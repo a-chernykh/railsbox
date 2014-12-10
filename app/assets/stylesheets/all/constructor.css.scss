@@ -1,0 +1,11 @@
+$item-padding: 1em;
+
+.constructor {
+  .playbook {
+    @include list-unstyled;
+  }
+
+  .playbook-item {
+    margin-bottom: $item-padding;
+  }
+}
