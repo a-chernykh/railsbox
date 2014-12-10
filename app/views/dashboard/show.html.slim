@@ -1,4 +1,20 @@
 .col-lg-4
+  .panel-group role="tablist" aria-multiselectable="true"
+    .panel.panel-default
+      .panel-heading role="tab" id="headingOne"
+        h4.panel-title
+          a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" Filesystem
+      #collapseOne.panel-collapse.collapse.in role="tabpanel" aria-labelledby="headingOne"
+        .panel-body
+          .panel.panel-primary
+            .panel-body Create new file or directory
+          .panel.panel-primary
+            .panel-body Change file attributes
+          .panel.panel-primary
+            .panel-body Create template
+          .panel.panel-primary
+            .panel-body Copy file
+
 .col-lg-8
   .constructor ng-app='app.constructor' ng-controller='ConstructorController'
 

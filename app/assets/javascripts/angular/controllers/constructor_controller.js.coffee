@@ -10,4 +10,4 @@ angular.module('app.constructor').classy.controller
     @$.sortableOptions = {}
     @$.items = []
     @$.items.push new Item 'file', { path: '/home/jlor/app', owner: 'jlor' }
-    @$.items.push new Item 'apt',  { pkg: 'python' }
+    @$.items.push new Item 'file', { path: '/home/jlor/app', owner: 'jlor' }
