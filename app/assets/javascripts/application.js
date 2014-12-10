@@ -12,6 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require bootstrap-sprockets
+
 //= require angular
+//= require angular-classy
+
+//= require ./angular/app
+//= require_tree ./angular/modules
+//= require_tree ./angular/controllers

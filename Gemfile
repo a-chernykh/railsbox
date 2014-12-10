@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'rails-assets-angular'
+gem 'rails-assets-angular-classy'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
