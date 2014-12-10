@@ -79,6 +79,8 @@ GEM
     rails-assets-angular-ui-sortable (0.13.1)
       rails-assets-angular (>= 1.2)
       rails-assets-jquery-ui (>= 1.9)
+    rails-assets-bootstrap-select (1.6.3)
+      rails-assets-jquery (>= 1.8)
     rails-assets-jquery (2.1.1)
     rails-assets-jquery-ui (1.11.2)
       rails-assets-jquery (>= 1.6)
@@ -146,6 +148,7 @@ DEPENDENCIES
   rails-assets-angular
   rails-assets-angular-classy
   rails-assets-angular-ui-sortable
+  rails-assets-bootstrap-select
   rails-assets-jqueryui
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require bootstrap-select
 
 //= require jqueryui
 
@@ -23,3 +24,4 @@
 //= require ./angular/app
 //= require_tree ./angular/modules
 //= require_tree ./angular/controllers
+//= require_tree ./angular/directives

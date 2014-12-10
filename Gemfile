@@ -18,6 +18,7 @@ gem 'rails-assets-jqueryui'
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-classy'
 gem 'rails-assets-angular-ui-sortable'
+gem 'rails-assets-bootstrap-select'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 

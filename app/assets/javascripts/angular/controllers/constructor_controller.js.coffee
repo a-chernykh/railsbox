@@ -1,6 +1,13 @@
+class Item
+  constructor: (@name, @args) ->
+  template: ->
+    "#{@name}.html"
+
 angular.module('app.constructor').classy.controller
   name: 'ConstructorController'
   inject: ['$scope']
   init: ->
     @$.sortableOptions = {}
-    @$.items = [{text: 'Item #1'}, {text: 'Item #2'}]
+    @$.items = []
+    @$.items.push new Item 'file', { path: '/home/jlor/app', owner: 'jlor' }
+    @$.items.push new Item 'apt',  { pkg: 'python' }

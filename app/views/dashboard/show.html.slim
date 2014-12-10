@@ -1,6 +1,15 @@
 .col-lg-4
 .col-lg-8
   .constructor ng-app='app.constructor' ng-controller='ConstructorController'
+
+    script type='text/ng-template' id='file.html'
+      .row
+        .col-lg-5
+          select.selectpicker
+            option Create new directory
+          input.form-control type='text' value='{{ item.args.path }}'
+
     h1 Default playbook
-    ul.playbook ui-sortable='sortableOptions' ng-model='items'
-      li.well.playbook-item ng-repeat='item in items' class='item' {{ item.text }}
+    ul.list-group.playbook ui-sortable='sortableOptions' ng-model='items'
+      li.list-group-item.playbook-item ng-repeat='item in items' class='item'
+        item item='item'

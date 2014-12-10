@@ -1,11 +1,5 @@
-$item-padding: 1em;
-
 .constructor {
-  .playbook {
-    @include list-unstyled;
-  }
-
-  .playbook-item {
-    margin-bottom: $item-padding;
+  .bootstrap-select {
+    width: 100% !important;
   }
 }
