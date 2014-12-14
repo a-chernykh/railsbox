@@ -22,7 +22,6 @@ html lang="en"
         a.navbar-brand href="/" vizops
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            li= link_to "About", "/about"
             - if user_signed_in?
               li= link_to 'Logout', destroy_user_session_path, method: :delete
             - else
