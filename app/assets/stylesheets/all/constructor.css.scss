@@ -23,6 +23,8 @@ $drop-area-height: 500px;
       background: $panel-default-heading-bg;
       padding: 10px;
       border-radius: $border-radius-base;
+      text-align: center;
+      padding-top: $drop-area-height / 2 - 20;
       
       &::after {
         content: attr(data-empty-message);
