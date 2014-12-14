@@ -21,6 +21,17 @@ angular.module('app.constructor').classy.controller
             { 'label': 'Mode', 'name': 'mode', 'type': 'fmode' },
             { 'label': 'Recursive', 'name': 'recurse', 'type': 'boolean' }
           ])
+        ],
+
+        'System': [
+          new Widget('user', 'User', [
+            { 'label': 'Action', 'name': 'state', 'type': 'dropdown', 'options': [
+              { 'label': 'Create', 'value': 'present' },
+              { 'label': 'Delete', 'value': 'absent' }
+            ]},
+            { 'label': 'Username', 'name': 'name', 'type': 'user' },
+            { 'label': 'Shell', 'name': 'shell', 'type': 'string', 'default': '/bin/bash' }
+          ])
         ]
       scope.widgets = jQuery.extend(true, {}, allWidgets);
     @$.sortableOptions =

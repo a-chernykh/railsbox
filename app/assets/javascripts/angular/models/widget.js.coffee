@@ -1,19 +1,20 @@
 class WidgetArg
-  constructor: (@widget, @label, @name, @type) ->
+  constructor: (@widget, @options) ->
+    @name = @options.name
+    @type = @options.type
+    @label = @options.label
+    @value = @options.default
   htmlId: ->
     [@name, @widget.id].join('-')
-  htmlType: ->
+  template: ->
     switch @type
-      when 'boolean' then 'checkbox'
-      else 'text'
-  htmlClass: ->
-    switch @type
-      when 'boolean' then ''
-      else 'form-control'
+      when 'dropdown' then 'argument_dropdown.html'
+      when 'boolean' then 'argument_boolean.html'
+      else 'argument_text.html'
 
 window.Widget = class Widget
   constructor: (@name, @label, args) ->
     @args = []
-    @args.push new WidgetArg(@, arg.label, arg.name, arg.type) for arg in args
+    @args.push new WidgetArg(@, arg) for arg in args
 
   template: -> 'default.html'

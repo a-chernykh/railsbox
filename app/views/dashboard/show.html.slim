@@ -12,14 +12,27 @@
 
   .col-lg-9
     .constructor ng-controller='ConstructorController'
+
+      script type='text/ng-template' id='argument_text.html'
+        label for='{{ arg.htmlId() }}' {{ arg.label }}
+        input.form-control id='{{ arg.htmlId() }}' type='text' value='{{ arg.value }}'
+
+      script type='text/ng-template' id='argument_boolean.html'
+        label for='{{ arg.htmlId() }}' {{ arg.label }}
+        input id='{{ arg.htmlId() }}' type='checkbox' value='{{ arg.value }}'
+
+      script type='text/ng-template' id='argument_dropdown.html'
+        label for='{{ arg.htmlId() }}' {{ arg.label }}
+        select.form-control id='{{ arg.htmlId() }}'
+          option ng-repeat='option in arg.options.options' value='{{ option.value }}' {{ option.label }}
+
       script type='text/ng-template' id='default.html'
         .panel.panel-default
           .panel-heading {{ item.label }}
           .panel-body
             .row
               div ng-class='"col-lg-{{ 12 / item.args.length }}"' ng-repeat='arg in item.args'
-                label for='{{ arg.htmlId() }}' {{ arg.label }}
-                input id='{{ arg.htmlId() }}' ng-class='arg.htmlClass()' type='{{ arg.htmlType() }}' value='{{ arg.value }}'
+                ng-include src='arg.template()'
 
       h1 Default playbook
       .drop-area
