@@ -10,11 +10,18 @@ $drop-area-height: 500px;
 
     ul {
       height: $drop-area-height;
+      overflow: auto;
     }
 
-    ul:empty::after{
-      content: attr(data-empty-message);
-      font-size: 2em;
+    ul:empty {
+      background: $panel-default-heading-bg;
+      padding: 10px;
+      border-radius: $border-radius-base;
+      
+      &::after {
+        content: attr(data-empty-message);
+        font-size: 2em;
+      }
     }
   }
 }

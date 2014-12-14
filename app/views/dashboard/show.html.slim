@@ -12,15 +12,17 @@
 
   .col-lg-9
     .constructor ng-controller='ConstructorController'
-      script type='text/ng-template' id='file.html'
-        .row
-          .col-lg-5
-            select.selectpicker
-              option Create new directory
-            input.form-control type='text' value='{{ item.args.path }}'
+      script type='text/ng-template' id='default.html'
+        .panel.panel-default
+          .panel-heading {{ item.label }}
+          .panel-body
+            .row
+              div ng-class='"col-lg-{{ 12 / item.args.length }}"' ng-repeat='arg in item.args'
+                label for='{{ arg.htmlId() }}' {{ arg.label }}
+                input id='{{ arg.htmlId() }}' ng-class='arg.htmlClass()' type='{{ arg.htmlType() }}' value='{{ arg.value }}'
 
       h1 Default playbook
-      .drop-area.well
-        ul.list-group.playbook ui-sortable='sortableOptions' ng-model='items' data-empty-message='Drag and Drop items here'
-          li.list-group-item.playbook-item ng-repeat='item in items' class='item'
+      .drop-area
+        ul.list-unstyled.playbook ui-sortable='sortableOptions' ng-model='items' data-empty-message='Drag and Drop items here'
+          li.playbook-item ng-repeat='item in items' class='item'
             item item='item'
