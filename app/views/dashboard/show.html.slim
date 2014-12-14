@@ -1,31 +1,25 @@
-.col-lg-4
-  .panel-group role="tablist" aria-multiselectable="true"
-    .panel.panel-default
-      .panel-heading role="tab" id="headingOne"
-        h4.panel-title
-          a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" Filesystem
-      #collapseOne.panel-collapse.collapse.in role="tabpanel" aria-labelledby="headingOne"
-        .panel-body
-          .panel.panel-primary
-            .panel-body Create new file or directory
-          .panel.panel-primary
-            .panel-body Change file attributes
-          .panel.panel-primary
-            .panel-body Create template
-          .panel.panel-primary
-            .panel-body Copy file
+.row ng-app='app.constructor'
+  .col-lg-3
+    .widgets-collection.panel-group role="tablist" aria-multiselectable="true" ng-controller='WidgetsController'
+      .panel.panel-default ng-repeat='(label, widgets) in widgets'
+        .panel-heading role="tab" id="headingOne"
+          h4.panel-title
+            a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" {{ label }}
+        #collapseOne.panel-collapse.collapse.in role="tabpanel" aria-labelledby="headingOne"
+          .panel-body
+            ul.list-group.widgets ui-sortable='sortableOptions' ng-model='widgets'
+              li.list-group-item.widget-item ng-repeat='widget in widgets' {{ widget.label }}
 
-.col-lg-8
-  .constructor ng-app='app.constructor' ng-controller='ConstructorController'
+  .col-lg-9
+    .constructor ng-controller='ConstructorController'
+      script type='text/ng-template' id='file.html'
+        .row
+          .col-lg-5
+            select.selectpicker
+              option Create new directory
+            input.form-control type='text' value='{{ item.args.path }}'
 
-    script type='text/ng-template' id='file.html'
-      .row
-        .col-lg-5
-          select.selectpicker
-            option Create new directory
-          input.form-control type='text' value='{{ item.args.path }}'
-
-    h1 Default playbook
-    ul.list-group.playbook ui-sortable='sortableOptions' ng-model='items'
-      li.list-group-item.playbook-item ng-repeat='item in items' class='item'
-        item item='item'
+      h1 Default playbook
+      ul.list-group.playbook ui-sortable='sortableOptions' ng-model='items'
+        li.list-group-item.playbook-item ng-repeat='item in items' class='item'
+          item item='item'
