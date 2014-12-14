@@ -1,5 +1,11 @@
 $drop-area-height: 500px;
 
+.widgets-collection {
+  ul.widgets {
+    margin-bottom: 0;
+  }
+}
+
 .constructor {
   .bootstrap-select {
     width: 100% !important;

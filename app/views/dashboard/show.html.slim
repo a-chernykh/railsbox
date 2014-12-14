@@ -4,7 +4,7 @@
       .panel.panel-default ng-repeat='(label, widgets) in widgets'
         .panel-heading role="tab" id="headingOne"
           h4.panel-title
-            a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" {{ label }}
+            a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" {{ label }}
         #collapseOne.panel-collapse.collapse.in role="tabpanel" aria-labelledby="headingOne"
           .panel-body
             ul.list-group.widgets ui-sortable='sortableOptions' ng-model='widgets'
