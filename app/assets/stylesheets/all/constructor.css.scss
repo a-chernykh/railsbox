@@ -1,5 +1,20 @@
+$drop-area-height: 500px;
+
 .constructor {
   .bootstrap-select {
     width: 100% !important;
+  }
+
+  .drop-area {
+    min-height: $drop-area-height;
+
+    ul {
+      height: $drop-area-height;
+    }
+
+    ul:empty::after{
+      content: attr(data-empty-message);
+      font-size: 2em;
+    }
   }
 }

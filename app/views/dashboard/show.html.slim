@@ -20,6 +20,7 @@
             input.form-control type='text' value='{{ item.args.path }}'
 
       h1 Default playbook
-      ul.list-group.playbook ui-sortable='sortableOptions' ng-model='items'
-        li.list-group-item.playbook-item ng-repeat='item in items' class='item'
-          item item='item'
+      .drop-area.well
+        ul.list-group.playbook ui-sortable='sortableOptions' ng-model='items' data-empty-message='Drag and Drop items here'
+          li.list-group-item.playbook-item ng-repeat='item in items' class='item'
+            item item='item'
