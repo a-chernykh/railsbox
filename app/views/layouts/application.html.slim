@@ -23,8 +23,13 @@ html lang="en"
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
             li= link_to "About", "/about"
+            - if user_signed_in?
+              li= link_to 'Logout', destroy_user_session_path, method: :delete
+            - else
+              li= link_to 'Login', new_user_session_path
 
     .container-fluid
       .row
         .col-lg-12
+          = render partial: 'shared/flash_messages'
           = yield

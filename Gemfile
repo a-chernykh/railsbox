@@ -20,6 +20,11 @@ gem 'rails-assets-angular-classy'
 gem 'rails-assets-angular-ui-sortable'
 gem 'rails-assets-bootstrap-select'
 
+gem 'devise'
+gem 'devise-bootstrap-views'
+
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-gem 'spring',        group: :development
+group :development do
+  gem 'spring'
+end
