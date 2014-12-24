@@ -13,4 +13,8 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def site_name
+    'rubyops'.freeze
+  end
 end

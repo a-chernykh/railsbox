@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title vizops
+    title= site_name
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
@@ -13,22 +13,20 @@ html lang="en"
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
   body
-    .navbar.navbar-default.navbar-static-top
-      .container-fluid
-        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand href="/" vizops
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="/"= site_name
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            - if user_signed_in?
-              li= link_to 'Logout', destroy_user_session_path, method: :delete
-            - else
-              li= link_to 'Login', new_user_session_path
+            li.active
+              a href='/' Home
+            li
+              a href='/' About
 
-    .container-fluid
-      .row
-        .col-lg-12
-          = render partial: 'shared/flash_messages'
-          = yield
+    = render partial: 'shared/flash_messages'
+    = yield

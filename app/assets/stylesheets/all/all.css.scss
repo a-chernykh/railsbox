@@ -1,0 +1,39 @@
+button.selectpicker {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 1px solid #cccccc !important;
+}
+
+.jumbotron {
+  padding: 40px 0px 15px;
+  margin-bottom: 0px;
+}
+
+.step-number {
+  h1 {
+    font-size: 4em;
+    color: #fff;
+  }
+}
+
+.row {
+    display: table;
+}
+
+[class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.step1, .step3 {
+  .step-number {
+    background: $brand-success;
+  }
+}
+
+.step2 {
+  .step-number {
+    background: $brand-primary;
+  }
+}

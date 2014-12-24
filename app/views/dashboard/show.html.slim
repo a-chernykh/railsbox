@@ -1,41 +1,78 @@
-.row ng-app='app.constructor'
-  .col-lg-3
-    .widgets-collection.panel-group role="tablist" aria-multiselectable="true" ng-controller='WidgetsController'
-      .panel.panel-default ng-repeat='(label, widgets) in widgets'
-        .panel-heading role="tab" id="headingOne"
-          h4.panel-title
-            a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" {{ label }}
-        #collapseOne.panel-collapse.collapse.in role="tabpanel" aria-labelledby="headingOne"
-          .panel-body
-            ul.list-group.widgets ui-sortable='sortableOptions' ng-model='widgets'
-              li.list-group-item.widget-item ng-repeat='widget in widgets' {{ widget.label }}
+.jumbotron
+  .container-fluid
+    .row
+      .col-lg-10.col-lg-offset-1
+        h1= site_name
+        p
+          ' Ruby developer? Heard about <strong>DevOps</strong> but too busy to learn it? Streamline your development workflow in no time by creating production-like virtual machine with your development environment. Try this extremely simple to use wizard to create new <strong>Ruby on Rails</strong> server using
+          a href='https://www.vagrantup.com/' <strong>vagrant</strong>
+          '  and
+          a href='http://www.ansible.com/' <strong>ansible</strong>
+          ' .
+        p.pull-right
+          a.btn.btn-primary href='#' New project
 
-  .col-lg-9
-    .constructor ng-controller='ConstructorController'
+.container-fluid
+  form role='form'
+    .row.step.step1
+      .col-lg-1.step-number
+        h1 1
+      .col-lg-11.step-conf
+        h1 Virtual machine settings
+        .container
+          .row
+            .col-lg-6
+              .form-group
+                label for='name' Name
+                input.form-control id='name' type='text' value='myapp'
+            .col-lg-6
+              .form-group
+                label for='os' Operating System
+                select.form-control id='os'
+                  option Ubuntu 14.04
+          .row
+            .col-lg-6
+              .form-group
+                label for='memory' Memory, Mb
+                p
+                  small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
+                input.form-control id='memory' type='text' value='700'
+            .col-lg-6
+              .form-group
+                label for='cpus' CPU cores
+                p
+                  small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
+                select.form-control id='cpus'
+                  option 1
+                  option 2
+                  option 3
+                  option 4
 
-      script type='text/ng-template' id='argument_text.html'
-        label for='{{ arg.htmlId() }}' {{ arg.label }}
-        input.form-control id='{{ arg.htmlId() }}' type='text' value='{{ arg.value }}'
+    .row.step.step2
+      .col-lg-1.step-number
+        h1 2
+      .col-lg-11.step-conf
+        h1 Application settings
+        .container
+          .row
+            .col-lg-6
+              .form-group
+                label for='server_name' Server Name
+                input.form-control id='server_name' type='text' value='localhost'
+            .col-lg-6
+              .form-group
+                label for='ruby_version' Ruby Version
+                select.form-control id='ruby_version'
+                  option 2.1.2
 
-      script type='text/ng-template' id='argument_boolean.html'
-        label for='{{ arg.htmlId() }}' {{ arg.label }}
-        input id='{{ arg.htmlId() }}' type='checkbox' value='{{ arg.value }}'
+    .row.step.step3
+      .col-lg-1.step-number
+        h1 3
+      .col-lg-11.step-conf
+        h1 Database
+        .container
+          .row
 
-      script type='text/ng-template' id='argument_dropdown.html'
-        label for='{{ arg.htmlId() }}' {{ arg.label }}
-        select.form-control id='{{ arg.htmlId() }}'
-          option ng-repeat='option in arg.options.options' value='{{ option.value }}' {{ option.label }}
-
-      script type='text/ng-template' id='default.html'
-        .panel.panel-default
-          .panel-heading {{ item.label }}
-          .panel-body
-            .row
-              div ng-class='"col-lg-{{ 12 / item.args.length }}"' ng-repeat='arg in item.args'
-                ng-include src='arg.template()'
-
-      h1 Default playbook
-      .drop-area
-        ul.list-unstyled.playbook ui-sortable='sortableOptions' ng-model='items' data-empty-message='Drag and Drop items here'
-          li.playbook-item ng-repeat='item in items' class='item'
-            item item='item'
+    .row
+      .col-lg-12
+        a.pull-right.btn.btn-primary.btn-lg href='#' Generate
