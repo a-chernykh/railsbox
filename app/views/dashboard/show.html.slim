@@ -25,29 +25,24 @@
             .col-lg-6
               .form-group
                 label for='name' Name
-                input.form-control id='name' type='text' ng-model='name'
+                input.form-control id='name' type='text' ng-model='vm.name'
             .col-lg-6
               .form-group
                 label for='os' Operating System
-                select.form-control id='os'
-                  option Ubuntu 14.04
+                select.form-control id='os' ng-options='os.name for os in osList' ng-model='vm.os'
           .row
             .col-lg-6
               .form-group
                 label for='memory' Memory, Mb
                 p
                   small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
-                input.form-control id='memory' type='text' value='700'
+                input.form-control id='memory' type='text' ng-model='vm.memory'
             .col-lg-6
               .form-group
-                label for='cpus' CPU cores
+                label for='cores' CPU cores
                 p
                   small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
-                select.form-control id='cpus'
-                  option 1
-                  option 2
-                  option 3
-                  option 4
+                select.form-control id='cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
 
     .row.step.step2
       .col-lg-1.step-number
@@ -83,4 +78,4 @@
                 input.form-control id='database_user_name' type='text' value='myapp'
           .row
             .col-lg-12
-              a.pull-right.btn.btn-primary.btn-lg href='#' Generate
+              button.pull-right.btn.btn-primary.btn-lg ng-click='generate()' Generate

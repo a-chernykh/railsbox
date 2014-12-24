@@ -14,11 +14,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
-gem 'rails-assets-jqueryui'
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-classy'
-gem 'rails-assets-angular-ui-sortable'
-gem 'rails-assets-bootstrap-select'
 
 gem 'devise'
 gem 'devise-bootstrap-views'
