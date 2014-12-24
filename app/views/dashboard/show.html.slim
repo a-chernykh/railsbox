@@ -54,12 +54,11 @@
             .col-lg-6
               .form-group
                 label for='server_name' Server Name
-                input.form-control id='server_name' type='text' value='localhost'
+                input.form-control id='server_name' type='text' ng-model='app.serverName'
             .col-lg-6
               .form-group
                 label for='ruby_version' Ruby Version
-                select.form-control id='ruby_version'
-                  option 2.1.2
+                select.form-control id='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions' ng-model='app.rubyVersion'
 
     .row.step.step3
       .col-lg-1.step-number
@@ -71,11 +70,11 @@
             .col-lg-6
               .form-group
                 label for='database_name' Database Name
-                input.form-control id='database_name' type='text' value='myapp_development'
+                input.form-control id='database_name' type='text' ng-model='db.name'
             .col-lg-6
               .form-group
                 label for='database_user_name' Database User
-                input.form-control id='database_user_name' type='text' value='myapp'
+                input.form-control id='database_user_name' type='text' ng-model='db.user'
           .row
             .col-lg-12
               button.pull-right.btn.btn-primary.btn-lg ng-click='generate()' Generate
