@@ -11,3 +11,15 @@ footer {
   padding-top: 10px;
   padding-bottom: 50px;
 }
+
+.row {
+  overflow: hidden; 
+  &.step {
+    border-bottom: 1px solid #fff;
+  }
+}
+
+.step-number[class*="col-"] {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}

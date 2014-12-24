@@ -20,7 +20,7 @@ gem 'rails-assets-angular-classy'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
   gem 'spring'

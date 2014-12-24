@@ -20,61 +20,58 @@
         h1 1
       .col-lg-11.step-conf
         h1 Virtual machine settings
-        .container
-          .row
-            .col-lg-6
-              .form-group
-                label for='name' Name
-                input.form-control id='name' type='text' ng-model='vm.name'
-            .col-lg-6
-              .form-group
-                label for='os' Operating System
-                select.form-control id='os' ng-options='os.name for os in osList' ng-model='vm.os'
-          .row
-            .col-lg-6
-              .form-group
-                label for='memory' Memory, Mb
-                p
-                  small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
-                input.form-control id='memory' type='text' ng-model='vm.memory'
-            .col-lg-6
-              .form-group
-                label for='cores' CPU cores
-                p
-                  small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
-                select.form-control id='cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
+        .row
+          .col-lg-6
+            .form-group
+              label for='name' Name
+              input.form-control id='name' type='text' ng-model='vm.name'
+          .col-lg-6
+            .form-group
+              label for='os' Operating System
+              select.form-control id='os' ng-options='os.name for os in osList' ng-model='vm.os'
+        .row
+          .col-lg-6
+            .form-group
+              label for='memory' Memory, Mb
+              p
+                small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
+              input.form-control id='memory' type='text' ng-model='vm.memory'
+          .col-lg-6
+            .form-group
+              label for='cores' CPU cores
+              p
+                small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
+              select.form-control id='cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
 
     .row.step.step2
       .col-lg-1.step-number
         h1 2
       .col-lg-11.step-conf
         h1 Application settings
-        .container
-          .row
-            .col-lg-6
-              .form-group
-                label for='server_name' Server Name
-                input.form-control id='server_name' type='text' ng-model='app.serverName'
-            .col-lg-6
-              .form-group
-                label for='ruby_version' Ruby Version
-                select.form-control id='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions' ng-model='app.rubyVersion'
+        .row
+          .col-lg-6
+            .form-group
+              label for='server_name' Server Name
+              input.form-control id='server_name' type='text' ng-model='app.serverName'
+          .col-lg-6
+            .form-group
+              label for='ruby_version' Ruby Version
+              select.form-control id='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions' ng-model='app.rubyVersion'
 
     .row.step.step3
       .col-lg-1.step-number
         h1 3
       .col-lg-11.step-conf
         h1 Database
-        .container
-          .row
-            .col-lg-6
-              .form-group
-                label for='database_name' Database Name
-                input.form-control id='database_name' type='text' ng-model='db.name'
-            .col-lg-6
-              .form-group
-                label for='database_user_name' Database User
-                input.form-control id='database_user_name' type='text' ng-model='db.user'
-          .row
-            .col-lg-12
-              button.pull-right.btn.btn-primary.btn-lg ng-click='generate()' Generate
+        .row
+          .col-lg-6
+            .form-group
+              label for='database_name' Database Name
+              input.form-control id='database_name' type='text' ng-model='db.name'
+          .col-lg-6
+            .form-group
+              label for='database_user_name' Database User
+              input.form-control id='database_user_name' type='text' ng-model='db.user'
+        .row
+          .col-lg-12
+            button.pull-right.btn.btn-primary.btn-lg ng-click='generate()' Generate

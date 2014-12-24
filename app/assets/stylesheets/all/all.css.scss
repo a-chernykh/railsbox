@@ -10,17 +10,6 @@
   }
 }
 
-.row {
-    display: table;
-}
-
-[class*="col-"] {
-    float: none;
-    display: table-cell;
-    vertical-align: top;
-}
-
 .step-number {
   background: $brand-success;
-  border-bottom: 1px solid #fff;
 }
