@@ -10,10 +10,11 @@
           a href='http://www.ansible.com/' <strong>ansible</strong>
           ' .
         p.pull-right
-          a.btn.btn-primary href='#' New project
+          a.btn.btn-primary href='#step-1' Get started
 
-.container-fluid
+.container-fluid ng-controller='ConfigurationController'
   form role='form'
+    a name='step-1'
     .row.step.step1
       .col-lg-1.step-number
         h1 1
@@ -24,7 +25,7 @@
             .col-lg-6
               .form-group
                 label for='name' Name
-                input.form-control id='name' type='text' value='myapp'
+                input.form-control id='name' type='text' ng-model='name'
             .col-lg-6
               .form-group
                 label for='os' Operating System

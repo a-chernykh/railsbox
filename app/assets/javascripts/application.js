@@ -14,13 +14,11 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-select
-//= require bootstrap/tooltip
 
 //= require jqueryui
 
 //= require angular
 //= require angular-classy
-//= require angular-ui-sortable
 
 //= require init
 
