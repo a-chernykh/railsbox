@@ -1,6 +1,7 @@
 angular.module('app.rubyops').classy.controller
   name: 'ConfigurationController'
   inject: ['$scope']
+
   init: ->
     defaultAppName = 'myapp'
 
@@ -13,6 +14,7 @@ angular.module('app.rubyops').classy.controller
       os: @$.osList[0]
       memory: 700
       cores: 1
+      httpForwardPort: 8080
 
     @$.rubyVersions = [
       { version: '2.1.2' }
@@ -24,5 +26,8 @@ angular.module('app.rubyops').classy.controller
     @$.db =
       name: defaultAppName
       user: defaultAppName
+
+  applicationUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
+
   generate: ->
     console.log 'yeah'

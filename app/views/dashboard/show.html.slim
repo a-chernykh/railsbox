@@ -30,18 +30,25 @@
               label for='os' Operating System
               select.form-control id='os' ng-options='os.name for os in osList' ng-model='vm.os'
         .row
-          .col-lg-6
+          .col-lg-4
             .form-group
               label for='memory' Memory, Mb
               p
                 small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
               input.form-control id='memory' type='text' ng-model='vm.memory'
-          .col-lg-6
+          .col-lg-4
             .form-group
               label for='cores' CPU cores
               p
                 small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
               select.form-control id='cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
+          .col-lg-4
+            .form-group
+              label for='http_forward_port' Forward HTTP port
+              p
+                small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationUrl() }}'>{{ applicationUrl() }}</a>.
+              br
+              input.form-control id='http_forward_port' type='text' ng-model='vm.httpForwardPort'
 
     .row.step.step2
       .col-lg-1.step-number
