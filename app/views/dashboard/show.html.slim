@@ -72,7 +72,14 @@
         h1 Database
         .container
           .row
-
-    .row
-      .col-lg-12
-        a.pull-right.btn.btn-primary.btn-lg href='#' Generate
+            .col-lg-6
+              .form-group
+                label for='database_name' Database Name
+                input.form-control id='database_name' type='text' value='myapp_development'
+            .col-lg-6
+              .form-group
+                label for='database_user_name' Database User
+                input.form-control id='database_user_name' type='text' value='myapp'
+          .row
+            .col-lg-12
+              a.pull-right.btn.btn-primary.btn-lg href='#' Generate

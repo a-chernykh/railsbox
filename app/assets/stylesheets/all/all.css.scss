@@ -26,14 +26,7 @@ button.selectpicker {
     vertical-align: top;
 }
 
-.step1, .step3 {
-  .step-number {
-    background: $brand-success;
-  }
-}
-
-.step2 {
-  .step-number {
-    background: $brand-primary;
-  }
+.step-number {
+  background: $brand-success;
+  border-bottom: 1px solid #fff;
 }

@@ -1,0 +1,13 @@
+footer {
+  background-color: $jumbotron-bg;
+  padding: 50px 0px;
+
+  p {
+    margin: 0px;
+  }
+}
+
+.step:last-child .col-lg-12 {
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
