@@ -8,7 +8,6 @@
           a href='https://www.vagrantup.com/' <strong>vagrant</strong>
           '  and
           a href='http://www.ansible.com/' <strong>ansible</strong>
-          ' .
         p.pull-right
           a.btn.btn-primary href='#step-1' Get started
 
@@ -81,4 +80,4 @@
               input.form-control id='database_user_name' type='text' ng-model='db.user'
         .row
           .col-lg-12
-            button.pull-right.btn.btn-primary.btn-lg ng-click='generate()' Generate
+            button.pull-right.btn.btn-primary.btn-lg ng-click='generate()'= t('.generate')

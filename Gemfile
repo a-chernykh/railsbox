@@ -17,12 +17,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-classy'
 
-gem 'devise'
-gem 'devise-bootstrap-views'
-
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development do
   gem 'spring'
   gem 'quiet_assets'
+end
+
+group :test do
+  gem 'capybara'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
 end
