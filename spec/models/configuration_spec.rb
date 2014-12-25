@@ -14,12 +14,17 @@ describe Configuration do
     end
     let(:dir) { Dir.mktmpdir }
     let(:configurators) do
-      [ VagrantConfiguration.new(params[:vm]) ]
+      [ CopyConfiguration.new,
+        VagrantConfiguration.new(params[:vm]) ]
     end
 
     subject(:configuration) { described_class.new(configurators) }
 
     before { configuration.save(dir) }
+
+    it 'copies files without erb extensions' do
+      expect(File).to exist(File.join(dir, '.gitignore'))
+    end
 
     it 'creates Vagrantfile' do
       expect(File).to exist(File.join(dir, 'Vagrantfile'))
