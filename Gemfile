@@ -20,6 +20,7 @@ gem 'rails-assets-angular-classy'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'tilt'
+gem 'rubyzip', require: 'zip'
 
 group :development do
   gem 'spring'
@@ -30,6 +31,8 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'launchy'
 end
 
 group :development, :test do

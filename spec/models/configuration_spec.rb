@@ -2,24 +2,9 @@ require 'rails_helper'
 
 describe Configuration do
   describe '#save' do
-    let(:params) do
-      { vm_name: 'myapp',
-        vm_os: 'ubuntu/trusty64',
-        vm_memory: 700,
-        vm_cores: 2,
-        vm_forwarded_port: 8080,
-        server_name: 'localhost',
-        ruby_version: '2.1.2',
-        database_name: 'myapp',
-        database_user: 'myapp' }
-    end
     let(:dir) { Dir.mktmpdir }
-    let(:configurators) do
-      [ CopyConfiguration.new,
-        TemplateConfiguration.new(params) ]
-    end
 
-    subject(:configuration) { described_class.new(configurators) }
+    subject(:configuration) { described_class.from_params(params_fixture) }
 
     before { configuration.save(dir) }
 
