@@ -19,6 +19,8 @@ gem 'rails-assets-angular-classy'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'tilt'
+
 group :development do
   gem 'spring'
   gem 'quiet_assets'

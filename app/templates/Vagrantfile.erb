@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = <%= memory %>
+    vb.cpus = <%= cores %>
+  end
+
+  config.vm.box = '<%= os %>'
+
+  config.vm.define '<%= name %>' do |machine|
+    machine.vm.hostname = '<%= name %>'
+    machine.vm.network 'forwarded_port', guest: 80, host: <%= forwarded_port %>
+  end
+
+  config.vm.provision 'ansible' do |ansible|
+    ansible.playbook = '../ansible/site.yml'
+    ansible.sudo = true
+    ansible.groups = {
+      'webservers'           => %w(application),
+      'dbservers'            => %w(database),
+      'development:children' => %w(webservers dbservers)
+    }
+    ansible.tags = ENV['TAGS']
+    # ansible.verbose = 'vvvv'
+  end
+end
