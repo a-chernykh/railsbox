@@ -22,32 +22,32 @@
         .row
           .col-lg-6
             .form-group
-              label for='name' Name
-              input.form-control id='name' type='text' ng-model='vm.name'
+              label for='vm_name' Name
+              input.form-control id='vm_name' name='vm_name' type='text' ng-model='vm.name'
           .col-lg-6
             .form-group
-              label for='os' Operating System
-              select.form-control id='os' ng-options='os.name for os in osList' ng-model='vm.os'
+              label for='vm_os' Operating System
+              select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList' ng-model='vm.os'
         .row
           .col-lg-4
             .form-group
-              label for='memory' Memory, Mb
+              label for='vm_memory' Memory, Mb
               p
                 small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
-              input.form-control id='memory' type='text' ng-model='vm.memory'
+              input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='vm.memory'
           .col-lg-4
             .form-group
-              label for='cores' CPU cores
+              label for='vm_cores' CPU cores
               p
                 small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
-              select.form-control id='cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
+              select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
           .col-lg-4
             .form-group
-              label for='http_forward_port' Forward HTTP port
+              label for='vm_forwarded_port' Forward HTTP port
               p
                 small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationUrl() }}'>{{ applicationUrl() }}</a>.
               br
-              input.form-control id='http_forward_port' type='text' ng-model='vm.httpForwardPort'
+              input.form-control id='vm_forwarded_port' name='vm_forwarded_port' type='text' ng-model='vm.httpForwardPort'
 
     .row.step.step2
       .col-lg-1.step-number
@@ -58,11 +58,11 @@
           .col-lg-6
             .form-group
               label for='server_name' Server Name
-              input.form-control id='server_name' type='text' ng-model='app.serverName'
+              input.form-control id='server_name' name='server_name' type='text' ng-model='app.serverName'
           .col-lg-6
             .form-group
               label for='ruby_version' Ruby Version
-              select.form-control id='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions' ng-model='app.rubyVersion'
+              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions' ng-model='app.rubyVersion'
 
     .row.step.step3
       .col-lg-1.step-number
@@ -73,11 +73,11 @@
           .col-lg-6
             .form-group
               label for='database_name' Database Name
-              input.form-control id='database_name' type='text' ng-model='db.name'
+              input.form-control id='database_name' name='database_name' type='text' ng-model='db.name'
           .col-lg-6
             .form-group
-              label for='database_user_name' Database User
-              input.form-control id='database_user_name' type='text' ng-model='db.user'
+              label for='database_user' Database User
+              input.form-control id='database_user' name='database_user' type='text' ng-model='db.user'
         .row
           .col-lg-12
             button.pull-right.btn.btn-primary.btn-lg= t('.generate')
