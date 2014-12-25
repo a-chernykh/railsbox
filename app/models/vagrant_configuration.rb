@@ -4,7 +4,7 @@ class VagrantConfiguration
   end
 
   def save(file)
-    template = Tilt.new 'app/templates/Vagrantfile.erb'
+    template = Tilt.new Templates.path('Vagrantfile.erb')
     file.write template.render(Object.new, @params)
   end
 end
