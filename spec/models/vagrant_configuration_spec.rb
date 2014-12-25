@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe VagrantConfiguration do
   describe '#save' do
-    let(:vagrantfile) { StringIO.new }
+    let(:dir) { Dir.mktmpdir }
     let(:configuration) do
       { name: 'myapp',
         os: 'ubuntu/trusty64',
@@ -11,9 +11,9 @@ describe VagrantConfiguration do
         forwarded_port: 8080 }
     end
 
-    subject(:output) { vagrantfile.string }
+    subject(:output) { IO.read(File.join(dir, 'Vagrantfile')) }
 
-    before { described_class.new(configuration).save(vagrantfile) }
+    before { described_class.new(configuration).save(dir) }
 
     it 'sets name' do
       expect(output).to include %Q(config.vm.define 'myapp')
@@ -35,5 +35,7 @@ describe VagrantConfiguration do
     it 'sets forwarded port' do
       expect(output).to include %Q(vm.network 'forwarded_port', guest: 80, host: 8080)
     end
+
+    after { FileUtils.remove_entry_secure dir }
   end
 end

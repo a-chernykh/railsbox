@@ -11,6 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = '<%= os %>'
 
+  config.vm.synced_folder '../', '/vagrant'
+
   config.vm.define '<%= name %>' do |machine|
     machine.vm.hostname = '<%= name %>'
     machine.vm.network 'forwarded_port', guest: 80, host: <%= forwarded_port %>
