@@ -9,12 +9,11 @@
           '  and
           a href='http://www.ansible.com/' <strong>ansible</strong>
         p.pull-right
-          a.btn.btn-primary href='#step-1' Get started
+          a.btn.btn-primary href='#start' Get started
 
-.container-fluid ng-controller='ConfigurationController'
+#start.container-fluid ng-controller='ConfigurationController'
   form role='form' method='post' action=configurations_path
     = token_tag nil
-    a name='step-1'
     .row.step.step1
       .col-lg-1.step-number
         h1 1
