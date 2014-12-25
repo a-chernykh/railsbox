@@ -5,6 +5,6 @@ feature 'Generate configuration' do
     visit '/'
     click_button I18n.t('dashboard.show.generate')
 
-    expect(page.response_headers['Content-Disposition']).to eq 'attachment'
+    expect(page.response_headers['Content-Disposition']).to include 'attachment'
   end
 end

@@ -12,7 +12,8 @@
           a.btn.btn-primary href='#step-1' Get started
 
 .container-fluid ng-controller='ConfigurationController'
-  form role='form'
+  form role='form' method='post' action=configurations_path
+    = token_tag nil
     a name='step-1'
     .row.step.step1
       .col-lg-1.step-number
@@ -80,4 +81,4 @@
               input.form-control id='database_user_name' type='text' ng-model='db.user'
         .row
           .col-lg-12
-            button.pull-right.btn.btn-primary.btn-lg ng-click='generate()'= t('.generate')
+            button.pull-right.btn.btn-primary.btn-lg= t('.generate')

@@ -22,6 +22,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development do
   gem 'spring'
   gem 'quiet_assets'
+  gem 'guard-rspec', require: false
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
