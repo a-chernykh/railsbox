@@ -62,7 +62,7 @@
           .col-lg-6
             .form-group
               label for='ruby_version' Ruby Version
-              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions track by rubyVersion.version' ng-model='app.rubyVersion'
+              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
 
     .row.step.step3
       .col-lg-1.step-number

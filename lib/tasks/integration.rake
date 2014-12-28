@@ -9,7 +9,7 @@ namespace :integration do
       vm_cores: 2,
       vm_forwarded_port: 8080,
       server_name: 'localhost',
-      ruby_version: '2.1.2',
+      ruby_version: 'ruby2.1',
       database_name: 'testapp',
       database_user: 'testapp'
     })

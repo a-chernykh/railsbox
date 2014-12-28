@@ -16,12 +16,17 @@ angular.module('app.rubyops').classy.controller
       cores: 1
       httpForwardPort: 8080
 
+    # https://www.brightbox.com/docs/ruby/ubuntu/
     @$.rubyVersions = [
-      { version: '2.1.2' }
+      { package: 'ruby1.8',   label: '1.8' },
+      { package: 'ruby1.9.1', label: '1.9.1' },
+      { package: 'ruby2.1',   label: '2.1' },
+      { package: 'ruby2.2',   label: '2.2 (beta)' }
     ]
+
     @$.app =
       serverName: 'localhost'
-      rubyVersion: @$.rubyVersions[0]
+      rubyVersion: @$.rubyVersions[2]
 
     @$.db =
       name: defaultAppName
