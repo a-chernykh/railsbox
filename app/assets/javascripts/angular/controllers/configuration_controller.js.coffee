@@ -28,6 +28,3 @@ angular.module('app.rubyops').classy.controller
       user: defaultAppName
 
   applicationUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
-
-  generate: ->
-    console.log 'yeah'

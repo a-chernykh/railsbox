@@ -33,6 +33,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'launchy'
+  gem 'fakefs', require: 'fakefs/safe'
 end
 
 group :development, :test do

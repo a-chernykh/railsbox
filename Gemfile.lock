@@ -72,6 +72,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    fakefs (0.6.0)
     ffi (1.9.6)
     formatador (0.2.5)
     globalid (0.3.0)
@@ -234,6 +235,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
+  fakefs
   guard-rspec
   jbuilder (~> 2.0)
   jquery-rails

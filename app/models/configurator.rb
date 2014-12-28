@@ -1,4 +1,4 @@
-class Configuration
+class Configurator
   def initialize(configurators)
     @configurators = configurators
   end
