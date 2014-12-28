@@ -27,7 +27,7 @@
           .col-lg-6
             .form-group
               label for='vm_os' Operating System
-              select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList' ng-model='vm.os'
+              select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
         .row
           .col-lg-4
             .form-group
@@ -40,7 +40,7 @@
               label for='vm_cores' CPU cores
               p
                 small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
-              select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList' ng-model='vm.cores'
+              select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
           .col-lg-4
             .form-group
               label for='vm_forwarded_port' Forward HTTP port
@@ -62,7 +62,7 @@
           .col-lg-6
             .form-group
               label for='ruby_version' Ruby Version
-              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions' ng-model='app.rubyVersion'
+              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.version for rubyVersion in rubyVersions track by rubyVersion.version' ng-model='app.rubyVersion'
 
     .row.step.step3
       .col-lg-1.step-number
