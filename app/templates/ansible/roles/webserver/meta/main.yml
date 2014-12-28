@@ -1,3 +1,5 @@
 ---
 dependencies:
   - ruby
+  - nginx
+  - unicorn

@@ -6,4 +6,5 @@
   apt: name={{ item }}
   with_items:
     - "{{ ruby_version }}"
+    - "{{ ruby_version }}-dev"
     - ruby-switch

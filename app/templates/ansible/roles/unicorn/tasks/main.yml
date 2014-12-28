@@ -1,0 +1,6 @@
+---
+- name: Configure unicorn
+  template: src=unicorn.rb.j2 dest={{ unicorn_config_path }}
+
+- name: Install unicorn
+  gem: name=unicorn user_install=no

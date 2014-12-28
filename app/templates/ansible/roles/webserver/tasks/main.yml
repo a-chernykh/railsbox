@@ -10,3 +10,10 @@
     - libreadline6-dev
     - zlib1g-dev
     - libncurses5-dev
+
+- name: Install bundler
+  gem: name=bundler user_install=no
+
+- name: bundle install
+  command: bundle install --deployment chdir={{ app_path }}
+  sudo: no

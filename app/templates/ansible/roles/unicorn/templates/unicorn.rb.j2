@@ -1,0 +1,12 @@
+working_directory '{{ app_path }}'
+
+pid '{{ unicorn_pid_path }}'
+
+stderr_path '{{ unicorn_stderr_path }}'
+stdout_path '{{ unicorn_stdout_path }}'
+
+listen '{{ unicorn_sock_path }}'
+
+worker_processes 2
+
+timeout 30
