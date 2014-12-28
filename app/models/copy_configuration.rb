@@ -14,7 +14,7 @@ class CopyConfiguration
       elsif File.extname(f) != Templates::EXT
         target_dir = File.join(output_dir, dir.gsub(Templates::ROOT_PATH, ''))
         target_path = File.join(target_dir, f)
-        Dir.mkdir target_dir unless File.exist?(target_dir)
+        FileUtils.mkdir_p target_dir unless File.exist?(target_dir)
         FileUtils.cp full_path, target_path
       end
     end

@@ -1,4 +1,5 @@
 ---
 hosts: dbservers
 roles:
+  - common
   - dbserver

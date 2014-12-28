@@ -77,3 +77,7 @@ guard :rspec, cmd: "bundle exec rspec" do
 
   watch(%r{^app/templates/.+\.erb}) { "#{rspec.spec_dir}/models" }
 end
+
+guard 'rake', :task => 'integration:copy' do
+  watch(%r{^app/templates/.+})
+end
