@@ -4,3 +4,7 @@
 
 - name: Install unicorn
   gem: name=unicorn user_install=no
+
+- name: Create upstart config
+  template: src=upstart.conf.j2 dest=/etc/init/{{ unicorn_app_name }}.conf
+  notify: restart unicorn
