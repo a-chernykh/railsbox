@@ -21,14 +21,21 @@
       .col-lg-11.step-conf
         h1 Virtual machine settings
         .row
-          .col-lg-6
+          .col-lg-4
             .form-group
               label for='vm_name' Name
               input.form-control id='vm_name' name='vm_name' type='text' ng-model='vm.name'
-          .col-lg-6
+          .col-lg-4
             .form-group
               label for='vm_os' Operating System
               select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
+          .col-lg-4
+            .form-group
+              label for='vm_http_forwarded_port' Forward HTTP port
+              p
+                small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpUrl() }}'>{{ applicationHttpUrl() }}</a>.
+              br
+              input.form-control id='vm_http_forwarded_port' name='vm_http_forwarded_port' type='text' ng-model='vm.httpForwardPort'
         .row
           .col-lg-4
             .form-group
@@ -44,17 +51,18 @@
               select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
           .col-lg-4
             .form-group
-              label for='vm_forwarded_port' Forward HTTP port
+              label for='vm_https_forwarded_port' Forward HTTPS port
               p
-                small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationUrl() }}'>{{ applicationUrl() }}</a>.
+                small HTTPS port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpsUrl() }}'>{{ applicationHttpsUrl() }}</a>.
               br
-              input.form-control id='vm_forwarded_port' name='vm_forwarded_port' type='text' ng-model='vm.httpForwardPort'
+              input.form-control id='vm_https_forwarded_port' name='vm_https_forwarded_port' type='text' ng-model='vm.httpsForwardPort'
 
     .row.step.step2
       .col-lg-1.step-number
         h1 2
       .col-lg-11.step-conf
         h1 Application settings
+        p ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <mark>sudo stop {{ vm.name }}</mark> and <mark>sudo start {{ vm.name }}</mark>.
         .row
           .col-lg-6
             .form-group
@@ -70,9 +78,15 @@
         h1 3
       .col-lg-11.step-conf
         h1 Databases
-        - %w(postgresql).each do |database|
-          input type='hidden' name='databases[]' value=database
-          = render partial: database
+        ul.nav.nav-tabs
+          li.active role='presentation'
+            a href="#postgresql" PostgreSQL
+        - %w(PostgreSQL).each do |database|
+          .checkbox
+            label
+              input type='checkbox' name='databases[]' value=database.downcase
+              ' Install #{database}
+          = render partial: database.downcase
         .row
           .col-lg-12
             button.pull-right.btn.btn-primary.btn-lg= t('.generate')

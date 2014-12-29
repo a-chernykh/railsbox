@@ -15,6 +15,7 @@ angular.module('app.rubyops').classy.controller
       memory: 700
       cores: 1
       httpForwardPort: 8080
+      httpsForwardPort: 8081
 
     # https://www.brightbox.com/docs/ruby/ubuntu/
     @$.rubyVersions = [
@@ -32,4 +33,5 @@ angular.module('app.rubyops').classy.controller
       name: defaultAppName
       user: 'vagrant'
 
-  applicationUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
+  applicationHttpUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
+  applicationHttpsUrl: -> "https://localhost:#{@$.vm.httpsForwardPort}"
