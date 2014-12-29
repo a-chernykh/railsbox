@@ -8,6 +8,7 @@
           a href='https://www.vagrantup.com/' <strong>vagrant</strong>
           '  and
           a href='http://www.ansible.com/' <strong>ansible</strong>
+          ' .
         p.pull-right
           a.btn.btn-primary href='#start' Get started
 
@@ -68,16 +69,10 @@
       .col-lg-1.step-number
         h1 3
       .col-lg-11.step-conf
-        h1 Database
-        .row
-          .col-lg-6
-            .form-group
-              label for='database_name' Database Name
-              input.form-control id='database_name' name='database_name' type='text' ng-model='db.name'
-          .col-lg-6
-            .form-group
-              label for='database_user' Database User
-              input.form-control id='database_user' name='database_user' type='text' ng-model='db.user'
+        h1 Databases
+        - %w(postgresql).each do |database|
+          input type='hidden' name='databases[]' value=database
+          = render partial: database
         .row
           .col-lg-12
             button.pull-right.btn.btn-primary.btn-lg= t('.generate')

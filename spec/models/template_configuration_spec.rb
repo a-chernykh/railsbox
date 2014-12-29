@@ -3,17 +3,7 @@ require 'rails_helper'
 describe TemplateConfiguration do
   describe '#save' do
     let(:dir) { Dir.mktmpdir }
-    let(:configuration) do
-      { vm_name: 'myapp',
-        vm_os: 'ubuntu/trusty64',
-        vm_memory: 700,
-        vm_cores: 2,
-        vm_forwarded_port: 8080,
-        server_name: 'localhost',
-        ruby_version: '2.1.2',
-        database_name: 'myapp',
-        database_user: 'myapp' }
-    end
+    let(:configuration) { params_fixture }
 
     describe 'files' do
       subject(:output) { IO.read(File.join(dir, file)) }

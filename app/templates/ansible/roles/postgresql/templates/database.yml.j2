@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: {{ postgresql_db_name }}
+
+  username: {{ postgresql_db_user }}
+  password: {{ postgresql_db_password }}
+
+test:
+  <<: *default
+  database: {{ postgresql_db_name }}_test

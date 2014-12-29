@@ -1,19 +1,6 @@
 ---
-- name: Install apt dependencies
-  apt: name={{ item }}
-  with_items:
-    - autoconf
-    - bison
-    - build-essential
-    - libssl-dev
-    - libyaml-dev
-    - libreadline6-dev
-    - zlib1g-dev
-    - libncurses5-dev
-
 - name: Install bundler
   gem: name=bundler user_install=no
 
 - name: bundle install
-  command: bundle install --deployment chdir={{ app_path }}
-  sudo: no
+  command: bundle install chdir={{ app_path }}

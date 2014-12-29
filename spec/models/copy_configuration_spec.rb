@@ -5,7 +5,7 @@ describe CopyConfiguration do
     before { @dir = Dir.mktmpdir }
     before { subject.save(@dir) }
 
-    %w(.gitignore ansible/site.yml).each do |file|
+    %w(.gitignore ansible/roles/base/tasks/main.yml).each do |file|
       it "copies #{file}" do
         input_file = File.join(Templates::ROOT_PATH, file)
         target_file = File.join(@dir, file)

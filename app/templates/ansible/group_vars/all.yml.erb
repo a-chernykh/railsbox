@@ -3,8 +3,11 @@ app_name: <%= vm_name %>
 server_name: <%= server_name %>
 ruby_version: <%= ruby_version %>
 
-database_name: <%= database_name %>
-database_user: <%= database_user %>
+user_name: vagrant
+
+postgresql_db_name: <%= postgresql_db_name %>
+postgresql_db_user: <%= postgresql_db_user %>
+postgresql_db_password: <%= postgresql_db_password %>
 
 ssl_certificate_path: /etc/nginx/ssl/<%= server_name %>.crt
 ssl_certificate_key_path: /etc/nginx/ssl/<%= server_name %>.key

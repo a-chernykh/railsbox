@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: no
+  roles:
+    - base
+<% databases.each do |db_role| -%>
+    - <%= db_role %>
+<% end %>
+    - webserver
+    - dbserver

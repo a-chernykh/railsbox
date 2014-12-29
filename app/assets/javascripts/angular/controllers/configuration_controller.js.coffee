@@ -30,6 +30,6 @@ angular.module('app.rubyops').classy.controller
 
     @$.db =
       name: defaultAppName
-      user: defaultAppName
+      user: 'vagrant'
 
   applicationUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"

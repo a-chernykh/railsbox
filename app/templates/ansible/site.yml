@@ -1,7 +1,0 @@
----
-- hosts: all
-  gather_facts: no
-  roles:
-    - common
-    - webserver
-    - dbserver
