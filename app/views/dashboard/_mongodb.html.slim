@@ -1,0 +1,17 @@
+.row
+  .col-lg-2
+    .form-group
+      .radio
+        label
+          input name='mongodb_orm' type='radio' checked='true' value='mongoid' ng-model='mongodbOrm'
+          ' Mongoid
+      .radio
+        label
+          input name='mongodb_orm' type='radio' value='mongomapper' ng-model='mongodbOrm'
+          ' MongoMapper
+
+  .col-lg-4
+    .form-group
+      label for='mongodb_db_name' Database Name
+      input.form-control id='mongodb_db_name' name='mongodb_db_name' type='text' ng-model='db.name'
+p <mark>{{ mongodbConfigPath }}</mark> will be automatically created based on the above params. Your old configuration will be backed up.

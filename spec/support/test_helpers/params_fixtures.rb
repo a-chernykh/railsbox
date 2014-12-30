@@ -1,7 +1,7 @@
 module TestHelpers
   module ParamsFixtures
     def params_fixture
-      { databases: %w(postgresql),
+      { databases: %w(postgresql mysql mongodb),
         vm_name: 'myapp',
         vm_os: 'ubuntu/trusty64',
         vm_memory: 700,
@@ -13,9 +13,12 @@ module TestHelpers
         postgresql_db_name: 'myapp',
         postgresql_db_user: 'vagrant',
         postgresql_db_password: 'vagrant',
+        postgresql_orm: 'activerecord',
         mysql_db_name: 'myapp',
         mysql_db_user: 'vagrant',
-        mysql_db_password: 'vagrant' }
+        mysql_db_password: 'vagrant',
+        mongodb_db_name: 'myapp',
+        mongodb_orm: 'mongoid' }
     end
   end
 end

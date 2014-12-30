@@ -3,7 +3,7 @@ namespace :integration do
   task copy: :environment do
     test_app_path = '/Users/akhkharu/projects/testapp'
     configurator = Configurator.from_params({
-      databases: %w(postgresql mysql),
+      databases: %w(postgresql mysql mongodb),
       vm_name: 'testapp',
       vm_os: 'ubuntu/trusty64',
       vm_memory: 1024,
@@ -17,7 +17,9 @@ namespace :integration do
       postgresql_db_password: 'vagrant',
       mysql_db_name: 'testapp',
       mysql_db_user: 'vagrant',
-      mysql_db_password: 'vagrant'
+      mysql_db_password: 'vagrant',
+      mongodb_db_name: 'testapp',
+      mongodb_orm: 'mongoid',
     })
     builder = ConfigurationBuilder.new(configurator)
     zip_path = builder.build

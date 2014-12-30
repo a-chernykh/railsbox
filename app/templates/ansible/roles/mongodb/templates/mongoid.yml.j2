@@ -1,0 +1,17 @@
+development:
+  sessions:
+    default:
+      database: {{ mongodb_db_name }}
+      hosts:
+        - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: {{ mongodb_db_name }}_test
+      hosts:
+        - localhost:27017
+      options:
+        read: primary
+        max_retries: 1
+        retry_interval: 0

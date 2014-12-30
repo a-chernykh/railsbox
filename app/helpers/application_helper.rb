@@ -20,6 +20,7 @@ module ApplicationHelper
 
   def databases
     [ OpenStruct.new({ id: 'postgresql', name: 'PostgreSQL' }),
-      OpenStruct.new({ id: 'mysql',      name: 'MySQL' }), ]
+      OpenStruct.new({ id: 'mysql',      name: 'MySQL' }),
+      OpenStruct.new({ id: 'mongodb',    name: 'MongoDB' }), ]
   end
 end

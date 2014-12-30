@@ -1,0 +1,22 @@
+---
+- name: Add repository key
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=7F0CEB10
+
+- name: Add repository
+  apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
+
+- name: Install packages
+  apt: name={{ item }}
+  with_items:
+    - mongodb-org
+
+- name: Enable and start mongod
+  service: name=mongod enabled=yes state=started
+
+- name: Create config/mongoid.yml for Mongoid
+  template: src=mongoid.yml.j2 dest={{ app_config_path }}/mongoid.yml owner={{ user_name }} mode=0600 backup=yes
+  when: mongodb_orm == 'mongoid'
+
+- name: Create config/mongo.yml for MongoMapper
+  template: src=mongo.yml.j2 dest={{ app_config_path }}/mongo.yml owner={{ user_name }} mode=0600 backup=yes
+  when: mongodb_orm == 'mongomapper'

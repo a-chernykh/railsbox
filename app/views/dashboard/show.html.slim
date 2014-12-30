@@ -88,8 +88,8 @@
               .tab-pane id=db.id role='tabpanel' class=('active' if db.id == 'postgresql')
                 .checkbox
                   label
-                    input type='checkbox' name='databases[]' value=db.id
-                    ' Install #{db.name}
+                    input checked=('true' if db.id == 'postgresql') type='checkbox' name='databases[]' value=db.id
+                    strong Install #{db.name}
                 = render partial: db.id
         .row
           .col-lg-12

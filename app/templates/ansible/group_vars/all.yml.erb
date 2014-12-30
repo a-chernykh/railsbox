@@ -18,6 +18,11 @@ mysql_db_user: <%= mysql_db_user %>
 mysql_db_password: <%= mysql_db_password %>
 <% end %>
 
+<% if databases.include? 'mongodb' -%>
+mongodb_db_name: <%= mongodb_db_name %>
+mongodb_orm: <%= mongodb_orm %>
+<% end %>
+
 ssl_certificate_path: /etc/nginx/ssl/<%= server_name %>.crt
 ssl_certificate_key_path: /etc/nginx/ssl/<%= server_name %>.key
 

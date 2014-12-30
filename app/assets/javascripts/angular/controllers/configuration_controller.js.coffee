@@ -33,6 +33,20 @@ angular.module('app.rubyops').classy.controller
       name: defaultAppName
       user: 'vagrant'
 
+    @$.sqlOrm = 'activerecord'
+    @$.mongodbOrm = 'mongoid'
+
+  watch:
+    'sqlOrm': '_onSqlOrmChange'
+    'mongodbOrm': '_onMongodbOrmChange'
+
   applicationHttpUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
   applicationHttpsUrl: -> "https://localhost:#{@$.vm.httpsForwardPort}"
   installDbToggle: ->
+
+  _onSqlOrmChange: (newValue) ->
+    @$.sqlConfigPath = switch newValue
+      when 'activerecord', 'sequel', 'datamapper' then 'config/database.yml'
+
+  _onMongodbOrmChange: (newValue) ->
+    @$.mongodbConfigPath = if newValue == 'mongoid' then 'config/mongoid.yml' else 'config/mongo.yml'

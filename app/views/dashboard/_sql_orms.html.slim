@@ -1,0 +1,13 @@
+.form-group
+  .radio
+    label
+      input name='#{db}_orm' type='radio' checked='true' value='activerecord' ng-model='sqlOrm'
+      ' ActiveRecord
+  .radio
+    label
+      input name='#{db}_orm' type='radio' value='sequel' ng-model='sqlOrm'
+      ' Sequel (<a target="_blank" href="https://github.com/TalentBox/sequel-rails">sequel-rails</a>)
+  .radio
+    label
+      input name='#{db}_orm' type='radio' value='datamapper' ng-model='sqlOrm'
+      ' DataMapper (<a target="_blank" href="https://github.com/datamapper/dm-rails">dm-rails</a>)
