@@ -49,4 +49,6 @@ angular.module('app.rubyops').classy.controller
       when 'activerecord', 'sequel', 'datamapper' then 'config/database.yml'
 
   _onMongodbOrmChange: (newValue) ->
-    @$.mongodbConfigPath = if newValue == 'mongoid' then 'config/mongoid.yml' else 'config/mongo.yml'
+    @$.mongodbConfigPath = switch newValue
+      when 'mongoid' then 'config/mongoid.yml'
+      when 'mongomapper' then 'config/mongo.yml'

@@ -1,6 +1,10 @@
 .form-group
   .radio
     label
+      input name='#{db}_orm' type='radio' checked='true' value='' ng-model='sqlOrm'
+      ' Do not configure
+  .radio
+    label
       input name='#{db}_orm' type='radio' checked='true' value='activerecord' ng-model='sqlOrm'
       ' ActiveRecord
   .radio

@@ -3,6 +3,10 @@
     .form-group
       .radio
         label
+          input name='mongodb_orm' type='radio' checked='true' value='' ng-model='mongodbOrm'
+          ' Do not configure
+      .radio
+        label
           input name='mongodb_orm' type='radio' checked='true' value='mongoid' ng-model='mongodbOrm'
           ' Mongoid
       .radio
@@ -14,4 +18,5 @@
     .form-group
       label for='mongodb_db_name' Database Name
       input.form-control id='mongodb_db_name' name='mongodb_db_name' type='text' ng-model='db.name'
-p <mark>{{ mongodbConfigPath }}</mark> will be automatically created based on the above params. Your old configuration will be backed up.
+p ng-show='mongodbConfigPath' <mark>{{ mongodbConfigPath }}</mark> will be automatically created based on the above params. Your old configuration will be backed up.
+p ng-hide='mongodbConfigPath' No configuration files will be created.
