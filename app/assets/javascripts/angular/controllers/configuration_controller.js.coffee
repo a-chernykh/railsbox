@@ -35,6 +35,7 @@ angular.module('app.rubyops').classy.controller
 
     @$.sqlOrm = 'activerecord'
     @$.mongodbOrm = 'mongoid'
+    @$.redisOrm = 'redis-rb'
 
   watch:
     'sqlOrm': '_onSqlOrmChange'

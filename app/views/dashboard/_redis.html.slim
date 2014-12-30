@@ -1,0 +1,14 @@
+.row
+  .col-lg-2
+    .form-group
+      .radio
+        label
+          input name='redis_orm' type='radio' value='' ng-model='redisOrm'
+          ' Do not configure
+      .radio
+        label
+          input name='redis_orm' type='radio' value='redis-rb' ng-model='redisOrm'
+          ' redis-rb
+
+p ng-show='redisOrm' <mark>config/initializers/redis.rb</mark> will be automatically created. Your old configuration (if any) will be backed up.
+p ng-hide='redisOrm' No configuration files will be created.

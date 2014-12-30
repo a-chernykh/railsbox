@@ -25,6 +25,10 @@ mongodb_db_name: <%= mongodb_db_name %>
 mongodb_orm: <%= mongodb_orm %>
 <% end %>
 
+<% if databases.include? 'redis' -%>
+redis_orm: <%= redis_orm %>
+<% end %>
+
 ssl_certificate_path: /etc/nginx/ssl/<%= server_name %>.crt
 ssl_certificate_key_path: /etc/nginx/ssl/<%= server_name %>.key
 

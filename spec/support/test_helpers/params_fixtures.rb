@@ -19,7 +19,8 @@ module TestHelpers
         mysql_db_password: 'vagrant',
         mysql_orm: 'activerecord',
         mongodb_db_name: 'testapp',
-        mongodb_orm: 'mongoid' }
+        mongodb_orm: 'mongoid',
+        redis_orm: 'redis-rb' }
     end
   end
 end
