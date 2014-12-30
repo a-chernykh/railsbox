@@ -28,6 +28,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-rake'
   gem 'terminal-notifier-guard'
+  gem 'serverspec'
 end
 
 group :test do

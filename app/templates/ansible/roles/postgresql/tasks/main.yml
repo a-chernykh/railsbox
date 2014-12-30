@@ -1,12 +1,12 @@
-- name: Install required Python modules
-  pip: name=psycopg2
-
 - name: Install packages
   apt: name={{ item }}
   with_items:
     - libpq-dev
     - postgresql
     - postgresql-contrib
+
+- name: Install required Python modules
+  pip: name=psycopg2
 
 - name: Create postgresql user
   postgresql_user: name={{ postgresql_db_user }} password={{ postgresql_db_password }} role_attr_flags=CREATEDB

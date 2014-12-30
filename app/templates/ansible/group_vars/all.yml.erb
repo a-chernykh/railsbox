@@ -6,9 +6,17 @@ ruby_version: <%= ruby_version %>
 user_name: vagrant
 group_name: vagrant
 
+<% if databases.include? 'postgresql' -%>
 postgresql_db_name: <%= postgresql_db_name %>
 postgresql_db_user: <%= postgresql_db_user %>
 postgresql_db_password: <%= postgresql_db_password %>
+<% end %>
+
+<% if databases.include? 'mysql' -%>
+mysql_db_name: <%= mysql_db_name %>
+mysql_db_user: <%= mysql_db_user %>
+mysql_db_password: <%= mysql_db_password %>
+<% end %>
 
 ssl_certificate_path: /etc/nginx/ssl/<%= server_name %>.crt
 ssl_certificate_key_path: /etc/nginx/ssl/<%= server_name %>.key

@@ -3,7 +3,7 @@ namespace :integration do
   task copy: :environment do
     test_app_path = '/Users/akhkharu/projects/testapp'
     configurator = Configurator.from_params({
-      databases: %w(postgresql),
+      databases: %w(postgresql mysql),
       vm_name: 'testapp',
       vm_os: 'ubuntu/trusty64',
       vm_memory: 1024,
@@ -14,7 +14,10 @@ namespace :integration do
       ruby_version: 'ruby2.1',
       postgresql_db_name: 'testapp',
       postgresql_db_user: 'vagrant',
-      postgresql_db_password: 'vagrant'
+      postgresql_db_password: 'vagrant',
+      mysql_db_name: 'testapp',
+      mysql_db_user: 'vagrant',
+      mysql_db_password: 'vagrant'
     })
     builder = ConfigurationBuilder.new(configurator)
     zip_path = builder.build

@@ -17,4 +17,9 @@ module ApplicationHelper
   def site_name
     'rubyops'.freeze
   end
+
+  def databases
+    [ OpenStruct.new({ id: 'postgresql', name: 'PostgreSQL' }),
+      OpenStruct.new({ id: 'mysql',      name: 'MySQL' }), ]
+  end
 end

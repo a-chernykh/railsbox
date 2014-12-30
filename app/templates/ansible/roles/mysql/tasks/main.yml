@@ -1,0 +1,21 @@
+---
+- name: Install packages
+  apt: name={{ item }}
+  with_items:
+    - mysql-server
+    - libmysqlclient-dev
+
+- name: Install required Python modules
+  pip: name=MySQL-python
+
+- name: Enable and start mysql
+  service: name=mysql enabled=yes state=started
+
+- name: Create mysql user
+  mysql_user: name={{ mysql_db_user }} password={{ mysql_db_password }} priv=*.*:ALL
+
+- name: Create mysql database
+  mysql_db: name={{ mysql_db_name }}
+
+- name: Create config/database.yml
+  template: src=database.yml.j2 dest={{ app_config_path }}/database.yml owner={{ user_name }} mode=0600 backup=yes

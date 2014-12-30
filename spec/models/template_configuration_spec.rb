@@ -23,7 +23,7 @@ describe TemplateConfiguration do
 
         it 'sets name' do
           expect(output).to include %Q(config.vm.define 'myapp')
-          expect(output).to include %Q(hostname = 'myapp')
+          expect(output).to include %Q(hostname = 'localhost')
         end
 
         it 'sets operating system' do

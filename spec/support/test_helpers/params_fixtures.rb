@@ -12,7 +12,10 @@ module TestHelpers
         ruby_version: '2.1.2',
         postgresql_db_name: 'myapp',
         postgresql_db_user: 'vagrant',
-        postgresql_db_password: 'vagrant' }
+        postgresql_db_password: 'vagrant',
+        mysql_db_name: 'myapp',
+        mysql_db_user: 'vagrant',
+        mysql_db_password: 'vagrant' }
     end
   end
 end

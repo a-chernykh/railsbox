@@ -1,0 +1,15 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+
+development:
+  <<: *default
+  database: {{ mysql_db_name }}
+
+  username: {{ mysql_db_user }}
+  password: {{ mysql_db_password }}
+
+test:
+  <<: *default
+  database: {{ mysql_db_name }}_test

@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder '../', '/vagrant'
 
   config.vm.define '<%= vm_name %>' do |machine|
-    machine.vm.hostname = '<%= vm_name %>'
+    machine.vm.hostname = '<%= server_name %>'
     machine.vm.network 'forwarded_port', guest: 80, host: <%= vm_http_forwarded_port %>
     machine.vm.network 'forwarded_port', guest: 443, host: <%= vm_https_forwarded_port %>
   end

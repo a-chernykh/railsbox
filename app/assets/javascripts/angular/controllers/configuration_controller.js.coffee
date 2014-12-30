@@ -35,3 +35,4 @@ angular.module('app.rubyops').classy.controller
 
   applicationHttpUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
   applicationHttpsUrl: -> "https://localhost:#{@$.vm.httpsForwardPort}"
+  installDbToggle: ->

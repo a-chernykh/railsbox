@@ -78,15 +78,19 @@
         h1 3
       .col-lg-11.step-conf
         h1 Databases
-        ul.nav.nav-tabs
-          li.active role='presentation'
-            a href="#postgresql" PostgreSQL
-        - %w(PostgreSQL).each do |database|
-          .checkbox
-            label
-              input type='checkbox' name='databases[]' value=database.downcase
-              ' Install #{database}
-          = render partial: database.downcase
+        div role='tabpanel'
+          ul.nav.nav-tabs role='tablist'
+            - databases.each do |db|
+              li role='presentation' class=('active' if db.id == 'postgresql')
+                a href="##{db.id}" aria-controls=db.id role='tab' data-toggle='tab'= db.name
+          .tab-content
+            - databases.each do |db|
+              .tab-pane id=db.id role='tabpanel' class=('active' if db.id == 'postgresql')
+                .checkbox
+                  label
+                    input type='checkbox' name='databases[]' value=db.id
+                    ' Install #{db.name}
+                = render partial: db.id
         .row
           .col-lg-12
             button.pull-right.btn.btn-primary.btn-lg= t('.generate')
