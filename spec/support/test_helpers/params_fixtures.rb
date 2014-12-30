@@ -13,9 +13,11 @@ module TestHelpers
         postgresql_db_name: 'testapp',
         postgresql_db_user: 'vagrant',
         postgresql_db_password: 'vagrant',
+        postgresql_orm: 'activerecord',
         mysql_db_name: 'testapp',
         mysql_db_user: 'vagrant',
         mysql_db_password: 'vagrant',
+        mysql_orm: 'activerecord',
         mongodb_db_name: 'testapp',
         mongodb_orm: 'mongoid' }
     end

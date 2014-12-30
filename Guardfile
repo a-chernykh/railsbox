@@ -81,4 +81,5 @@ end
 guard 'rake', :task => 'integration:copy' do
   watch(%r{^app/templates/.+})
   watch('lib/tasks/integration.rake')
+  watch('spec/support/test_helpers/params_fixtures.rb')
 end

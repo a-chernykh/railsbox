@@ -10,12 +10,14 @@ group_name: vagrant
 postgresql_db_name: <%= postgresql_db_name %>
 postgresql_db_user: <%= postgresql_db_user %>
 postgresql_db_password: <%= postgresql_db_password %>
+postgresql_orm: <%= postgresql_orm %>
 <% end %>
 
 <% if databases.include? 'mysql' -%>
 mysql_db_name: <%= mysql_db_name %>
 mysql_db_user: <%= mysql_db_user %>
 mysql_db_password: <%= mysql_db_password %>
+mysql_orm: <%= mysql_orm %>
 <% end %>
 
 <% if databases.include? 'mongodb' -%>
