@@ -22,7 +22,7 @@ describe TemplateConfiguration do
         let(:file) { self.class.description }
 
         it 'sets name' do
-          expect(output).to include %Q(config.vm.define 'myapp')
+          expect(output).to include %Q(config.vm.define 'testapp')
           expect(output).to include %Q(hostname = 'localhost')
         end
 
@@ -31,7 +31,7 @@ describe TemplateConfiguration do
         end
 
         it 'sets memory' do
-          expect(output).to include %Q(.memory = 700)
+          expect(output).to include %Q(.memory = 1024)
         end
 
         it 'sets cores' do
