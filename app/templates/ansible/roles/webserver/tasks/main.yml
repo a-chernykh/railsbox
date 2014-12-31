@@ -1,6 +1,6 @@
 ---
 - name: Install bundler
-  gem: name=bundler user_install=no
+  command: /bin/bash -l -c 'gem install bundler --no-ri --no-rdoc' chdir={{ app_path }}
 
 - name: bundle install
-  command: bundle install chdir={{ app_path }}
+  command: /bin/bash -l -c 'bundle install' chdir={{ app_path }}

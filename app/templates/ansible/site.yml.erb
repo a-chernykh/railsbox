@@ -3,6 +3,7 @@
   gather_facts: no
   roles:
     - base
+    - swap
 <% (params[:databases] + params[:background_jobs]).each do |role| -%>
     - <%= role %>
 <% end %>

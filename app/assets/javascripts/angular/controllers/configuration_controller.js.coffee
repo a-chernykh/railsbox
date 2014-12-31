@@ -12,7 +12,8 @@ angular.module('app.rubyops').classy.controller
     @$.vm =
       name: defaultAppName
       os: @$.osList[0]
-      memory: 700
+      memory: 1024
+      swap: 1024
       cores: 1
       ports: [
         { guest: 80,  host: 8080 },
