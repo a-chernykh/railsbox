@@ -27,7 +27,7 @@ class TemplateConfiguration
         FileUtils.mkdir_p target_dir unless File.exist?(target_dir)
         template = Tilt.new full_path
         File.open(target_path, 'w') do |f|
-          f.write template.render(Object.new, params: default_params.merge(@params))
+          f.write template.render(Object.new, params: default_params.merge(@params).symbolize_keys)
         end
       end
     end

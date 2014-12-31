@@ -39,7 +39,6 @@ angular.module('app.rubyops').classy.controller
       railsVersion: @$.railsVersions[2]
 
     @$.db =
-      name: defaultAppName
       user: 'vagrant'
 
     @$.allObjects = []
@@ -71,3 +70,5 @@ angular.module('app.rubyops').classy.controller
       @$.delayed_job.app_name = "#{newValue}-delayed_job"
     if @$.sidekiq.app_name is undefined || @$.sidekiq.app_name == "#{oldValue}-sidekiq"
       @$.sidekiq.app_name = "#{newValue}-sidekiq"
+    if @$.db.name is undefined || @$.db.name == oldValue
+      @$.db.name = newValue
