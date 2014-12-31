@@ -17,8 +17,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define '<%= params[:vm_name] %>' do |machine|
     machine.vm.hostname = '<%= params[:server_name] %>'
-    machine.vm.network 'forwarded_port', guest: 80, host: <%= params[:vm_http_forwarded_port] %>
-    machine.vm.network 'forwarded_port', guest: 443, host: <%= params[:vm_https_forwarded_port] %>
+    <% params[:vm_ports].each_value do |port| -%>
+    machine.vm.network 'forwarded_port', guest: <%= port[:guest] %>, host: <%= port[:host] %>
+    <% end %>
   end
 
   config.vm.provision 'ansible' do |ansible|

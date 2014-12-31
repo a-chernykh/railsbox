@@ -7,8 +7,10 @@ module TestHelpers
         vm_os: 'ubuntu/trusty64',
         vm_memory: 1024,
         vm_cores: 2,
-        vm_http_forwarded_port: 8080,
-        vm_https_forwarded_port: 8081,
+        vm_ports: {
+          '0' => { guest: 80, host: 8080 },
+          '1' => { guest: 443, host: 8081 },
+        },
         server_name: 'localhost',
         ruby_version: 'ruby2.1',
         rails_version: '4',

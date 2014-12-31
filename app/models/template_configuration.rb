@@ -11,7 +11,8 @@ class TemplateConfiguration
 
   def default_params
     { databases: [],
-      background_jobs: [] }
+      background_jobs: [],
+      vm_ports: {} }
   end
 
   def copy_recursive(dir, output_dir)

@@ -5,18 +5,6 @@ angular.module('app.rubyops').classy.controller
   init: ->
     defaultAppName = 'myapp'
 
-    @$.osList = [
-      { box: 'ubuntu/trusty64', name: 'Ubuntu Trusty 14.04' }
-    ]
-    @$.coresList = [ 1, 2, 3, 4 ]
-    @$.vm =
-      name: defaultAppName
-      os: @$.osList[0]
-      memory: 700
-      cores: 1
-      httpForwardPort: 8080
-      httpsForwardPort: 8081
-
     # https://www.brightbox.com/docs/ruby/ubuntu/
     @$.rubyVersions = [
       { package: 'ruby1.8',   label: '1.8' },
@@ -53,8 +41,6 @@ angular.module('app.rubyops').classy.controller
     'mongodbOrm': '_onMongodbOrmChange'
     'app.railsVersion': '_onRailsVersionChange'
 
-  applicationHttpUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
-  applicationHttpsUrl: -> "https://localhost:#{@$.vm.httpsForwardPort}"
   installDbToggle: ->
 
   _onSqlOrmChange: (newValue) ->

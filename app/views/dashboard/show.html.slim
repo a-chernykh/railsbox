@@ -12,14 +12,13 @@ a.anchor#home
           a href='http://www.ansible.com/' <strong>ansible</strong>
           ' .
         p.button
-          a.btn.btn-default.btn-lg href='#start' Get started
+          a.btn.btn-default.btn-lg href='#vm-settings' Get started
 
-a.anchor#start
 .container-fluid ng-controller='ConfigurationController'
   form role='form' method='post' action=configurations_path
     = token_tag nil
     a.anchor#vm-settings
-    .row.step.step1
+    .row.step.step1 ng-controller='VirtualMachineController'
       .col-lg-1.step-number
         h1 1
       .col-lg-11.step-conf
@@ -28,41 +27,49 @@ a.anchor#start
             h2.panel-title Virtual machine settings
           .panel-body
             .row
+              .col-lg-8
+                .row
+                  .col-lg-6
+                    .form-group
+                      label for='vm_name' Name
+                      input.form-control id='vm_name' name='vm_name' type='text' ng-model='vm.name'
+                  .col-lg-6
+                    .form-group
+                      label for='vm_os' Operating System
+                      select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
+                .row
+                  .col-lg-6
+                    .form-group
+                      label for='vm_memory' Memory, Mb
+                      p
+                        small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
+                      input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='vm.memory'
+                  .col-lg-6
+                    .form-group
+                      label for='vm_cores' CPU cores
+                      p
+                        small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
+                      select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
+
               .col-lg-4
-                .form-group
-                  label for='vm_name' Name
-                  input.form-control id='vm_name' name='vm_name' type='text' ng-model='vm.name'
-              .col-lg-4
-                .form-group
-                  label for='vm_os' Operating System
-                  select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
-              .col-lg-4
-                .form-group
-                  label for='vm_http_forwarded_port' Forward HTTP port
-                  p
-                    small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpUrl() }}'>{{ applicationHttpUrl() }}</a>.
-                  br
-                  input.form-control id='vm_http_forwarded_port' name='vm_http_forwarded_port' type='text' ng-model='vm.httpForwardPort'
-            .row
-              .col-lg-4
-                .form-group
-                  label for='vm_memory' Memory, Mb
-                  p
-                    small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
-                  input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='vm.memory'
-              .col-lg-4
-                .form-group
-                  label for='vm_cores' CPU cores
-                  p
-                    small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
-                  select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
-              .col-lg-4
-                .form-group
-                  label for='vm_https_forwarded_port' Forward HTTPS port
-                  p
-                    small HTTPS port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpsUrl() }}'>{{ applicationHttpsUrl() }}</a>.
-                  br
-                  input.form-control id='vm_https_forwarded_port' name='vm_https_forwarded_port' type='text' ng-model='vm.httpsForwardPort'
+                label for='new_guest_port' Port forwarding
+                table.table.table-bordered
+                  thead
+                    tr
+                      th Guest port
+                      th Host port
+                  tbody
+                    tr ng-repeat='port in vm.ports'
+                      input type='hidden' name='vm_ports[{{ $index }}][guest]' value='{{ port.guest }}'
+                      input type='hidden' name='vm_ports[{{ $index }}][host]' value='{{ port.host }}'
+                      td {{ port.guest }}
+                      td {{ port.host }}
+                    tr
+                      td
+                        input.form-control id='new_guest_port' type='text' placeholder='guest port' ng-model='newGuestPort'
+                      td
+                        input.form-control type='text' placeholder='host port' ng-model='newHostPort'
+                button.btn.btn-default.pull-right ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add port
 
     a.anchor#app-settings
     .row.step.step2
@@ -85,14 +92,12 @@ a.anchor#start
                   label for='ruby_version' Ruby version
                   p
                     small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
-                  br
                   select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.version' ng-model='app.rubyVersion'
               .col-lg-4
                 .form-group
                   label for='rails_version' Ruby on Rails version
                   p
                     small System will configure some of the services appropriately based on Ruby on Rails version you are using.
-                  br
                   select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='app.railsVersion'
 
     a.anchor#databases
