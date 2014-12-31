@@ -1,7 +1,3 @@
-.btn-lg {
-  font-size: 1.5em;
-}
-
 .jumbotron {
   @include dark-background;
 
@@ -49,10 +45,6 @@
   background-image: image-url('debut_dark.png');
 }
 
-mark {
-  white-space: nowrap;
-}
-
 .step {
   padding: 25px 0px;
 }
@@ -62,9 +54,4 @@ mark {
   button {
     font-size: 2.5em;
   }
-}
-
-h2.panel-title {
-  font-size: 2.5em;
-  font-weight: 300;
 }

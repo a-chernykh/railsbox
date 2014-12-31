@@ -1,0 +1,16 @@
+h2.panel-title {
+  font-size: 2.5em;
+  font-weight: 300;
+}
+
+.panel-default > .panel-heading {
+  @include dark-background;
+}
+
+mark {
+  white-space: nowrap;
+}
+
+.btn-lg {
+  font-size: 1.5em;
+}
