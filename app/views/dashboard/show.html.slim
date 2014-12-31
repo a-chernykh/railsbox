@@ -92,7 +92,7 @@ a.anchor#home
                   label for='ruby_version' Ruby version
                   p
                     small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
-                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.version' ng-model='app.rubyVersion'
+                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
               .col-lg-4
                 .form-group
                   label for='rails_version' Ruby on Rails version
