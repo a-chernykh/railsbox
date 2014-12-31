@@ -7,10 +7,16 @@ h2.panel-title {
   @include dark-background;
 }
 
-mark {
+kbd {
   white-space: nowrap;
 }
 
 .btn-lg {
   font-size: 1.5em;
+}
+
+.panel-body {
+  .dropdown {
+    margin-bottom: 10px;
+  }
 }

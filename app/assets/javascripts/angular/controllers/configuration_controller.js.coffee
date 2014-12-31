@@ -5,6 +5,20 @@ angular.module('app.rubyops').classy.controller
   init: ->
     defaultAppName = 'myapp'
 
+    @$.osList = [
+      { box: 'ubuntu/trusty64', name: 'Ubuntu Trusty 14.04' }
+    ]
+    @$.coresList = [ 1, 2, 3, 4 ]
+    @$.vm =
+      name: defaultAppName
+      os: @$.osList[0]
+      memory: 700
+      cores: 1
+      ports: [
+        { guest: 80,  host: 8080 },
+        { guest: 443, host: 8081 }
+      ]
+
     # https://www.brightbox.com/docs/ruby/ubuntu/
     @$.rubyVersions = [
       { package: 'ruby1.8',   label: '1.8' },
@@ -28,32 +42,27 @@ angular.module('app.rubyops').classy.controller
       name: defaultAppName
       user: 'vagrant'
 
-    @$.sqlOrm = 'activerecord'
-    @$.mongodbOrm = 'mongoid'
-    @$.redisOrm = 'redis-rb'
+    @$.allObjects = []
+    @$.activeObjects = []
 
     @$.delayed_job =
-      app_name: "#{defaultAppName}-delayed_job"
       command: 'script/delayed_job run'
 
+    @$.isActive = (obj) ->
+      obj in @activeObjects
+
+    @$.allActive = ->
+      @activeObjects.length == @allObjects.length
+
+    @$.add = (obj) ->
+      @activeObjects.push obj
+
+    @$.delete = (obj) ->
+      @activeObjects = @activeObjects.filter (curObj) -> curObj isnt obj
+
   watch:
-    'sqlOrm': '_onSqlOrmChange'
-    'mongodbOrm': '_onMongodbOrmChange'
-    'app.railsVersion': '_onRailsVersionChange'
+    'vm.name': '_onVmNameChanged'
 
-  installDbToggle: ->
-
-  _onSqlOrmChange: (newValue) ->
-    @$.sqlConfigPath = switch newValue
-      when 'activerecord', 'sequel', 'datamapper' then 'config/database.yml'
-
-  _onMongodbOrmChange: (newValue) ->
-    @$.mongodbConfigPath = switch newValue
-      when 'mongoid' then 'config/mongoid.yml'
-      when 'mongomapper' then 'config/mongo.yml'
-
-  _onRailsVersionChange: (newValue) ->
-    if newValue
-      @$.delayed_job.command = switch newValue.version
-        when '4' then 'bin/delayed_job run'
-        else 'script/delayed_job run'
+  _onVmNameChanged: (newValue, oldValue) ->
+    if @$.delayed_job.app_name is undefined || @$.delayed_job.app_name == "#{oldValue}-delayed_job"
+      @$.delayed_job.app_name = "#{newValue}-delayed_job"

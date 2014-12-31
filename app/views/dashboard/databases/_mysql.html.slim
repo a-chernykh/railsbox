@@ -1,6 +1,6 @@
 .row
   .col-lg-2
-    = render 'sql_orms', db: 'mysql'
+    = render 'dashboard/databases/sql_orms', db: 'mysql'
   .col-lg-3
     .form-group
       label for='mysql_db_name' Database Name
@@ -13,4 +13,4 @@
     .form-group
       label for='mysql_db_password' Database Password
       input.form-control id='mysql_db_password' name='mysql_db_password' type='text' placeholder='optional'
-= render 'sql_config'
+= render 'dashboard/databases/sql_config'

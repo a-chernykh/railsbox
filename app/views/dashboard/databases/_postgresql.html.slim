@@ -1,6 +1,6 @@
 .row
   .col-lg-2
-    = render 'sql_orms', db: 'postgresql'
+    = render 'dashboard/databases/sql_orms', db: 'postgresql'
   .col-lg-3
     .form-group
       label for='postgresql_db_name' Database Name
@@ -13,4 +13,4 @@
     .form-group
       label for='postgresql_db_password' Database Password
       input.form-control id='postgresql_db_password' name='postgresql_db_password' type='text' placeholder='optional'
-= render 'sql_config'
+= render 'dashboard/databases/sql_config'

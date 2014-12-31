@@ -85,23 +85,25 @@ a.anchor#home
                 .form-group
                   label for='server_name' Server name
                   p
-                    small Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <mark>sudo stop {{ vm.name }}</mark> and <mark>sudo start {{ vm.name }}</mark>.
+                    small Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ vm.name }}</kbd> and <kbd>sudo start {{ vm.name }}</kbd>.
                   input.form-control id='server_name' name='server_name' type='text' ng-model='app.serverName'
               .col-lg-4
                 .form-group
                   label for='ruby_version' Ruby version
                   p
                     small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
+                  br
                   select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
               .col-lg-4
                 .form-group
                   label for='rails_version' Ruby on Rails version
                   p
                     small System will configure some of the services appropriately based on Ruby on Rails version you are using.
+                  br
                   select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='app.railsVersion'
 
     a.anchor#databases
-    .row.step.step3
+    .row.step.step3 ng-controller='DatabasesController'
       .col-lg-1.step-number
         h1 3
       .col-lg-11.step-conf
@@ -109,22 +111,25 @@ a.anchor#home
           .panel-heading
             h2.panel-title Databases, caching and search
           .panel-body
-            div role='tabpanel'
-              ul.nav.nav-tabs role='tablist'
-                - databases.each do |db|
-                  li role='presentation' class=('active' if db.id == 'postgresql')
-                    a href="##{db.id}" aria-controls=db.id role='tab' data-toggle='tab'= db.name
-              .tab-content
-                - databases.each do |db|
-                  .tab-pane id=db.id role='tabpanel' class=('active' if db.id == 'postgresql')
-                    .checkbox
-                      label
-                        input checked=('true' if db.id == 'postgresql') type='checkbox' name='databases[]' value=db.id
-                        strong Install #{db.name}
-                    = render partial: db.id
+            .dropdown ng-hide='allActive()'
+              button.btn.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='databasesMenu'
+                ' Add database
+                span.caret
+              ul.dropdown-menu role='menu' aria-labelledby='databasesMenu'
+                li ng-repeat='database in allObjects' role='presentation' ng-hide='isActive(database.id)'
+                  a role='menuitem' tabindex='-1' href='#' ng-click='add(database.id)' {{ database.name }}
+
+            input ng-repeat='database in activeObjects' type='hidden' name='databases[]' value='{{ database }}'
+
+            - databases.each do |database|
+              .panel.panel-primary ng-show="isActive('#{database.id}')"
+                .panel-heading= database.name
+                .panel-body
+                  = render "dashboard/databases/#{database.id}"
+                  button.btn.btn-danger.pull-right type='button' ng-click="delete('#{database.id}')" Delete
 
     a.anchor#background-jobs
-    .row.step.step4
+    .row.step.step4 ng-controller='BackgroundJobsController'
       .col-lg-1.step-number
         h1 4
       .col-lg-11.step-conf
@@ -132,19 +137,22 @@ a.anchor#home
           .panel-heading
             h2.panel-title Background jobs
           .panel-body
-            div role='tabpanel'
-              ul.nav.nav-tabs role='tablist'
-                - background_jobs.each do |bg_job|
-                  li role='presentation' class=('active' if bg_job.id == 'delayed_job')
-                    a href="##{bg_job.id}" aria-controls=bg_job.id role='tab' data-toggle='tab'= bg_job.name
-              .tab-content
-                - background_jobs.each do |bg_job|
-                  .tab-pane id=bg_job.id role='tabpanel' class=('active' if bg_job.id == 'delayed_job')
-                    .checkbox
-                      label
-                        input type='checkbox' name='background_jobs[]' value=bg_job.id
-                        strong Add #{bg_job.name} workers
-                    = render partial: bg_job.id
+            .dropdown ng-hide='allActive()'
+              button.btn.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='backgroundJobsMenu'
+                ' Add worker
+                span.caret
+              ul.dropdown-menu role='menu' aria-labelledby='backgroundJobsMenu'
+                li ng-repeat='backgroundJob in allObjects' role='presentation' ng-hide='isActive(backgroundJob.id)'
+                  a role='menuitem' tabindex='-1' href='#' ng-click='add(backgroundJob.id)' {{ backgroundJob.name }}
+
+            input ng-repeat='backgroundJob in activeObjects' type='hidden' name='background_jobs[]' value='{{ backgroundJob }}'
+
+            - background_jobs.each do |background_job|
+              .panel.panel-primary ng-show="isActive('#{background_job.id}')"
+                .panel-heading= background_job.name
+                .panel-body
+                  = render "dashboard/background_jobs/#{background_job.id}"
+                  button.btn.btn-danger.pull-right type='button' ng-click="delete('#{background_job.id}')" Delete
 
     .row.step.download-step
       .col-lg-12
