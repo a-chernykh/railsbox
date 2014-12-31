@@ -2,7 +2,7 @@ module TestHelpers
   module ParamsFixtures
     def params_fixture
       { databases: %w(postgresql mysql mongodb redis),
-        background_jobs: %w(delayed_job),
+        background_jobs: %w(delayed_job sidekiq),
         vm_name: 'testapp',
         vm_os: 'ubuntu/trusty64',
         vm_memory: 1024,
@@ -26,7 +26,9 @@ module TestHelpers
         mongodb_orm: 'mongoid',
         redis_orm: 'redis-rb',
         delayed_job_app_name: 'testapp-delayed_job',
-        delayed_job_command: 'bin/delayed_job run' }
+        delayed_job_command: 'bin/delayed_job run',
+        sidekiq_app_name: 'testapp-sidekiq',
+        sidekiq_command: 'sidekiq' }
     end
   end
 end

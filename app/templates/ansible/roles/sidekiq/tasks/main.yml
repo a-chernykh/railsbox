@@ -1,0 +1,4 @@
+---
+- name: Create upstart config
+  template: src=upstart.conf.j2 dest=/etc/init/{{ sidekiq_app_name }}.conf
+  notify: restart sidekiq

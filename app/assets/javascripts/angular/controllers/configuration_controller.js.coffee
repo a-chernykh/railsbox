@@ -48,6 +48,9 @@ angular.module('app.rubyops').classy.controller
     @$.delayed_job =
       command: 'script/delayed_job run'
 
+    @$.sidekiq =
+      command: 'sidekiq'
+
     @$.isActive = (obj) ->
       obj in @activeObjects
 
@@ -66,3 +69,5 @@ angular.module('app.rubyops').classy.controller
   _onVmNameChanged: (newValue, oldValue) ->
     if @$.delayed_job.app_name is undefined || @$.delayed_job.app_name == "#{oldValue}-delayed_job"
       @$.delayed_job.app_name = "#{newValue}-delayed_job"
+    if @$.sidekiq.app_name is undefined || @$.sidekiq.app_name == "#{oldValue}-sidekiq"
+      @$.sidekiq.app_name = "#{newValue}-sidekiq"

@@ -26,6 +26,7 @@ module ApplicationHelper
   end
 
   def background_jobs
-    [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }) ]
+    [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }), 
+      OpenStruct.new({ id: 'sidekiq',     name: 'sidekiq' }), ]
   end
 end
