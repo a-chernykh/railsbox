@@ -58,18 +58,22 @@ a.anchor#home
                     tr
                       th Guest port
                       th Host port
+                      th
                   tbody
                     tr ng-repeat='port in vm.ports'
                       input type='hidden' name='vm_ports[{{ $index }}][guest]' value='{{ port.guest }}'
                       input type='hidden' name='vm_ports[{{ $index }}][host]' value='{{ port.host }}'
                       td {{ port.guest }}
                       td {{ port.host }}
+                      td
+                        button.btn.btn-danger type='button' ng-click='deletePort($index)' Delete
                     tr
                       td
                         input.form-control id='new_guest_port' type='text' placeholder='guest port' ng-model='newGuestPort'
                       td
                         input.form-control type='text' placeholder='host port' ng-model='newHostPort'
-                button.btn.btn-default.pull-right ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add port
+                      td
+                        button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
 
     a.anchor#app-settings
     .row.step.step2
