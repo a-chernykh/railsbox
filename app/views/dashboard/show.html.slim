@@ -43,7 +43,7 @@ a.anchor#home
                       label for='vm_memory' Memory, Mb
                       p
                         small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
-                      input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='vm.memory'
+                      input.form-control id='vm_memory' name='vm_memory' type='number' ng-model='vm.memory'
                   .col-lg-6
                     .form-group
                       label for='vm_cores' CPU cores
