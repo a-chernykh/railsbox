@@ -1,19 +1,56 @@
-.jumbotron {
-  padding: 40px 0px 15px;
-  margin-bottom: 0px;
+.btn-lg {
+  font-size: 1.5em;
 }
 
-.step-number {
+.jumbotron {
+  @include dark-background;
+
+  padding: 30px 0px 35px;
+  margin-bottom: 0px;
+
   h1 {
-    font-size: 4em;
-    color: #fff;
+    color: $logo-light-color-1;
+    span {
+      color: $logo-light-color-2;
+    }
+  }
+
+  h2 {
+    margin-top: 10px;
+  }
+
+  p {
+    margin-top: 40px;
+    &.button {
+      text-align: center;
+    }
   }
 }
 
 .step-number {
-  background: $brand-success;
+  @include border-right-radius(10px);
+  h1 {
+    font-size: 4em;
+    color: #fff;
+    margin: 10px 0px;
+  }
+}
+
+.step-number {
+  background-image: image-url('debut_dark.png');
 }
 
 mark {
   white-space: nowrap;
+}
+
+.step {
+  padding: 25px 0px;
+}
+
+.download-step .col-lg-12 {
+  text-align: center;
+  button {
+    font-size: 2.5em;
+  }
 }

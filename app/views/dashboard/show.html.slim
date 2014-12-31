@@ -2,15 +2,16 @@
   .container-fluid
     .row
       .col-lg-10.col-lg-offset-1
-        h1= site_name
+        h1 <span>rails</span>box
+        h2 Easy and fast Ruby on Rails development boxes
         p
           ' Ruby developer? Heard about <strong>DevOps</strong> but too busy to learn it? Streamline your development workflow in no time by creating production-like virtual machine with your development environment. Try this extremely simple to use VM configuration tool to create new <strong>Ruby on Rails</strong> server using
           a href='https://www.vagrantup.com/' <strong>vagrant</strong>
           '  and
           a href='http://www.ansible.com/' <strong>ansible</strong>
           ' .
-        p.pull-right
-          a.btn.btn-primary href='#start' Get started
+        p.button
+          a.btn.btn-default.btn-lg href='#start' Get started
 
 #start.container-fluid ng-controller='ConfigurationController'
   form role='form' method='post' action=configurations_path
@@ -19,78 +20,92 @@
       .col-lg-1.step-number
         h1 1
       .col-lg-11.step-conf
-        h1 Virtual machine settings
-        .row
-          .col-lg-4
-            .form-group
-              label for='vm_name' Name
-              input.form-control id='vm_name' name='vm_name' type='text' ng-model='vm.name'
-          .col-lg-4
-            .form-group
-              label for='vm_os' Operating System
-              select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
-          .col-lg-4
-            .form-group
-              label for='vm_http_forwarded_port' Forward HTTP port
-              p
-                small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpUrl() }}'>{{ applicationHttpUrl() }}</a>.
-              br
-              input.form-control id='vm_http_forwarded_port' name='vm_http_forwarded_port' type='text' ng-model='vm.httpForwardPort'
-        .row
-          .col-lg-4
-            .form-group
-              label for='vm_memory' Memory, Mb
-              p
-                small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
-              input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='vm.memory'
-          .col-lg-4
-            .form-group
-              label for='vm_cores' CPU cores
-              p
-                small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
-              select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
-          .col-lg-4
-            .form-group
-              label for='vm_https_forwarded_port' Forward HTTPS port
-              p
-                small HTTPS port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpsUrl() }}'>{{ applicationHttpsUrl() }}</a>.
-              br
-              input.form-control id='vm_https_forwarded_port' name='vm_https_forwarded_port' type='text' ng-model='vm.httpsForwardPort'
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Virtual machine settings
+          .panel-body
+            .row
+              .col-lg-4
+                .form-group
+                  label for='vm_name' Name
+                  input.form-control id='vm_name' name='vm_name' type='text' ng-model='vm.name'
+              .col-lg-4
+                .form-group
+                  label for='vm_os' Operating System
+                  select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
+              .col-lg-4
+                .form-group
+                  label for='vm_http_forwarded_port' Forward HTTP port
+                  p
+                    small HTTP port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpUrl() }}'>{{ applicationHttpUrl() }}</a>.
+                  br
+                  input.form-control id='vm_http_forwarded_port' name='vm_http_forwarded_port' type='text' ng-model='vm.httpForwardPort'
+            .row
+              .col-lg-4
+                .form-group
+                  label for='vm_memory' Memory, Mb
+                  p
+                    small The amount of memory which will be available for virtual machine. Ruby on Rails application are usually memory-heavy, so increasing this value to <strong>1024</strong> make sense sometimes.
+                  input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='vm.memory'
+              .col-lg-4
+                .form-group
+                  label for='vm_cores' CPU cores
+                  p
+                    small Number of CPU cores which will be dedicated to virtual machine. Usually the default of <strong>1</strong> works fine, but for CPU-intensive applications you may raise it to <strong>2</strong> or higher.
+                  select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
+              .col-lg-4
+                .form-group
+                  label for='vm_https_forwarded_port' Forward HTTPS port
+                  p
+                    small HTTPS port which will be forwarded from your guest machine to the host machine. Your application will be available as <a target='_blank' href='{{ applicationHttpsUrl() }}'>{{ applicationHttpsUrl() }}</a>.
+                  br
+                  input.form-control id='vm_https_forwarded_port' name='vm_https_forwarded_port' type='text' ng-model='vm.httpsForwardPort'
 
     .row.step.step2
       .col-lg-1.step-number
         h1 2
       .col-lg-11.step-conf
-        h1 Application settings
-        p ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <mark>sudo stop {{ vm.name }}</mark> and <mark>sudo start {{ vm.name }}</mark>.
-        .row
-          .col-lg-6
-            .form-group
-              label for='server_name' Server Name
-              input.form-control id='server_name' name='server_name' type='text' ng-model='app.serverName'
-          .col-lg-6
-            .form-group
-              label for='ruby_version' Ruby Version
-              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Application settings
+          .panel-body
+            .row
+              .col-lg-6
+                .form-group
+                  label for='server_name' Server Name
+                  p
+                    small Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <mark>sudo stop {{ vm.name }}</mark> and <mark>sudo start {{ vm.name }}</mark>.
+                  input.form-control id='server_name' name='server_name' type='text' ng-model='app.serverName'
+              .col-lg-6
+                .form-group
+                  label for='ruby_version' Ruby Version
+                  p
+                    small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
+                  br
+                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
 
     .row.step.step3
       .col-lg-1.step-number
         h1 3
       .col-lg-11.step-conf
-        h1 Databases, caching and search
-        div role='tabpanel'
-          ul.nav.nav-tabs role='tablist'
-            - databases.each do |db|
-              li role='presentation' class=('active' if db.id == 'postgresql')
-                a href="##{db.id}" aria-controls=db.id role='tab' data-toggle='tab'= db.name
-          .tab-content
-            - databases.each do |db|
-              .tab-pane id=db.id role='tabpanel' class=('active' if db.id == 'postgresql')
-                .checkbox
-                  label
-                    input checked=('true' if db.id == 'postgresql') type='checkbox' name='databases[]' value=db.id
-                    strong Install #{db.name}
-                = render partial: db.id
-        .row
-          .col-lg-12
-            button.pull-right.btn.btn-primary.btn-lg= t('.generate')
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Databases, caching and search
+          .panel-body
+            div role='tabpanel'
+              ul.nav.nav-tabs role='tablist'
+                - databases.each do |db|
+                  li role='presentation' class=('active' if db.id == 'postgresql')
+                    a href="##{db.id}" aria-controls=db.id role='tab' data-toggle='tab'= db.name
+              .tab-content
+                - databases.each do |db|
+                  .tab-pane id=db.id role='tabpanel' class=('active' if db.id == 'postgresql')
+                    .checkbox
+                      label
+                        input checked=('true' if db.id == 'postgresql') type='checkbox' name='databases[]' value=db.id
+                        strong Install #{db.name}
+                    = render partial: db.id
+
+    .row.step.download-step
+      .col-lg-12
+        button.btn.btn-default.btn-lg= t('.generate')

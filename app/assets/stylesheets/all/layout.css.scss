@@ -1,5 +1,10 @@
+body {
+  padding-top: $navbar-height;
+  background-image: image-url('debut_light.png');
+}
+
 footer {
-  background-color: $jumbotron-bg;
+  @include dark-background;
   padding: 50px 0px;
 
   p {
@@ -7,24 +12,7 @@ footer {
   }
 }
 
-.step:last-child .col-lg-12 button {
-  margin-top: 10px;
-  margin-bottom: 50px;
-}
-
-// .row {
-//   overflow: hidden; 
-//   &.step {
-//     border-bottom: 1px solid #fff;
-//   }
-// }
-
-// .step-number[class*="col-"] {
-//   margin-bottom: -99999px;
-//   padding-bottom: 99999px;
-// }
-
 #start {
-  padding-top: 40px;
-  margin-top: -40px;
+  padding-top: 35px;
+  padding-bottom: 35px;
 }

@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def site_name
-    'rubyops'.freeze
+    'railsbox'.freeze
   end
 
   def databases
