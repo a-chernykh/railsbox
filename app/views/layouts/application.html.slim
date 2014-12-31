@@ -12,7 +12,7 @@ html lang="en"
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
-  body ng-app='app.rubyops'
+  body ng-app='app.rubyops' data-spy='scroll' data-target='.navbar'
     nav.navbar.navbar-fixed-top.navbar-default
       .container
         .navbar-header
@@ -24,9 +24,15 @@ html lang="en"
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
             li.active
-              a href='/' Home
+              a href='#home' Home
             li
-              a href='/' About
+              a href='#vm-settings' Virtual Machine
+            li
+              a href='#app-settings' Application
+            li
+              a href='#databases' Databases
+            li
+              a href='#background-jobs' Background Jobs
 
     = render partial: 'shared/flash_messages'
     = yield

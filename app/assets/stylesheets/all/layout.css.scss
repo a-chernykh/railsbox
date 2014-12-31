@@ -12,7 +12,9 @@ footer {
   }
 }
 
-#start {
-  padding-top: 35px;
-  padding-bottom: 35px;
+a.anchor {
+  display: block;
+  position: relative;
+  top: -$navbar-height;
+  visibility: hidden;
 }

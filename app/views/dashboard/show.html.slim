@@ -1,3 +1,4 @@
+a.anchor#home
 .jumbotron
   .container-fluid
     .row
@@ -13,9 +14,11 @@
         p.button
           a.btn.btn-default.btn-lg href='#start' Get started
 
-#start.container-fluid ng-controller='ConfigurationController'
+a.anchor#start
+.container-fluid ng-controller='ConfigurationController'
   form role='form' method='post' action=configurations_path
     = token_tag nil
+    a.anchor#vm-settings
     .row.step.step1
       .col-lg-1.step-number
         h1 1
@@ -61,6 +64,7 @@
                   br
                   input.form-control id='vm_https_forwarded_port' name='vm_https_forwarded_port' type='text' ng-model='vm.httpsForwardPort'
 
+    a.anchor#app-settings
     .row.step.step2
       .col-lg-1.step-number
         h1 2
@@ -91,6 +95,7 @@
                   br
                   select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='app.railsVersion'
 
+    a.anchor#databases
     .row.step.step3
       .col-lg-1.step-number
         h1 3
@@ -113,6 +118,7 @@
                         strong Install #{db.name}
                     = render partial: db.id
 
+    a.anchor#background-jobs
     .row.step.step4
       .col-lg-1.step-number
         h1 4
