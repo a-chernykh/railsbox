@@ -85,26 +85,36 @@ a.anchor#home
             h2.panel-title Application settings
           .panel-body
             .row
-              .col-lg-4
+              .col-lg-6
                 .form-group
                   label for='server_name' Server name
                   p
                     small Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ vm.name }}</kbd> and <kbd>sudo start {{ vm.name }}</kbd>.
                   input.form-control id='server_name' name='server_name' type='text' ng-model='app.serverName'
-              .col-lg-4
-                .form-group
-                  label for='ruby_version' Ruby version
-                  p
-                    small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
-                  br
-                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
-              .col-lg-4
+              .col-lg-6
                 .form-group
                   label for='rails_version' Ruby on Rails version
                   p
                     small System will configure some of the services appropriately based on Ruby on Rails version you are using.
                   br
                   select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='app.railsVersion'
+            .row
+              .col-lg-2
+                label Install Ruby with
+                .form-group
+                  .radio ng-repeat='(k, v) in rubyInstalls'
+                    label
+                      input name='ruby_type' type='radio' value='{{ k }}' ng-model='app.rubyInstall'
+                      ' {{ v.label }}
+
+              .col-lg-10
+                .form-group
+                  label for='ruby_version' Ruby version
+                  p ng-show='app.rubyInstall == "package"'
+                    small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
+                  p ng-show='app.rubyInstall == "rvm"'
+                    small ruby will be installed with <a href="https://rvm.io/">RVM</a>.
+                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[app.rubyInstall].rubies track by rubyVersion.version' ng-model='app.rubyVersion'
 
     a.anchor#databases
     .row.step.step3 ng-controller='DatabasesController'
