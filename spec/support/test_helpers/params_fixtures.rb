@@ -8,10 +8,10 @@ module TestHelpers
         vm_memory: 1024,
         vm_swap: 1024,
         vm_cores: 2,
-        # vm_ports: {
-        #   '0' => { guest: 80, host: 8080 },
-        #   '1' => { guest: 443, host: 8081 },
-        # },
+        vm_ports: {
+          '0' => { guest: 80, host: 8080 },
+          '1' => { guest: 443, host: 8081 },
+        },
         server_name: 'localhost',
         ruby_type: 'rvm',
         ruby_version: '2.1.2',
