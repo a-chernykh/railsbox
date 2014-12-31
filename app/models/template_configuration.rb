@@ -9,6 +9,11 @@ class TemplateConfiguration
 
   private
 
+  def default_params
+    { databases: [],
+      background_jobs: [] }
+  end
+
   def copy_recursive(dir, output_dir)
     Dir.foreach(dir) do |f|
       next if f.in?(['.', '..'])
@@ -21,7 +26,7 @@ class TemplateConfiguration
         FileUtils.mkdir_p target_dir unless File.exist?(target_dir)
         template = Tilt.new full_path
         File.open(target_path, 'w') do |f|
-          f.write template.render(Object.new, @params)
+          f.write template.render(Object.new, params: default_params.merge(@params))
         end
       end
     end

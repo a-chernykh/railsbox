@@ -3,7 +3,7 @@
     .row
       .col-lg-10.col-lg-offset-1
         h1 <span>rails</span>box
-        h2 Easy and fast Ruby on Rails development boxes
+        h2 Fast and easy Ruby on Rails development boxes
         p
           ' Ruby developer? Heard about <strong>DevOps</strong> but too busy to learn it? Streamline your development workflow in no time by creating production-like virtual machine with your development environment. Try this extremely simple to use VM configuration tool to create new <strong>Ruby on Rails</strong> server using
           a href='https://www.vagrantup.com/' <strong>vagrant</strong>
@@ -70,19 +70,26 @@
             h2.panel-title Application settings
           .panel-body
             .row
-              .col-lg-6
+              .col-lg-4
                 .form-group
-                  label for='server_name' Server Name
+                  label for='server_name' Server name
                   p
                     small Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <mark>sudo stop {{ vm.name }}</mark> and <mark>sudo start {{ vm.name }}</mark>.
                   input.form-control id='server_name' name='server_name' type='text' ng-model='app.serverName'
-              .col-lg-6
+              .col-lg-4
                 .form-group
-                  label for='ruby_version' Ruby Version
+                  label for='ruby_version' Ruby version
                   p
                     small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
                   br
-                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.package' ng-model='app.rubyVersion'
+                  select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyVersions track by rubyVersion.version' ng-model='app.rubyVersion'
+              .col-lg-4
+                .form-group
+                  label for='rails_version' Ruby on Rails version
+                  p
+                    small System will configure some of the services appropriately based on Ruby on Rails version you are using.
+                  br
+                  select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='app.railsVersion'
 
     .row.step.step3
       .col-lg-1.step-number
@@ -105,6 +112,28 @@
                         input checked=('true' if db.id == 'postgresql') type='checkbox' name='databases[]' value=db.id
                         strong Install #{db.name}
                     = render partial: db.id
+
+    .row.step.step4
+      .col-lg-1.step-number
+        h1 4
+      .col-lg-11.step-conf
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Background jobs
+          .panel-body
+            div role='tabpanel'
+              ul.nav.nav-tabs role='tablist'
+                - background_jobs.each do |bg_job|
+                  li role='presentation' class=('active' if bg_job.id == 'delayed_job')
+                    a href="##{bg_job.id}" aria-controls=bg_job.id role='tab' data-toggle='tab'= bg_job.name
+              .tab-content
+                - background_jobs.each do |bg_job|
+                  .tab-pane id=bg_job.id role='tabpanel' class=('active' if bg_job.id == 'delayed_job')
+                    .checkbox
+                      label
+                        input type='checkbox' name='background_jobs[]' value=bg_job.id
+                        strong Add #{bg_job.name} workers
+                    = render partial: bg_job.id
 
     .row.step.download-step
       .col-lg-12

@@ -24,4 +24,8 @@ module ApplicationHelper
       OpenStruct.new({ id: 'mongodb',    name: 'MongoDB' }),
       OpenStruct.new({ id: 'redis',      name: 'Redis' }), ]
   end
+
+  def background_jobs
+    [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }) ]
+  end
 end

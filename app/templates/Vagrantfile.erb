@@ -5,28 +5,28 @@ VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
-    vb.memory = <%= vm_memory %>
-    vb.cpus = <%= vm_cores %>
+    vb.memory = <%= params[:vm_memory] %>
+    vb.cpus = <%= params[:vm_cores] %>
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
-  config.vm.box = '<%= vm_os %>'
+  config.vm.box = '<%= params[:vm_os] %>'
 
   config.vm.synced_folder '../', '/vagrant'
 
-  config.vm.define '<%= vm_name %>' do |machine|
-    machine.vm.hostname = '<%= server_name %>'
-    machine.vm.network 'forwarded_port', guest: 80, host: <%= vm_http_forwarded_port %>
-    machine.vm.network 'forwarded_port', guest: 443, host: <%= vm_https_forwarded_port %>
+  config.vm.define '<%= params[:vm_name] %>' do |machine|
+    machine.vm.hostname = '<%= params[:server_name] %>'
+    machine.vm.network 'forwarded_port', guest: 80, host: <%= params[:vm_http_forwarded_port] %>
+    machine.vm.network 'forwarded_port', guest: 443, host: <%= params[:vm_https_forwarded_port] %>
   end
 
   config.vm.provision 'ansible' do |ansible|
     ansible.playbook = 'ansible/site.yml'
     ansible.sudo = true
     ansible.groups = {
-      'webservers'           => %w(<%= vm_name %>),
-      'dbservers'            => %w(<%= vm_name %>),
+      'webservers'           => %w(<%= params[:vm_name] %>),
+      'dbservers'            => %w(<%= params[:vm_name] %>),
       'development:children' => %w(webservers dbservers)
     }
     ansible.tags = ENV['TAGS']

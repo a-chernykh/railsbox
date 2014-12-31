@@ -1,0 +1,10 @@
+.row
+  .col-lg-6
+    .form-group
+      label for='delayed_job_app_name' Service name
+      input.form-control id='delayed_job_app_name' name='delayed_job_app_name' type='text' ng-model='delayed_job.app_name'
+  .col-lg-6
+    .form-group
+      label for='delayed_job_command' Command to start delayed_job
+      input.form-control id='delayed_job_command' name='delayed_job_command' type='text' ng-model='delayed_job.command'
+p System service <mark>{{ delayed_job.app_name }}</mark> will be created. You can control it by running the following commands: <mark>sudo stop {{ delayed_job.app_name }}</mark>, <mark>sudo start {{ delayed_job.app_name }}</mark>, <mark>sudo restart {{ delayed_job.app_name }}</mark>.

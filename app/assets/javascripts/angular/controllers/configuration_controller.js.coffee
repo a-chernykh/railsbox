@@ -25,9 +25,16 @@ angular.module('app.rubyops').classy.controller
       { package: 'ruby2.2',   label: '2.2 (beta)' }
     ]
 
+    @$.railsVersions = [
+      { version: '2',   label: 'rails 2.0+' },
+      { version: '3', label: 'rails 3.0+' },
+      { version: '4',   label: 'rails 4.0+' }
+    ]
+
     @$.app =
       serverName: 'localhost'
       rubyVersion: @$.rubyVersions[2]
+      railsVersion: @$.railsVersions[2]
 
     @$.db =
       name: defaultAppName
@@ -37,9 +44,14 @@ angular.module('app.rubyops').classy.controller
     @$.mongodbOrm = 'mongoid'
     @$.redisOrm = 'redis-rb'
 
+    @$.delayed_job =
+      app_name: "#{defaultAppName}-delayed_job"
+      command: 'script/delayed_job run'
+
   watch:
     'sqlOrm': '_onSqlOrmChange'
     'mongodbOrm': '_onMongodbOrmChange'
+    'app.railsVersion': '_onRailsVersionChange'
 
   applicationHttpUrl: -> "http://localhost:#{@$.vm.httpForwardPort}"
   applicationHttpsUrl: -> "https://localhost:#{@$.vm.httpsForwardPort}"
@@ -53,3 +65,9 @@ angular.module('app.rubyops').classy.controller
     @$.mongodbConfigPath = switch newValue
       when 'mongoid' then 'config/mongoid.yml'
       when 'mongomapper' then 'config/mongo.yml'
+
+  _onRailsVersionChange: (newValue) ->
+    if newValue
+      @$.delayed_job.command = switch newValue.version
+        when '4' then 'bin/delayed_job run'
+        else 'script/delayed_job run'

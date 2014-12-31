@@ -17,11 +17,19 @@
 
   h2 {
     margin-top: 10px;
+    font-weight: 200;
   }
 
   p {
     margin-top: 40px;
+    font-weight: 100;
+    strong {
+      font-weight: 300;
+    }
     &.button {
+      a {
+        font-weight: 300;
+      }
       text-align: center;
     }
   }
@@ -30,6 +38,7 @@
 .step-number {
   @include border-right-radius(10px);
   h1 {
+    text-align: center;
     font-size: 4em;
     color: #fff;
     margin: 10px 0px;
@@ -53,4 +62,9 @@ mark {
   button {
     font-size: 2.5em;
   }
+}
+
+h2.panel-title {
+  font-size: 2.5em;
+  font-weight: 300;
 }
