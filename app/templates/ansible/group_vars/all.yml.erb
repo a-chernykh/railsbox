@@ -7,6 +7,11 @@ app_name: <%= params[:vm_name] %>
   <% end %>
 <% end %>
 
+packages:
+<% params[:packages].each do |package| -%>
+  - <%= package %>
+<% end %>
+
 user_name: vagrant
 group_name: vagrant
 

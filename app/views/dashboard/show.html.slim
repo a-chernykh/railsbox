@@ -24,7 +24,7 @@ a.anchor#home
       .col-lg-11.step-conf
         .panel.panel-default
           .panel-heading
-            h2.panel-title Virtual machine settings
+            h2.panel-title System settings
           .panel-body
             .row
               .col-lg-8
@@ -38,19 +38,28 @@ a.anchor#home
                       label for='vm_os' Operating System
                       select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='vm.os'
                 .row
-                  .col-lg-6
+                  .col-lg-4
                     .form-group
                       label for='vm_memory' Memory, Mb
                       input.form-control id='vm_memory' name='vm_memory' type='number' ng-model='vm.memory'
-                  .col-lg-6
+                  .col-lg-4
                     .form-group
                       label for='vm_swap' Swap, Mb
                       input.form-control id='vm_swap' name='vm_swap' type='number' ng-model='vm.swap'
-                .row
-                  .col-lg-6
+                  .col-lg-4
                     .form-group
                       label for='vm_cores' CPU cores
                       select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='vm.cores'
+                .row
+                  .col-lg-12
+                    .form-group
+                      label Additional packages
+                      .form-group
+                        .checkbox ng-repeat='(k, v) in packages'
+                          label data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}'
+                            input type='checkbox' value='{{ k }}' ng-model='v.selected'
+                            ' {{ v.label }}
+                            input ng-repeat='package in v.packages' type='hidden' name='packages[]' value='{{ package }}' ng-disabled='!v.selected'
 
               .col-lg-4
                 label for='new_guest_port' Port forwarding

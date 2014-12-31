@@ -18,3 +18,7 @@
     - python-dev
     - htop
     - git
+
+- name: Install additional packages
+  apt: name={{ item }}
+  with_items: packages
