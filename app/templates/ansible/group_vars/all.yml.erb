@@ -5,11 +5,12 @@ app_name: <%= params[:vm_name] %>
   <% unless v.respond_to?(:each) -%>
 <%= k %>: <%= v %>
   <% end %>
+  <% if v.is_a?(Array) -%>
+<%= k %>:
+<% params[k].each do |v| -%>
+  - <%= v %>
 <% end %>
-
-packages:
-<% params[:packages].each do |package| -%>
-  - <%= package %>
+  <% end %>
 <% end %>
 
 user_name: vagrant

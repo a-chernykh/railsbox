@@ -15,6 +15,13 @@ angular.module('app.rubyops').classy.controller
     @$.mongodbOrm = 'mongoid'
     @$.redisOrm = 'redis-rb'
 
+    @$.postgresql = 
+      extensions: [ 
+        { name: 'hstore' },
+        { name: 'citext' },
+        { name: 'postgis' }
+      ]
+
   watch:
     'sqlOrm': '_onSqlOrmChange'
     'mongodbOrm': '_onMongodbOrmChange'

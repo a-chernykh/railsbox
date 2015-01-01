@@ -32,6 +32,7 @@ namespace :integration do
       postgresql_db_user: 'vagrant',
       postgresql_db_password: '',
       postgresql_orm: 'activerecord',
+      postgresql_extensions: [ 'hstore', 'postgis' ],
       sidekiq_app_name: 'roadar-sidekiq',
       sidekiq_command: 'sidekiq',
       packages: %w(imagemagick qt5-default libqt5webkit5-dev),

@@ -1,3 +1,4 @@
+---
 - name: Install packages
   apt: name={{ item }}
   with_items:
@@ -19,3 +20,16 @@
 - name: Create config/database.yml
   template: src=database.yml.j2 dest={{ app_config_path }}/database.yml owner={{ user_name }} mode=0600 backup=yes
   when: postgresql_orm in ['activerecord', 'sequel', 'datamapper']
+
+- name: Make sure the postgis extensions are installed
+  apt: name={{ item }}
+  with_items:
+    - libgeos-c1
+    - 'postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}'
+  notify: restart postgresql
+  when: "'postgis' in postgresql_extensions"
+
+- name: Create extensions
+  sudo_user: '{{ postgresql_admin_user }}'
+  shell: "psql {{ postgresql_db_name }} -c 'CREATE EXTENSION IF NOT EXISTS {{ item }};'"
+  with_items: postgresql_extensions
