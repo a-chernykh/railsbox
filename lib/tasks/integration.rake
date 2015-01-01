@@ -31,7 +31,7 @@ namespace :integration do
       postgresql_db_name: 'roadar',
       postgresql_db_user: 'vagrant',
       postgresql_db_password: '',
-      postgresql_orm: 'activerecord',
+      postgresql_orm: '',
       postgresql_extensions: [ 'hstore', 'postgis' ],
       sidekiq_app_name: 'roadar-sidekiq',
       sidekiq_command: 'sidekiq',
