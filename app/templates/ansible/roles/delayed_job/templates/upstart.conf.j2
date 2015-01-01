@@ -3,7 +3,8 @@ description "{{ app_name }} delayed_job"
 start on [2]
 stop on runlevel [016]
 
-env PATH=$PATH:/usr/local/bin:/usr/bin
+env PATH=$PATH:/usr/local/bin:/usr/bin:/bin
+env HOME=/home/vagrant
 
 respawn
 
@@ -13,6 +14,6 @@ setgid {{ group_name }}
 chdir {{ app_path }}
 
 script
-  bundle exec {{ delayed_job_command }}
+  /bin/bash -l -c 'bundle exec {{ delayed_job_command }}'
   sleep 5
 end script
