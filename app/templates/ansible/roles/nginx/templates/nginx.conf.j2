@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 upstream app {
   server unix:{{ unicorn_sock_path }} fail_timeout=0;
 }

@@ -117,7 +117,7 @@ a.anchor#home
                       input name='ruby_type' type='radio' value='{{ k }}' ng-model='app.rubyInstall'
                       ' {{ v.label }}
 
-              .col-lg-10
+              .col-lg-4
                 .form-group
                   label for='ruby_version' Ruby version
                   p ng-show='app.rubyInstall == "package"'
@@ -125,6 +125,13 @@ a.anchor#home
                   p ng-show='app.rubyInstall == "rvm"'
                     small ruby will be installed with <a href="https://rvm.io/">RVM</a>.
                   select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[app.rubyInstall].rubies track by rubyVersion.version' ng-model='app.rubyVersion'
+
+              .col-lg-6
+                .form-group
+                  label for='environment_file' Environment variables
+                  p
+                    small Application configuration will be read from <kbd>{{ app.environmentFile }}</kbd> (if it exists).
+                  input.form-control type='text' id='environment_file' name='environment_file' ng-model='app.environmentFile'
 
     a.anchor#databases
     .row.step.step3 ng-controller='DatabasesController'

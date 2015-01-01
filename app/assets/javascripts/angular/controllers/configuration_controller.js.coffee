@@ -55,7 +55,8 @@ angular.module('app.rubyops').classy.controller
     @$.app =
       serverName: 'localhost'
       railsVersion: @$.railsVersions[2]
-      rubyInstall: 'package'
+      rubyInstall: 'rvm'
+      environmentFile: '/vagrant/.envrc'
 
     @$.db =
       user: 'vagrant'

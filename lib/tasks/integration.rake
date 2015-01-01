@@ -34,7 +34,8 @@ namespace :integration do
       postgresql_orm: 'activerecord',
       sidekiq_app_name: 'roadar-sidekiq',
       sidekiq_command: 'sidekiq',
-      packages: %w(imagemagick qt5-default libqt5webkit5-dev)
+      packages: %w(imagemagick qt5-default libqt5webkit5-dev),
+      environment_file: '/vagrant/.envrc'
     }
 
     test_app_path = '/Users/akhkharu/projects/RoadAR-website'
