@@ -16,8 +16,8 @@ namespace :integration do
       databases: %w(postgresql redis),
       background_jobs: %w(sidekiq),
       vm_name: 'roadar',
-      vm_os: 'ubuntu/trusty64',
-      vm_memory: 1024,
+      vm_os: 'ubuntu/trusty64-prepackaged',
+      vm_memory: 1500,
       vm_swap: 1024,
       vm_cores: 2,
       vm_ports: {

@@ -14,10 +14,6 @@ module ApplicationHelper
     end
   end
 
-  def site_name
-    'railsbox'.freeze
-  end
-
   def databases
     [ OpenStruct.new({ id: 'postgresql', name: 'PostgreSQL' }),
       OpenStruct.new({ id: 'mysql',      name: 'MySQL' }),
