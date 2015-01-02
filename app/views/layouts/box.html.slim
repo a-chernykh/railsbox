@@ -5,7 +5,7 @@ html lang="en"
 
   body ng-app='app.rubyops' data-spy='scroll' data-target='.navbar'
     nav.navbar.navbar-fixed-top.navbar-default
-      .container
+      .container-fluid
         .navbar-header
           button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
             span.icon-bar
@@ -14,20 +14,8 @@ html lang="en"
           a.navbar-brand href="/" <span>rails</span>box
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            li.active
-              a href='#home' Home
             li
-              a href='#vm-settings' System
-            li
-              a href='#app-settings' Application
-            li
-              a href='#databases' Databases
-            li
-              a href='#background-jobs' Background Jobs
+              a href='/' Create new box
 
     = render partial: 'shared/flash_messages'
     = yield
-
-    footer
-      .container
-        p Created by <a href="https://github.com/andreychernih">Andrey Chernih</a>

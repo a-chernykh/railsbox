@@ -1,11 +1,20 @@
 require 'rails_helper'
 
-feature 'Generate configuration', js: true do
-  scenario 'User generates new configuration' do
+feature 'Create box', js: true do
+  scenario 'User creates new box' do
     visit '/'
-    click_button I18n.t('dashboard.show.generate')
+    fill_in 'Name', with: 'myapp'
+    click_on I18n.t('dashboard.show.generate')
+  
+    expect(page).to have_selector(:link_or_button, I18n.t('boxes.show.download'))
+  end
 
-    expect(page).not_to have_css('[name=vm_name]') # a little hack to wait for the page load
+  scenario 'User downloads generated configuration' do
+    visit '/'
+    click_on I18n.t('dashboard.show.generate')
+    click_on I18n.t('boxes.show.download')
+
+    expect(page).not_to have_content 'Download'
 
     expect(page.response_headers['Content-Disposition']).to include 'attachment'
 

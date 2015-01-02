@@ -5,6 +5,7 @@ class Configurator
   end
 
   def self.from_params(params)
+    params = ActiveSupport::HashWithIndifferentAccess.new(params)
     new([ CopyConfiguration.new,
           TemplateConfiguration.new(params) ], params[:vm_name])
   end

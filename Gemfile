@@ -35,6 +35,8 @@ group :test do
   gem 'capybara-webkit'
   gem 'launchy'
   gem 'fakefs', require: 'fakefs/safe'
+  gem 'shoulda-matchers', require: false
+  gem 'database_cleaner'
 end
 
 group :development, :test do

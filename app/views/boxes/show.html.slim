@@ -1,0 +1,27 @@
+.container-fluid
+  .row
+    .col-lg-6
+      h1 Your virtual box: <kbd>#{@box.name}</kbd>
+      p Make sure you bookmark this page (or save URL somewhere), it's the only way to access your configuration later.
+      p
+        input.form-control id='url' type='text' value=request.original_url
+      br
+      p 
+        a.btn-primary.btn-lg href=download_box_url(@box) = t('.download')
+    .col-lg-6
+      h1 What's next?
+
+      h2 Download
+      p Go ahead and place your downloaded box to your Ruby on Rails project directory. Then unarchive it. <kbd>devops</kbd> directory will be created with the similar structure:
+      p
+        pre
+          | devops/
+              ansible/
+              Vagrantfile
+
+      h2 Requirements
+      p You will need <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, <a href="https://www.vagrantup.com/downloads.html">vagrant</a> and <a href="http://docs.ansible.com/intro_installation.html">ansible</a> to be installed.
+
+      h2 Run
+      p Go to the <kbd>devops</kbd> directory and type <kbd>vagrant up</kbd>. vagrant will download the base box and provision it with ansible using your configuration.
+      p Once it's done, you'll be able to login into it using <kbd>vagrant ssh</kbd> command. Your application is stored in <kbd>/vagrant</kbd> directory.

@@ -20,6 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      box:
+        secure_id: 'Secure ID'
   dashboard:
     show:
-      generate: 'Download box'
+      generate: 'Create configuration'
+  boxes:
+    show:
+      download: 'Download'
