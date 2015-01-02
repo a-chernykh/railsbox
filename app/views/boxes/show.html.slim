@@ -4,7 +4,7 @@
       h1 Your virtual box: <kbd>#{@box.name}</kbd>
       p Make sure you bookmark this page (or save URL somewhere), it's the only way to access your configuration later.
       p
-        input.form-control id='url' type='text' value=box_url(@box)
+        input.form-control data-copies-itself='yes' id='url' type='text' value=box_url(@box)
       br
       p 
         a.btn.btn-primary.btn-lg role='button' href=download_box_url(@box) = t('.download')
