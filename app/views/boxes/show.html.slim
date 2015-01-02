@@ -4,7 +4,7 @@
       h1 Your virtual box: <kbd>#{@box.name}</kbd>
       p Make sure you bookmark this page (or save URL somewhere), it's the only way to access your configuration later.
       p
-        input.form-control id='url' type='text' value=request.original_url
+        input.form-control id='url' type='text' value=box_url(@box)
       br
       p 
         a.btn-primary.btn-lg href=download_box_url(@box) = t('.download')
@@ -12,7 +12,7 @@
       h1 What's next?
 
       h2 Download
-      p Go ahead and place your downloaded box to your Ruby on Rails project directory. Then unarchive it. <kbd>devops</kbd> directory will be created with the similar structure:
+      p Go ahead and place your downloaded box to your Ruby on Rails project directory. Then unarchive it. <kbd>devops</kbd> directory will be created with the following structure:
       p
         pre
           | devops/
