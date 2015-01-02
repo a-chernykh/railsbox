@@ -15,7 +15,8 @@ a.anchor#home
           a.btn.btn-default.btn-lg href='#vm-settings' Get started
 
 .container-fluid ng-controller='ConfigurationController' ng-init="downloadConfiguration('#{default_boxes_url(format: 'json')}')"
-  form role='form' method='post' action=boxes_path
+  form name='newBox' role='form' method='post' action=boxes_path novalidate=true
     = token_tag nil
     = render layout: 'boxes/form' do
-        button.btn.btn-default.btn-lg= t('.create')
+      div.alert.alert-danger role='alert' ng-hide='newBox.$valid' Please fix form errors first
+      button.btn.btn-default.btn-lg ng-disabled='!newBox.$valid'= t('.create')

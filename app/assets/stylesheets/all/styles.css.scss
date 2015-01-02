@@ -55,3 +55,7 @@
     font-size: 2.5em;
   }
 }
+
+input.ng-invalid[type=text] {
+  background-color: lighten($brand-danger, 30%);
+}
