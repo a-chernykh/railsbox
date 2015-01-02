@@ -3,12 +3,12 @@
     .form-group
       .radio
         label
-          input name='redis_orm' type='radio' value='' ng-model='redisOrm'
+          input name='redis_orm' type='radio' value='none' ng-model='configuration.redis_orm'
           ' Do not configure
       .radio
         label
-          input name='redis_orm' type='radio' value='redis-rb' ng-model='redisOrm'
+          input name='redis_orm' type='radio' value='redis-rb' ng-model='configuration.redis_orm'
           ' redis-rb
 
-p ng-show='redisOrm' <kbd>config/initializers/redis.rb</kbd> will be automatically created. Your old configuration (if any) will be backed up.
-p ng-hide='redisOrm' No configuration files will be created.
+p ng-show='configuration.redis_orm != "none"' <kbd>config/initializers/redis.rb</kbd> will be automatically created. Your old configuration (if any) will be backed up.
+p ng-hide='configuration.redis_orm != "none"' No configuration files will be created.

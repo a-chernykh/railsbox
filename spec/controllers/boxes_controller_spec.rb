@@ -20,13 +20,40 @@ describe BoxesController do
   end
 
   describe 'GET show' do
+    let(:box) { Box.create! params: params_fixture }
+
     it 'renders 404 for non-existing box' do
       expect { get(:show, id: 'nonexisting') }.to raise_error ActiveRecord::RecordNotFound
     end
 
     it 'loads the box' do
-      box = Box.create! params: params_fixture
       get :show, id: box.secure_id
+      expect(assigns(:box)).to eq box
+    end
+
+    it 'responds with json' do
+      get :show, id: box.secure_id, format: :json
+      json = JSON.parse(response.body)
+      expect(json['vm_name']).to eq 'testapp'
+    end
+  end
+
+  describe 'GET default' do
+    it 'responds with json' do
+      get :default, format: :json
+      json = JSON.parse(response.body)
+      expect(json['vm_name']).to eq 'myapp'
+    end
+  end
+
+  describe 'GET edit' do
+    it 'renders 404 for non-existing box' do
+      expect { get(:edit, id: 'nonexisting') }.to raise_error ActiveRecord::RecordNotFound
+    end
+
+    it 'loads the box' do
+      box = Box.create! params: params_fixture
+      get :edit, id: box.secure_id
       expect(assigns(:box)).to eq box
     end
   end

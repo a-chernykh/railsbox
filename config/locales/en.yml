@@ -20,13 +20,17 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  updated: Box has been updated
   activerecord:
     attributes:
       box:
         secure_id: 'Secure ID'
-  dashboard:
-    show:
-      generate: 'Create configuration'
   boxes:
+    form:
+      create: 'Create box'
+      edit: 'Update box'
+      back: 'Go back'
+      name: 'Name'
+      memory: 'Memory, Mb'
     show:
       download: 'Download'

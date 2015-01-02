@@ -1,0 +1,171 @@
+a.anchor#vm-settings
+.row.step.step1 ng-controller='VirtualMachineController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 1
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title System settings
+      .panel-body
+        .row
+          .col-lg-8
+            .row
+              .col-lg-6
+                .form-group
+                  label for='vm_name'= t('.name')
+                  input.form-control id='vm_name' name='vm_name' type='text' ng-model='configuration.vm_name'
+              .col-lg-6
+                .form-group
+                  label for='vm_os' Operating System
+                  select.form-control id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='configuration.vm_os'
+            .row
+              .col-lg-4
+                .form-group
+                  label for='vm_memory'= t('.memory')
+                  input.form-control id='vm_memory' name='vm_memory' type='text' ng-model='configuration.vm_memory'
+              .col-lg-4
+                .form-group
+                  label for='vm_swap' Swap, Mb
+                  input.form-control id='vm_swap' name='vm_swap' type='text' ng-model='configuration.vm_swap'
+              .col-lg-4
+                .form-group
+                  label for='vm_cores' CPU cores
+                  select.form-control id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration.vm_cores'
+            .row
+              .col-lg-12
+                .form-group
+                  label Additional packages
+                  .form-group
+                    .checkbox ng-repeat='(k, v) in packages'
+                      label data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}'
+                        input type='checkbox' name='package_bundles[]' value='{{ k }}' ng-model='v.selected'
+                        ' {{ v.label }}
+                        input ng-repeat='package in v.packages' type='hidden' name='packages[]' value='{{ package }}' ng-disabled='!v.selected'
+
+          .col-lg-4
+            label for='new_guest_port' Port forwarding
+            table.table.table-bordered
+              thead
+                tr
+                  th Guest port
+                  th Host port
+                  th
+              tbody
+                tr ng-repeat='port in configuration.vm_ports'
+                  input type='hidden' name='vm_ports[{{ $index }}][guest]' value='{{ port.guest }}'
+                  input type='hidden' name='vm_ports[{{ $index }}][host]' value='{{ port.host }}'
+                  td {{ port.guest }}
+                  td {{ port.host }}
+                  td
+                    button.btn.btn-danger type='button' ng-click='deletePort($index)' Delete
+                tr
+                  td
+                    input.form-control id='new_guest_port' type='number' placeholder='guest port' ng-model='newGuestPort'
+                  td
+                    input.form-control type='number' placeholder='host port' ng-model='newHostPort'
+                  td
+                    button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
+
+a.anchor#app-settings
+.row.step.step2
+  .col-lg-1.step-number.visible-lg-block
+    h1 2
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Application settings
+      .panel-body
+        .row
+          .col-lg-6
+            .form-group
+              label for='server_name' Server name
+              p
+                small Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ configuration.vm_name }}</kbd> and <kbd>sudo start {{ configuration.vm_name }}</kbd>.
+              input.form-control id='server_name' name='server_name' type='text' ng-model='configuration.server_name'
+          .col-lg-6
+            .form-group
+              label for='rails_version' Ruby on Rails version
+              p
+                small System will configure some of the services appropriately based on Ruby on Rails version you are using.
+              br
+              select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='configuration.rails_version'
+        .row
+          .col-lg-2
+            label Install Ruby with
+            .form-group
+              .radio ng-repeat='(k, v) in rubyInstalls'
+                label
+                  input name='ruby_install' type='radio' value='{{ k }}' ng-model='configuration.ruby_install'
+                  ' {{ v.label }}
+
+          .col-lg-4
+            .form-group
+              label for='ruby_version' Ruby version
+              p ng-show='configuration.ruby_install == "package"'
+                small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
+              p ng-show='configuration.ruby_install == "rvm"'
+                small ruby will be installed with <a href="https://rvm.io/">RVM</a>.
+              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[configuration.ruby_install].rubies track by rubyVersion.version' ng-model='configuration.ruby_version'
+
+          .col-lg-6
+            .form-group
+              label for='environment_file' Environment variables
+              p
+                small Application configuration will be read from <kbd>{{ configuration.environment_file }}</kbd> (if it exists).
+              input.form-control type='text' id='environment_file' name='environment_file' ng-model='configuration.environment_file'
+
+a.anchor#databases
+.row.step.step3 ng-controller='DatabasesController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 3
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Databases, caching and search
+      .panel-body
+        .dropdown ng-hide='allActive()'
+          button.btn.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='databasesMenu'
+            ' Add database
+            span.caret
+          ul.dropdown-menu role='menu' aria-labelledby='databasesMenu'
+            li ng-repeat='database in allObjects' role='presentation' ng-hide='isActive(database.id)'
+              a role='menuitem' tabindex='-1' href='#' ng-click='add(database.id)' {{ database.name }}
+
+        input ng-repeat='database in activeObjects' type='hidden' name='databases[]' value='{{ database }}'
+
+        - databases.each do |database|
+          .panel.panel-primary ng-show="isActive('#{database.id}')"
+            .panel-heading= database.name
+            .panel-body
+              = render "dashboard/databases/#{database.id}"
+              button.btn.btn-danger.pull-right type='button' ng-click="delete('#{database.id}')" Delete
+
+a.anchor#background-jobs
+.row.step.step4 ng-controller='BackgroundJobsController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 4
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Background jobs
+      .panel-body
+        .dropdown ng-hide='allActive()'
+          button.btn.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='backgroundJobsMenu'
+            ' Add worker
+            span.caret
+          ul.dropdown-menu role='menu' aria-labelledby='backgroundJobsMenu'
+            li ng-repeat='backgroundJob in allObjects' role='presentation' ng-hide='isActive(backgroundJob.id)'
+              a role='menuitem' tabindex='-1' href='#' ng-click='add(backgroundJob.id)' {{ backgroundJob.name }}
+
+        input ng-repeat='backgroundJob in activeObjects' type='hidden' name='background_jobs[]' value='{{ backgroundJob }}'
+
+        - background_jobs.each do |background_job|
+          .panel.panel-primary ng-show="isActive('#{background_job.id}')"
+            .panel-heading= background_job.name
+            .panel-body
+              = render "dashboard/background_jobs/#{background_job.id}"
+              button.btn.btn-danger.pull-right type='button' ng-click="delete('#{background_job.id}')" Delete
+
+.row.step.download-step
+  .col-lg-12
+    = yield

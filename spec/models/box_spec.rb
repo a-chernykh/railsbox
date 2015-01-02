@@ -17,6 +17,18 @@ describe Box do
     end
   end
 
+  describe '.default_configuration' do
+    subject { described_class.default_configuration }
+
+    it 'has 1024Mb RAM' do
+      expect(subject[:vm_memory]).to eq 1024
+    end
+
+    it 'has myapp name' do
+      expect(subject[:vm_name]).to eq 'myapp'
+    end
+  end
+
   describe '#to_param' do
     it 'returns secure_id' do
       box = Box.new secure_id: 'abc123'

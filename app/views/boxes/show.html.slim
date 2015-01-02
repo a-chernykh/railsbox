@@ -7,7 +7,9 @@
         input.form-control id='url' type='text' value=box_url(@box)
       br
       p 
-        a.btn-primary.btn-lg href=download_box_url(@box) = t('.download')
+        a.btn.btn-primary.btn-lg role='button' href=download_box_url(@box) = t('.download')
+        ' 
+        a.btn.btn-default.btn-lg role='button' href=edit_box_url(@box) = t('.edit')
     .col-lg-6
       h1 What's next?
 

@@ -1,13 +1,29 @@
 class BoxesController < ApplicationController
-  layout 'box'
-  before_filter :find_box, only: %w(show download)
+  layout 'box', except: %w(edit)
+  before_filter :find_box, only: %w(show edit download update)
 
   def create
     box = Box.create params: params
     redirect_to box_url(box)
   end
 
+  def default
+    render json: Box.default_configuration
+  end
+
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @box }
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @box.update_attributes params: params
+    redirect_to box_url(@box), notice: t('updated')
   end
 
   def download

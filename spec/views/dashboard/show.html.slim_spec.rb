@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'dashboard/show.html.slim' do
-  REQUIRED_PARAMS = %w(vm_name vm_os vm_memory vm_cores server_name ruby_version postgresql_db_name postgresql_db_user ruby_type ruby_version)
+  REQUIRED_PARAMS = %w(vm_name vm_os vm_memory vm_cores server_name ruby_version postgresql_db_name postgresql_db_user ruby_install ruby_version)
 
   REQUIRED_PARAMS.each do |param|
     it "includes #{param} input" do

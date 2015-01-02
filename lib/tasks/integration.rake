@@ -25,7 +25,7 @@ namespace :integration do
         '1' => { guest: 443, host: 8081 },
       },
       server_name: 'localhost',
-      ruby_type: 'rvm',
+      ruby_install: 'rvm',
       ruby_version: '2.1.2',
       rails_version: '4',
       postgresql_db_name: 'roadar',

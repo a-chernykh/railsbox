@@ -6,22 +6,22 @@
       .col-lg-4
         .form-group
           label for='postgresql_db_name' Database Name
-          input.form-control id='postgresql_db_name' name='postgresql_db_name' type='text' ng-model='db.name'
+          input.form-control id='postgresql_db_name' name='postgresql_db_name' type='text' ng-model='configuration.postgresql_db_name'
       .col-lg-4
         .form-group
           label for='postgresql_db_user' Database User
-          input.form-control id='postgresql_db_user' name='postgresql_db_user' type='text' ng-model='db.user'
+          input.form-control id='postgresql_db_user' name='postgresql_db_user' type='text' ng-model='configuration.postgresql_db_user'
       .col-lg-4
         .form-group
           label for='postgresql_db_password' Database Password
-          input.form-control id='postgresql_db_password' name='postgresql_db_password' type='text' placeholder='optional'
+          input.form-control id='postgresql_db_password' name='postgresql_db_password' type='text' placeholder='optional' ng-model='configuration.postgresql_db_password'
     .row
       .col-lg-12
         .form-group
           label Extensions
-          .checkbox ng-repeat='ext in postgresql.extensions'
+          .checkbox ng-repeat='ext in postgresqlExtensions'
             label
-              input type='checkbox' name='postgresql_extensions[]' value='{{ ext.name }}'
+              input type='checkbox' name='postgresql_extensions[]' value='{{ ext.name }}' ng-model='ext.selected'
               ' {{ ext.name }}
 
 = render 'dashboard/databases/sql_config'
