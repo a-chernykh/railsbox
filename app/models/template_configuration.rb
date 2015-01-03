@@ -13,7 +13,8 @@ class TemplateConfiguration
     { databases: [],
       background_jobs: [],
       vm_ports: {},
-      packages: [] }
+      packages: [],
+      manual_ruby_version: nil }
   end
 
   def copy_recursive(dir, output_dir)
