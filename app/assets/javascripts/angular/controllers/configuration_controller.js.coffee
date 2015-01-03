@@ -89,11 +89,9 @@ angular.module('app.rubyops').classy.controller
 
   _onVmNameChanged: (newValue, oldValue) ->
     if @$.configuration
-      if @$.configuration.delayed_job_app_name is undefined || @$.configuration.delayed_job_app_name == "#{oldValue}-delayed_job"
-        @$.configuration.delayed_job_app_name = "#{newValue}-delayed_job"
-
-      if @$.configuration.sidekiq_app_name is undefined || @$.configuration.sidekiq_app_name == "#{oldValue}-sidekiq"
-        @$.configuration.sidekiq_app_name = "#{newValue}-sidekiq"
+      for dependant in ['delayed_job', 'sidekiq', 'resque']
+        if @$.configuration["#{dependant}_app_name"] is undefined || @$.configuration["#{dependant}_app_name"] == "#{oldValue}-#{dependant}"
+          @$.configuration["#{dependant}_app_name"] = "#{newValue}-#{dependant}"
 
       for db in [ 'postgresql', 'mysql', 'mongodb' ]
         if @$.configuration["#{db}_db_name"] is undefined || @$.configuration["#{db}_db_name"] == oldValue

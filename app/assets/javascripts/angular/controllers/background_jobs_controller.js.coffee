@@ -6,6 +6,7 @@ angular.module('app.rubyops').classy.controller
     @$.allObjects = [
       { id: 'delayed_job', name: 'delayed_job' },
       { id: 'sidekiq',     name: 'sidekiq' },
+      { id: 'resque',      name: 'resque' },
     ]
     @$.activeObjects = []
 

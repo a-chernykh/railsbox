@@ -1,0 +1,4 @@
+---
+- name: Create upstart config
+  template: src=upstart.conf.j2 dest=/etc/init/{{ resque_app_name }}.conf
+  notify: restart resque
