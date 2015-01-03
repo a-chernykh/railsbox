@@ -29,14 +29,14 @@
         pre
           | cd /path/to/rails/project
             unzip #{@box.vm_name}-railsbox.zip
-      p <kbd>devops</kbd> directory will be created. Your project structure will be like:
+      p <kbd>railsbox</kbd> directory will be created. Your project structure will be like:
       p
         pre
           | project/
               app
               bin
               ...
-              devops/
+              railsbox/
                 ansible/
                 Vagrantfile
               Gemfile
@@ -44,10 +44,10 @@
 
 
       h2 Bootstrap VM
-      p Go to the <kbd>devops</kbd> directory and type <kbd>vagrant up</kbd>. vagrant will download the base box and provision it with ansible using your configuration.
+      p Go to the <kbd>railsbox</kbd> directory and type <kbd>vagrant up</kbd>. vagrant will download the base box and provision it with ansible using your configuration.
       p
         pre
-          | cd /path/to/rails/project/devops
+          | cd /path/to/rails/project/railsbox
             vagrant up
       p Note that vagrant may ask for a sudo password. That's required when you're using NFS for folder synchronization.
       p Once it's done, you'll be able to login into it using <kbd>vagrant ssh</kbd> command. Your application is stored in <kbd>#{@box.vm_shared_directory}</kbd> directory.

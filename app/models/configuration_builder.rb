@@ -7,9 +7,9 @@ class ConfigurationBuilder
     zip_path = Rails.root.join('tmp', File.basename(temp_dir) + '.zip')
 
     begin
-      devops_dir = File.join(temp_dir, 'devops')
-      Dir.mkdir(devops_dir)
-      @configurator.save(devops_dir)
+      railsbox_dir = File.join(temp_dir, 'railsbox')
+      Dir.mkdir(railsbox_dir)
+      @configurator.save(railsbox_dir)
       Archiver.new(temp_dir).archive(zip_path)
     ensure
       FileUtils.remove_entry_secure temp_dir

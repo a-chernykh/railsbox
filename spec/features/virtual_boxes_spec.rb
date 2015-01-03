@@ -19,8 +19,8 @@ feature 'Virtual boxes', js: true do
     expect(page.response_headers['Content-Disposition']).to include 'attachment'
 
     files = zip_list_of_files(page.body)
-    expect(files).to include('devops/Vagrantfile')
-    expect(files).to include('devops/ansible/group_vars/all.yml')
+    expect(files).to include('railsbox/Vagrantfile')
+    expect(files).to include('railsbox/ansible/group_vars/all.yml')
   end
 
   scenario 'Edit box' do
@@ -33,6 +33,6 @@ feature 'Virtual boxes', js: true do
     expect(page).to have_selector(:link_or_button, I18n.t('boxes.show.edit'))
 
     click_on I18n.t('boxes.show.edit')
-    expect(page).to have_selector('input[name="vm_memory"][value="2048"]')
+    expect(find_field(I18n.t('boxes.form.memory')).value).to eq '2048'
   end
 end

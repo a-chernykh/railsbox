@@ -27,14 +27,14 @@ describe ConfigurationBuilder do
       subject.build
     end
 
-    it 'creates devops directory in temp directory' do
+    it 'creates railsbox directory in temp directory' do
       expect(FileUtils).to receive(:remove_entry_secure)
       subject.build
-      expect(File).to be_directory('/tmp/devops')
+      expect(File).to be_directory('/tmp/railsbox')
     end
 
     it 'saves configuration' do
-      expect(configurator).to receive(:save).with('/tmp/devops')
+      expect(configurator).to receive(:save).with('/tmp/railsbox')
       subject.build
     end
 
