@@ -3,6 +3,7 @@ angular.module('app.rubyops').classy.controller
   inject: ['$scope', '$http']
 
   init: ->
+    @$.shareTypes = [ 'NFS', 'VirtualBox' ]
     @$.postgresqlExtensions =
       [ { name: 'hstore' },
         { name: 'citext' },

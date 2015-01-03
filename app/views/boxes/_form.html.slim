@@ -36,6 +36,17 @@ a.anchor#vm-settings
                 .form-group
                   label for='vm_cores' CPU cores
                   select.form-control required=true id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration.vm_cores'
+            .row
+              .col-lg-4
+                .form-group
+                  label for='vm_shared_directory' Shared directory
+                  input.form-control required=true type='text' id='vm_shared_directory' name='vm_shared_directory' ng-model='configuration.vm_shared_directory'
+              .col-lg-4
+                .form-group
+                  label for='vm_share_type' Share type
+                  select.form-control required=true id='vm_share_type' name='vm_share_type' ng-model='configuration.vm_share_type' ng-options='t for t in shareTypes track by t'
+              .col-lg-4
+                p It's recommended to use NFS sharing type because it provides better performance.
 
           .col-lg-4
             label for='new_guest_port' Port forwarding

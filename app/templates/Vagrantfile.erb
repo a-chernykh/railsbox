@@ -13,7 +13,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = '<%= params[:vm_os] %>'
 
-  config.vm.synced_folder '../', '/vagrant'
+  config.vm.network 'private_network', type: 'dhcp'
+
+  config.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<% if params[:vm_share_type] == 'NFS' -%>, type: 'nfs'<% end %>
 
   config.vm.define '<%= params[:vm_name] %>' do |machine|
     machine.vm.hostname = '<%= params[:server_name] %>'

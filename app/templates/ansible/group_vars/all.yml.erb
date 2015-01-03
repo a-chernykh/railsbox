@@ -19,7 +19,7 @@ group_name: vagrant
 ssl_certificate_path: /etc/nginx/ssl/<%= params[:server_name] %>.crt
 ssl_certificate_key_path: /etc/nginx/ssl/<%= params[:server_name] %>.key
 
-app_path: /vagrant
+app_path: <%= params[:vm_shared_directory] %>
 app_public_path: "{{ app_path }}/public"
 app_config_path: "{{ app_path }}/config"
 app_temp_path: "{{ app_path }}/tmp"

@@ -1,5 +1,5 @@
 class Box < ActiveRecord::Base
-  store_accessor :params, :vm_name
+  store_accessor :params, :vm_name, :vm_shared_directory
 
   validates :params, presence: true
   validates :secure_id, presence: true, uniqueness: true
@@ -15,6 +15,8 @@ class Box < ActiveRecord::Base
       vm_memory: '1024',
       vm_swap: '1024',
       vm_cores: '2',
+      vm_shared_directory: '/vagrant',
+      vm_share_type: 'NFS',
       vm_ports: {
         '0' => { guest: 80,  host: 8080 },
         '1' => { guest: 443, host: 8081 }
