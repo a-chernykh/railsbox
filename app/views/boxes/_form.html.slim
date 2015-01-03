@@ -155,7 +155,7 @@ a.anchor#databases
           .panel.panel-primary ng-show="isActive('#{database.id}')"
             .panel-heading= database.name
             .panel-body
-              = render "dashboard/databases/#{database.id}"
+              = render "boxes/databases/#{database.id}"
               button.btn.btn-danger.pull-right type='button' ng-click="delete('#{database.id}')" Delete
 
 a.anchor#background-jobs
@@ -181,7 +181,7 @@ a.anchor#background-jobs
           .panel.panel-primary ng-show="isActive('#{background_job.id}')"
             .panel-heading= background_job.name
             .panel-body
-              = render "dashboard/background_jobs/#{background_job.id}"
+              = render "boxes/background_jobs/#{background_job.id}"
               button.btn.btn-danger.pull-right type='button' ng-click="delete('#{background_job.id}')" Delete
 
 .row.step.download-step

@@ -1,6 +1,6 @@
 .row
   .col-lg-2
-    = render 'dashboard/databases/sql_orms', db: 'postgresql'
+    = render 'boxes/databases/sql_orms', db: 'postgresql'
   .col-lg-10
     .row
       .col-lg-4
@@ -24,4 +24,4 @@
               input type='checkbox' name='postgresql_extensions[]' value='{{ ext.name }}' ng-model='ext.selected'
               ' {{ ext.name }}
 
-= render 'dashboard/databases/sql_config'
+= render 'boxes/databases/sql_config'
