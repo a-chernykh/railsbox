@@ -8,6 +8,8 @@ server {
   listen 80;
   listen 443 ssl;
 
+  sendfile off;
+
   server_name {{ server_name }};
 
   ssl_certificate {{ ssl_certificate_path }};
