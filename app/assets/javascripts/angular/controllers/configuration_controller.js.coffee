@@ -52,6 +52,9 @@ angular.module('app.rubyops').classy.controller
       qt:
         label: 'QT kit'
         packages: [ 'qt5-default', 'libqt5webkit5-dev' ]
+      curl:
+        label: 'curl'
+        packages: [ 'curl', 'libcurl3', 'libcurl3-gnutls', 'libcurl4-openssl-dev' ]
 
     @$.isActive = (obj) ->
       obj in @activeObjects

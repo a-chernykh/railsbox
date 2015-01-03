@@ -5,23 +5,24 @@ a.anchor#vm-settings
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading
-        h2.panel-title System settings
+        h2.panel-title System
       .panel-body
         .row
           .col-lg-8
             .row
               .col-lg-6
                 .form-group
-                  label for='vm_name'= t('.name')
-                  p
-                    small Only alphanumeric characters, dashes and underscores.
-                  input.form-control required=true id='vm_name' name='vm_name' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
+                  label for='vm_os' Operating System
+                  select.form-control required=true id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='configuration.vm_os'
+
               .col-lg-6
                 .form-group
-                  label for='vm_os' Operating System
+                  label Additional packages
                   p
-                    small Only latest Ubuntu supported at the moment.
-                  select.form-control required=true id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='configuration.vm_os'
+                    label.checkbox-inline ng-repeat='(k, v) in packages'
+                      input type='checkbox' name='package_bundles[]' value='{{ k }}' ng-model='v.selected'
+                      span data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}' {{ v.label }}
+                      input ng-repeat='package in v.packages' type='hidden' name='packages[]' value='{{ package }}' ng-disabled='!v.selected'
             .row
               .col-lg-4
                 .form-group
@@ -35,16 +36,6 @@ a.anchor#vm-settings
                 .form-group
                   label for='vm_cores' CPU cores
                   select.form-control required=true id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration.vm_cores'
-            .row
-              .col-lg-12
-                .form-group
-                  label Additional packages
-                  .form-group
-                    .checkbox ng-repeat='(k, v) in packages'
-                      label data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}'
-                        input type='checkbox' name='package_bundles[]' value='{{ k }}' ng-model='v.selected'
-                        ' {{ v.label }}
-                        input ng-repeat='package in v.packages' type='hidden' name='packages[]' value='{{ package }}' ng-disabled='!v.selected'
 
           .col-lg-4
             label for='new_guest_port' Port forwarding
@@ -77,16 +68,23 @@ a.anchor#app-settings
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading
-        h2.panel-title Application settings
+        h2.panel-title Application and ruby
       .panel-body
         .row
-          .col-lg-6
+          .col-lg-4
+            .form-group
+              label for='vm_name'= t('.name')
+              p
+                small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores.
+              br
+              input.form-control required=true id='vm_name' name='vm_name' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
+          .col-lg-4
             .form-group
               label for='server_name' Server name
               p
                 small It's recommended to keep <kbd>localhost</kbd> value here. Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ configuration.vm_name }}</kbd> and <kbd>sudo start {{ configuration.vm_name }}</kbd>.
               input.form-control required='true' ng-pattern="/^[a-zA-Z0-9-.]+$/" id='server_name' name='server_name' type='text' ng-model='configuration.server_name'
-          .col-lg-6
+          .col-lg-4
             .form-group
               label for='rails_version' Ruby on Rails version
               p

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Box do
   it { should validate_presence_of(:params) }
+  it { should_not allow_value('<test').for(:vm_name) }
 
   describe 'secure_id' do
     before { allow(SecureIdGenerator).to receive(:generate) { 'abc123' } }
@@ -21,7 +22,7 @@ describe Box do
     subject { described_class.default_configuration }
 
     it 'has 1024Mb RAM' do
-      expect(subject[:vm_memory]).to eq 1024
+      expect(subject[:vm_memory]).to eq '1024'
     end
 
     it 'has myapp name' do
@@ -36,10 +37,10 @@ describe Box do
     end
   end
 
-  describe '#name' do
+  describe '#vm_name' do
     it 'will extract name from params' do
       box = Box.new params: { vm_name: 'myapp' }
-      expect(box.name).to eq 'myapp'
+      expect(box.vm_name).to eq 'myapp'
     end
   end
 end
