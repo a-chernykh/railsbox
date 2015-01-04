@@ -22,4 +22,3 @@
 //= require ./angular/app
 //= require_tree ./angular/modules
 //= require_tree ./angular/controllers
-//= require_tree ./angular/directives
