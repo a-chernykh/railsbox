@@ -1,12 +1,7 @@
-// @import "cosmo/variables";
-
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// @import "cosmo/overrides";
-
-@import "variables/all";
-@import "mixins/all";
-
-@import "all/*";
+@import "variables/*";
+@import "mixins/*";
+@import "styles/*";

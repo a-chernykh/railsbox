@@ -12,7 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
+
+//= require bootstrap/alert
+//= require bootstrap/scrollspy
+//= require bootstrap/dropdown
+//= require bootstrap/tooltip
 
 //= require angular
 //= require angular-classy
