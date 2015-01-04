@@ -7,6 +7,12 @@ footer {
   @include dark-background;
   padding: 50px 0px;
 
+  ul {
+    li {
+      margin-right: 20px;
+    }
+  }
+
   p {
     margin: 0px;
   }
