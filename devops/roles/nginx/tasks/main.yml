@@ -3,7 +3,7 @@
   apt: name=nginx
 
 - name: Enable gzip
-  template: src=gzip.conf.j2 dest=/etc/nginx/conf.d/gzip.conf validate='nginx -t'
+  template: src=gzip.conf.j2 dest=/etc/nginx/conf.d/gzip.conf
   notify: restart nginx
 
 - name: Disable default nginx site
