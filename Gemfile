@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
+ruby '2.2.0'
+
 gem 'rails', '4.2'
 
 gem 'pg'
@@ -21,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'tilt'
 gem 'rubyzip', require: 'zip'
+
+gem 'unicorn'
 
 group :development do
   gem 'spring'
