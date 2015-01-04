@@ -7,7 +7,7 @@ describe Archiver do
     before { FileUtils.rm_f zip }
 
     it 'creates zip archive' do
-      described_class.new(Rails.root.join('app/templates')).archive(zip)
+      described_class.new(Rails.root.join('templates')).archive(zip)
       expect(File).to exist(zip)
     end
   end
