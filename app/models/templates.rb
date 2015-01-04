@@ -1,5 +1,5 @@
 class Templates
-  ROOT_PATH = 'app/templates'
+  ROOT_PATH = 'templates'
   EXT = '.erb'
 
   def self.path(template)
