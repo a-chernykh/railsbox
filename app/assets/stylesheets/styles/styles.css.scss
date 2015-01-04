@@ -59,3 +59,13 @@
 input.ng-invalid[type=text] {
   background-color: lighten($brand-danger, 30%);
 }
+
+.fork-me {
+  img {
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    border: 0;
+    z-index: $zindex-navbar-fixed + 10;
+  }
+}
