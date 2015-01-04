@@ -13,38 +13,38 @@ a.anchor#vm-settings
               .col-lg-6
                 .form-group
                   label for='vm_os' Operating System
-                  select.form-control required=true id='vm_os' name='vm_os' ng-options='os.name for os in osList track by os.box' ng-model='configuration.vm_os'
+                  select.form-control required=true id='vm_os' name='box[vm_os]' ng-options='os.name for os in osList track by os.box' ng-model='configuration.vm_os'
 
               .col-lg-6
                 .form-group
                   label Additional packages
                   p
                     label.checkbox-inline ng-repeat='(k, v) in packages'
-                      input type='checkbox' name='package_bundles[]' value='{{ k }}' ng-model='v.selected'
+                      input type='checkbox' name='box[package_bundles][]' value='{{ k }}' ng-model='v.selected'
                       span data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}' {{ v.label }}
-                      input ng-repeat='package in v.packages' type='hidden' name='packages[]' value='{{ package }}' ng-disabled='!v.selected'
+                      input ng-repeat='package in v.packages' type='hidden' name='box[packages][]' value='{{ package }}' ng-disabled='!v.selected'
             .row
               .col-lg-4
                 .form-group
                   label for='vm_memory'= t('.memory')
-                  input.form-control required=true id='vm_memory' name='vm_memory' type='text' ng-model='configuration.vm_memory' ng-pattern="/^[0-9]+$/"
+                  input.form-control required=true id='vm_memory' name='box[vm_memory]' type='text' ng-model='configuration.vm_memory' ng-pattern="/^[0-9]+$/"
               .col-lg-4
                 .form-group
                   label for='vm_swap' Swap, Mb
-                  input.form-control required=true id='vm_swap' name='vm_swap' type='text' ng-model='configuration.vm_swap' ng-pattern="/^[0-9]+$/"
+                  input.form-control required=true id='vm_swap' name='box[vm_swap]' type='text' ng-model='configuration.vm_swap' ng-pattern="/^[0-9]+$/"
               .col-lg-4
                 .form-group
                   label for='vm_cores' CPU cores
-                  select.form-control required=true id='vm_cores' name='vm_cores' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration.vm_cores'
+                  select.form-control required=true id='vm_cores' name='box[vm_cores]' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration.vm_cores'
             .row
               .col-lg-4
                 .form-group
                   label for='vm_shared_directory' Shared directory
-                  input.form-control required=true type='text' id='vm_shared_directory' name='vm_shared_directory' ng-model='configuration.vm_shared_directory'
+                  input.form-control required=true type='text' id='vm_shared_directory' name='box[vm_shared_directory]' ng-model='configuration.vm_shared_directory'
               .col-lg-4
                 .form-group
                   label for='vm_share_type' Share type
-                  select.form-control required=true id='vm_share_type' name='vm_share_type' ng-model='configuration.vm_share_type' ng-options='t for t in shareTypes track by t'
+                  select.form-control required=true id='vm_share_type' name='box[vm_share_type]' ng-model='configuration.vm_share_type' ng-options='t for t in shareTypes track by t'
               .col-lg-4
                 p It's recommended to use NFS sharing type because it provides better performance.
 
@@ -58,8 +58,8 @@ a.anchor#vm-settings
                   th
               tbody
                 tr ng-repeat='port in configuration.vm_ports'
-                  input type='hidden' name='vm_ports[{{ $index }}][guest]' value='{{ port.guest }}'
-                  input type='hidden' name='vm_ports[{{ $index }}][host]' value='{{ port.host }}'
+                  input type='hidden' name='box[vm_ports[{{ $index }}][guest]]' value='{{ port.guest }}'
+                  input type='hidden' name='box[vm_ports[{{ $index }}][host]]' value='{{ port.host }}'
                   td {{ port.guest }}
                   td {{ port.host }}
                   td
@@ -87,26 +87,26 @@ a.anchor#app-settings
               label for='vm_name'= t('.name')
               p
                 small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores are allowed.
-              input.form-control required=true id='vm_name' name='vm_name' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
+              input.form-control required=true id='vm_name' name='box[vm_name]' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
           .col-lg-4
             .form-group
               label for='rails_version' Ruby on Rails version
               p
                 small System will configure some of the services based on Ruby on Rails version you are using.
-              select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='configuration.rails_version'
+              select.form-control id='rails_version' name='box[rails_version]' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='configuration.rails_version'
           .col-lg-4
             .form-group
               label for='environment_file' Environment variables
               p
                 small Application configuration will be read from <kbd>{{ configuration.environment_file }}</kbd> (if it exists).
-              input.form-control type='text' id='environment_file' name='environment_file' ng-model='configuration.environment_file'
+              input.form-control type='text' id='environment_file' name='box[environment_file]' ng-model='configuration.environment_file'
         .row
           .col-lg-2
             label Install Ruby with
             .form-group
               .radio ng-repeat='k in ["rvm", "package"]'
                 label
-                  input name='ruby_install' type='radio' value='{{ k }}' ng-model='configuration.ruby_install'
+                  input name='box[ruby_install]' type='radio' value='{{ k }}' ng-model='configuration.ruby_install'
                   ' {{ rubyInstalls[k].label }}
           .col-lg-5
             .form-group
@@ -115,13 +115,13 @@ a.anchor#app-settings
                 small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
               p ng-show='configuration.ruby_install == "rvm"'
                 small ruby will be installed with <a href="https://rvm.io/">RVM</a>.
-              select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[configuration.ruby_install].rubies track by rubyVersion.version' ng-model='configuration.ruby_version'
+              select.form-control id='ruby_version' name='box[ruby_version]' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[configuration.ruby_install].rubies track by rubyVersion.version' ng-model='configuration.ruby_version'
           .col-lg-4
             .form-group ng-show='configuration.ruby_install == "rvm"'
               label for='manual_ruby_version' Other version
               p
                 small Specify custom ruby version
-              input.form-control type='text' placeholder='ruby version' name='manual_ruby_version' id='manual_ruby_version' ng-model='configuration.manual_ruby_version'
+              input.form-control type='text' placeholder='ruby version' name='box[manual_ruby_version]' id='manual_ruby_version' ng-model='configuration.manual_ruby_version'
 
 a.anchor#server
 .row.step.step2
@@ -138,13 +138,13 @@ a.anchor#server
               label for='server_name' Server name
               p
                 small It's recommended to keep <kbd>localhost</kbd> value here.
-              input.form-control required='true' ng-pattern="/^[a-zA-Z0-9-.]+$/" id='server_name' name='server_name' type='text' ng-model='configuration.server_name'
+              input.form-control required='true' ng-pattern="/^[a-zA-Z0-9-.]+$/" id='server_name' name='box[server_name]' type='text' ng-model='configuration.server_name'
           .col-lg-8
             .form-group
               label for='server_type' Server type
               .radio ng-repeat='type in serverTypes'
                 label
-                  input name='server_type' type='radio' value='{{ type.id }}' ng-model='configuration.server_type'
+                  input name='box[server_type]' type='radio' value='{{ type.id }}' ng-model='configuration.server_type'
                   ' {{ type.label }}
               p
                 small ng-show='configuration.server_type == "nginx_unicorn"' Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ configuration.vm_name }}</kbd> and <kbd>sudo start {{ configuration.vm_name }}</kbd>.
@@ -165,7 +165,7 @@ a.anchor#databases
             li ng-repeat='database in allObjects' role='presentation' ng-hide='isActive(database.id)'
               a role='menuitem' tabindex='-1' href='#' ng-click='add(database.id)' {{ database.name }}
 
-        input ng-repeat='database in activeObjects' type='hidden' name='databases[]' value='{{ database }}'
+        input ng-repeat='database in activeObjects' type='hidden' name='box[databases][]' value='{{ database }}'
 
         - databases.each do |database|
           .panel.panel-primary ng-show="isActive('#{database.id}')"
@@ -191,7 +191,7 @@ a.anchor#background-jobs
             li ng-repeat='backgroundJob in allObjects' role='presentation' ng-hide='isActive(backgroundJob.id)'
               a role='menuitem' tabindex='-1' href='#' ng-click='add(backgroundJob.id)' {{ backgroundJob.name }}
 
-        input ng-repeat='backgroundJob in activeObjects' type='hidden' name='background_jobs[]' value='{{ backgroundJob }}'
+        input ng-repeat='backgroundJob in activeObjects' type='hidden' name='box[background_jobs][]' value='{{ backgroundJob }}'
 
         - background_jobs.each do |background_job|
           .panel.panel-primary ng-show="isActive('#{background_job.id}')"

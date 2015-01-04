@@ -4,7 +4,7 @@ describe BoxesController do
   describe 'POST create' do
     before do
       allow(SecureIdGenerator).to receive(:generate) { 'abc123' }
-      post :create, params_fixture
+      post :create, box: params_fixture
     end
 
     let(:box) { Box.where(secure_id: 'abc123').first }

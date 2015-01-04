@@ -1,17 +1,17 @@
 .form-group
   .radio
     label
-      input name='#{db}_orm' type='radio' value='none' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='none' ng-model='configuration.#{db}_orm'
       ' Do not configure
   .radio
     label
-      input name='#{db}_orm' type='radio' value='activerecord' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='activerecord' ng-model='configuration.#{db}_orm'
       ' ActiveRecord
   .radio
     label
-      input name='#{db}_orm' type='radio' value='sequel' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='sequel' ng-model='configuration.#{db}_orm'
       ' Sequel (<a target="_blank" href="https://github.com/TalentBox/sequel-rails">sequel-rails</a>)
   .radio
     label
-      input name='#{db}_orm' type='radio' value='datamapper' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='datamapper' ng-model='configuration.#{db}_orm'
       ' DataMapper (<a target="_blank" href="https://github.com/datamapper/dm-rails">dm-rails</a>)

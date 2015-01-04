@@ -6,7 +6,7 @@ describe 'dashboard/show.html.slim' do
   REQUIRED_PARAMS.each do |param|
     it "includes #{param} input" do
       render
-      expect(rendered).to have_css("[name=#{param}]")
+      expect(rendered).to have_css("[name='box[#{param}]']")
     end
   end
 end

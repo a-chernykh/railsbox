@@ -3,7 +3,7 @@ class BoxesController < ApplicationController
   before_filter :find_box, only: %w(show edit download update)
 
   def create
-    box = Box.create params: params
+    box = Box.create! params: params[:box]
     redirect_to box_url(box)
   end
 

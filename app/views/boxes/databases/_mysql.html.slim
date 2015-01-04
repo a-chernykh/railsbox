@@ -4,13 +4,13 @@
   .col-lg-3
     .form-group
       label for='mysql_db_name' Database Name
-      input.form-control id='mysql_db_name' name='mysql_db_name' type='text' ng-model='configuration.mysql_db_name'
+      input.form-control id='mysql_db_name' name='box[mysql_db_name]' type='text' ng-model='configuration.mysql_db_name'
   .col-lg-3
     .form-group
       label for='mysql_db_user' Database User
-      input.form-control id='mysql_db_user' name='mysql_db_user' type='text' ng-model='configuration.mysql_db_user'
+      input.form-control id='mysql_db_user' name='box[mysql_db_user]' type='text' ng-model='configuration.mysql_db_user'
   .col-lg-3
     .form-group
       label for='mysql_db_password' Database Password
-      input.form-control id='mysql_db_password' name='mysql_db_password' type='text' placeholder='optional' ng-model='configuration.mysql_db_password'
+      input.form-control id='mysql_db_password' name='box[mysql_db_password]' type='text' placeholder='optional' ng-model='configuration.mysql_db_password'
 = render 'boxes/databases/sql_config'
