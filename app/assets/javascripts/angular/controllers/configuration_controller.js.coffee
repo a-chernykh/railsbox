@@ -3,13 +3,20 @@ angular.module('app.rubyops').classy.controller
   inject: ['$scope', '$http']
 
   init: ->
+    @$.serverTypes = [
+      label: 'nginx + unicorn'
+      id: 'nginx_unicorn'
+     # ,
+     #  label: 'nginx + passenger'
+     #  id: 'nginx_passenger'
+    ]
     @$.shareTypes = [ 'NFS', 'VirtualBox' ]
     @$.postgresqlExtensions =
       [ { name: 'hstore' },
         { name: 'citext' },
         { name: 'postgis' } ]
     @$.osList = [
-      { box: 'ubuntu/precise32', name: 'Ubuntu Precise Pangolin 12.04 LTS 64' },
+      { box: 'ubuntu/precise32', name: 'Ubuntu Precise Pangolin 12.04 LTS 32' },
       { box: 'ubuntu/precise64', name: 'Ubuntu Precise Pangolin 12.04 LTS 64' },
       { box: 'ubuntu/trusty32', name: 'Ubuntu Trusty 14.04 LTS 32' },
       { box: 'ubuntu/trusty64', name: 'Ubuntu Trusty 14.04 LTS 64' }

@@ -35,6 +35,7 @@ class DefaultConfiguration
       postgresql_extensions: [ 'hstore' ],
       delayed_job_command: 'script/delayed_job run',
       sidekiq_command: 'sidekiq',
-      resque_command: 'rake resque:work' }
+      resque_command: 'rake resque:work',
+      server_type: 'nginx_unicorn' }
   end
 end

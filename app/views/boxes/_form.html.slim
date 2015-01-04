@@ -79,29 +79,27 @@ a.anchor#app-settings
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading
-        h2.panel-title Application and ruby
+        h2.panel-title Application
       .panel-body
         .row
           .col-lg-4
             .form-group
               label for='vm_name'= t('.name')
               p
-                small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores.
-              br
+                small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores are allowed.
               input.form-control required=true id='vm_name' name='vm_name' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
-          .col-lg-4
-            .form-group
-              label for='server_name' Server name
-              p
-                small It's recommended to keep <kbd>localhost</kbd> value here. Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ configuration.vm_name }}</kbd> and <kbd>sudo start {{ configuration.vm_name }}</kbd>.
-              input.form-control required='true' ng-pattern="/^[a-zA-Z0-9-.]+$/" id='server_name' name='server_name' type='text' ng-model='configuration.server_name'
           .col-lg-4
             .form-group
               label for='rails_version' Ruby on Rails version
               p
-                small System will configure some of the services appropriately based on Ruby on Rails version you are using.
-              br
+                small System will configure some of the services based on Ruby on Rails version you are using.
               select.form-control id='rails_version' name='rails_version' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='configuration.rails_version'
+          .col-lg-4
+            .form-group
+              label for='environment_file' Environment variables
+              p
+                small Application configuration will be read from <kbd>{{ configuration.environment_file }}</kbd> (if it exists).
+              input.form-control type='text' id='environment_file' name='environment_file' ng-model='configuration.environment_file'
         .row
           .col-lg-2
             label Install Ruby with
@@ -110,8 +108,7 @@ a.anchor#app-settings
                 label
                   input name='ruby_install' type='radio' value='{{ k }}' ng-model='configuration.ruby_install'
                   ' {{ rubyInstalls[k].label }}
-
-          .col-lg-3
+          .col-lg-5
             .form-group
               label for='ruby_version' Ruby version
               p ng-show='configuration.ruby_install == "package"'
@@ -119,27 +116,46 @@ a.anchor#app-settings
               p ng-show='configuration.ruby_install == "rvm"'
                 small ruby will be installed with <a href="https://rvm.io/">RVM</a>.
               select.form-control id='ruby_version' name='ruby_version' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[configuration.ruby_install].rubies track by rubyVersion.version' ng-model='configuration.ruby_version'
-          .col-lg-2
+          .col-lg-4
             .form-group ng-show='configuration.ruby_install == "rvm"'
               label for='manual_ruby_version' Other version
               p
                 small Specify custom ruby version
               input.form-control type='text' placeholder='ruby version' name='manual_ruby_version' id='manual_ruby_version' ng-model='configuration.manual_ruby_version'
-          .col-lg-5
-            .form-group
-              label for='environment_file' Environment variables
-              p
-                small Application configuration will be read from <kbd>{{ configuration.environment_file }}</kbd> (if it exists).
-              input.form-control type='text' id='environment_file' name='environment_file' ng-model='configuration.environment_file'
 
-a.anchor#databases
-.row.step.step3 ng-controller='DatabasesController'
+a.anchor#server
+.row.step.step2
   .col-lg-1.step-number.visible-lg-block
     h1 3
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading
-        h2.panel-title Databases, caching and search
+        h2.panel-title Server
+      .panel-body
+        .row
+          .col-lg-4
+            .form-group
+              label for='server_name' Server name
+              p
+                small It's recommended to keep <kbd>localhost</kbd> value here.
+              input.form-control required='true' ng-pattern="/^[a-zA-Z0-9-.]+$/" id='server_name' name='server_name' type='text' ng-model='configuration.server_name'
+          .col-lg-8
+            .form-group
+              label for='server_type' Server type
+              .radio ng-repeat='type in serverTypes'
+                label
+                  input name='server_type' type='radio' value='{{ type.id }}' ng-model='configuration.server_type'
+                  ' {{ type.label }}
+              p
+                small ng-show='configuration.server_type == "nginx_unicorn"' Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ configuration.vm_name }}</kbd> and <kbd>sudo start {{ configuration.vm_name }}</kbd>.
+a.anchor#databases
+.row.step.step3 ng-controller='DatabasesController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 4
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Databases
       .panel-body
         .dropdown ng-hide='allActive()'
           button.btn.btn-lg.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='databasesMenu'
@@ -161,7 +177,7 @@ a.anchor#databases
 a.anchor#background-jobs
 .row.step.step4 ng-controller='BackgroundJobsController'
   .col-lg-1.step-number.visible-lg-block
-    h1 4
+    h1 5
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading

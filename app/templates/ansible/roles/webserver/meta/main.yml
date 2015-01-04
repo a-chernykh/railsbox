@@ -1,5 +1,0 @@
----
-dependencies:
-  - ruby
-  - nginx
-  - unicorn

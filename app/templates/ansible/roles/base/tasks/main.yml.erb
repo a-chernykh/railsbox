@@ -26,7 +26,7 @@
 - name: Setup script to read application environment
   template: src=read_environment.sh.j2 dest=/etc/profile.d/read_environment.sh
   notify:
-    - restart unicorn
+    - restart application
 <% params[:background_jobs].each do |job| -%>
     - restart <%= job %>
 <% end %>
