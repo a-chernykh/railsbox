@@ -19,4 +19,4 @@ a.anchor#home
     = token_tag nil
     = render layout: 'boxes/form' do
       div.alert.alert-danger role='alert' ng-hide='newBox.$valid' Please fix form errors first
-      button.btn.btn-default.btn-lg ng-disabled='!newBox.$valid'= t('.create')
+      button.btn.btn-default.btn-lg ng-disabled='!newBox.$valid' data-disable-with='Wait...' = t('.create')
