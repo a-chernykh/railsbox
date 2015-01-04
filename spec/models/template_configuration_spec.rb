@@ -18,6 +18,10 @@ describe TemplateConfiguration do
         end
       end
 
+      it 'does not copies files with .erb extension' do
+        expect(File).not_to exist(File.join(dir, 'Vagrantfile.erb'))
+      end
+
       context 'Vagrantfile' do
         let(:file) { self.class.description }
 

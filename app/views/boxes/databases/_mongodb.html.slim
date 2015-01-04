@@ -3,20 +3,20 @@
     .form-group
       .radio
         label
-          input name='box[mongodb_orm]' type='radio' value='none' ng-model='configuration.mongodb_orm'
+          input name='box[mongodb_orm]' type='radio' value='none' ng-model='configuration.mongodb_orm' ng-disabled='!isActive("mongodb")'
           ' Do not configure
       .radio
         label
-          input name='box[mongodb_orm]' type='radio' value='mongoid' ng-model='configuration.mongodb_orm'
+          input name='box[mongodb_orm]' type='radio' value='mongoid' ng-model='configuration.mongodb_orm' ng-disabled='!isActive("mongodb")'
           ' Mongoid
       .radio
         label
-          input name='box[mongodb_orm]' type='radio' value='mongomapper' ng-model='configuration.mongodb_orm'
+          input name='box[mongodb_orm]' type='radio' value='mongomapper' ng-model='configuration.mongodb_orm' ng-disabled='!isActive("mongodb")'
           ' MongoMapper
 
   .col-lg-4
     .form-group
       label for='mongodb_db_name' Database Name
-      input.form-control id='mongodb_db_name' name='box[mongodb_db_name]' type='text' ng-model='configuration.mongodb_db_name'
+      input.form-control id='mongodb_db_name' name='box[mongodb_db_name]' type='text' ng-model='configuration.mongodb_db_name' ng-disabled='!isActive("mongodb")'
 p ng-show='mongodbConfigPath' <kbd>{{ mongodbConfigPath }}</kbd> will be automatically created based on the above params. Your old configuration will be backed up.
 p ng-hide='mongodbConfigPath' No configuration files will be created.

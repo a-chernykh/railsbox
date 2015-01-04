@@ -2,9 +2,9 @@
   .col-lg-6
     .form-group
       label for='resque_app_name' Service name
-      input.form-control id='resque_app_name' name='box[resque_app_name]' type='text' ng-model='configuration.resque_app_name'
+      input.form-control id='resque_app_name' name='box[resque_app_name]' type='text' ng-model='configuration.resque_app_name' ng-disabled='!isActive("resque")'
   .col-lg-6
     .form-group
       label for='resque_command' Command to start resque
-      input.form-control id='resque_command' name='box[resque_command]' type='text' ng-model='configuration.resque_command'
+      input.form-control id='resque_command' name='box[resque_command]' type='text' ng-model='configuration.resque_command' ng-disabled='!isActive("resque")'
 p System service <kbd>{{ configuration.resque_app_name }}</kbd> will be created. You can control it by running the following commands: <kbd>sudo stop {{ configuration.resque_app_name }}</kbd>, <kbd>sudo start {{ configuration.resque_app_name }}</kbd>, <kbd>sudo restart {{ configuration.resque_app_name }}</kbd>.

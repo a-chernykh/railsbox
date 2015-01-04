@@ -3,11 +3,11 @@
     .form-group
       .radio
         label
-          input name='box[redis_orm]' type='radio' value='none' ng-model='configuration.redis_orm'
+          input name='box[redis_orm]' type='radio' value='none' ng-model='configuration.redis_orm' ng-disabled='!isActive("redis")'
           ' Do not configure
       .radio
         label
-          input name='box[redis_orm]' type='radio' value='redis-rb' ng-model='configuration.redis_orm'
+          input name='box[redis_orm]' type='radio' value='redis-rb' ng-model='configuration.redis_orm' ng-disabled='!isActive("redis")'
           ' redis-rb
 
 p ng-show='configuration.redis_orm != "none"' <kbd>config/initializers/redis.rb</kbd> will be automatically created. Your old configuration (if any) will be backed up.

@@ -2,9 +2,9 @@
   .col-lg-6
     .form-group
       label for='delayed_job_app_name' Service name
-      input.form-control id='delayed_job_app_name' name='box[delayed_job_app_name]' type='text' ng-model='configuration.delayed_job_app_name'
+      input.form-control id='delayed_job_app_name' name='box[delayed_job_app_name]' type='text' ng-model='configuration.delayed_job_app_name' ng-disabled='!isActive("delayed_job")'
   .col-lg-6
     .form-group
       label for='delayed_job_command' Command to start delayed_job
-      input.form-control id='delayed_job_command' name='box[delayed_job_command]' type='text' ng-model='configuration.delayed_job_command'
+      input.form-control id='delayed_job_command' name='box[delayed_job_command]' type='text' ng-model='configuration.delayed_job_command' ng-disabled='!isActive("delayed_job")'
 p System service <kbd>{{ configuration.delayed_job_app_name }}</kbd> will be created. You can control it by running the following commands: <kbd>sudo stop {{ configuration.delayed_job_app_name }}</kbd>, <kbd>sudo start {{ configuration.delayed_job_app_name }}</kbd>, <kbd>sudo restart {{ configuration.delayed_job_app_name }}</kbd>.

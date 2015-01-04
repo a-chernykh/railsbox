@@ -1,17 +1,17 @@
 .form-group
   .radio
     label
-      input name='box[#{db}_orm]' type='radio' value='none' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='none' ng-model='configuration.#{db}_orm' ng-disabled='!isActive("#{db}")'
       ' Do not configure
   .radio
     label
-      input name='box[#{db}_orm]' type='radio' value='activerecord' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='activerecord' ng-model='configuration.#{db}_orm' ng-disabled='!isActive("#{db}")'
       ' ActiveRecord
   .radio
     label
-      input name='box[#{db}_orm]' type='radio' value='sequel' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='sequel' ng-model='configuration.#{db}_orm' ng-disabled='!isActive("#{db}")'
       ' Sequel (<a target="_blank" href="https://github.com/TalentBox/sequel-rails">sequel-rails</a>)
   .radio
     label
-      input name='box[#{db}_orm]' type='radio' value='datamapper' ng-model='configuration.#{db}_orm'
+      input name='box[#{db}_orm]' type='radio' value='datamapper' ng-model='configuration.#{db}_orm' ng-disabled='!isActive("#{db}")'
       ' DataMapper (<a target="_blank" href="https://github.com/datamapper/dm-rails">dm-rails</a>)
