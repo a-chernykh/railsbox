@@ -15,7 +15,7 @@ brew install ansible
 
 ## Operating systems
 
-You can choose between Ubuntu 12.04 LTS and Ubuntu 14.04 LTS. Base boxes provided by [vagrantcloud.com][].
+You can choose between Ubuntu 12.04 LTS and Ubuntu 14.04 LTS. Base boxes provided by [vagrantcloud][].
 
 ## Ruby versions
 
@@ -54,6 +54,8 @@ It's possible to install the following databases:
 * Add SMTP server
 
 # Contributing
+
+All kind of contributions are always welcomed.
 
 [railsbox]: http://railsbox.io/
 [vagrant]: https://www.vagrantup.com/
