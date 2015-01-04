@@ -22,7 +22,7 @@ class BoxesController < ApplicationController
   end
 
   def update
-    @box.update_attributes params: params
+    @box.update_attributes params: params[:box]
     redirect_to box_url(@box), notice: t('updated')
   end
 
