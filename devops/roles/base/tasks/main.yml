@@ -1,0 +1,52 @@
+---
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Install apt dependencies
+  apt: name={{ item }}
+  with_items:
+    - autoconf
+    - bison
+    - build-essential
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - nodejs
+    - python-pip
+    - python-dev
+    - htop
+    - git
+
+- name: Install additional packages
+  apt: name={{ item }}
+  with_items: packages
+
+- name: Create application group
+  group: name={{ group_name }}
+
+- name: Create application user
+  user: name={{ user_name }} group={{ group_name }} shell=/bin/bash home={{ user_home_path }}
+
+- name: Create shared paths
+  file: path={{ item }} state=directory owner={{ user_name }} group={{ group_name }}
+  with_items:
+    - '{{ shared_path }}'
+    - '{{ shared_path }}/tmp'
+    - '{{ shared_path }}/log'
+    - '{{ shared_path }}/config'
+    - '{{ shared_path }}/vendor'
+    - '{{ shared_path }}/vendor/bundle'
+
+- name: Authorize current user
+  authorized_key: user={{ user_name }} key='{{ lookup('file', '~/.ssh/id_rsa.pub') }}'
+
+- name: Clone app repository
+  git: repo={{ git_url }} dest={{ app_path }} version={{ git_version }} accept_hostkey=yes
+
+- name: Change owner of git path to app user
+  file: path={{ app_path }} recurse=yes owner={{ user_name }} group={{ group_name }}
+
+- name: Allow to start / stop app with sudo
+  template: src=sudoers.d.conf.j2 dest=/etc/sudoers.d/{{ app_name }} validate='visudo -cf %s'

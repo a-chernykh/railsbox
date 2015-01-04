@@ -1,0 +1,38 @@
+---
+- name: Update code
+  git: repo={{ git_url }} dest={{ app_path }} version={{ git_version }} accept_hostkey=yes
+
+- name: Stop unicorn
+  command: sudo stop {{ app_name }}
+  ignore_errors: yes
+
+- name: Delete log directory
+  file: path={{ app_path }}/log state=absent
+
+- name: Symlink shared files
+  file: src={{ shared_path }}/{{ item }} dest={{ app_path }}/{{ item }} state=link force=yes
+  with_items:
+    - config/database.yml
+    - config/secrets.yml
+    - config/unicorn.rb
+    - log
+    - tmp
+    - vendor/bundle
+
+- name: Install bundle
+  command: 'bundle install --deployment --without="development test"'
+  args:
+    chdir: '{{ app_path }}'
+
+- name: Precompile assets
+  command: rake assets:precompile chdir={{ app_path }}
+  environment:
+    RAILS_ENV: '{{ rails_env }}'
+
+- name: Migrate database
+  command: rake db:migrate chdir={{ app_path }}
+  environment:
+    RAILS_ENV: '{{ rails_env }}'
+
+- name: Start unicorn
+  command: sudo start {{ app_name }}

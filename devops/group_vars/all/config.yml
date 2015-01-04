@@ -1,0 +1,43 @@
+---
+vm_swap: 2048
+
+app_name: railsbox
+server_name: railsbox.io
+user_name: '{{ app_name }}'
+group_name: '{{ app_name }}'
+
+git_url: git@github.com:andreychernih/railsbox.git
+git_version: master
+
+packages:
+  - curl
+  - libcurl3
+  - libcurl3-gnutls
+  - libcurl4-openssl-dev
+  - imagemagick
+  - qt5-default
+  - libqt5webkit5-dev
+
+ruby_version: ruby2.2
+
+postgresql_db_name: railsbox_production
+postgresql_db_user: railsbox
+postgresql_db_password: 
+
+ssl_certificate_path: /etc/nginx/ssl/railsbox.crt
+ssl_certificate_key_path: /etc/nginx/ssl/railsbox.key
+
+user_home_path: '/{{ app_name }}'
+app_path: '{{ user_home_path }}/app'
+app_public_path: "{{ app_path }}/public"
+app_config_path: "{{ app_path }}/config"
+app_temp_path: "{{ app_path }}/tmp"
+app_logs_path: "{{ app_path }}/log"
+
+shared_path: '{{ user_home_path }}/shared'
+
+unicorn_sock_path: "{{ app_temp_path }}/unicorn.sock"
+unicorn_config_path: "{{ app_config_path }}/unicorn.rb"
+unicorn_pid_path: "{{ app_temp_path }}/unicorn.pid"
+unicorn_stderr_path: "{{ app_logs_path }}/unicorn.err.log"
+unicorn_stdout_path: "{{ app_logs_path }}/unicorn.log"

@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+description "{{ app_name }} unicorn app"
+
+start on [2]
+stop on runlevel [016]
+
+env PATH=$PATH:/usr/local/bin:/usr/bin:/bin
+
+respawn
+
+setuid {{ user_name }}
+setgid {{ group_name }}
+
+chdir {{ app_path }}
+
+script
+  /bin/bash -l -c 'bundle exec unicorn -E {{ rails_env }} -c {{ unicorn_config_path }}'
+  sleep 5
+end script

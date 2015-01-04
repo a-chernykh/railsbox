@@ -1,0 +1,7 @@
+---
+- name: Create secrets.yml
+  template: src=secrets.yml.j2 dest={{ shared_path }}/config/secrets.yml owner={{ user_name }} group={{ group_name }} mode=0600
+
+- name: Install bundler
+  command: /bin/bash -l -c 'gem install bundler --no-ri --no-rdoc' chdir={{ app_path }}
+  sudo: no

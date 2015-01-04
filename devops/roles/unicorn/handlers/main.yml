@@ -1,0 +1,3 @@
+---
+- name: restart application
+  service: name={{ unicorn_app_name }} state=restarted
