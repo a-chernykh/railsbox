@@ -4,6 +4,7 @@ class DefaultConfiguration
     user_name = 'vagrant'
     { vm_name: app_name,
       vm_os: 'ubuntu/trusty64',
+      autoconf: true,
       vm_memory: '1024',
       vm_swap: '1024',
       vm_cores: '2',

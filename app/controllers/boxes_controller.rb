@@ -3,7 +3,7 @@ class BoxesController < ApplicationController
   before_filter :find_box, only: %w(show edit download update)
 
   def create
-    box = Box.create! params: params[:box]
+    box = Box.create! params: typecasted_box_params
     redirect_to box_url(box)
   end
 
@@ -22,7 +22,7 @@ class BoxesController < ApplicationController
   end
 
   def update
-    @box.update_attributes params: params[:box]
+    @box.update_attributes params: typecasted_box_params
     redirect_to box_url(@box), notice: t('updated')
   end
 
@@ -37,5 +37,9 @@ class BoxesController < ApplicationController
 
   def find_box
     @box = Box.where(secure_id: params[:id]).first!
+  end
+
+  def typecasted_box_params
+    Typecaster.new(params[:box]).typecasted
   end
 end
