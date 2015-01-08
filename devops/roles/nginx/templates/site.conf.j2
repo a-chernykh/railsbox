@@ -5,10 +5,7 @@ upstream app {
 }
 
 server {
-  listen 80;
   listen 443 ssl;
-
-  sendfile off;
 
   server_name {{ server_name }};
 
@@ -19,6 +16,10 @@ server {
   root {{ app_public_path }};
 
   try_files $uri/index.html $uri @app;
+
+  location ~* ^.+\.(?:css|js|jpe?g|gif|ico|png)$ {
+    expires 30d;
+  }
 
   location @app {
     proxy_set_header X-Forwarded-Proto $scheme;
@@ -31,4 +32,25 @@ server {
   error_page 500 502 503 504 /500.html;
   client_max_body_size 4G;
   keepalive_timeout 10;
+}
+
+server {
+  listen 80;
+
+  server_name {{ server_name }};
+
+  return 301 https://{{ server_name }}$request_uri;
+}
+
+server {
+  listen 80;
+  listen 443 ssl;
+
+  ssl_certificate {{ ssl_certificate_path }};
+  ssl_certificate_key {{ ssl_certificate_key_path }};
+  ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;  # don’t use SSLv3 ref: POODLE
+
+  server_name www.{{ server_name }};
+
+  return 301 https://{{ server_name }}$request_uri;
 }

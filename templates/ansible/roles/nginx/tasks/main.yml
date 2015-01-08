@@ -14,6 +14,10 @@
   file: src=/etc/nginx/sites-available/{{ server_name }}.conf dest=/etc/nginx/sites-enabled/{{ server_name }}.conf state=link
   notify: restart nginx
 
+- name: Create nginx.conf
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+
 - name: Create certificates directory
   file: path={{ ssl_certificate_path|dirname }} recurse=yes state=directory
 

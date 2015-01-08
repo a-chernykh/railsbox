@@ -11,16 +11,24 @@
   notify: restart nginx
 
 - name: Copy nginx configuration
-  template: src=nginx.conf.j2 dest=/etc/nginx/sites-available/{{ server_name }}.conf
+  template: src=site.conf.j2 dest=/etc/nginx/sites-available/{{ server_name }}.conf
   notify: restart nginx
 
 - name: Symlink nginx configuration
   file: src=/etc/nginx/sites-available/{{ server_name }}.conf dest=/etc/nginx/sites-enabled/{{ server_name }}.conf state=link
   notify: restart nginx
 
+- name: Create nginx.conf
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+
 - name: Create certificates directory
   file: path={{ ssl_certificate_path|dirname }} recurse=yes state=directory
 
-- name: Create self-signed SSL cert
-  command: openssl req -new -nodes -x509 -subj "/C=US/ST=California/L=MountainView/O=IT/CN=${server_name}" -days 3650 -keyout {{ ssl_certificate_key_path }} -out {{ ssl_certificate_path }} -extensions v3_ca creates={{ ssl_certificate_path }}
+- name: Copy certificate
+  copy: content="{{ ssl_cert }}" dest={{ ssl_certificate_path }} mode=0600
+  notify: restart nginx
+
+- name: Copy private key
+  copy: content="{{ ssl_key }}" dest={{ ssl_certificate_key_path }} mode=0600
   notify: restart nginx
