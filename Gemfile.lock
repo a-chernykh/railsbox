@@ -43,6 +43,7 @@ GEM
       execjs
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
+    browser (0.8.0)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -175,6 +176,10 @@ GEM
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
       rspec-mocks (~> 3.1.0)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -247,6 +252,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.1)
+  browser
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
@@ -263,6 +269,7 @@ DEPENDENCIES
   rails (= 4.2)
   rails-assets-angular
   rails-assets-angular-classy
+  rspec-activemodel-mocks
   rspec-its
   rspec-rails (~> 3.0)
   rubyzip

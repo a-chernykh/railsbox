@@ -24,6 +24,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'tilt'
 gem 'rubyzip', require: 'zip'
 
+gem 'browser'
+
 gem 'unicorn'
 
 group :development do
@@ -41,10 +43,11 @@ group :test do
   gem 'fakefs', require: 'fakefs/safe'
   gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
+  gem 'rspec-its'
+  gem 'rspec-activemodel-mocks'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'rspec-its'
   gem 'pry-byebug'
 end

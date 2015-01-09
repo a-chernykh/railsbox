@@ -1,0 +1,21 @@
+h3 VirtualBox
+p VirtualBox is installed from custom apt repository. See <a href="https://www.virtualbox.org/wiki/Linux_Downloads">https://www.virtualbox.org/wiki/Linux_Downloads</a> for details. If you're on Debian or Ubuntu run the following:
+pre
+  | sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian trusty contrib"
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+    sudo apt-get update
+    sudo apt-get install -y virtualbox-4.3 dkms
+p You should replace <mark>trusty</mark> with your distribution name.
+
+h3 vagrant
+p Latest deb and rpm files are available <a href="https://www.vagrantup.com/downloads.html">here</a>. Or you can install it with apt:
+pre
+  | sudo apt-get install vagrant
+
+h3 ansible
+p ansible can be installed from ansible apt repository:
+pre
+  | sudo apt-get install software-properties-common
+    sudo apt-add-repository ppa:ansible/ansible
+    sudo apt-get update
+    sudo apt-get install ansible
