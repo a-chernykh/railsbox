@@ -3,6 +3,18 @@
 
 VAGRANTFILE_API_VERSION = '2'
 
+needs_restart = false
+plugins = {
+  'vagrant-bindfs' => '0.3.2',
+}
+plugins.each do |plugin, version|
+  unless Vagrant.has_plugin?(plugin)
+    system("vagrant plugin install #{plugin} --plugin-version #{version}") || exit!
+    needs_restart = true
+  end
+  exit system('vagrant', *ARGV) if needs_restart
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     <% if params[:autoconf] -%>
@@ -29,8 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = '<%= params[:vm_os] %>'
 
   config.vm.network 'private_network', type: 'dhcp'
-
   config.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<% if params[:vm_share_type] == 'NFS' -%>, type: 'nfs'<% end %>
+  <% if params[:vm_share_type] == 'NFS' -%>
+  config.bindfs.bind_folder '/vagrant', '/vagrant'
+  <% end %>
 
   config.vm.define '<%= params[:vm_name] %>' do |machine|
     machine.vm.hostname = '<%= params[:server_name] %>'
