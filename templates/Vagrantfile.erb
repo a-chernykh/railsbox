@@ -62,6 +62,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     <% end %>
   end
 
+  config.ssh.forward_agent = true
+
   if ansible_installed?
     config.vm.provision 'ansible' do |ansible|
       ansible.playbook = 'ansible/site.yml'
