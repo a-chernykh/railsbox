@@ -1,15 +1,8 @@
-[railsbox][] is Ruby on Rails virtual machine configurator. You can quickly create virtual machine for development using this tool.
+[railsbox][] is Ruby on Rails virtual machine configurator. You can quickly create virtual machine for development using this tool. Mac OS X, Linux and Windows host machines are supported.
 
 # Requirements
 
-You will need [VirtualBox][], [vagrant][] and [ansible][] to bootstrap new machine using configuration created by this utility. You can install everything quickly with [homebrew][] and [brew cask][]:
-
-```bash
-brew install caskroom/cask/brew-cask
-brew cask install virtualbox
-brew cask install vagrant
-brew install ansible
-```
+You will need [VirtualBox][], [vagrant][] and [ansible][] to bootstrap new machine using configuration created by this utility. [ansible][] is not required for Windows, railsbox will use shell scripts to install and run ansible inside guest machine.
 
 # What's included
 

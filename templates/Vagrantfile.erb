@@ -15,6 +15,11 @@ plugins.each do |plugin, version|
   exit system('vagrant', *ARGV) if needs_restart
 end
 
+def ansible_installed?
+  require 'mkmf'
+  find_executable 'ansible-playbook'
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     <% if params[:autoconf] -%>
@@ -42,8 +47,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network 'private_network', type: 'dhcp'
   config.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<% if params[:vm_share_type] == 'NFS' -%>, type: 'nfs'<% end %>
+  config.vm.synced_folder 'ansible', '/ansible'<% if params[:vm_share_type] == 'NFS' -%>, type: 'nfs'<% end %>
   <% if params[:vm_share_type] == 'NFS' -%>
   config.bindfs.bind_folder '/vagrant', '/vagrant'
+  config.bindfs.bind_folder '/ansible', '/ansible'
   <% end %>
 
   config.vm.define '<%= params[:vm_name] %>' do |machine|
@@ -53,14 +60,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     <% end %>
   end
 
-  config.vm.provision 'ansible' do |ansible|
-    ansible.playbook = 'ansible/site.yml'
-    ansible.sudo = true
-    ansible.groups = {
-      'webservers'           => %w(<%= params[:vm_name] %>),
-      'dbservers'            => %w(<%= params[:vm_name] %>),
-      'development:children' => %w(webservers dbservers)
-    }
-    ansible.tags = ENV['TAGS']
+  if ansible_installed?
+    config.vm.provision 'ansible' do |ansible|
+      ansible.playbook = 'ansible/site.yml'
+      ansible.sudo = true
+      ansible.groups = {
+        'webservers'           => %w(<%= params[:vm_name] %>),
+        'dbservers'            => %w(<%= params[:vm_name] %>),
+        'development:children' => %w(webservers dbservers)
+      }
+      ansible.tags = ENV['TAGS']
+    end
+  else
+    Dir['shell/*.sh'].each do |script|
+      config.vm.provision 'shell', path: script, privileged: false
+    end
   end
 end
