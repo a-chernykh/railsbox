@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe Archiver do
   describe '#archive' do
     let(:zip) { Rails.root.join('tmp/test.zip') }

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'Virtual boxes', js: true do
   scenario 'Create new box' do
     visit '/'

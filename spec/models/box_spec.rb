@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe Box do
   it { should validate_presence_of(:params) }
   it { should_not allow_value('<test').for(:vm_name) }
@@ -30,5 +28,17 @@ describe Box do
       box = Box.new params: { vm_name: 'myapp' }
       expect(box.vm_name).to eq 'myapp'
     end
+  end
+
+  describe '.databases' do
+    subject { described_class.databases.map(&:id) }
+
+    it { should include 'postgresql' }
+  end
+
+  describe '.background_jobs' do
+    subject { described_class.background_jobs.map(&:id) }
+
+    it { should include 'sidekiq' }
   end
 end

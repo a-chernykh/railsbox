@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe ArchiveBuilder do
   describe '#build' do
     include FakeFS::SpecHelpers

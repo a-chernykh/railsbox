@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe 'boxes/show.html.slim' do
   let(:box) { stub_model(Box, secure_id: 'whatever') }
   let(:os)  { :mac }

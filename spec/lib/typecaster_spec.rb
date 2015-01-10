@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe Typecaster do
   describe '#typecasted' do
     it 'converts strings to boolean' do

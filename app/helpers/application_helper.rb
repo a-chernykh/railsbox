@@ -13,17 +13,4 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
-
-  def databases
-    [ OpenStruct.new({ id: 'postgresql', name: 'PostgreSQL' }),
-      OpenStruct.new({ id: 'mysql',      name: 'MySQL' }),
-      OpenStruct.new({ id: 'mongodb',    name: 'MongoDB' }),
-      OpenStruct.new({ id: 'redis',      name: 'Redis' }), ]
-  end
-
-  def background_jobs
-    [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }), 
-      OpenStruct.new({ id: 'sidekiq',     name: 'sidekiq' }),
-      OpenStruct.new({ id: 'resque',      name: 'resque' }), ]
-  end
 end

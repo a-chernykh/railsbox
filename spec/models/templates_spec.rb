@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe Templates do
   describe '.path' do
     it 'returns path to given template' do

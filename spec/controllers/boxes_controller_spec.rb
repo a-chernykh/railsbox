@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe BoxesController do
   describe 'POST create' do
     before do

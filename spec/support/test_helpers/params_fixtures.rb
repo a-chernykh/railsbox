@@ -1,7 +1,7 @@
 module TestHelpers
   module ParamsFixtures
     def params_fixture
-      { databases: %w(postgresql mysql mongodb redis),
+      { databases: %w(postgresql mysql redis),
         background_jobs: %w(delayed_job sidekiq),
         vm_name: 'testapp',
         vm_os: 'ubuntu/trusty64',

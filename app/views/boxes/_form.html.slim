@@ -169,7 +169,7 @@ a.anchor#databases
 
         input ng-repeat='database in activeObjects' type='hidden' name='box[databases][]' value='{{ database }}'
 
-        - databases.each do |database|
+        - Box.databases.each do |database|
           .panel.panel-primary ng-show="isActive('#{database.id}')"
             .panel-heading= database.name
             .panel-body
@@ -195,7 +195,7 @@ a.anchor#background-jobs
 
         input ng-repeat='backgroundJob in activeObjects' type='hidden' name='box[background_jobs][]' value='{{ backgroundJob }}'
 
-        - background_jobs.each do |background_job|
+        - Box.background_jobs.each do |background_job|
           .panel.panel-primary ng-show="isActive('#{background_job.id}')"
             .panel-heading= background_job.name
             .panel-body

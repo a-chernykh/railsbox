@@ -1,14 +1,14 @@
-require 'rails_helper'
-
 describe TemplateConfiguration do
   describe '#save' do
-    let(:dir) { Dir.mktmpdir }
-    let(:configuration) { params_fixture }
+    let(:dir)    { Dir.mktmpdir }
+    let(:params) { params_fixture }
+
+    before { CopyConfiguration.new(params).save(dir) }
 
     describe 'files' do
       subject(:output) { IO.read(File.join(dir, file)) }
 
-      before { described_class.new(configuration).save(dir) }
+      before { described_class.new(params).save(dir) }
 
       context 'ansible/group_vars/all.yml' do
         let(:file) { self.class.description }

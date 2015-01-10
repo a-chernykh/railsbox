@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe BoxDecorator do
   let(:box) { stub_model(Box, secure_id: 'whatever', vm_name: 'myvm') }
 

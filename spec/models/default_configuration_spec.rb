@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe DefaultConfiguration do
   describe '#get' do
     subject { described_class.new.get }

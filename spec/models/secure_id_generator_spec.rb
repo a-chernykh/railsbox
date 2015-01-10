@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe SecureIdGenerator do
   describe '.generate' do
     it 'returns unique strings' do

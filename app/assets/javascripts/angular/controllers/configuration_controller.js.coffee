@@ -49,7 +49,7 @@ angular.module('app.rubyops').classy.controller
                   { version: 'ruby2.2',   label: '2.2 (beta)' } ]
     @$.railsVersions = [
       { version: '2',   label: 'rails 2.0+' },
-      { version: '3', label: 'rails 3.0+' },
+      { version: '3',   label: 'rails 3.0+' },
       { version: '4',   label: 'rails 4.0+' }
     ]
 

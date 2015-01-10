@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe BoxConfigurator do
   subject(:configurator) { described_class.from_params(params_fixture) }
 

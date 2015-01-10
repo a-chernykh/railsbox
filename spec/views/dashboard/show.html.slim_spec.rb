@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe 'dashboard/show.html.slim' do
   REQUIRED_PARAMS = %w(vm_name vm_os vm_memory vm_cores server_name postgresql_db_name postgresql_db_user ruby_install ruby_version)
 

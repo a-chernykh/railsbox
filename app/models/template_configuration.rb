@@ -4,12 +4,13 @@ class TemplateConfiguration < BaseConfiguration
   end
 
   def save(output_dir)
-    process_recursive(Templates::ROOT_PATH, output_dir) do |source_path, target_path|
+    process_recursive(output_dir, '', output_dir) do |source_path, target_path|
       target_path.gsub!('.erb', '')
       template = Tilt.new source_path
       File.open(target_path, 'w') do |f|
-        f.write template.render(Object.new, params: default_params.merge(@params).symbolize_keys)
+        f.write template.render(Object.new, params: @params)
       end
+      FileUtils.rm_f source_path
     end
   end
 
@@ -17,13 +18,5 @@ class TemplateConfiguration < BaseConfiguration
 
   def process_file?(file)
     File.extname(file) == Templates::EXT
-  end
-
-  def default_params
-    { databases: [],
-      background_jobs: [],
-      vm_ports: {},
-      packages: [],
-      manual_ruby_version: nil }
   end
 end
