@@ -1,5 +1,5 @@
 class Box < ActiveRecord::Base
-  store_accessor :params, :vm_name, :vm_shared_directory
+  store_accessor :params, :vm_name, :vm_shared_directory, :vm_ports
 
   validates :params, presence: true
   validates :secure_id, presence: true, uniqueness: true

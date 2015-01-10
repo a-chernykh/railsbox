@@ -10,13 +10,33 @@
         a.btn.btn-primary.btn-lg role='button' href=download_box_url(@box) = t('.download')
         ' 
         a.btn.btn-default.btn-lg role='button' href=edit_box_url(@box) = t('.edit')
+
+      p Your site will be available as <a href="#{@box.http_url}">#{@box.http_url}</a> (http) and <a href="#{@box.https_url}">#{@box.https_url}</a> (https).
+
+      h2 Control
+      h3 VM
+      p Virtual machine can be controlled by running the following commands:
+      p
+        pre
+          | vagrant up                      # To start VM
+            vagrant provision               # To re-run ansible playbook
+            vagrant halt                    # To stop VM
+            vagrant destroy                 # To destroy VM completely
+      h3 unicorn
+      p You can start and stop unicorn by running standard upstart commands:
+      p
+        pre
+          | sudo start #{@box.vm_name}
+            sudo stop #{@box.vm_name}
+            sudo restart #{@box.vm_name}
+
       h2 Customization
       p Feel free to customize ansible playbooks as you need. But keep in mind that your changes may be lost if you decide to re-generate configuration using Edit button. Probably it will be best if you keep your customizations in a separate roles which names do not overlap with the playbooks provided by railsbox.
 
-    .col-lg-7
-      h1 What's next?
+    .col-lg-6.how-to-install.col-lg-offset-1
+      h1 How to install
 
-      h2 Install requirements
+      h2 Requirements
       = render "boxes/#{browser.platform}/requirements"
       
       h2 Unzip
@@ -43,7 +63,7 @@
               ...
 
 
-      h2 Bootstrap VM
+      h2 Start VM
       p Go to the <kbd>railsbox</kbd> directory and type <kbd>vagrant up</kbd>. vagrant will download the base box and provision it with ansible using your configuration.
       p
         pre
@@ -51,20 +71,3 @@
             vagrant up
       p Note that vagrant may ask for a sudo password. That's required when you're using NFS for folder synchronization.
       p Once it's done, you'll be able to login into it using <kbd>vagrant ssh</kbd> command. Your application is stored in <kbd>#{@box.vm_shared_directory}</kbd> directory.
-
-      h2 Control
-      h3 VM
-      p Virtual machine can be controlled by running the following commands:
-      p
-        pre
-          | vagrant up                      # To start VM
-            vagrant provision               # To re-run ansible playbook
-            vagrant halt                    # To stop VM
-            vagrant destroy                 # To destroy VM completely
-      h3 unicorn
-      p You can start and stop unicorn by running standard upstart commands:
-      p
-        pre
-          | sudo start #{@box.vm_name}
-            sudo stop #{@box.vm_name}
-            sudo restart #{@box.vm_name}

@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 describe 'boxes/show.html.slim' do
+  let(:box) { stub_model(Box, secure_id: 'whatever') }
+  let(:os)  { :mac }
+
+  before do
+    assign :box, BoxDecorator.decorate(box)
+    allow(view).to receive(:browser) { double(platform: os) }
+  end
+
+  it 'has box http URL' do
+  end
+
   describe 'by operating system' do
-    let(:box) { stub_model(Box, secure_id: 'whatever') }
-
-    before do
-      assign :box, box
-      allow(view).to receive(:browser) { double(platform: os) }
-    end
-
     context 'mac' do
       let(:os) { :mac }
 

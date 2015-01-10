@@ -12,6 +12,7 @@ class BoxesController < ApplicationController
   end
 
   def show
+    @box = BoxDecorator.decorate @box
     respond_to do |format|
       format.html
       format.json { render json: @box }
