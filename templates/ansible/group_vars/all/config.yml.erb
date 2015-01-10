@@ -1,5 +1,6 @@
 ---
 app_name: <%= params[:vm_name] %>
+rails_env: development
 
 <% params.each do |k, v| -%>
   <% unless v.respond_to?(:each) -%>
@@ -25,8 +26,8 @@ app_config_path: "{{ app_path }}/config"
 app_temp_path: "{{ app_path }}/tmp"
 app_logs_path: "{{ app_path }}/log"
 
-unicorn_sock_path: "/tmp/unicorn.development.sock"
-unicorn_config_path: "{{ app_config_path }}/unicorn.development.rb"
-unicorn_pid_path: "{{ app_temp_path }}/unicorn.development.pid"
+unicorn_sock_path: "/tmp/unicorn.{{ rails_env }}.sock"
+unicorn_config_path: "{{ app_config_path }}/unicorn.{{ rails_env }}.rb"
+unicorn_pid_path: "{{ app_temp_path }}/unicorn.{{ rails_env }}.pid"
 unicorn_stderr_path: "{{ app_logs_path }}/unicorn.err.log"
 unicorn_stdout_path: "{{ app_logs_path }}/unicorn.log"

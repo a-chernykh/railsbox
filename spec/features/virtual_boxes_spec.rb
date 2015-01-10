@@ -18,7 +18,9 @@ feature 'Virtual boxes', js: true do
 
     files = zip_list_of_files(page.body)
     expect(files).to include('railsbox/Vagrantfile')
-    expect(files).to include('railsbox/ansible/group_vars/all.yml')
+    expect(files).to include('railsbox/ansible/group_vars/all/config.yml')
+    expect(files).to include('railsbox/ansible/roles/postgresql/tasks/main.yml')
+    expect(files).not_to include('railsbox/ansible/roles/mongodb/tasks/main.yml')
   end
 
   scenario 'Edit box' do

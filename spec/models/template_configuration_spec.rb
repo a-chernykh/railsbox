@@ -10,7 +10,7 @@ describe TemplateConfiguration do
 
       before { described_class.new(params).save(dir) }
 
-      context 'ansible/group_vars/all.yml' do
+      context 'ansible/group_vars/all/config.yml' do
         let(:file) { self.class.description }
 
         it 'sets server_name' do
