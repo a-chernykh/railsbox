@@ -28,8 +28,8 @@ class BoxesController < ApplicationController
   end
 
   def download
-    configurator = Configurator.from_params(@box.params)
-    builder = ConfigurationBuilder.new(configurator)
+    configurator = BoxConfigurator.from_params(@box.params)
+    builder = ArchiveBuilder.new(configurator)
     zip_path = builder.build
     send_file zip_path, filename: configurator.file_name
   end

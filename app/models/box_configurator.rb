@@ -1,4 +1,4 @@
-class Configurator
+class BoxConfigurator
   def initialize(configurators, name)
     @configurators = configurators
     @name = name

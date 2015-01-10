@@ -1,4 +1,4 @@
-class ConfigurationBuilder
+class ArchiveBuilder
   def initialize(configurator)
     @configurator = configurator
   end

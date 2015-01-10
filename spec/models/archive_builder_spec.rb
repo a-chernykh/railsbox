@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ConfigurationBuilder do
+describe ArchiveBuilder do
   describe '#build' do
     include FakeFS::SpecHelpers
 
@@ -15,7 +15,7 @@ describe ConfigurationBuilder do
       allow(Archiver).to receive(:new) { archiver }
     end
 
-    let(:configurator) { double('Configurator').as_null_object }
+    let(:configurator) { double('BoxConfigurator').as_null_object }
     let(:archiver) { double('Archiver').as_null_object }
     subject { described_class.new(configurator) }
 

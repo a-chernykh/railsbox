@@ -5,8 +5,8 @@ namespace :integration do
   task copy: :environment do
     include TestHelpers::ParamsFixtures
     test_app_path = '/Users/akhkharu/projects/testapp'
-    configurator = Configurator.from_params(params_fixture)
-    builder = ConfigurationBuilder.new(configurator)
+    configurator = BoxConfigurator.from_params(params_fixture)
+    builder = ArchiveBuilder.new(configurator)
     zip_path = builder.build
     `unzip -o #{zip_path} -d #{test_app_path}`
   end
@@ -40,8 +40,8 @@ namespace :integration do
     }
 
     test_app_path = '/Users/akhkharu/projects/RoadAR-website'
-    configurator = Configurator.from_params(config)
-    builder = ConfigurationBuilder.new(configurator)
+    configurator = BoxConfigurator.from_params(config)
+    builder = ArchiveBuilder.new(configurator)
     zip_path = builder.build
     `unzip -o #{zip_path} -d #{test_app_path}`
   end
