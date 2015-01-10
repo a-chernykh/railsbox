@@ -1,9 +1,13 @@
 .row
-  .col-lg-6
+  .col-lg-4
+    .form-group
+      label for='rails_version' Ruby on Rails version
+      select.form-control id='rails_version' name='box[rails_version]' ng-options='railsVersion.label for railsVersion in railsVersions track by railsVersion.version' ng-model='configuration.rails_version'
+  .col-lg-4
     .form-group
       label for='delayed_job_app_name' Service name
       input.form-control id='delayed_job_app_name' name='box[delayed_job_app_name]' type='text' ng-model='configuration.delayed_job_app_name' ng-disabled='!isActive("delayed_job")'
-  .col-lg-6
+  .col-lg-4
     .form-group
       label for='delayed_job_command' Command to start delayed_job
       input.form-control id='delayed_job_command' name='box[delayed_job_command]' type='text' ng-model='configuration.delayed_job_command' ng-disabled='!isActive("delayed_job")'
