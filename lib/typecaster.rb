@@ -4,10 +4,11 @@ class Typecaster
   end
 
   def typecasted
+    result = {}
     arr = @attrs.map do |k, v|
       v = v == 'true' if ['true', 'false'].include?(v)
-      [k, v]
+      result[k] = v
     end
-    Hash[*arr.flatten]
+    result
   end
 end
