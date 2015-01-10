@@ -26,6 +26,8 @@ feature 'Virtual boxes', js: true do
   scenario 'Edit box' do
     visit '/'
 
+    uncheck I18n.t('boxes.form.autoconf')
+
     fill_in I18n.t('boxes.form.name'), with: 'myapp'
     fill_in I18n.t('boxes.form.memory'), with: '2048'
 

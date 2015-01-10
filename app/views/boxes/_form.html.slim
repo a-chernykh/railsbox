@@ -28,7 +28,7 @@ a.anchor#vm-settings
                 .form-group
                   label.checkbox-inline
                     input type='checkbox' name='box[autoconf]' value='true' ng-model='configuration.autoconf'
-                    ' Configure VM automatically for best performance
+                    = t('.autoconf')
                     p.small ng-show='configuration.autoconf' VirtualBox will use all of available CPU cores and 1/3 of available RAM. This option is recommended if you are using one virtual machine at a time.
             .row ng-hide='configuration.autoconf'
               .col-lg-4

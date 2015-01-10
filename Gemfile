@@ -27,6 +27,7 @@ gem 'rubyzip', require: 'zip'
 gem 'browser'
 
 gem 'unicorn'
+gem 'rollbar', '~> 1.3.1'
 
 group :development do
   gem 'spring'
