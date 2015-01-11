@@ -12,7 +12,7 @@ You can choose between Ubuntu 12.04 LTS and Ubuntu 14.04 LTS. Base boxes provide
 
 ## Ruby versions
 
-It's possible to install Ruby either with [rvm][] or using [brightbox apt repository][].
+It's possible to install Ruby either with [rvm][], [rbenv][] or using [brightbox apt repository][].
 
 ## Application server
 
@@ -32,6 +32,10 @@ It's possible to install the following databases:
 * sidekiq
 * resque
 * delayed_job
+
+## vim
+
+[vim-sensible][] and [vim-rails][] are automatically installed.
 
 # Future plans
 
@@ -61,3 +65,6 @@ All kind of contributions are always welcomed.
 [homebrew]: http://brew.sh/
 [brew cask]: https://github.com/caskroom/homebrew-cask
 [vagrantcloud]: http://vagrantcloud.com
+[rbenv]: https://github.com/sstephenson/rbenv
+[vim-sensible]: https://github.com/tpope/vim-sensible
+[vim-rails]: https://github.com/tpope/vim-rails
