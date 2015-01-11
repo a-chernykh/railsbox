@@ -2,6 +2,7 @@
 - hosts: all
   roles:
     - base
+    - vim
     - swap
 <% (params[:databases] + params[:background_jobs]).each do |role| -%>
     - <%= role %>
