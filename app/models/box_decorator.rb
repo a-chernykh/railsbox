@@ -16,6 +16,6 @@ class BoxDecorator < SimpleDelegator
   private
 
   def find_by_guest_port(port_number)
-    (vm_ports || {}).values.find { |port| port['guest'] == port_number.to_s }
+    (vm_ports || {}).values.find { |port| port['guest'].try(:to_s) == port_number.to_s }
   end
 end

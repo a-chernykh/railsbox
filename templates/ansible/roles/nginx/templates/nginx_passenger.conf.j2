@@ -4,8 +4,8 @@ server {
   listen 80;
   listen 443 ssl;
 
-  passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
   passenger_enabled on;
+  passenger_app_env {{ rails_env }};
 
   sendfile off;
 

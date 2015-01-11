@@ -6,9 +6,9 @@ angular.module('app.rubyops').classy.controller
     @$.serverTypes = [
       label: 'nginx + unicorn'
       id: 'nginx_unicorn'
-     # ,
-     #  label: 'nginx + passenger'
-     #  id: 'nginx_passenger'
+     ,
+      label: 'nginx + passenger'
+      id: 'nginx_passenger'
     ]
     @$.shareTypes = [ 'NFS', 'VirtualBox' ]
     @$.postgresqlExtensions =

@@ -16,7 +16,10 @@ It's possible to install Ruby either with [rvm][], [rbenv][] or using [brightbox
 
 ## Application server
 
-Currently only [nginx][] in combination with [unicorn][] are supported. Some other servers will be added later.
+Supported servers are:
+
+* [nginx][] and [unicorn][]
+* [nginx][] and [passenger][]
 
 ## Databases
 
@@ -62,6 +65,7 @@ All kind of contributions are always welcomed.
 [brightbox apt repository]: https://www.brightbox.com/docs/ruby/ubuntu/
 [nginx]: http://nginx.org/
 [unicorn]: http://unicorn.bogomips.org/
+[passenger]: https://www.phusionpassenger.com/
 [homebrew]: http://brew.sh/
 [brew cask]: https://github.com/caskroom/homebrew-cask
 [vagrantcloud]: http://vagrantcloud.com

@@ -151,6 +151,7 @@ a.anchor#server
                   ' {{ type.label }}
               p
                 small ng-show='configuration.server_type == "nginx_unicorn"' Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="http://unicorn.bogomips.org/">unicorn</a>. You can control it by running standard upstart commands: <kbd>sudo stop {{ configuration.vm_name }}</kbd> and <kbd>sudo start {{ configuration.vm_name }}</kbd>.
+                small ng-show='configuration.server_type == "nginx_passenger"' Your application will be served by <a href="http://nginx.org/">nginx</a> and <a href="https://www.phusionpassenger.com/">Passenger</a>. You can restart Passenger by running <kbd>touch tmp/restart.txt</kbd> in your application dir or by restarting nginx with <kbd>service nginx restart</kbd>.
 a.anchor#databases
 .row.step.step3 ng-controller='DatabasesController'
   .col-lg-1.step-number.visible-lg-block

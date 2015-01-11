@@ -1,5 +1,5 @@
 describe 'boxes/show.html.slim' do
-  let(:box) { stub_model(Box, secure_id: 'whatever') }
+  let(:box) { stub_model(Box, secure_id: 'whatever', vm_name: 'myapp') }
   let(:os)  { :mac }
 
   before do
@@ -8,6 +8,34 @@ describe 'boxes/show.html.slim' do
   end
 
   it 'has box http URL' do
+    allow(box).to receive(:vm_ports).and_return({
+      '0' => { 'guest' => 80, 'host' => 8080 },
+      '1' => { 'guest' => 443, 'host' => 8081 },
+    })
+    render
+    expect(rendered).to include 'http://localhost:8080'
+  end
+
+  describe 'by server type' do
+    before { allow(box).to receive(:server_type).and_return server_type }
+
+    context 'nginx and unicorn' do
+      let(:server_type) { 'nginx_unicorn' }
+
+      it 'includes unicorn control commands' do
+        render
+        expect(rendered).to include 'sudo start myapp'
+      end
+    end
+
+    context 'nginx and passenger' do
+      let(:server_type) { 'nginx_passenger' }
+
+      it 'includes passenger control commands' do
+        render
+        expect(rendered).to include 'touch tmp/restart.txt'
+      end
+    end
   end
 
   describe 'by operating system' do
