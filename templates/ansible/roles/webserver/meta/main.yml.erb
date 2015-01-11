@@ -1,11 +1,10 @@
 ---
 dependencies:
   - ruby
-<% if params[:server_type] == 'nginx_unicorn' -%>
-  - nginx
-  - unicorn
-<% end %>
 <% if params[:server_type] == 'nginx_passenger' -%>
   - passenger
   - nginx
+<% else %>
+  - nginx
+  - unicorn
 <% end %>

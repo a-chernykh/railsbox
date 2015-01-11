@@ -106,20 +106,21 @@ a.anchor#app-settings
           .col-lg-2
             label Install Ruby with
             .form-group
-              .radio ng-repeat='k in ["rvm", "package"]'
+              .radio ng-repeat='k in ["rvm", "rbenv", "package"]'
                 label
                   input name='box[ruby_install]' type='radio' value='{{ k }}' ng-model='configuration.ruby_install'
                   ' {{ rubyInstalls[k].label }}
           .col-lg-5
             .form-group
               label for='ruby_version' Ruby version
-              p ng-show='configuration.ruby_install == "package"'
-                small ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository. 
-              p ng-show='configuration.ruby_install == "rvm"'
-                small ruby will be installed with <a href="https://rvm.io/">RVM</a>.
+
+              p.small ng-show='configuration.ruby_install == "package"' ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository.
+              p.small ng-show='configuration.ruby_install == "rbenv"' ruby will be installed with <a href="https://github.com/sstephenson/ruby-build">ruby-build</a> and version will be managed with <a href="https://github.com/sstephenson/rbenv">rbenv</a>.
+              p.small ng-show='configuration.ruby_install == "rvm"' ruby will be installed with <a href="https://rvm.io/">RVM</a>.
+
               select.form-control id='ruby_version' name='box[ruby_version]' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[configuration.ruby_install].rubies track by rubyVersion.version' ng-model='configuration.ruby_version'
           .col-lg-5
-            .form-group ng-show='configuration.ruby_install == "rvm"'
+            .form-group ng-show='["rvm", "rbenv"].indexOf(configuration.ruby_install) > -1'
               label for='manual_ruby_version' Other version
               p
                 small Specify custom ruby version

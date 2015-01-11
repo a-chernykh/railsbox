@@ -25,3 +25,14 @@ rvm1_symlink_binaries:
 rvm1_symlink_to: '/usr/local/bin'
 rvm1_rubies:
   - "{{ rvm1_default_ruby_version }}"
+
+rbenv_repo: https://github.com/sstephenson/rbenv.git
+rbenv_version: master
+rbenv_path: '{{ user_home_path }}/.rbenv'
+rbenv_bin: '{{ rbenv_path }}/bin/rbenv'
+rbenv_plugins_path: '{{ rbenv_path }}/plugins'
+rbenv_plugins:
+  - name: ruby-build
+    git: https://github.com/sstephenson/ruby-build.git
+    version: master
+rbenv_ruby_version: '{{ manual_ruby_version or ruby_version }}'

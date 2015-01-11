@@ -4,3 +4,6 @@
 
 - include: rvm.yml
   when: ruby_install == 'rvm'
+
+- include: rbenv.yml
+  when: ruby_install == 'rbenv'

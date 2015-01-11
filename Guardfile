@@ -78,8 +78,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(%r{^templates/.+\.erb}) { "#{rspec.spec_dir}/models" }
 end
 
-guard 'rake', :task => 'integration:copy' do
+guard 'rake', :task => 'integration:roadar' do
   watch(%r{^templates/.+})
   watch('lib/tasks/integration.rake')
-  watch('spec/support/test_helpers/params_fixtures.rb')
 end

@@ -17,6 +17,8 @@ rails_env: development
 user_name: vagrant
 group_name: vagrant
 
+user_home_path: '/home/{{ user_name }}'
+
 ssl_certificate_path: /etc/nginx/ssl/<%= params[:server_name] %>.crt
 ssl_certificate_key_path: /etc/nginx/ssl/<%= params[:server_name] %>.key
 

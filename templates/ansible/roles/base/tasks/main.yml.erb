@@ -23,6 +23,12 @@
   apt: name={{ item }}
   with_items: packages
 
+- name: Create application group
+  group: name={{ group_name }}
+
+- name: Create application user
+  user: name={{ user_name }} group={{ group_name }} shell=/bin/bash home={{ user_home_path }}
+
 - name: Setup script to read application environment
   template: src=read_environment.sh.j2 dest=/etc/profile.d/read_environment.sh
   notify:
@@ -30,3 +36,9 @@
 <% params[:background_jobs].each do |job| -%>
     - restart <%= job %>
 <% end %>
+
+- name: Create profile.d directory
+  file: path={{ profile_d_path }} state=directory owner={{ user_name }} group={{ group_name }}
+
+- name: Create ~/.bash_profile which loads all from ~/profile.d
+  template: src=bash_profile.j2 dest={{ user_home_path }}/.bash_profile owner={{ user_name }} group={{ group_name }}

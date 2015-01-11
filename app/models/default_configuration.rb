@@ -18,7 +18,7 @@ class DefaultConfiguration
       server_name: 'localhost',
       rails_version: '4',
       ruby_install: 'rvm',
-      ruby_version: '2.1.5',
+      ruby_version: '2.2.0',
       environment_file: '/vagrant/.envrc',
       databases: ['postgresql'],
       background_jobs: [],
