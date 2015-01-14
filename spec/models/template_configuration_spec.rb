@@ -34,6 +34,11 @@ describe TemplateConfiguration do
         expect(File).not_to exist(File.join(dir, 'Vagrantfile.erb'))
       end
 
+      it 'does not copies partials' do
+        expect(File).not_to exist(File.join(dir, '_vagrant_plugins'))
+        expect(File).not_to exist(File.join(dir, '_vagrant_plugins.erb'))
+      end
+
       context 'Vagrantfile' do
         let(:file) { self.class.description }
 

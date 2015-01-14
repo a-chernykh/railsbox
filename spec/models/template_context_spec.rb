@@ -25,4 +25,12 @@ describe TemplateContext do
       it { should eq 'passenger' }
     end
   end
+
+  describe '#render' do
+    subject(:rendered) { context.render 'vagrant_plugins' }
+
+    it 'renders given partial' do
+      expect(rendered).to include 'require_plugins'
+    end
+  end
 end
