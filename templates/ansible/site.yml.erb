@@ -10,6 +10,7 @@
     <% end %>
   roles:
     - base
+    - ruby
     - vim
     - webserver
 
@@ -19,6 +20,7 @@
     - include: roles/<%= server_role %>/handlers/main.yml
   roles:
     - base
+    - ruby
     - <%= bg %>
 <% end %>
 

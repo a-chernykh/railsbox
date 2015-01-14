@@ -1,4 +1,4 @@
 ---
 - name: restart sidekiq
   service: name={{ sidekiq_app_name }} state=restarted
-  when: "'sidekiq' in group_names"
+  when: sidekiq|default(false)

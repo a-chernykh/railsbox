@@ -1,4 +1,4 @@
 ---
 - name: restart delayed_job
   service: name={{ delayed_job_app_name }} state=restarted
-  when: "'delayed_job' in group_names"
+  when: delayed_job|default(false)

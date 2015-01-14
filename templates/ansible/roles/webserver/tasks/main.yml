@@ -1,8 +1,0 @@
----
-- name: Install bundler
-  command: /bin/bash -l -c 'gem install bundler --no-ri --no-rdoc' chdir={{ app_path }}
-  sudo: no
-
-- name: bundle install
-  command: /bin/bash -l -c 'bundle install' chdir={{ app_path }}
-  sudo: no

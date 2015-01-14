@@ -1,4 +1,4 @@
 ---
 - name: restart resque
   service: name={{ resque_app_name }} state=restarted
-  when: "'resque' in group_names"
+  when: resque|default(false)
