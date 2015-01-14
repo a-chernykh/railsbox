@@ -3,6 +3,7 @@ module TestHelpers
     def params_fixture
       { databases: %w(postgresql mysql redis),
         background_jobs: %w(delayed_job sidekiq),
+        server_type: 'nginx_unicorn',
         vm_name: 'testapp',
         vm_os: 'ubuntu/trusty64',
         vm_memory: 1024,

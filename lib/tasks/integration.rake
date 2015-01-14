@@ -16,6 +16,7 @@ namespace :integration do
       databases: %w(postgresql redis),
       background_jobs: %w(sidekiq),
       autoconf: true,
+      docker: true,
       vm_name: 'roadar',
       vm_os: 'ubuntu/trusty64-prepackaged',
       vm_shared_directory: '/vagrant',

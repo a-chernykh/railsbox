@@ -76,9 +76,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = 'ansible/site.yml'
       ansible.sudo = true
       ansible.groups = {
-        'webservers'           => %w(<%= params[:vm_name] %>),
-        'dbservers'            => %w(<%= params[:vm_name] %>),
-        'development:children' => %w(webservers dbservers)
+        'application' => %w(<%= params[:vm_name] %>),
+        'vm' => %w(<%= params[:vm_name] %>),
+        <% roles.each do |role| -%>
+        '<%= role %>' => %w(<%= params[:vm_name] %>),
+        <% end %>
+        'development:children' => %w(application vm <%= roles.join(' ') %>),
       }
       ansible.tags = ENV['TAGS']
     end

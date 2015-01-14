@@ -9,7 +9,8 @@ class BoxConfigurator
       background_jobs: [],
       vm_ports: {},
       packages: [],
-      manual_ruby_version: nil }
+      manual_ruby_version: nil,
+      server_type: 'nginx_unicorn', }
   end
 
   def self.from_params(params)

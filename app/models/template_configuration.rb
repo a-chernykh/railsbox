@@ -8,7 +8,7 @@ class TemplateConfiguration < BaseConfiguration
       target_path.gsub!('.erb', '')
       template = Tilt.new source_path
       File.open(target_path, 'w') do |f|
-        f.write template.render(Object.new, params: @params)
+        f.write template.render(TemplateContext.new(@params), params: @params)
       end
       FileUtils.rm_f source_path
     end
