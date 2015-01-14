@@ -5,17 +5,24 @@ Vagrant.require_version '>= 1.5'
 
 VAGRANTFILE_API_VERSION = '2'
 
-needs_restart = false
-plugins = {
-  'vagrant-bindfs' => '0.3.2',
-}
-plugins.each do |plugin, version|
-  unless Vagrant.has_plugin?(plugin)
-    system("vagrant plugin install #{plugin} --plugin-version #{version}") || exit!
+def require_plugins(plugins = {})
+  needs_restart = false
+  plugins.each do |plugin, version|
+    next if Vagrant.has_plugin?(plugin)
+    cmd =
+      [
+        'vagrant plugin install',
+        plugin
+      ]
+    cmd << "--plugin-version #{version}" if version
+    system(cmd.join(' ')) || exit!
     needs_restart = true
   end
   exit system('vagrant', *ARGV) if needs_restart
 end
+
+require_plugins \
+  'vagrant-bindfs' => '0.3.2'
 
 def ansible_installed?
   require 'mkmf'
