@@ -82,3 +82,6 @@
     force: yes
   when: not '--user-install' in rvm1_install_flags
   with_items: rvm1_symlink_binaries
+
+- name: Create rvm.sh
+  template: src=rvm.sh.j2 dest={{ profile_d_path }}/rvm.sh owner={{ user_name }} group={{ group_name }}
