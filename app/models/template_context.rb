@@ -16,6 +16,15 @@ class TemplateContext
     @params[:server_type].sub 'nginx_', ''
   end
 
+  def docker_ports_for(role)
+    port = Databases.port_for(role)
+    if port
+      [%Q('#{port}:#{port}')]
+    else
+      []
+    end
+  end
+
   private
 
   def partial_path(partial)

@@ -12,7 +12,7 @@ class CopyConfiguration < BaseConfiguration
   private
 
   def optional_roles
-    @optional_roles ||= Box.databases.map(&:id) + Box.background_jobs.map(&:id)
+    @optional_roles ||= Databases.list.map(&:id) + Box.background_jobs.map(&:id)
   end
 
   def selected_roles

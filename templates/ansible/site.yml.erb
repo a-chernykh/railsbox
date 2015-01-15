@@ -3,6 +3,10 @@
   roles:
     - swap
 
+- hosts: dockerhost
+  roles:
+    - docker
+
 - hosts: application
   handlers:
     <% params[:background_jobs].each do |bg| -%>

@@ -1,0 +1,5 @@
+---
+docker_pkg_name: lxc-docker
+apt_key_url: http://get.docker.io/gpg
+apt_key_sig: A88D21E9
+apt_repository: deb http://get.docker.io/ubuntu docker main

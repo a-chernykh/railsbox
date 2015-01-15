@@ -33,7 +33,7 @@ group :development do
   gem 'spring'
   gem 'quiet_assets'
   gem 'guard-rspec', require: false
-  gem 'guard-rake'
+  gem 'guard-shell'
   gem 'terminal-notifier-guard'
 end
 

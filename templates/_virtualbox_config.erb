@@ -1,21 +1,21 @@
-config.vm.provider :virtualbox do |vb|
-  <% if params[:autoconf] -%>
-  host = RbConfig::CONFIG["host_os"]
+  config.vm.provider :virtualbox do |vb|
+    <% if params[:autoconf] -%>
+    host = RbConfig::CONFIG["host_os"]
 
-  if host =~ /darwin/ # OS X
-    # sysctl returns bytes, convert to MB
-    vb.memory = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 3
-    vb.cpus = `sysctl -n hw.ncpu`.to_i
-  elsif host =~ /linux/ # Linux
-    # meminfo returns kilobytes, convert to MB
-    vb.memory = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024 / 2
-    vb.cpus = `nproc`.to_i
+    if host =~ /darwin/ # OS X
+      # sysctl returns bytes, convert to MB
+      vb.memory = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 3
+      vb.cpus = `sysctl -n hw.ncpu`.to_i
+    elsif host =~ /linux/ # Linux
+      # meminfo returns kilobytes, convert to MB
+      vb.memory = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024 / 2
+      vb.cpus = `nproc`.to_i
+    end
+    <% else %>
+    vb.memory = <%= params[:vm_memory] %>
+    vb.cpus = <%= params[:vm_cores] %>
+    <% end %>
+
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
-  <% else %>
-  vb.memory = <%= params[:vm_memory] %>
-  vb.cpus = <%= params[:vm_cores] %>
-  <% end %>
-
-  vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-  vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-end
