@@ -1,4 +1,7 @@
 ---
+- name: Install libffi-dev
+  apt: name=libffi-dev
+
 - name: Clone rbenv repository to ~/.rbenv
   git: repo={{ rbenv_repo }} dest={{ rbenv_path }} version={{ rbenv_version }} accept_hostkey=yes update=no
   sudo_user: '{{ user_name }}'
