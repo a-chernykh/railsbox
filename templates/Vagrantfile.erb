@@ -25,7 +25,7 @@ Vagrant.configure('2') do |config|
   containers.each do |opts|
     config.vm.define opts[:name] do |container|
       container.vm.provider 'docker' do |d|
-        d.name                = '<%= opts[:name] %>'
+        d.name                = opts[:name]
         d.vagrant_vagrantfile = 'Vagrantfile.host'
         d.cmd                 = ['/sbin/my_init', '--enable-insecure-key']
         d.image               = 'phusion/baseimage'
@@ -33,12 +33,12 @@ Vagrant.configure('2') do |config|
         d.has_ssh             = true
       end
 
-      if %w(application worker).include?(opts[:name])
+      if %w(application <%= params[:background_jobs].join(' ') %>).include?(opts[:name])
         # We need to use NFS + bindfs combination here because NFS gives adequate performance, but does
-        # not allows to change the ownership of synced directory. binfs will rebind the directory with
+        # not allows to change the ownership of synced directory. bindfs will rebind the directory with
         # correct permissions.
-        container.vm.synced_folder '../..', '/jlor', type: 'nfs'
-        container.bindfs.bind_folder '/jlor', '/jlor'
+        container.vm.synced_folder '../', '/vagrant', type: 'nfs'
+        container.bindfs.bind_folder '/vagrant', '/vagrant'
       end
 
       container.ssh.username = "root"
@@ -48,6 +48,7 @@ Vagrant.configure('2') do |config|
         'grep -q dockerhost /etc/hosts || (echo `/sbin/ip route|awk \'/default/ { print  $3 }\'` dockerhost >> /etc/hosts) &&
           apt-get update &&
           apt-get install -y python'
+
       container.vm.provision 'ansible' do |ansible|
         ansible.playbook = '../ansible/site.yml'
 
@@ -85,7 +86,6 @@ Vagrant.configure('2') do |config|
   end
 
   config.ssh.forward_agent = true
-<% end %>
 
   if ansible_installed?
     config.vm.provision 'ansible' do |ansible|
@@ -106,4 +106,5 @@ Vagrant.configure('2') do |config|
       config.vm.provision 'shell', :path => script, :privileged => false
     end
   end
+<% end %>
 end
