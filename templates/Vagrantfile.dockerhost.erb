@@ -13,7 +13,7 @@ Vagrant.configure('2') do |config|
   config.vm.define 'default' do |machine|
     machine.vm.hostname = 'dockerhost'
     <% params[:vm_ports].each_value do |port| -%>
-    machine.vm.network 'forwarded_port', 'guest' => <%= port[:guest] %>, 'host' => <%= port[:host] %>
+    machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
     <% end %>
   end
 

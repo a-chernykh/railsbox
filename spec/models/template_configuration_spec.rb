@@ -60,7 +60,7 @@ describe TemplateConfiguration do
         end
 
         it 'sets forwarded port' do
-          expect(output).to include %Q(vm.network 'forwarded_port', 'guest' => 80, 'host' => 8080)
+          expect(output).to include %Q(vm.network 'forwarded_port', :guest => 80, :host => 8080)
         end
       end
 

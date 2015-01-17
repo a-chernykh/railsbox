@@ -1,7 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+<% if params[:docker] -%>
+Vagrant.require_version '>= 1.7'
+<% else -%>
 Vagrant.require_version '>= 1.5'
+<% end %>
 
 <%= render 'vagrant_plugins' %>
 
@@ -26,7 +30,7 @@ Vagrant.configure('2') do |config|
     config.vm.define opts[:name] do |container|
       container.vm.provider 'docker' do |d|
         d.name                = opts[:name]
-        d.vagrant_vagrantfile = 'Vagrantfile.host'
+        d.vagrant_vagrantfile = 'Vagrantfile.dockerhost'
         d.cmd                 = ['/sbin/my_init', '--enable-insecure-key']
         d.image               = 'phusion/baseimage'
         d.ports               = opts[:ports]
@@ -50,7 +54,7 @@ Vagrant.configure('2') do |config|
           apt-get install -y python'
 
       container.vm.provision 'ansible' do |ansible|
-        ansible.playbook = '../ansible/site.yml'
+        ansible.playbook = 'ansible/site.yml'
 
         ansible.groups = {}
         opts[:groups].each do |group|
