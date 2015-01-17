@@ -3,7 +3,7 @@
   apt: name=libffi-dev
 
 - name: Clone rbenv repository to ~/.rbenv
-  git: repo={{ rbenv_repo }} dest={{ rbenv_path }} version={{ rbenv_version }} accept_hostkey=yes update=no
+  git: repo={{ rbenv_repo }} dest={{ rbenv_path }} version={{ rbenv_version }} accept_hostkey=yes
   sudo_user: '{{ user_name }}'
 
 - name: Create rbenv.sh
@@ -13,7 +13,7 @@
   file: path={{ rbenv_plugins_path }} state=directory owner={{ user_name }} group={{ group_name }}
 
 - name: Install plugins
-  git: repo={{ item.git }} dest={{ rbenv_plugins_path }}/{{ item.name }} version={{ item.version }} accept_hostkey=yes update=no
+  git: repo={{ item.git }} dest={{ rbenv_plugins_path }}/{{ item.name }} version={{ item.version }} accept_hostkey=yes
   with_items: rbenv_plugins
 
 - name: Check if ruby installed
