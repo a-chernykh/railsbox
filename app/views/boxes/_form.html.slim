@@ -24,12 +24,18 @@ a.anchor#vm-settings
                       span data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}' {{ v.label }}
                       input ng-repeat='package in v.packages' type='hidden' name='box[packages][]' value='{{ package }}' ng-disabled='!v.selected'
             .row
-              .col-lg-12
+              .col-lg-6
                 .form-group
                   label.checkbox-inline
                     input type='checkbox' name='box[autoconf]' value='true' ng-model='configuration.autoconf'
                     = t('.autoconf')
                     p.small ng-show='configuration.autoconf' VirtualBox will use all of available CPU cores and 1/3 of available RAM. This option is recommended if you are using one virtual machine at a time.
+              .col-lg-6
+                .form-group
+                  label.checkbox-inline
+                    input type='checkbox' name='box[docker]' value='true' ng-model='configuration.docker'
+                    = t('.docker')
+                    p.small Deploy all services to <a href="https://www.docker.com/">Docker</a> containers. <a href="https://github.com/phusion/baseimage-docker">baseimage-docker</a> will be used.
             .row ng-hide='configuration.autoconf'
               .col-lg-4
                 .form-group
