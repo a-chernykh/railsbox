@@ -32,7 +32,7 @@ Vagrant.configure('2') do |config|
         d.name                = opts[:name]
         d.vagrant_vagrantfile = 'Vagrantfile.dockerhost'
         d.cmd                 = ['/sbin/my_init', '--enable-insecure-key']
-        d.image               = 'phusion/baseimage'
+        d.image               = 'andreychernih/railsbox-baseimage'
         d.ports               = opts[:ports]
         d.has_ssh             = true
       end
@@ -41,17 +41,12 @@ Vagrant.configure('2') do |config|
         # We need to use NFS + bindfs combination here because NFS gives adequate performance, but does
         # not allows to change the ownership of synced directory. bindfs will rebind the directory with
         # correct permissions.
-        container.vm.synced_folder '../', '/vagrant', type: 'nfs'
-        container.bindfs.bind_folder '/vagrant', '/vagrant'
+        # container.vm.synced_folder '../', '/vagrant', type: 'nfs'
+        # container.bindfs.bind_folder '/vagrant', '/vagrant'
       end
 
       container.ssh.username = "root"
       container.ssh.private_key_path = "phusion.key"
-
-      container.vm.provision 'shell', inline: \
-        'grep -q dockerhost /etc/hosts || (echo `/sbin/ip route|awk \'/default/ { print  $3 }\'` dockerhost >> /etc/hosts) &&
-          apt-get update &&
-          apt-get install -y python'
 
       container.vm.provision 'ansible' do |ansible|
         ansible.playbook = 'ansible/site.yml'

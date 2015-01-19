@@ -18,16 +18,11 @@ Vagrant.configure('2') do |config|
   end
 
   config.ssh.forward_agent = true
+  config.vm.provision 'docker'
 
-  if ansible_installed?
-    config.vm.provision 'ansible' do |ansible|
-      ansible.playbook = 'ansible/site.yml'
-      ansible.sudo = true
-      ansible.groups = {
-        'vm' => %w(default),
-        'dockerhost' => %w(default),
-      }
-      ansible.tags = ENV['TAGS']
-    end
-  end
+  # The following line terminates all ssh connections. Therefore
+  # Vagrant will be forced to reconnect.
+  # That's a workaround to have the docker command in the PATH
+  config.vm.provision "shell", inline:
+    "ps aux | grep 'sshd:' | awk '{print $2}' | xargs kill"
 end

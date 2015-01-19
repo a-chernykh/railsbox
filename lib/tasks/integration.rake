@@ -18,7 +18,7 @@ namespace :integration do
       autoconf: true,
       docker: true,
       vm_name: 'roadar',
-      vm_os: 'ubuntu/trusty64-prepackaged',
+      vm_os: 'ubuntu/trusty64',
       vm_shared_directory: '/vagrant',
       vm_share_type: 'NFS',
       vm_memory: 1500,
