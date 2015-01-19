@@ -43,6 +43,7 @@ Vagrant.configure('2') do |config|
 
       container.vm.provision 'ansible' do |ansible|
         ansible.playbook = 'ansible/site.yml'
+        ansible.sudo = true
 
         ansible.groups = {}
         opts[:groups].each do |group|
