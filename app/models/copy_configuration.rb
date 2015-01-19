@@ -5,11 +5,30 @@ class CopyConfiguration < BaseConfiguration
 
   def save(output_dir)
     process_recursive(Templates::ROOT_PATH, '', output_dir) do |source_path, target_path|
-      FileUtils.cp source_path, target_path
+      custom_rules.each do |k, v|
+        if source_path.include?(k)
+          target_path = v ? target_path.gsub(k, v) : nil
+          break
+        end
+      end
+
+      FileUtils.cp source_path, target_path unless target_path.nil?
     end
   end
 
   private
+
+  def custom_rules
+    if @params[:docker]
+      { 'Vagrantfile.docker.erb' => 'Vagrantfile.erb',
+        'Vagrantfile.single.erb' => nil }.freeze
+    else
+      { 'Vagrantfile.single.erb'     => 'Vagrantfile.erb',
+        'Vagrantfile.docker.erb'     => nil,
+        'Vagrantfile.dockerhost.erb' => nil,
+        'ansible/roles/docker'       => nil }.freeze
+    end
+  end
 
   def optional_roles
     @optional_roles ||= Databases.list.map(&:id) + Box.background_jobs.map(&:id)

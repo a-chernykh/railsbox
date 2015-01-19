@@ -5,12 +5,16 @@ describe CopyConfiguration do
     before { @dir = Dir.mktmpdir }
     before { subject.save(@dir) }
 
-    %w(.gitignore ansible/roles/swap/tasks/main.yml Vagrantfile.erb).each do |file|
+    def source_contents(file)
+      input_file = File.join(Templates::ROOT_PATH, file)
+      IO.read(input_file)
+    end
+
+    %w(.gitignore ansible/roles/swap/tasks/main.yml).each do |file|
       it "copies #{file}" do
-        input_file = File.join(Templates::ROOT_PATH, file)
         target_file = File.join(@dir, file)
         expect(File).to exist(target_file)
-        expect(IO.read(input_file)).to eq IO.read(target_file)
+        expect(source_contents(file)).to eq IO.read(target_file)
       end
     end
 
@@ -20,6 +24,46 @@ describe CopyConfiguration do
 
     it 'does copy roles which are included' do
       expect(File).to exist(File.join(@dir, 'ansible/roles/postgresql/tasks/main.yml'))
+    end
+
+    describe 'docker' do
+      subject { described_class.new(params_fixture.merge(docker: docker)) }
+
+      context '== true' do
+        let(:docker) { true }
+
+        it 'copies Vagrantfile.erb from docker source' do
+          expect(IO.read(File.join(@dir, 'Vagrantfile.erb'))).to eq(source_contents('Vagrantfile.docker.erb'))
+        end
+
+        it 'does not copies Vagrantfile.single.erb' do
+          expect(File).not_to exist(File.join(@dir, 'Vagrantfile.single.erb'))
+        end
+
+        it 'does not copies Vagrantfile.docker.erb' do
+          expect(File).not_to exist(File.join(@dir, 'Vagrantfile.docker.erb'))
+        end
+
+        it 'copies Vagrantfile.dockerhost.erb' do
+          expect(IO.read(File.join(@dir, 'Vagrantfile.dockerhost.erb'))).to eq(source_contents('Vagrantfile.dockerhost.erb'))
+        end
+      end
+
+      context '== false' do
+        let(:docker) { false }
+
+        it 'copies Vagrantfile.erb from vagrant source' do
+          expect(IO.read(File.join(@dir, 'Vagrantfile.erb'))).to eq(source_contents('Vagrantfile.single.erb'))
+        end
+
+        it 'does not copies Vagrantfile.docker.erb' do
+          expect(File).not_to exist(File.join(@dir, 'Vagrantfile.docker.erb'))
+        end
+
+        it 'does not copies Vagrantfile.dockerhost.erb' do
+          expect(File).not_to exist(File.join(@dir, 'Vagrantfile.dockerhost.erb'))
+        end
+      end
     end
 
     after { FileUtils.remove_entry_secure @dir }

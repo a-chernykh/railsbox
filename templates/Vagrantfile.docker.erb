@@ -1,18 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-<% if params[:docker] -%>
 Vagrant.require_version '>= 1.7'
-<% else -%>
-Vagrant.require_version '>= 1.5'
-<% end %>
 
 <%= render 'vagrant_plugins' %>
 
 Vagrant.configure('2') do |config|
-
-<% if params[:docker] %>
-
   containers = [
     { :name   => 'application',
       :ports  => ['80:80', '443:443'],
@@ -63,47 +56,4 @@ Vagrant.configure('2') do |config|
       end
     end
   end
-
-<% else %>
-<%= render 'virtualbox_config' %>
-
-  config.vm.box = '<%= params[:vm_os] %>'
-
-  config.vm.network 'private_network', type: 'dhcp'
-  config.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<% if params[:vm_share_type] == 'NFS' -%>, type: 'nfs'<% end %>
-  config.vm.synced_folder 'ansible', '/ansible'<% if params[:vm_share_type] == 'NFS' -%>, :type => 'nfs'<% end %>
-  <% if params[:vm_share_type] == 'NFS' -%>
-  config.bindfs.bind_folder '/vagrant', '/vagrant'
-  config.bindfs.bind_folder '/ansible', '/ansible'
-  <% end %>
-
-  config.vm.define '<%= params[:vm_name] %>' do |machine|
-    machine.vm.hostname = '<%= params[:server_name] %>'
-    <% params[:vm_ports].each_value do |port| -%>
-    machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
-    <% end %>
-  end
-
-  config.ssh.forward_agent = true
-
-  if ansible_installed?
-    config.vm.provision 'ansible' do |ansible|
-      ansible.playbook = 'ansible/site.yml'
-      ansible.sudo = true
-      ansible.groups = {
-        'application' => %w(<%= params[:vm_name] %>),
-        'vm' => %w(<%= params[:vm_name] %>),
-        <% roles.each do |role| -%>
-        '<%= role %>' => %w(<%= params[:vm_name] %>),
-        <% end %>
-        'development:children' => %w(application vm <%= roles.join(' ') %>),
-      }
-      ansible.tags = ENV['TAGS']
-    end
-  else
-    Dir['shell/*.sh'].each do |script|
-      config.vm.provision 'shell', :path => script, :privileged => false
-    end
-  end
-<% end %>
 end
