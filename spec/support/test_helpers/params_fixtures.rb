@@ -12,6 +12,7 @@ module TestHelpers
           '0' => { guest: 80, host: 8080 },
           '1' => { guest: 443, host: 8081 },
         },
+        vm_ip: '192.168.20.50',
         server_name: 'localhost',
         ruby_install: 'rvm',
         ruby_version: '2.1.2',

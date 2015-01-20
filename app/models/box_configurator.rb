@@ -4,15 +4,8 @@ class BoxConfigurator
     @name = name
   end
 
-  def self.default_params
-    { databases: [],
-      background_jobs: [],
-      vm_ports: {},
-      packages: [],
-      manual_ruby_version: nil }
-  end
-
   def self.from_params(params)
+    default_params = DefaultConfiguration.base
     params = ActiveSupport::HashWithIndifferentAccess.new(default_params.merge(params.symbolize_keys))
     new([ CopyConfiguration.new(params),
           TemplateConfiguration.new(params) ], params[:vm_name])

@@ -8,7 +8,7 @@ class BoxesController < ApplicationController
   end
 
   def default
-    render json: DefaultConfiguration.new.get
+    render json: DefaultConfiguration.get
   end
 
   def show

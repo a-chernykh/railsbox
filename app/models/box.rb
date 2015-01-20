@@ -25,7 +25,7 @@ class Box < ActiveRecord::Base
   end
 
   def as_json(opts = {})
-    params
+    DefaultConfiguration.base.merge(params.symbolize_keys)
   end
 
   private
