@@ -34,6 +34,7 @@ en:
       memory: 'Memory, Mb'
       autoconf: 'Configure VM automatically for best performance'
       add_database: 'Add database'
+      docker: 'Docker (experimental version)'
     show:
       download: 'Download'
       edit: 'Edit'
