@@ -169,7 +169,8 @@ a.anchor#databases
       .panel-body
         .dropdown ng-hide='allActive()'
           button.btn.btn-lg.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='databasesMenu'
-            ' Add database
+            = t('.add_database')
+            ' 
             span.caret
           ul.dropdown-menu role='menu' aria-labelledby='databasesMenu'
             li ng-repeat='database in allObjects' role='presentation' ng-hide='isActive(database.id)'
