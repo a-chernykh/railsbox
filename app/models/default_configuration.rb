@@ -1,5 +1,5 @@
 class DefaultConfiguration
-  def get
+  def self.get
     app_name = 'myapp'
     user_name = 'vagrant'
     { vm_name: app_name,
@@ -10,11 +10,14 @@ class DefaultConfiguration
       vm_cores: '2',
       vm_shared_directory: '/vagrant',
       vm_share_type: 'NFS',
+      vm_ip: '192.168.20.50',
       vm_ports: {
         '0' => { guest: 80,  host: 8080 },
         '1' => { guest: 443, host: 8081 }
       },
       package_bundles: [ 'graphics', 'qt', 'curl' ],
+      packages: [],
+      manual_ruby_version: nil,
       server_name: 'localhost',
       rails_version: '4',
       ruby_install: 'rvm',
@@ -38,5 +41,24 @@ class DefaultConfiguration
       sidekiq_command: 'sidekiq',
       resque_command: 'rake resque:work',
       server_type: 'nginx_unicorn' }
+  end
+
+  # Returns default configuration minimally required to compile
+  # box templates. Includes everything but booleans. Hashes and arrays
+  # are emptied.
+  def self.base
+    @base ||= begin
+      base = get
+      base.each do |k, v|
+        if [true, false].include?(v)
+          base.delete(k)
+        elsif v.is_a?(Array)
+          base[k] = []
+        elsif v.is_a?(Hash)
+          base[k] = {}
+        end
+      end
+      base
+    end
   end
 end

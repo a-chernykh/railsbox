@@ -1,6 +1,8 @@
 describe Box do
   it { should validate_presence_of(:params) }
   it { should_not allow_value('<test').for(:vm_name) }
+  it { should allow_value('my_app').for(:vm_name) }
+  it { should allow_value('my-app').for(:vm_name) }
 
   describe 'secure_id' do
     before { allow(SecureIdGenerator).to receive(:generate) { 'abc123' } }

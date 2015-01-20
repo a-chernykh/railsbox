@@ -10,7 +10,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.box = '<%= params[:vm_os] %>'
 
-  config.vm.network 'private_network', type: 'dhcp'
+  config.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
   config.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<% if params[:vm_share_type] == 'NFS' -%>, type: 'nfs'<% end %>
   config.vm.synced_folder 'ansible', '/ansible'<% if params[:vm_share_type] == 'NFS' -%>, :type => 'nfs'<% end %>
   <% if params[:vm_share_type] == 'NFS' -%>

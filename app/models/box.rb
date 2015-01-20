@@ -3,7 +3,7 @@ class Box < ActiveRecord::Base
 
   validates :params, presence: true
   validates :secure_id, presence: true, uniqueness: true
-  validates :vm_name, format: { with: /\A[a-z0-9.-]+\z/i, allow_nil: true }
+  validates :vm_name, format: { with: /\A[a-z0-9_.-]+\z/i, allow_nil: true }
 
   before_validation :generate_secure_id, on: :create
 
@@ -18,7 +18,7 @@ class Box < ActiveRecord::Base
   end
 
   def as_json(opts = {})
-    params
+    DefaultConfiguration.base.merge(params.symbolize_keys)
   end
 
   private

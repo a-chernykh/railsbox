@@ -8,7 +8,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.box = '<%= params[:vm_os] %>'
 
-  config.vm.network 'private_network', type: 'dhcp'
+  config.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
 
   config.vm.define 'default' do |machine|
     machine.vm.hostname = 'dockerhost'

@@ -10,7 +10,7 @@
   pip: name=psycopg2
 
 - name: Create postgresql user
-  postgresql_user: name={{ postgresql_db_user }} password={{ postgresql_db_password }} role_attr_flags=CREATEDB
+  postgresql_user: name={{ postgresql_db_user }} password={{ postgresql_db_password }} role_attr_flags=CREATEDB,SUPERUSER,CREATEROLE
   sudo_user: postgres
 
 - name: Create postgresql database

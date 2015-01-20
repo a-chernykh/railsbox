@@ -62,6 +62,10 @@ describe TemplateConfiguration do
         it 'sets forwarded port' do
           expect(output).to include %Q(vm.network 'forwarded_port', :guest => 80, :host => 8080)
         end
+
+        it 'sets box ip' do
+          expect(output).to include %Q(config.vm.network 'private_network', ip: '192.168.20.50')
+        end
       end
 
       after { FileUtils.remove_entry_secure dir }

@@ -59,8 +59,9 @@ a.anchor#vm-settings
                   label for='vm_share_type' Share type
                   select.form-control required=true id='vm_share_type' name='box[vm_share_type]' ng-model='configuration.vm_share_type' ng-options='t for t in shareTypes track by t'
               .col-lg-4
-                br
-                p.small It's recommended to use NFS sharing type because it provides better performance.
+                .form-group
+                  label for='vm_ip' IP address
+                  input.form-control required=true type='text' id='vm_ip' name='box[vm_ip]' ng-model='configuration.vm_ip'
 
           .col-lg-4
             label for='new_guest_port' Port forwarding
