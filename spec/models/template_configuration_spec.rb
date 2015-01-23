@@ -18,8 +18,25 @@ describe TemplateConfiguration do
         end
       end
 
+      context 'ansible/site.yml' do
+        let(:file) { self.class.description }
+
+        it 'includes postgresql role' do
+          expect(output).to include %Q(- postgresql)
+        end
+
+        it 'includes sidekiq role' do
+          expect(output).to include %Q(- sidekiq)
+        end
+      end
+
       it 'does not copies files with .erb extension' do
         expect(File).not_to exist(File.join(dir, 'Vagrantfile.erb'))
+      end
+
+      it 'does not copies partials' do
+        expect(File).not_to exist(File.join(dir, '_vagrant_plugins'))
+        expect(File).not_to exist(File.join(dir, '_vagrant_plugins.erb'))
       end
 
       context 'Vagrantfile' do
@@ -43,7 +60,7 @@ describe TemplateConfiguration do
         end
 
         it 'sets forwarded port' do
-          expect(output).to include %Q(vm.network 'forwarded_port', guest: 80, host: 8080)
+          expect(output).to include %Q(vm.network 'forwarded_port', :guest => 80, :host => 8080)
         end
 
         it 'sets box ip' do

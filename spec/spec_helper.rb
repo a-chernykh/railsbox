@@ -78,6 +78,7 @@ RSpec.configure do |config|
 
   config.include TestHelpers::ParamsFixtures
   config.include TestHelpers::ZipContents
+  config.include TestHelpers::BoxTester
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

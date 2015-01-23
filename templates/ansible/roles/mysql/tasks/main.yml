@@ -4,6 +4,8 @@
   with_items:
     - mysql-server
     - libmysqlclient-dev
+    - python-pip
+    - python-dev
 
 - name: Install required Python modules
   pip: name=MySQL-python

@@ -7,13 +7,6 @@ class Box < ActiveRecord::Base
 
   before_validation :generate_secure_id, on: :create
 
-  def self.databases
-    [ OpenStruct.new({ id: 'postgresql', name: 'PostgreSQL' }),
-      OpenStruct.new({ id: 'mysql',      name: 'MySQL' }),
-      OpenStruct.new({ id: 'mongodb',    name: 'MongoDB' }),
-      OpenStruct.new({ id: 'redis',      name: 'Redis' }), ]
-  end
-
   def self.background_jobs
     [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }), 
       OpenStruct.new({ id: 'sidekiq',     name: 'sidekiq' }),

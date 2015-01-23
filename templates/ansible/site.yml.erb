@@ -1,11 +1,37 @@
 ---
+- hosts: vm
+  roles:
+    - swap
+
 - hosts: all
+  gather_facts: no
+  roles:
+    - { role: apt_proxy, when: use_apt_proxy }
+
+- hosts: application
+  handlers:
+    <% params[:background_jobs].each do |bg| -%>
+    - include: roles/<%= bg %>/handlers/main.yml
+    <% end %>
   roles:
     - base
+    - ruby
     - vim
-    - swap
-<% (params[:databases] + params[:background_jobs]).each do |role| -%>
-    - <%= role %>
-<% end %>
     - webserver
-    - dbserver
+
+<% params[:background_jobs].each do |bg| -%>
+- hosts: <%= bg %>
+  handlers:
+    - include: roles/<%= server_role %>/handlers/main.yml
+  roles:
+    - base
+    - ruby
+    - <%= bg %>
+<% end %>
+
+<% params[:databases].each do |db| -%>
+- hosts: <%= db %>
+  roles:
+    - <%= db %>
+
+<% end %>

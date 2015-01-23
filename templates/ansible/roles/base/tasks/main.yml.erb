@@ -18,6 +18,9 @@
     - python-dev
     - htop
     - git
+<% if params[:databases].include?('postgresql') -%>
+    - libpq-dev
+<% end %>
 
 - name: Install additional packages
   apt: name={{ item }}

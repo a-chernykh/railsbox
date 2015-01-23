@@ -5,6 +5,16 @@
     - libpq-dev
     - postgresql
     - postgresql-contrib
+    - python-pip
+    - python-dev
+
+<% if params[:docker] -%>
+- name: Create /etc/my_init.d/postgresql.sh
+  template: src=my_init.sh.j2 dest=/etc/my_init.d/postgresql.sh mode=0755
+
+- name: Start postgresql
+  command: /etc/my_init.d/postgresql.sh
+<% end %>
 
 - name: Install required Python modules
   pip: name=psycopg2

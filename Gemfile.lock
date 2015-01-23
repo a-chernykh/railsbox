@@ -87,13 +87,13 @@ GEM
       pry (>= 0.9.12)
       thor (>= 0.18.1)
     guard-compat (1.2.0)
-    guard-rake (1.0.0)
-      guard
-      rake
     guard-rspec (4.5.0)
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    guard-shell (0.7.1)
+      guard (>= 2.0.0)
+      guard-compat (~> 1.0)
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -260,8 +260,8 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   fakefs
-  guard-rake
   guard-rspec
+  guard-shell
   jbuilder (~> 2.0)
   jquery-rails
   launchy

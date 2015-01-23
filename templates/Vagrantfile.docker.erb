@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_version '>= 1.7'
+
+<%= render 'vagrant_plugins' %>
+
+Vagrant.configure('2') do |config|
+  containers = [
+    { :name   => 'application',
+      :ports  => ['80:80', '443:443'],
+      :groups => %w(application), 
+    },
+    <% roles.each do |role| -%>
+    { :name   => '<%= role %>',
+      :ports  => [<%= docker_ports_for(role).join ', ' %>],
+      :groups => %w(<%= role %>),
+    },
+    <% end %>
+  ]
+
+  containers.each do |opts|
+    config.vm.define opts[:name] do |container|
+      container.vm.provider 'docker' do |d|
+        d.name                = opts[:name]
+        d.vagrant_vagrantfile = 'Vagrantfile.dockerhost'
+        d.cmd                 = ['/sbin/my_init', '--enable-insecure-key']
+        d.image               = 'andreychernih/railsbox-baseimage'
+        d.ports               = opts[:ports]
+        d.has_ssh             = true
+      end
+
+      if %w(application <%= params[:background_jobs].join(' ') %>).include?(opts[:name])
+        # We need to use NFS + bindfs combination here because NFS gives adequate performance, but does
+        # not allows to change the ownership of synced directory. bindfs will rebind the directory with
+        # correct permissions.
+        container.vm.synced_folder '../', '/vagrant', type: 'nfs'
+        # container.bindfs.bind_folder '/vagrant', '/vagrant'
+      end
+
+      container.ssh.username = "root"
+      container.ssh.private_key_path = "phusion.key"
+
+      container.vm.provision 'ansible' do |ansible|
+        ansible.playbook = 'ansible/site.yml'
+        ansible.sudo = true
+
+        ansible.groups = {}
+        opts[:groups].each do |group|
+          ansible.groups[group] = opts[:name]
+        end
+        ansible.groups['development:children'] = [opts[:name]]
+        ansible.groups['docker:children'] = [opts[:name]]
+
+        ansible.tags = ENV['TAGS']
+        # ansible.verbose = 'vvvv'
+      end
+    end
+  end
+end

@@ -1,0 +1,23 @@
+def require_plugins(plugins = {})
+  needs_restart = false
+  plugins.each do |plugin, version|
+    next if Vagrant.has_plugin?(plugin)
+    cmd =
+      [
+        'vagrant plugin install',
+        plugin
+      ]
+    cmd << "--plugin-version #{version}" if version
+    system(cmd.join(' ')) || exit!
+    needs_restart = true
+  end
+  exit system('vagrant', *ARGV) if needs_restart
+end
+
+require_plugins \
+  'vagrant-bindfs' => '0.3.2'
+
+def ansible_installed?
+  require 'mkmf'
+  find_executable 'ansible-playbook'
+end

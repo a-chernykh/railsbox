@@ -1,3 +1,4 @@
 ---
 - name: restart sidekiq
   service: name={{ sidekiq_app_name }} state=restarted
+  when: sidekiq|default(false)

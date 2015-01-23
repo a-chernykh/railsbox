@@ -32,12 +32,6 @@ describe Box do
     end
   end
 
-  describe '.databases' do
-    subject { described_class.databases.map(&:id) }
-
-    it { should include 'postgresql' }
-  end
-
   describe '.background_jobs' do
     subject { described_class.background_jobs.map(&:id) }
 

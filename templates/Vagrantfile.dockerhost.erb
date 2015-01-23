@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_version '>= 1.7'
+
+Vagrant.configure('2') do |config|
+<%= render 'virtualbox_config' %>
+
+  config.vm.box = '<%= params[:vm_os] %>'
+
+  config.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
+
+  config.vm.define 'default' do |machine|
+    machine.vm.hostname = 'dockerhost'
+    <% params[:vm_ports].each_value do |port| -%>
+    machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
+    <% end %>
+  end
+
+  config.ssh.forward_agent = true
+  config.vm.provision 'docker'
+
+  # The following line terminates all ssh connections. Therefore
+  # Vagrant will be forced to reconnect.
+  # That's a workaround to have the docker command in the PATH
+  config.vm.provision "shell", inline:
+    "ps aux | grep 'sshd:' | awk '{print $2}' | xargs kill"
+end

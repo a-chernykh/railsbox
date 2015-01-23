@@ -33,6 +33,9 @@ en:
       name: 'Name'
       memory: 'Memory, Mb'
       autoconf: 'Configure VM automatically for best performance'
+      add_database: 'Add database'
+      add_worker: 'Add worker'
+      docker: 'Docker (experimental version)'
     show:
       download: 'Download'
       edit: 'Edit'

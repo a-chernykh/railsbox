@@ -78,7 +78,9 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(%r{^templates/.+\.erb}) { "#{rspec.spec_dir}/models" }
 end
 
-guard 'rake', :task => 'integration:roadar' do
-  watch(%r{^templates/.+})
-  watch('lib/tasks/integration.rake')
+guard :shell do
+  watch(/.*/) do
+    puts 'Running rake integration:roadar'
+    `rake integration:roadar`
+  end
 end
