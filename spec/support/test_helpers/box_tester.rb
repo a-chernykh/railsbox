@@ -1,6 +1,6 @@
 module TestHelpers
   module BoxTester
-    def download_box(components)
+    def download_box(*components)
       visit '/'
 
       # We don't want vagrant to ask root password (required by NFS)
@@ -62,7 +62,7 @@ module TestHelpers
 
 vagrant is left at #{dir}, please run run this manually to destroy it:
 
-cd #{dir}
+cd #{dir}/railsbox
 vagrant destroy -f
 cd -
 rm -rf #{dir}
