@@ -23,7 +23,7 @@ describe CopyConfiguration do
     end
 
     it 'does copy roles which are included' do
-      expect(File).to exist(File.join(@dir, 'ansible/roles/postgresql/tasks/main.yml'))
+      expect(File).to exist(File.join(@dir, 'ansible/roles/postgresql/tasks/main.yml.erb'))
     end
 
     describe 'docker' do
