@@ -3,14 +3,10 @@
   roles:
     - swap
 
-- hosts: dockerhost
-  roles:
-    - docker
-
 - hosts: all
   gather_facts: no
   roles:
-    - apt_proxy
+    - { role: apt_proxy, when: use_apt_proxy }
 
 - hosts: application
   handlers:

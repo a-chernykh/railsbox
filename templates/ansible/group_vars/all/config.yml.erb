@@ -35,3 +35,5 @@ unicorn_stderr_path: "{{ app_logs_path }}/unicorn.err.log"
 unicorn_stdout_path: "{{ app_logs_path }}/unicorn.log"
 
 ruby_user_name: '{{ "root" if ruby_install == "package" else user_name }}'
+
+use_apt_proxy: false
