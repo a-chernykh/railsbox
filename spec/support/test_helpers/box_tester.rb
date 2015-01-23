@@ -12,6 +12,7 @@ module TestHelpers
           choose 'rbenv'
         when 'rvm'
           choose 'RVM'
+          select '2.1.5', from: 'Ruby version' # precompiled binaries available (faster)
         when 'unicorn'
           choose 'nginx + unicorn'
         when 'postgresql'
@@ -46,6 +47,7 @@ module TestHelpers
             print_left_notice(dir) unless success
             expect(success).to eq true
           
+            require 'open-uri'
             response = open('http://localhost:8080/').read
             expect(response).to eq 'ok'
           ensure
