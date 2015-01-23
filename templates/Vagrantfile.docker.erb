@@ -35,7 +35,7 @@ Vagrant.configure('2') do |config|
         # not allows to change the ownership of synced directory. bindfs will rebind the directory with
         # correct permissions.
         container.vm.synced_folder '../', '/vagrant', type: 'nfs'
-        container.bindfs.bind_folder '/vagrant', '/vagrant'
+        # container.bindfs.bind_folder '/vagrant', '/vagrant'
       end
 
       container.ssh.username = "root"

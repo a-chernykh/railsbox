@@ -5,6 +5,8 @@
     - libpq-dev
     - postgresql
     - postgresql-contrib
+    - python-pip
+    - python-dev
 
 - name: Install required Python modules
   pip: name=psycopg2
