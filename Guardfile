@@ -78,9 +78,11 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(%r{^templates/.+\.erb}) { "#{rspec.spec_dir}/models" }
 end
 
-guard :shell do
-  watch(/.*/) do
-    puts 'Running rake integration:roadar'
-    `rake integration:roadar`
+group :integration do
+  guard :shell do
+    watch(/^templates\/.*/) do
+      puts 'Running rake integration:testapp1'
+      `rake integration:testapp1`
+    end
   end
 end

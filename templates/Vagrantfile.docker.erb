@@ -53,6 +53,7 @@ Vagrant.configure('2') do |config|
         ansible.groups['docker:children'] = [opts[:name]]
 
         ansible.tags = ENV['TAGS']
+        ansible.raw_arguments = ENV['ANSIBLE_ARGS']
         # ansible.verbose = 'vvvv'
       end
     end

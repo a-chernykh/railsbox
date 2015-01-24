@@ -1,18 +1,8 @@
 require File.expand_path('../../../spec/support/test_helpers/params_fixtures', __FILE__)
 
 namespace :integration do
-  desc 'Builds new configuration and copies it to the test_app_path'
-  task copy: :environment do
-    include TestHelpers::ParamsFixtures
-    test_app_path = '/Users/akhkharu/projects/testapp'
-    configurator = BoxConfigurator.from_params(params_fixture)
-    builder = ArchiveBuilder.new(configurator)
-    zip_path = builder.build
-    `unzip -o #{zip_path} -d #{test_app_path}`
-  end
-
-  task roadar: :environment do
-    config = { 
+  task testapp1: :environment do
+    config = {
       databases: %w(postgresql redis),
       background_jobs: %w(sidekiq),
       autoconf: true,
@@ -46,7 +36,7 @@ namespace :integration do
       environment_file: '/vagrant/.envrc'
     }
 
-    test_app_path = '/Users/akhkharu/projects/RoadAR-website'
+    test_app_path = Rails.root.join('spec/fixtures/testapp1')
     configurator = BoxConfigurator.from_params(config)
     builder = ArchiveBuilder.new(configurator)
     zip_path = builder.build
