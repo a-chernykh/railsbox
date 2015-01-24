@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
+gem "i18n-js", ">= 3.0.0.rc8"
 
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-classy'

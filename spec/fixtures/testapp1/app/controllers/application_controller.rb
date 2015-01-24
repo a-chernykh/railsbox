@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def test
     book = Book.create! title: 'Rails'
     BookWorker.perform_async book.id
-    sleep 3
+    sleep 10
     render text: book.reload.title
   end
 end

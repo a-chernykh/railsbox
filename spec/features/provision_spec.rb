@@ -1,11 +1,16 @@
-feature 'Provision boxes', js: true do
+feature 'Provision boxes', js: true, vagrant: true do
   scenario 'rbenv, unicorn, PostgreSQL, redis, sidekiq' do
-    zip_data = download_box 'rbenv', 'unicorn', 'postgresql', 'redis', 'sidekiq'
-    test_box(zip_data, 'testapp1')
+    test_box(app: 'testapp1', 
+             components: ['rbenv', 'unicorn', 'postgresql', 'redis', 'sidekiq'])
   end
 
   scenario 'rvm, unicorn, PostgreSQL, redis, sidekiq' do
-    zip_data = download_box 'rvm', 'unicorn', 'postgresql', 'redis', 'sidekiq'
-    test_box(zip_data, 'testapp1')
+    test_box(app: 'testapp1', 
+             components: ['rvm', 'unicorn', 'postgresql', 'redis', 'sidekiq'])
+  end
+
+  scenario 'system_package, passenger, MySQL, delayed_job' do
+    test_box(app: 'testapp2', 
+             components: ['system_package', 'passenger', 'mysql', 'delayed_job'])
   end
 end

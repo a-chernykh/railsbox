@@ -11,7 +11,6 @@ class BaseConfiguration
       elsif process_file?(full_path)
         target_dir = File.join(output_dir, source_path)
         target_path = File.join(target_dir, f)
-        FileUtils.mkdir_p target_dir unless File.exist?(target_dir)
         yield full_path, target_path
       end
     end

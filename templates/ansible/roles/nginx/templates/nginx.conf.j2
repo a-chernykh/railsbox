@@ -1,6 +1,8 @@
-user www-data;
+user {{ user_name }};
 worker_processes auto;
 pid /run/nginx.pid;
+
+env PATH;
 
 events {
   worker_connections 768;

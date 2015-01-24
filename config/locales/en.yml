@@ -36,6 +36,25 @@ en:
       add_database: 'Add database'
       add_worker: 'Add worker'
       docker: 'Docker (experimental version)'
+      share_type: Share type
+      nfs: NFS
+      virtualbox: VirtualBox
+      graphics_kit: Graphics kit
+      qt_kit: QT kit
+      curl: curl
+      rvm: RVM
+      rbenv: rbenv
+      system_package: System package
+      ruby_version: Ruby version
+      nginx_unicorn: nginx + unicorn
+      nginx_passenger: nginx + passenger
+      mysql: MySQL
+      postgresql: PostgreSQL
+      mongodb: MongoDB
+      redis: Redis
+      sidekiq: sidekiq
+      resque: resque
+      delayed_job: delayed_job
     show:
       download: 'Download'
       edit: 'Edit'

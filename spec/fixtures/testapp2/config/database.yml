@@ -1,0 +1,10 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+
+development:
+  <<: *default
+  host: 192.168.59.103
+  username: root
+  password: mypassword
+  database: testapp1_development

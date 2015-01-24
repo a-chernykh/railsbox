@@ -12,13 +12,24 @@ class CopyConfiguration < BaseConfiguration
         end
       end
 
-      FileUtils.cp source_path, target_path unless target_path.nil?
+      unless target_path.nil?
+        target_dir = File.dirname(target_path)
+        FileUtils.mkdir_p target_dir unless File.exist?(target_dir)
+        FileUtils.cp source_path, target_path
+      end
     end
   end
 
   private
 
-  def custom_rules
+  def common_rules
+    { 'ansible/callback_plugins' => nil,
+      'Rakefile'                 => nil,
+      'spec'                     => nil,
+    }.freeze
+  end
+
+  def docker_rules
     if @params[:docker]
       { 'Vagrantfile.docker.erb' => 'Vagrantfile.erb',
         'Vagrantfile.single.erb' => nil }.freeze
@@ -26,8 +37,13 @@ class CopyConfiguration < BaseConfiguration
       { 'Vagrantfile.single.erb'     => 'Vagrantfile.erb',
         'Vagrantfile.docker.erb'     => nil,
         'Vagrantfile.dockerhost.erb' => nil,
-        'ansible/roles/docker'       => nil }.freeze
+        'ansible/roles/docker'       => nil,
+        'phusion.key'                => nil }.freeze
     end
+  end
+
+  def custom_rules
+    common_rules.merge(docker_rules)
   end
 
   def optional_roles

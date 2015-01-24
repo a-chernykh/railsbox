@@ -56,7 +56,7 @@ a.anchor#vm-settings
                   input.form-control required=true type='text' id='vm_shared_directory' name='box[vm_shared_directory]' ng-model='configuration.vm_shared_directory'
               .col-lg-4
                 .form-group
-                  label for='vm_share_type' Share type
+                  label for='vm_share_type'= t('.share_type')
                   select.form-control required=true id='vm_share_type' name='box[vm_share_type]' ng-model='configuration.vm_share_type' ng-options='t for t in shareTypes track by t'
               .col-lg-4
                 .form-group
@@ -119,7 +119,7 @@ a.anchor#app-settings
                   ' {{ rubyInstalls[k].label }}
           .col-lg-5
             .form-group
-              label for='ruby_version' Ruby version
+              label for='ruby_version'= t('.ruby_version')
 
               p.small ng-show='configuration.ruby_install == "package"' ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository.
               p.small ng-show='configuration.ruby_install == "rbenv"' ruby will be installed with <a href="https://github.com/sstephenson/ruby-build">ruby-build</a> and version will be managed with <a href="https://github.com/sstephenson/rbenv">rbenv</a>.
