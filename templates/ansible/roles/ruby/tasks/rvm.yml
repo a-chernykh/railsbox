@@ -57,7 +57,7 @@
   with_items: rvm1_rubies
 
 - name: Install rubies
-  command: '{{ rvm1_rvm }} install {{ item.item }}'
+  command: '{{ rvm1_rvm }} install {{ item.item }} --binary'
   when: item.rc != 0
   with_items: detect_rubies.results
   sudo_user: '{{ rvm1_user }}'

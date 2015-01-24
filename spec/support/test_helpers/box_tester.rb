@@ -6,6 +6,11 @@ module TestHelpers
       # We don't want vagrant to ask root password (required by NFS)
       select 'VirtualBox', from: 'Share type'
 
+      # Speed up
+      uncheck 'curl'
+      uncheck 'Graphics kit'
+      uncheck 'QT kit'
+
       components.each do |component|
         case component
         when 'rbenv'
@@ -46,7 +51,10 @@ module TestHelpers
             success = system({'ANSIBLE_ARGS' => '-e use_apt_proxy=true'}, 'vagrant up')
             print_left_notice(dir) unless success
             expect(success).to eq true
-          
+
+            # give unicorn / worker some time to start
+            sleep(10)
+
             require 'open-uri'
             response = open('http://localhost:8080/').read
             expect(response).to eq 'ok'

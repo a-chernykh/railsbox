@@ -7,6 +7,14 @@
   gather_facts: no
   roles:
     - { role: apt_proxy, when: use_apt_proxy }
+  tasks:
+    - apt: update_cache=yes
+
+<% params[:databases].each do |db| -%>
+- hosts: <%= db %>
+  roles:
+    - <%= db %>
+<% end %>
 
 - hosts: application
   handlers:
@@ -27,11 +35,4 @@
     - base
     - ruby
     - <%= bg %>
-<% end %>
-
-<% params[:databases].each do |db| -%>
-- hosts: <%= db %>
-  roles:
-    - <%= db %>
-
 <% end %>

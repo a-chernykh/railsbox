@@ -25,6 +25,7 @@
 - name: Install additional packages
   apt: name={{ item }}
   with_items: packages
+  when: packages
 
 - name: Create application group
   group: name={{ group_name }}
