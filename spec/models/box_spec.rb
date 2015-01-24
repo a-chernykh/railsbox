@@ -5,16 +5,18 @@ describe Box do
   it { should allow_value('my-app').for(:vm_name) }
 
   describe 'secure_id' do
-    before { allow(SecureIdGenerator).to receive(:generate) { 'abc123' } }
+    let(:params) { { params: {databases: []} } }
 
-    it 'does not allows non-unique secure id' do
-      described_class.create!(params: {databases: []})
-      expect(described_class.create(params: {databases: []})).not_to be_valid
-    end
+    before { allow(SecureIdGenerator).to receive(:generate) { '123' } }
 
     it 'generates unique secure id' do
-      box = described_class.create!(params: {databases: []})
-      expect(box.secure_id).to eq 'abc123'
+      box = described_class.create!(params)
+      expect(box.secure_id).to eql '123'
+    end
+
+    it 'checks the uniqueness of secure id' do
+      allow(described_class).to receive(:exists?).with({secure_id: '123'})
+      described_class.create!(params)
     end
   end
 

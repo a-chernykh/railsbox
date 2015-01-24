@@ -8,7 +8,7 @@ class Box < ActiveRecord::Base
   before_validation :generate_secure_id, on: :create
 
   def self.background_jobs
-    [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }), 
+    [ OpenStruct.new({ id: 'delayed_job', name: 'delayed_job' }),
       OpenStruct.new({ id: 'sidekiq',     name: 'sidekiq' }),
       OpenStruct.new({ id: 'resque',      name: 'resque' }), ]
   end
@@ -24,6 +24,9 @@ class Box < ActiveRecord::Base
   private
 
   def generate_secure_id
-    self.secure_id = SecureIdGenerator.generate
+    loop do
+      self.secure_id = SecureIdGenerator.generate
+      break unless self.class.exists?(secure_id: secure_id)
+    end
   end
 end
