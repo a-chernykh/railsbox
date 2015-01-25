@@ -42,11 +42,11 @@
 - name: Authorize current user
   authorized_key: user={{ user_name }} key='{{ lookup('file', '~/.ssh/id_rsa.pub') }}'
 
-- name: Clone app repository
-  git: repo={{ git_url }} dest={{ app_path }} version={{ git_version }} accept_hostkey=yes
+# - name: Clone app repository
+#   git: repo={{ git_url }} dest={{ app_path }} version={{ git_version }} accept_hostkey=yes
 
-- name: Change owner of git path to app user
-  file: path={{ app_path }} recurse=yes owner={{ user_name }} group={{ group_name }}
+# - name: Change owner of git path to app user
+#   file: path={{ app_path }} recurse=yes owner={{ user_name }} group={{ group_name }}
 
 - name: Allow to start / stop app with sudo
   template: src=sudoers.d.conf.j2 dest=/etc/sudoers.d/{{ app_name }} validate='visudo -cf %s'

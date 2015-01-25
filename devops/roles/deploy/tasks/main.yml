@@ -1,16 +1,17 @@
 ---
-- name: Update code
-  git: repo={{ git_url }} dest={{ app_path }} version={{ git_version }} accept_hostkey=yes
+- set_fact: this_release_path={{ releases_path }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
 
-- name: Stop unicorn
-  command: sudo stop {{ app_name }}
-  ignore_errors: yes
+- name: Create new release dir
+  file: path={{ this_release_path }} state=directory
+
+- name: Update code
+  git: repo={{ git_url }} dest={{ this_release_path }} version={{ git_version }} accept_hostkey=yes
 
 - name: Delete log directory
-  file: path={{ app_path }}/log state=absent
+  file: path={{ this_release_path }}/log state=absent
 
 - name: Symlink shared files
-  file: src={{ shared_path }}/{{ item }} dest={{ app_path }}/{{ item }} state=link force=yes
+  file: src={{ shared_path }}/{{ item }} dest={{ this_release_path }}/{{ item }} state=link force=yes
   with_items:
     - config/database.yml
     - config/secrets.yml
@@ -22,17 +23,25 @@
 - name: Install bundle
   command: 'bundle install --deployment --without="development test"'
   args:
-    chdir: '{{ app_path }}'
+    chdir: '{{ this_release_path }}'
 
 - name: Precompile assets
-  command: rake assets:precompile chdir={{ app_path }}
+  command: rake assets:precompile chdir={{ this_release_path }}
   environment:
     RAILS_ENV: '{{ rails_env }}'
 
 - name: Migrate database
-  command: rake db:migrate chdir={{ app_path }}
+  command: rake db:migrate chdir={{ this_release_path }}
   environment:
     RAILS_ENV: '{{ rails_env }}'
 
-- name: Start unicorn
-  command: sudo start {{ app_name }}
+- name: Symlink new release
+  file: src={{ this_release_path }} dest={{ current_release_path }} state=link force=yes
+
+- name: Restart unicorn
+  command: sudo restart {{ app_name }}
+
+- name: Cleanup
+  shell: "ls -1t {{ releases_path }}|tail -n +{{ keep_releases + 1 }}|xargs rm -rf"
+  args:
+    chdir: '{{ releases_path }}'
