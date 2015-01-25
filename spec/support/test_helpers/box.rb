@@ -92,7 +92,7 @@ module TestHelpers
 
       def show_vagrant_leftover(dir)
         puts <<-eos.gsub /^\s+/, ""
-          WARNING: vagrant is left at #{dir}, please run run this manually to destroy it:
+          WARNING: vagrant is left at #{dir}, please run this manually to destroy it:
 
           cd #{dir}/railsbox
           vagrant destroy -f

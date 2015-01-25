@@ -79,10 +79,12 @@ guard :rspec, cmd: "bundle exec rspec" do
 end
 
 group :integration do
-  guard :shell do
-    watch(/^templates\/.*/) do
-      puts 'Running rake integration:testapp1'
+  guard :shell, first_match: true do
+    def integrate(m)
+      n m[0], 'Integrating testapp1'
       `rake integration:testapp1`
     end
+
+    watch(/^templates\/.*/) { |m| integrate(m) }
   end
 end

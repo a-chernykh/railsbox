@@ -32,13 +32,15 @@ class CopyConfiguration < BaseConfiguration
   def docker_rules
     if @params[:docker]
       { 'Vagrantfile.docker.erb' => 'Vagrantfile.erb',
+        'README.docker'          => 'README',
         'Vagrantfile.single.erb' => nil }.freeze
     else
       { 'Vagrantfile.single.erb'     => 'Vagrantfile.erb',
         'Vagrantfile.docker.erb'     => nil,
         'Vagrantfile.dockerhost.erb' => nil,
         'ansible/roles/docker'       => nil,
-        'phusion.key'                => nil }.freeze
+        'phusion.key'                => nil,
+        'README.docker'              => nil }.freeze
     end
   end
 

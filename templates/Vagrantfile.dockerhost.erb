@@ -20,9 +20,17 @@ Vagrant.configure('2') do |config|
   config.ssh.forward_agent = true
   config.vm.provision 'docker'
 
+  # Need to set ulimit -n 1024 because of apt-get bug
+  # https://bugs.launchpad.net/ubuntu/+source/apt/+bug/1332440
+  config.vm.provision 'shell', :inline =>
+    "sed -i 's/limit nofile \([0-9]*\) \([0-9]*\)/limit nofile 1024 2048/' /etc/init/docker.conf &&
+      stop docker &&
+      sleep 5 &&
+      start docker"
+
   # The following line terminates all ssh connections. Therefore
   # Vagrant will be forced to reconnect.
   # That's a workaround to have the docker command in the PATH
-  config.vm.provision "shell", inline:
+  config.vm.provision "shell", :inline =>
     "ps aux | grep 'sshd:' | awk '{print $2}' | xargs kill"
 end

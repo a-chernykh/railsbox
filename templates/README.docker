@@ -1,0 +1,5 @@
+Please make sure to run:
+
+chmod 0600 phusion.key
+
+Otherwise vagrant will be complaining about insecure group-readable private key.

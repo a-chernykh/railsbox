@@ -7,16 +7,16 @@ Vagrant.require_version '>= 1.7'
 
 Vagrant.configure('2') do |config|
   containers = [
-    { :name   => 'application',
-      :ports  => ['80:80', '443:443'],
-      :groups => %w(application), 
-    },
     <% roles.each do |role| -%>
     { :name   => '<%= role %>',
       :ports  => [<%= docker_ports_for(role).join ', ' %>],
       :groups => %w(<%= role %>),
     },
     <% end %>
+    { :name   => 'application',
+      :ports  => ['80:80', '443:443'],
+      :groups => %w(application), 
+    },
   ]
 
   containers.each do |opts|

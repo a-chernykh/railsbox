@@ -35,7 +35,7 @@ a.anchor#vm-settings
                   label.checkbox-inline
                     input type='checkbox' name='box[docker]' value='true' ng-model='configuration.docker'
                     = t('.docker')
-                    p.small Deploy all services to <a href="https://www.docker.com/">Docker</a> containers. <a href="https://github.com/phusion/baseimage-docker">baseimage-docker</a> will be used.
+                    p.small Deploy all services to <a href="https://www.docker.com/">Docker</a> containers. <a href="https://github.com/phusion/baseimage-docker">baseimage-docker</a> will be used. <strong>Please note that Docker support was not tested thoroughly and provided as is.</strong>
             .row ng-hide='configuration.autoconf'
               .col-lg-4
                 .form-group
