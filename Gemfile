@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
 ruby '2.2.0'
 
@@ -17,8 +16,10 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem "i18n-js", ">= 3.0.0.rc8"
 
-gem 'rails-assets-angular'
-gem 'rails-assets-angular-classy'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-angular'
+  gem 'rails-assets-angular-classy'
+end
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
