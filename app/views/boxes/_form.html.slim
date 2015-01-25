@@ -198,6 +198,7 @@ a.anchor#background-jobs
         .dropdown ng-hide='allActive()'
           button.btn.btn-lg.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='backgroundJobsMenu'
             = t('.add_worker')
+            ' 
             span.caret
           ul.dropdown-menu role='menu' aria-labelledby='backgroundJobsMenu'
             li ng-repeat='backgroundJob in allObjects' role='presentation' ng-hide='isActive(backgroundJob.id)'
