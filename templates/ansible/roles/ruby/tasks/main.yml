@@ -14,4 +14,4 @@
 
 - name: bundle install
   command: /bin/bash -l -c 'bundle install' chdir={{ app_path }}
-  sudo_user: '{{ user_name }}'
+  sudo_user: '{{ ruby_user_name }}'

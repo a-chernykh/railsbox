@@ -8,6 +8,14 @@
     - python-pip
     - python-dev
 
+- name: Configure PostgreSQL - postgresql.conf
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf
+  notify: restart postgresql
+
+- name: Configure PostgreSQL - pg_hba.conf
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf
+  notify: restart postgresql
+
 <% if params[:docker] -%>
 - name: Create /etc/my_init.d/postgresql.sh
   template: src=my_init.sh.j2 dest=/etc/my_init.d/postgresql.sh mode=0755
@@ -37,9 +45,10 @@
     - libgeos-c1
     - 'postgresql-{{ postgresql_version }}-postgis-{{ postgresql_ext_postgis_version }}'
   notify: restart postgresql
-  when: "'postgis' in postgresql_extensions"
+  when: "postgresql_extensions and 'postgis' in postgresql_extensions"
 
 - name: Create extensions
   sudo_user: '{{ postgresql_admin_user }}'
   shell: "psql {{ postgresql_db_name }} -c 'CREATE EXTENSION IF NOT EXISTS {{ item }};'"
   with_items: postgresql_extensions
+  when: postgresql_extensions

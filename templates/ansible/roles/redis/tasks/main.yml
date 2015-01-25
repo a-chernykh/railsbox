@@ -4,6 +4,10 @@
   with_items:
     - redis-server
 
+- name: Configure redis
+  template: src=redis.conf.j2 dest=/etc/redis/redis.conf
+  notify: restart redis
+
 - name: Enable and start redis-server
   service: name=redis-server enabled=yes state=started
 
