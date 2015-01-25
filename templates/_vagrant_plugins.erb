@@ -18,6 +18,11 @@ require_plugins \
   'vagrant-bindfs' => '0.3.2'
 
 def ansible_installed?
-  require 'mkmf'
-  find_executable 'ansible-playbook'
+  exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+  ENV['PATH'].split(File::PATH_SEPARATOR).any? do |p|
+    exts.any? do |ext|
+      full_path = File.join(p, "ansible-playbook#{ext}")
+      File.executable?(full_path) && File.file?(full_path)
+    end
+  end
 end
