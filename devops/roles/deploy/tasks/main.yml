@@ -1,11 +1,16 @@
 ---
 - set_fact: this_release_path={{ releases_path }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
 
+- debug: msg='New release path {{ this_release_path }}'
+
 - name: Create new release dir
   file: path={{ this_release_path }} state=directory
 
 - name: Update code
   git: repo={{ git_url }} dest={{ this_release_path }} version={{ git_version }} accept_hostkey=yes
+  register: git
+
+- debug: msg='Updated repo from {{ git.before }} to {{ git.after }}'
 
 - name: Delete log directory
   file: path={{ this_release_path }}/log state=absent
@@ -40,6 +45,12 @@
 
 - name: Restart unicorn
   command: sudo restart {{ app_name }}
+
+- name: Notify Rollbar
+  uri:
+    url: https://api.rollbar.com/api/1/deploy/
+    method: POST
+    body: access_token={{ rollbar_access_token }}&environment={{ rails_env }}&revision={{ git.after }}&local_username={{ lookup('pipe', 'whoami') }}
 
 - name: Cleanup
   shell: "ls -1t {{ releases_path }}|tail -n +{{ keep_releases + 1 }}|xargs rm -rf"

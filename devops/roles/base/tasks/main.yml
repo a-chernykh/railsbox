@@ -23,6 +23,9 @@
   apt: name={{ item }}
   with_items: packages
 
+- name: Install required Python modules
+  pip: name=httplib2
+
 - name: Create application group
   group: name={{ group_name }}
 
