@@ -15,8 +15,8 @@ describe Box do
     end
 
     it 'checks the uniqueness of secure id' do
-      allow(described_class).to receive(:exists?).with({secure_id: '123'})
       described_class.create!(params)
+      expect(described_class.new(params)).not_to be_valid
     end
   end
 

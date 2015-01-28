@@ -24,9 +24,11 @@ class Box < ActiveRecord::Base
   private
 
   def generate_secure_id
+    tries = 10
     loop do
       self.secure_id = SecureIdGenerator.generate
-      break unless self.class.exists?(secure_id: secure_id)
+      break if !self.class.exists?(secure_id: secure_id) || tries == 0
+      tries -= 1
     end
   end
 end
