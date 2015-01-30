@@ -10,7 +10,16 @@ angular.module('app.rubyops').classy.controller
       label: @_t('nginx_passenger')
       id: 'nginx_passenger'
     ]
-    @$.shareTypes = [ @_t('nfs'), @_t('virtualbox') ]
+    @$.shareTypes = [
+      label: @_t('nfs')
+      id: 'nfs'
+     , 
+      label: @_t('virtualbox')
+      id: ''
+     ,
+      label: @_t('smb')
+      id: 'smb'
+    ]
     @$.postgresqlExtensions =
       [ { name: 'hstore' },
         { name: 'citext' },
@@ -90,12 +99,15 @@ angular.module('app.rubyops').classy.controller
   downloadConfiguration: (url) ->
     @$http.get(url).success (data) => @_loadConfiguration(data)
 
+  _findOptionById: (options, id, label) -> (options.filter (opt) -> opt[label] == id)[0]
+
   _loadConfiguration: (configuration) ->
     @$.configuration = configuration
-    @$.configuration.vm_os = (@$.osList.filter (os) -> os.box == configuration.vm_os)[0]
+    @$.configuration.vm_os = @_findOptionById(@$.osList, configuration.vm_os, 'box')
     @$.configuration.vm_ports = (val for key, val of configuration.vm_ports)
+    @$.configuration.vm_share_type = @_findOptionById(@$.shareTypes, configuration.vm_share_type, 'id')
     p.selected = (id in configuration.package_bundles) for id, p of @$.packages
-    @$.configuration.rails_version = (@$.railsVersions.filter (v) -> v.version == configuration.rails_version)[0]
+    @$.configuration.rails_version = @_findOptionById(@$.railsVersions, configuration.rails_version, 'version')
     @$.configuration.ruby_version = (@$.rubyInstalls[@$.configuration.ruby_install].rubies.filter (v) -> v.version == configuration.ruby_version)[0]
     ext.selected = (ext.name in configuration.postgresql_extensions) for ext in @$.postgresqlExtensions
 

@@ -52,11 +52,11 @@ describe TemplateConfiguration do
         end
 
         it 'sets memory' do
-          expect(output).to include %Q(.memory = 1024)
+          expect(output).to include %Q(sysctl -n hw.memsize)
         end
 
         it 'sets cores' do
-          expect(output).to include %Q(.cpus = 2)
+          expect(output).to include %Q(sysctl -n hw.ncpu)
         end
 
         it 'sets forwarded port' do

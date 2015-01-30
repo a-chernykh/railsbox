@@ -57,7 +57,7 @@ a.anchor#vm-settings
               .col-lg-4
                 .form-group
                   label for='vm_share_type'= t('.share_type')
-                  select.form-control required=true id='vm_share_type' name='box[vm_share_type]' ng-model='configuration.vm_share_type' ng-options='t for t in shareTypes track by t'
+                  select.form-control required=true id='vm_share_type' name='box[vm_share_type]' ng-model='configuration.vm_share_type' ng-options='t.label for t in shareTypes track by t.id'
               .col-lg-4
                 .form-group
                   label for='vm_ip' IP address

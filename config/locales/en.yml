@@ -39,6 +39,7 @@ en:
       share_type: Share type
       nfs: NFS
       virtualbox: VirtualBox
+      smb: SMB (Windows only)
       graphics_kit: Graphics kit
       qt_kit: QT kit
       curl: curl

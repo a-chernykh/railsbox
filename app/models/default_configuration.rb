@@ -1,5 +1,5 @@
 class DefaultConfiguration
-  def self.get
+  def self.get(platform = :mac)
     app_name = 'myapp'
     user_name = 'vagrant'
     { vm_name: app_name,
@@ -9,7 +9,7 @@ class DefaultConfiguration
       vm_swap: '1024',
       vm_cores: '2',
       vm_shared_directory: '/vagrant',
-      vm_share_type: 'NFS',
+      vm_share_type: platform == :windows ? 'smb' : 'nfs',
       vm_ip: '192.168.20.50',
       vm_ports: {
         '0' => { guest: 80,  host: 8080 },

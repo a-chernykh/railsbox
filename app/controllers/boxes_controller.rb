@@ -8,7 +8,7 @@ class BoxesController < ApplicationController
   end
 
   def default
-    render json: DefaultConfiguration.get
+    render json: DefaultConfiguration.get(browser.platform)
   end
 
   def show
