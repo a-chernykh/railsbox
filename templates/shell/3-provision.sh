@@ -2,4 +2,4 @@
 
 set -e
 
-ansible-playbook /ansible/site.yml --connection=local -s
+ansible-playbook $@ /ansible/site.yml --connection=local -s

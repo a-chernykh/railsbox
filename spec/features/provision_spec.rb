@@ -13,4 +13,10 @@ feature 'Provision boxes', js: true, vagrant: true do
     test_box(app: 'testapp2', 
              components: ['system_package', 'passenger', 'mysql', 'delayed_job'])
   end
+
+  scenario '(no ansible installed) system_package, passenger, MySQL' do
+    test_box(app: 'testapp2', 
+             components: ['system_package', 'passenger', 'mysql'],
+             ansible: false)
+  end
 end

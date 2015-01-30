@@ -56,6 +56,10 @@ en:
       sidekiq: sidekiq
       resque: resque
       delayed_job: delayed_job
+      postgresql: PostgreSQL
+      mysql: MySQL
+      mongodb: MongoDB
+      redis: Redis
     show:
       download: 'Download'
       edit: 'Edit'

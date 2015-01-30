@@ -44,7 +44,7 @@ Vagrant.configure('2') do |config|
     end
   else
     Dir['shell/*.sh'].each do |script|
-      config.vm.provision 'shell', :path => script, :privileged => false
+      config.vm.provision 'shell', :path => script, :privileged => false, :args => ENV['ANSIBLE_ARGS']
     end
   end
 end

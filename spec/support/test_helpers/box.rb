@@ -5,6 +5,7 @@ module TestHelpers
         @app        = opts[:app]
         @components = opts[:components]
         @context    = opts[:context]
+        @ansible    = opts[:ansible].nil? ? true : opts[:ansible]
       end
 
       def test
@@ -15,7 +16,10 @@ module TestHelpers
           FileUtils.cp_r File.join(Rails.root.join('spec/fixtures', @app), '.'), dir
           Dir.chdir("#{dir}/railsbox") do
             begin
-              is_provisioned = system({'ANSIBLE_ARGS' => '-e use_apt_proxy=true'}, 'vagrant up')
+              env = {'ANSIBLE_ARGS' => '-e use_apt_proxy=true'}
+              # a little hack to make ansible_installed? return false
+              env['PATHEXT'] = 'whatever' unless @ansible
+              is_provisioned = system(env, 'vagrant up')
               return false unless is_provisioned
 
               # give unicorn / worker some time to start
@@ -71,7 +75,13 @@ module TestHelpers
               choose t("nginx_#{component}")
             when 'postgresql'
               # Default, do nothing
-            when 'mysql', 'redis'
+            when 'mysql'
+              # PostgreSQL is default, need to delete it
+              page.find('.database', text: t('postgresql')).click_button 'Delete'
+
+              click_on t('add_database')
+              click_on t(component)
+            when 'redis'
               click_on t('add_database')
               click_on t(component)
             when 'sidekiq', 'delayed_job'

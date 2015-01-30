@@ -4,10 +4,10 @@ angular.module('app.rubyops').classy.controller
 
   init: ->
     @$.allObjects = [
-      { id: 'postgresql', name: 'PostgreSQL' },
-      { id: 'mysql',      name: 'MySQL' },
-      { id: 'mongodb',    name: 'MongoDB' },
-      { id: 'redis',      name: 'Redis' },
+      { id: 'postgresql', name: I18n.t('boxes.form.postgresql') },
+      { id: 'mysql',      name: I18n.t('boxes.form.mysql') },
+      { id: 'mongodb',    name: I18n.t('boxes.form.mongodb') },
+      { id: 'redis',      name: I18n.t('boxes.form.redis') },
     ]
     @$.activeObjects = []
 

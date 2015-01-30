@@ -180,8 +180,8 @@ a.anchor#databases
         input ng-repeat='database in activeObjects' type='hidden' name='box[databases][]' value='{{ database }}'
 
         - Databases.list.each do |database|
-          .panel.panel-primary ng-show="isActive('#{database.id}')"
-            .panel-heading= database.name
+          .panel.panel-primary.database ng-show="isActive('#{database.id}')"
+            .panel-heading= t(".#{database.id}")
             .panel-body
               = render "boxes/databases/#{database.id}"
               button.btn.btn-danger.pull-right type='button' ng-click="delete('#{database.id}')" Delete
