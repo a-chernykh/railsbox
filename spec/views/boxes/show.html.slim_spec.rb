@@ -1,5 +1,5 @@
 describe 'boxes/show.html.slim' do
-  let(:box) { stub_model(Box, secure_id: 'whatever', vm_name: 'myapp') }
+  let(:box) { stub_model(Box, secure_id: 'whatever', params: params_fixture) }
   let(:os)  { :mac }
 
   before do
@@ -8,10 +8,6 @@ describe 'boxes/show.html.slim' do
   end
 
   it 'has box http URL' do
-    allow(box).to receive(:vm_ports).and_return({
-      '0' => { 'guest' => 80, 'host' => 8080 },
-      '1' => { 'guest' => 443, 'host' => 8081 },
-    })
     render
     expect(rendered).to include 'http://localhost:8080'
   end
@@ -24,7 +20,7 @@ describe 'boxes/show.html.slim' do
 
       it 'includes unicorn control commands' do
         render
-        expect(rendered).to include 'sudo start myapp'
+        expect(rendered).to include 'sudo start testapp'
       end
     end
 

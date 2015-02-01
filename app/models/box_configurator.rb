@@ -1,4 +1,4 @@
-class BoxConfigurator
+class BoxConfigurator < BaseConfiguration
   def initialize(configurators, name)
     @configurators = configurators
     @name = name
@@ -9,7 +9,8 @@ class BoxConfigurator
     params = ActiveSupport::HashWithIndifferentAccess.new(default_params.merge(params.symbolize_keys))
     new([ CopyConfiguration.new(params),
           EnvironmentsConfiguration.new(params),
-          TemplateConfiguration.new(params) ], params[:vm_name])
+          TemplateConfiguration.new(params),
+          ConfigurationCleanup.new ], params[:vm_name])
   end
 
   def file_name

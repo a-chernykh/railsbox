@@ -13,7 +13,15 @@ class BoxDecorator < SimpleDelegator
     "https://localhost:#{port['host']}" if port
   end
 
+  def vm_shared_directory
+    development['vm_shared_directory']
+  end
+
   private
+
+  def vm_ports
+    development['vm_ports']
+  end
 
   def find_by_guest_port(port_number)
     (vm_ports || {}).values.find { |port| port['guest'].try(:to_s) == port_number.to_s }
