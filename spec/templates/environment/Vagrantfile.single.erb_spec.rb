@@ -11,7 +11,6 @@ describe 'templates/Vagrantfile.single.erb' do
       let(:params) { base_params.merge(:vm_share_type => nil) }
 
       it 'does not sets synced folder type' do
-        puts params[:vm_share_type].inspect
         expect(subject).to include %Q(.vm.synced_folder '../', '/vagrant'\n)
       end
     end
