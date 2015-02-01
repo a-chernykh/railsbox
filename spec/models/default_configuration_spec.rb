@@ -3,7 +3,7 @@ describe DefaultConfiguration do
     subject { described_class.get }
 
     it 'has 1024Mb RAM' do
-      expect(subject[:vm_memory]).to eq '1024'
+      expect(subject[:development][:vm_memory]).to eq '1024'
     end
 
     it 'has myapp name' do
@@ -13,13 +13,13 @@ describe DefaultConfiguration do
     context 'by platform' do
       context 'windows' do
         it 'defaults to nfs share type' do
-          expect(described_class.get(:mac)[:vm_share_type]).to eq 'nfs'
+          expect(described_class.get(:mac)[:development][:vm_share_type]).to eq 'nfs'
         end
       end
 
       context 'windows' do
         it 'defaults to smb share type' do
-          expect(described_class.get(:windows)[:vm_share_type]).to eq 'smb'
+          expect(described_class.get(:windows)[:development][:vm_share_type]).to eq 'smb'
         end
       end
     end
@@ -41,7 +41,7 @@ describe DefaultConfiguration do
     end
 
     it 'has empty list of forwarded ports' do
-      expect(subject[:vm_ports]).to eq({})
+      expect(subject[:development][:vm_ports]).to eq({})
     end
   end
 end

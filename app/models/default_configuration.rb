@@ -51,18 +51,23 @@ class DefaultConfiguration
   # box templates. Includes everything but booleans. Hashes and arrays
   # are emptied.
   def self.base
-    @base ||= begin
-      base = get
-      base.each do |k, v|
-        if [true, false].include?(v)
-          base.delete(k)
-        elsif v.is_a?(Array)
-          base[k] = []
-        elsif v.is_a?(Hash)
-          base[k] = {}
+    @base ||= cleanup(get)
+  end
+
+  def self.cleanup(hash)
+    hash.each do |k, v|
+      if [true, false].include?(v)
+        hash.delete(k)
+      elsif v.is_a?(Array)
+        hash[k] = []
+      elsif v.is_a?(Hash)
+        if %i(development staging production).include?(k)
+          cleanup(hash[k])
+        else
+          hash[k] = {}
         end
       end
-      base
     end
+    hash
   end
 end

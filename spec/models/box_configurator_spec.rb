@@ -11,7 +11,7 @@ describe BoxConfigurator do
     end
 
     it 'creates Vagrantfile' do
-      expect(File).to exist(File.join(dir, 'development/Vagrantfile'))
+      expect(File.join(dir, 'development/Vagrantfile')).to file_exists
     end
 
     after { FileUtils.remove_entry_secure dir }

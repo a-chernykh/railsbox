@@ -8,6 +8,7 @@ class BoxConfigurator
     default_params = DefaultConfiguration.base
     params = ActiveSupport::HashWithIndifferentAccess.new(default_params.merge(params.symbolize_keys))
     new([ CopyConfiguration.new(params),
+          EnvironmentsConfiguration.new(params),
           TemplateConfiguration.new(params) ], params[:vm_name])
   end
 

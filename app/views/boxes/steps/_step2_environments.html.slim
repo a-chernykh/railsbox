@@ -17,6 +17,8 @@ a.anchor#environments
               a role='menuitem' tabindex='-1' href='#' ng-click='add(environment.id)' {{ environment.id }}
 
         .panel.panel-primary.database ng-repeat='environment in activeObjects'
+          input type='hidden' name='box[environments][]' value='{{ environment }}'
+
           .panel-heading {{ environment }}
           .panel-body
             p
