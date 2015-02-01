@@ -10,5 +10,24 @@ describe Typecaster do
         'other' => 1,
         'arr' => ['a', 'b', 'c']})
     end
+
+    it 'works with nested hashes' do
+      typecasted = described_class.new({
+        'nested' => {
+          'true' => 'true',
+          'false' => 'false',
+          'other' => 1,
+          'arr' => ['a', 'b', 'c']
+        }
+      }).typecasted
+      expect(typecasted).to eq({
+        'nested' => {
+          'true' => true,
+          'false' => false,
+          'other' => 1,
+          'arr' => ['a', 'b', 'c']
+        }
+      })
+    end
   end
 end

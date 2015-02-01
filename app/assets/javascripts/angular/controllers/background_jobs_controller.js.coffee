@@ -1,4 +1,4 @@
-angular.module('app.rubyops').classy.controller
+angular.module('app.railsbox').classy.controller
   name: 'BackgroundJobsController'
   inject: ['$scope']
 

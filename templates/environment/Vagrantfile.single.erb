@@ -3,27 +3,12 @@
 
 Vagrant.require_version '>= 1.5'
 
-<%= render 'vagrant_plugins' %>
+<%= render 'environment/vagrant_plugins' %>
 
 Vagrant.configure('2') do |config|
-<%= render 'virtualbox_config' %>
-
-  config.vm.box = '<%= params[:vm_os] %>'
-
-  config.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
-  config.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<%= vm_share_type_param %>
-  config.vm.synced_folder 'ansible', '/ansible'<%= vm_share_type_param %>
-  <% if params[:vm_share_type] == 'nfs' -%>
-  config.bindfs.bind_folder '/vagrant', '/vagrant'
-  config.bindfs.bind_folder '/ansible', '/ansible'
-  <% end %>
-
-  config.vm.define '<%= params[:vm_name] %>' do |machine|
-    machine.vm.hostname = '<%= params[:server_name] %>'
-    <% params[:vm_ports].each_value do |port| -%>
-    machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
-    <% end %>
-  end
+<% if params[:target] == 'virtualbox' %>
+<%= render "environment/virtualbox_config" %>
+<% end %>
 
   config.ssh.forward_agent = true
 

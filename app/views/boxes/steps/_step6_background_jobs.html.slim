@@ -1,0 +1,26 @@
+a.anchor#background-jobs
+.row.step.step4 ng-controller='BackgroundJobsController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 6
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Background jobs
+      .panel-body
+        .dropdown ng-hide='allActive()'
+          button.btn.btn-lg.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='backgroundJobsMenu'
+            = t('boxes.form.add_worker')
+            ' 
+            span.caret
+          ul.dropdown-menu role='menu' aria-labelledby='backgroundJobsMenu'
+            li ng-repeat='backgroundJob in allObjects' role='presentation' ng-hide='isActive(backgroundJob.id)'
+              a role='menuitem' tabindex='-1' href='#' ng-click='add(backgroundJob.id)' {{ backgroundJob.name }}
+
+        input ng-repeat='backgroundJob in activeObjects' type='hidden' name='box[background_jobs][]' value='{{ backgroundJob }}'
+
+        - Box.background_jobs.each do |background_job|
+          .panel.panel-primary ng-show="isActive('#{background_job.id}')"
+            .panel-heading= background_job.name
+            .panel-body
+              = render "boxes/background_jobs/#{background_job.id}"
+              button.btn.btn-danger.pull-right type='button' ng-click="delete('#{background_job.id}')" Delete

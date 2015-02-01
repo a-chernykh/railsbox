@@ -4,9 +4,19 @@ class Typecaster
   end
 
   def typecasted
+    typecast(@attrs)
+  end
+
+  private
+
+  def typecast(hash)
     result = {}
-    arr = @attrs.map do |k, v|
-      v = v == 'true' if ['true', 'false'].include?(v)
+    arr = hash.map do |k, v|
+      if v.is_a?(Hash)
+        v = typecast(v)
+      else
+        v = v == 'true' if ['true', 'false'].include?(v)
+      end
       result[k] = v
     end
     result

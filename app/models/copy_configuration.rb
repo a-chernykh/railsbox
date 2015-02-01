@@ -23,10 +23,7 @@ class CopyConfiguration < BaseConfiguration
   private
 
   def common_rules
-    { 'ansible/callback_plugins' => nil,
-      'Rakefile'                 => nil,
-      'spec'                     => nil,
-    }.freeze
+    { 'ansible/callback_plugins' => nil, }.freeze
   end
 
   def docker_rules

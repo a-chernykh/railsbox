@@ -1,0 +1,29 @@
+a.anchor#vm-settings
+.row.step.step1
+  .col-lg-1.step-number.visible-lg-block
+    h1 1
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title System
+      .panel-body
+        .row
+          .col-lg-4
+            .form-group
+              label for='vm_os' Operating System
+              select.form-control required=true id='vm_os' name='box[vm_os]' ng-options='os.name for os in osList track by os.box' ng-model='configuration.vm_os'
+
+          .col-lg-3
+            .form-group
+              label Additional packages
+              p
+                label.checkbox-inline ng-repeat='(k, v) in packages'
+                  input type='checkbox' name='box[package_bundles][]' value='{{ k }}' ng-model='v.selected'
+                  span data-toggle='tooltip' data-placement='top' title='{{ v.packages.join(", ") }}' {{ v.label }}
+                  input ng-repeat='package in v.packages' type='hidden' name='box[packages][]' value='{{ package }}' ng-disabled='!v.selected'
+          .col-lg-5
+            .form-group
+              label.checkbox-inline
+                input type='checkbox' name='box[docker]' value='true' ng-model='configuration.docker'
+                = t('boxes.form.docker')
+                p.small Deploy all services to <a href="https://www.docker.com/">Docker</a> containers. <a href="https://github.com/phusion/baseimage-docker">baseimage-docker</a> will be used. <strong>Please note that Docker support was not tested thoroughly and provided as is.</strong>

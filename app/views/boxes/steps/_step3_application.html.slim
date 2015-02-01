@@ -1,0 +1,45 @@
+a.anchor#app-settings
+.row.step.step2
+  .col-lg-1.step-number.visible-lg-block
+    h1 3
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Application
+      .panel-body
+        .row
+          .col-lg-7
+            .form-group
+              label for='vm_name'= t('boxes.form.name')
+              p
+                small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores are allowed.
+              input.form-control required=true id='vm_name' name='box[vm_name]' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
+          .col-lg-5
+            .form-group
+              label for='environment_file' Environment variables
+              p
+                small Application configuration will be read from <kbd>{{ configuration.environment_file }}</kbd> (if it exists).
+              input.form-control type='text' id='environment_file' name='box[environment_file]' ng-model='configuration.environment_file'
+        .row
+          .col-lg-2
+            label Install Ruby with
+            .form-group
+              .radio ng-repeat='k in ["rvm", "rbenv", "package"]'
+                label
+                  input name='box[ruby_install]' type='radio' value='{{ k }}' ng-model='configuration.ruby_install'
+                  ' {{ rubyInstalls[k].label }}
+          .col-lg-5
+            .form-group
+              label for='ruby_version'= t('boxes.form.ruby_version')
+
+              p.small ng-show='configuration.ruby_install == "package"' ruby will be installed as system package using <a href="https://www.brightbox.com/docs/ruby/ubuntu/">brightbox/ruby-ng</a> apt repository.
+              p.small ng-show='configuration.ruby_install == "rbenv"' ruby will be installed with <a href="https://github.com/sstephenson/ruby-build">ruby-build</a> and version will be managed with <a href="https://github.com/sstephenson/rbenv">rbenv</a>.
+              p.small ng-show='configuration.ruby_install == "rvm"' ruby will be installed with <a href="https://rvm.io/">RVM</a>.
+
+              select.form-control id='ruby_version' name='box[ruby_version]' ng-options='rubyVersion.label for rubyVersion in rubyInstalls[configuration.ruby_install].rubies track by rubyVersion.version' ng-model='configuration.ruby_version'
+          .col-lg-5
+            .form-group ng-show='["rvm", "rbenv"].indexOf(configuration.ruby_install) > -1'
+              label for='manual_ruby_version' Other version
+              p
+                small Specify custom ruby version
+              input.form-control type='text' placeholder='ruby version' name='box[manual_ruby_version]' id='manual_ruby_version' ng-model='configuration.manual_ruby_version'

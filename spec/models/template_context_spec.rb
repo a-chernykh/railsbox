@@ -27,7 +27,7 @@ describe TemplateContext do
   end
 
   describe '#render' do
-    subject(:rendered) { context.render 'vagrant_plugins' }
+    subject(:rendered) { context.render 'environment/vagrant_plugins' }
 
     it 'renders given partial' do
       expect(rendered).to include 'require_plugins'

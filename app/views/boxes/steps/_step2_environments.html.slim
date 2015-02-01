@@ -1,0 +1,94 @@
+a.anchor#environments
+.row.step.step2 ng-controller='EnvironmentsController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 2
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Environments
+      .panel-body
+        .dropdown ng-hide='allActive()'
+          button.btn.btn-lg.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='environmentsMenu'
+            = t('boxes.form.add_environment')
+            ' 
+            span.caret
+          ul.dropdown-menu role='menu' aria-labelledby='environmentsMenu'
+            li ng-repeat='environment in allObjects' role='presentation' ng-hide='isActive(environment.id)'
+              a role='menuitem' tabindex='-1' href='#' ng-click='add(environment.id)' {{ environment.id }}
+
+        .panel.panel-primary.database ng-repeat='environment in activeObjects'
+          .panel-heading {{ environment }}
+          .panel-body
+            p
+              label.radio-inline
+                input name='box[{{ environment }}][target]' type='radio' value='virtualbox' ng-model='configuration[environment].target'
+                ' VirtualBox
+              label.radio-inline
+                input name='box[{{ environment }}][target]' type='radio' value='ec2' ng-model='configuration[environment].target'
+                ' Amazon EC2
+              label.radio-inline
+                input name='box[{{ environment }}][target]' type='radio' value='digitalocean' ng-model='configuration[environment].target'
+                ' DigitalOcean
+
+            div ng-show="configuration[environment].target == 'virtualbox'"
+              .row
+                .col-lg-8
+                  .row
+                    .col-lg-12
+                      .form-group
+                        label.checkbox-inline
+                          input type='checkbox' name='box[{{ environment }}][autoconf]' value='true' ng-model='configuration[environment].autoconf'
+                          = t('boxes.form.autoconf')
+                          p.small VirtualBox will use all of available CPU cores and 1/3 of available RAM. This option is recommended if you are using one virtual machine at a time.
+
+                  .row ng-hide='configuration[environment].autoconf'
+                    .col-lg-4
+                      .form-group
+                        label for='vm_memory'= t('boxes.form.memory')
+                        input.form-control required=true id='vm_memory' name='box[{{ environment }}][vm_memory]' type='text' ng-model='configuration[environment].vm_memory' ng-pattern="/^[0-9]+$/"
+                    .col-lg-4
+                      .form-group
+                        label for='vm_swap' Swap, Mb
+                        input.form-control required=true id='vm_swap' name='box[{{ environment }}][vm_swap]' type='text' ng-model='configuration[environment].vm_swap' ng-pattern="/^[0-9]+$/"
+                    .col-lg-4
+                      .form-group
+                        label for='vm_cores' CPU cores
+                        select.form-control required=true id='vm_cores' name='box[{{ environment }}][vm_cores]' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration[environment].vm_cores'
+                  .row
+                    .col-lg-4
+                      .form-group
+                        label for='vm_shared_directory' Shared directory
+                        input.form-control required=true type='text' id='vm_shared_directory' name='box[{{ environment }}][vm_shared_directory]' ng-model='configuration[environment].vm_shared_directory'
+                    .col-lg-4
+                      .form-group
+                        label for='vm_share_type'= t('boxes.form.share_type')
+                        select.form-control required=true id='vm_share_type' name='box[{{ environment }}][vm_share_type]' ng-model='configuration[environment].vm_share_type' ng-options='t.label for t in shareTypes track by t.id'
+                    .col-lg-4
+                      .form-group
+                        label for='vm_ip' IP address
+                        input.form-control required=true type='text' id='vm_ip' name='box[{{ environment }}][vm_ip]' ng-model='configuration[environment].vm_ip'
+                .col-lg-4 ng-controller='VirtualMachineController'
+                  label for='new_guest_port' Port forwarding
+                  table.table.table-bordered
+                    thead
+                      tr
+                        th Guest port
+                        th Host port
+                        th
+                    tbody
+                      tr ng-repeat='port in configuration[environment].vm_ports'
+                        input type='hidden' name='box[{{ environment }}][vm_ports[{{ $index }}][guest]]' value='{{ port.guest }}'
+                        input type='hidden' name='box[{{ environment }}][vm_ports[{{ $index }}][host]]' value='{{ port.host }}'
+                        td {{ port.guest }}
+                        td {{ port.host }}
+                        td
+                          button.btn.btn-danger type='button' ng-click='deletePort($index)' Delete
+                      tr
+                        td
+                          input.form-control id='new_guest_port' type='number' placeholder='guest port' ng-model='newGuestPort'
+                        td
+                          input.form-control type='number' placeholder='host port' ng-model='newHostPort'
+                        td
+                          button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
+
+            button.btn.btn-danger.pull-right type='button' ng-show='activeObjects.length > 1' ng-click="delete(environment)" Delete

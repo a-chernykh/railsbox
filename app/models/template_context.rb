@@ -19,6 +19,9 @@ class TemplateContext
   private
 
   def partial_path(partial)
-    File.join Templates::ROOT_PATH, "_#{partial}.erb"
+    parts = partial.split('/')
+    parts.unshift Templates::ROOT_PATH
+    parts[-1] = "_#{parts[-1]}.erb"
+    File.join parts
   end
 end

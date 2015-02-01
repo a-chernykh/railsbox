@@ -1,0 +1,26 @@
+a.anchor#databases
+.row.step.step3 ng-controller='DatabasesController'
+  .col-lg-1.step-number.visible-lg-block
+    h1 5
+  .col-lg-11.step-conf
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title Databases
+      .panel-body
+        .dropdown ng-hide='allActive()'
+          button.btn.btn-lg.btn-default.dropdown-toggle type='button' data-toggle='dropdown' id='databasesMenu'
+            = t('boxes.form.add_database')
+            ' 
+            span.caret
+          ul.dropdown-menu role='menu' aria-labelledby='databasesMenu'
+            li ng-repeat='database in allObjects' role='presentation' ng-hide='isActive(database.id)'
+              a role='menuitem' tabindex='-1' href='#' ng-click='add(database.id)' {{ database.name }}
+
+        input ng-repeat='database in activeObjects' type='hidden' name='box[databases][]' value='{{ database }}'
+
+        - Databases.list.each do |database|
+          .panel.panel-primary.database ng-show="isActive('#{database.id}')"
+            .panel-heading= t("boxes.form.#{database.id}")
+            .panel-body
+              = render "boxes/databases/#{database.id}"
+              button.btn.btn-danger.pull-right type='button' ng-click="delete('#{database.id}')" Delete

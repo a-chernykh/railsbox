@@ -33,6 +33,7 @@ en:
       name: 'Name'
       memory: 'Memory, Mb'
       autoconf: 'Configure VM automatically for best performance'
+      add_environment: Add environment
       add_database: 'Add database'
       add_worker: 'Add worker'
       docker: 'Docker (experimental version)'

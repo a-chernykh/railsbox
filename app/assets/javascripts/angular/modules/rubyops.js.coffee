@@ -1,1 +1,1 @@
-angular.module 'app.rubyops', ['classy']
+angular.module 'app.railsbox', ['classy']

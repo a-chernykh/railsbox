@@ -39,35 +39,6 @@ describe TemplateConfiguration do
         expect(File).not_to exist(File.join(dir, '_vagrant_plugins.erb'))
       end
 
-      context 'Vagrantfile' do
-        let(:file) { self.class.description }
-
-        it 'sets name' do
-          expect(output).to include %Q(config.vm.define 'testapp')
-          expect(output).to include %Q(hostname = 'localhost')
-        end
-
-        it 'sets operating system' do
-          expect(output).to include %Q(config.vm.box = 'ubuntu/trusty64')
-        end
-
-        it 'sets memory' do
-          expect(output).to include %Q(sysctl -n hw.memsize)
-        end
-
-        it 'sets cores' do
-          expect(output).to include %Q(sysctl -n hw.ncpu)
-        end
-
-        it 'sets forwarded port' do
-          expect(output).to include %Q(vm.network 'forwarded_port', :guest => 80, :host => 8080)
-        end
-
-        it 'sets box ip' do
-          expect(output).to include %Q(config.vm.network 'private_network', ip: '192.168.20.50')
-        end
-      end
-
       after { FileUtils.remove_entry_secure dir }
     end
   end

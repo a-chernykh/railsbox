@@ -1,11 +1,11 @@
-angular.module('app.rubyops').classy.controller
+angular.module('app.railsbox').classy.controller
   name: 'VirtualMachineController'
   inject: ['$scope']
 
   addPort: ->
-    @$.configuration.vm_ports.push { guest: @$.newGuestPort, host: @$.newHostPort }
+    @$.configuration[@$.environment].vm_ports.push { guest: @$.newGuestPort, host: @$.newHostPort }
     @$.newGuestPort = null
     @$.newHostPort = null
 
   deletePort: (index) ->
-    @$.configuration.vm_ports.splice index, 1
+    @$.configuration[@$.environment].vm_ports.splice index, 1

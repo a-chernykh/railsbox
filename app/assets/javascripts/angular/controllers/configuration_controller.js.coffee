@@ -1,4 +1,4 @@
-angular.module('app.rubyops').classy.controller
+angular.module('app.railsbox').classy.controller
   name: 'ConfigurationController'
   inject: ['$scope', '$http']
 
@@ -66,9 +66,6 @@ angular.module('app.rubyops').classy.controller
       { version: '4',   label: 'rails 4.0+' }
     ]
 
-    @$.allObjects = []
-    @$.activeObjects = []
-
     @$.packages =
       graphics:
         label: @_t('graphics_kit')
@@ -79,18 +76,6 @@ angular.module('app.rubyops').classy.controller
       curl:
         label: @_t('curl')
         packages: [ 'curl', 'libcurl3', 'libcurl3-gnutls', 'libcurl4-openssl-dev' ]
-
-    @$.isActive = (obj) ->
-      obj in @activeObjects
-
-    @$.allActive = ->
-      @activeObjects.length == @allObjects.length
-
-    @$.add = (obj) ->
-      @activeObjects.push obj
-
-    @$.delete = (obj) ->
-      @activeObjects = @activeObjects.filter (curObj) -> curObj isnt obj
 
   watch:
     'configuration.vm_name': '_onVmNameChanged'
@@ -103,9 +88,14 @@ angular.module('app.rubyops').classy.controller
 
   _loadConfiguration: (configuration) ->
     @$.configuration = configuration
+
     @$.configuration.vm_os = @_findOptionById(@$.osList, configuration.vm_os, 'box')
-    @$.configuration.vm_ports = (val for key, val of configuration.vm_ports)
-    @$.configuration.vm_share_type = @_findOptionById(@$.shareTypes, configuration.vm_share_type, 'id')
+
+    for environment in ['development', 'staging', 'production']
+      if @$.configuration[environment]
+        @$.configuration[environment].vm_ports = (val for key, val of configuration[environment].vm_ports)
+        @$.configuration[environment].vm_share_type = @_findOptionById(@$.shareTypes, configuration[environment].vm_share_type, 'id')
+
     p.selected = (id in configuration.package_bundles) for id, p of @$.packages
     @$.configuration.rails_version = @_findOptionById(@$.railsVersions, configuration.rails_version, 'version')
     @$.configuration.ruby_version = (@$.rubyInstalls[@$.configuration.ruby_install].rubies.filter (v) -> v.version == configuration.ruby_version)[0]

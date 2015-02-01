@@ -4,16 +4,20 @@ class DefaultConfiguration
     user_name = 'vagrant'
     { vm_name: app_name,
       vm_os: 'ubuntu/trusty64',
-      autoconf: true,
-      vm_memory: '1024',
-      vm_swap: '1024',
-      vm_cores: '2',
-      vm_shared_directory: '/vagrant',
-      vm_share_type: platform == :windows ? 'smb' : 'nfs',
-      vm_ip: '192.168.20.50',
-      vm_ports: {
-        '0' => { guest: 80,  host: 8080 },
-        '1' => { guest: 443, host: 8081 }
+      environments: ['development'],
+      development: {
+        target: 'virtualbox',
+        autoconf: true,
+        vm_memory: '1024',
+        vm_swap: '1024',
+        vm_cores: '2',
+        vm_shared_directory: '/vagrant',
+        vm_share_type: platform == :windows ? 'smb' : 'nfs',
+        vm_ip: '192.168.20.50',
+        vm_ports: {
+          '0' => { guest: 80,  host: 8080 },
+          '1' => { guest: 443, host: 8081 }
+        },
       },
       package_bundles: [ 'graphics', 'qt', 'curl' ],
       packages: [],
