@@ -16,7 +16,7 @@
 
   .col-lg-4
     .form-group
-      label for='mongodb_db_name' Database Name
+      label for='mongodb_db_name'= t('boxes.form.database_name')
       input.form-control id='mongodb_db_name' name='box[mongodb_db_name]' type='text' ng-model='configuration.mongodb_db_name' ng-disabled='!isActive("mongodb")'
 p ng-show='mongodbConfigPath' <kbd>{{ mongodbConfigPath }}</kbd> will be automatically created based on the above params. Your old configuration will be backed up.
 p ng-hide='mongodbConfigPath' No configuration files will be created.

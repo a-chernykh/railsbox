@@ -50,10 +50,7 @@ en:
       ruby_version: Ruby version
       nginx_unicorn: nginx + unicorn
       nginx_passenger: nginx + passenger
-      mysql: MySQL
       postgresql: PostgreSQL
-      mongodb: MongoDB
-      redis: Redis
       sidekiq: sidekiq
       resque: resque
       delayed_job: delayed_job
@@ -61,6 +58,7 @@ en:
       mysql: MySQL
       mongodb: MongoDB
       redis: Redis
+      database_name: Database name
     show:
       download: 'Download'
       edit: 'Edit'

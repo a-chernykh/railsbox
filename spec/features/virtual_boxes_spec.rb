@@ -31,10 +31,15 @@ feature 'Virtual boxes', js: true do
     fill_in I18n.t('boxes.form.name'), with: 'myapp'
     fill_in I18n.t('boxes.form.memory'), with: '2048'
 
+    click_on I18n.t('boxes.form.add_database')
+    click_on I18n.t('boxes.form.mongodb')
+    page.find('.database', text: I18n.t('boxes.form.mongodb')).fill_in I18n.t('boxes.form.database_name'), with: 'mymongo'
+
     click_on I18n.t('boxes.form.create')
     expect(page).to have_selector(:link_or_button, I18n.t('boxes.show.edit'))
 
     click_on I18n.t('boxes.show.edit')
     expect(find_field(I18n.t('boxes.form.memory')).value).to eq '2048'
+    expect(page.find('.database', text: I18n.t('boxes.form.mongodb')).find_field(I18n.t('boxes.form.database_name')).value).to eq 'mymongo'
   end
 end
