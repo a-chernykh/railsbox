@@ -14,7 +14,7 @@ module TestHelpers
         begin
           dir = @context.extract_zip(download)
           FileUtils.cp_r File.join(Rails.root.join('spec/fixtures', @app), '.'), dir
-          Dir.chdir("#{dir}/railsbox") do
+          Dir.chdir("#{dir}/railsbox/development") do
             begin
               env = {'ANSIBLE_ARGS' => '-e use_apt_proxy=true'}
               # a little hack to make ansible_installed? return false
@@ -104,7 +104,7 @@ module TestHelpers
         puts <<-eos.gsub /^\s+/, ""
           WARNING: vagrant is left at #{dir}, please run this manually to destroy it:
 
-          cd #{dir}/railsbox
+          cd #{dir}/railsbox/development
           vagrant destroy -f
           cd -
           rm -rf #{dir}
