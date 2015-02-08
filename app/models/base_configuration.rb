@@ -20,7 +20,7 @@ class BaseConfiguration
     template = Tilt.new template_path
     params = @params.merge(additional_params)
     File.open(output_path, 'w') do |f|
-      f.write template.render(TemplateContext.new(params), params: params)
+      f.write template.render(TemplateContext.new(template_path, params), params: params)
     end
   end
 end

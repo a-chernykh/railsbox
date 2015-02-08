@@ -1,9 +1,9 @@
-describe 'templates/Vagrantfile.single.erb' do
+describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
   let(:base_params)  { params_fixture.merge(target: 'virtualbox').merge(params_fixture[:development]) }
   let(:params)       { base_params }
-  let(:context)      { TemplateContext.new(params) }
+  let(:context)      { TemplateContext.new(Rails.root.join('templates/environment/virtualbox/Vagrantfile.single.erb'), params) }
 
-  let(:template) { Tilt.new 'templates/environment/Vagrantfile.single.erb' }
+  let(:template) { Tilt.new 'templates/environment/virtualbox/Vagrantfile.single.erb' }
   subject { template.render(context, params: params) }
 
   context 'vm_share_type' do

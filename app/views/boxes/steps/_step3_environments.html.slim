@@ -93,15 +93,19 @@ a.anchor#environments
                           button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
 
             div ng-show="configuration[environment].target == 'server'"
-              p.small SSH connection will be used to provision and deploy.
+              p.small SSH connection will be used to provision and deploy. Your default private key will be used to authenticate.
               .row
                 .col-lg-6
                   .form-group
                     label for='{{ environment }}_host'= t('boxes.form.server_host')
                     input.form-control id='{{ environment }}_host' name='box[{{ environment }}][host]' type='text' ng-model='configuration[environment].host'
-                .col-lg-2
+                .col-lg-3
                   .form-group
                     label for='{{ environment }}_port'= t('boxes.form.server_port')
                     input.form-control id='{{ environment }}_port' name='box[{{ environment }}][port]' type='text' ng-model='configuration[environment].port'
+                .col-lg-3
+                  .form-group
+                    label for='{{ environment }}_username'= t('boxes.form.server_username')
+                    input.form-control id='{{ environment }}_username' name='box[{{ environment }}][username]' type='text' ng-model='configuration[environment].username'
 
             button.btn.btn-danger.pull-right type='button' ng-show='activeObjects.length > 1' ng-click="delete(environment)" Delete

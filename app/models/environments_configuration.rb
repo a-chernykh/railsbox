@@ -10,10 +10,16 @@ class EnvironmentsConfiguration < BaseConfiguration
       env_path = File.join(output_dir, env)
       FileUtils.mkdir_p env_path
 
-      process_recursive(File.join(output_dir, 'environment'), '', env_path) do |source_path, target_path|
-        if File.extname(source_path) == Templates::EXT && File.basename(source_path)[0] != '_'
-          target_path.gsub!('.erb', '')
-          render(source_path, target_path.gsub('.erb', ''), env_params)
+      env_templates_path = File.join(output_dir, 'environment', target(env))
+
+      process_recursive(env_templates_path, '', env_path) do |source_path, target_path|
+        if File.extname(source_path) == Templates::EXT
+          if File.basename(source_path)[0] != '_'
+            target_path.gsub!('.erb', '')
+            render(source_path, target_path.gsub('.erb', ''), env_params)
+          end
+        else
+          FileUtils.cp_r source_path, target_path
         end
       end
 
@@ -34,5 +40,9 @@ class EnvironmentsConfiguration < BaseConfiguration
 
   def environments
     %w(development staging production) & @params[:environments]
+  end
+
+  def target(env)
+    %w(virtualbox server).delete(@params[env.to_sym][:target])
   end
 end

@@ -1,8 +1,15 @@
 describe EnvironmentsConfiguration do
   describe '#save' do
     let(:params) do
-      params_fixture.merge(environments: %w(development staging))
+      params_fixture.merge(environments: %w(development staging), staging: {
+        'target': 'server',
+        'host': 'myapp.com',
+        'port': '22',
+        'username': 'ubuntu',
+      })
     end
+    let(:staging_inventory_path) { File.join(@dir, 'staging', 'inventory') }
+    let(:staging_provision_path) { File.join(@dir, 'staging', 'provision.sh') }
     subject { described_class.new(params) }
 
     before { @dir = Dir.mktmpdir }
@@ -27,6 +34,14 @@ describe EnvironmentsConfiguration do
 
       it 'copies Vagrantfile' do
         expect(File).to exist(vagrantfile_path)
+      end
+
+      it 'does not creates development/inventory' do
+        expect(File).not_to exist(File.join(@dir, 'development', 'inventory'))
+      end
+
+      it 'does not creates development/provision.sh' do
+        expect(File).not_to exist(File.join(@dir, 'development', 'provision.sh'))
       end
 
       context 'ansible/group_vars/development/config.yml' do
@@ -64,6 +79,16 @@ describe EnvironmentsConfiguration do
         it 'sets box ip' do
           expect(output).to include %Q(.vm.network 'private_network', ip: '192.168.20.50')
         end
+      end
+    end
+
+    describe 'staging - remote server' do
+      it 'creates staging/inventory' do
+        expect(File).to exist(staging_inventory_path)
+      end
+
+      it 'creates staging/provision.sh' do
+        expect(File).to exist(staging_provision_path)
       end
     end
 

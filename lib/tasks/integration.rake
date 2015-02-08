@@ -8,7 +8,7 @@ namespace :integration do
       docker: false,
       vm_name: 'testapp1',
       vm_os: 'ubuntu/trusty64',
-      environments: ['development'],
+      environments: ['development', 'staging'],
       development: {
         target: 'virtualbox',
         autoconf: true,
@@ -22,6 +22,12 @@ namespace :integration do
           '0' => { guest: 80, host: 8080 },
           '1' => { guest: 443, host: 8081 },
         },
+      },
+      staging: {
+        target: 'server',
+        host: 'localhost',
+        port: '2222',
+        username: 'vagrant',
       },
       server_name: 'localhost',
       server_type: 'nginx_passenger',

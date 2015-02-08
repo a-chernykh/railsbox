@@ -3,11 +3,11 @@
 
 Vagrant.require_version '>= 1.5'
 
-<%= render 'environment/vagrant_plugins' %>
+<%= render 'vagrant_plugins' %>
 
 Vagrant.configure('2') do |config|
 <% if params[:target] == 'virtualbox' %>
-<%= render "environment/virtualbox_config" %>
+<%= render 'virtualbox_config' %>
 <% end %>
 
   config.ssh.forward_agent = true

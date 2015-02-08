@@ -1,5 +1,6 @@
 class TemplateContext
-  def initialize(params)
+  def initialize(path, params)
+    @path = path
     @params = params
   end
 
@@ -20,8 +21,7 @@ class TemplateContext
 
   def partial_path(partial)
     parts = partial.split('/')
-    parts.unshift Templates::ROOT_PATH
     parts[-1] = "_#{parts[-1]}.erb"
-    File.join parts
+    File.join File.dirname(@path), parts
   end
 end

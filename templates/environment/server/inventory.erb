@@ -1,0 +1,19 @@
+<%= params[:host] %> ansible_ssh_port=<%= params[:port] || 22 %> ansible_ssh_user=<%= params[:username] %>
+
+[all]
+<%= params[:host] %>
+
+[application]
+<%= params[:host] %>
+
+[vm]
+<%= params[:host] %>
+
+[development]
+<%= params[:host] %>
+
+<% roles.each do |role| -%>
+[<%= role %>]
+<%= params[:host] %>
+
+<% end %>

@@ -33,19 +33,19 @@ describe CopyConfiguration do
         let(:docker) { true }
 
         it 'copies Vagrantfile.erb from docker source' do
-          expect(IO.read(File.join(@dir, 'environment/Vagrantfile.erb'))).to eq(source_contents('environment/Vagrantfile.docker.erb'))
+          expect(IO.read(File.join(@dir, 'environment/virtualbox/Vagrantfile.erb'))).to eq(source_contents('environment/virtualbox/Vagrantfile.docker.erb'))
         end
 
         it 'does not copies Vagrantfile.single.erb' do
-          expect(File).not_to exist(File.join(@dir, 'environment/Vagrantfile.single.erb'))
+          expect(File).not_to exist(File.join(@dir, 'environment/virtualbox/Vagrantfile.single.erb'))
         end
 
         it 'does not copies Vagrantfile.docker.erb' do
-          expect(File).not_to exist(File.join(@dir, 'environment/Vagrantfile.docker.erb'))
+          expect(File).not_to exist(File.join(@dir, 'environment/virtualbox/Vagrantfile.docker.erb'))
         end
 
         it 'copies Vagrantfile.dockerhost.erb' do
-          expect(IO.read(File.join(@dir, 'environment/Vagrantfile.dockerhost.erb'))).to eq(source_contents('environment/Vagrantfile.dockerhost.erb'))
+          expect(IO.read(File.join(@dir, 'environment/virtualbox/Vagrantfile.dockerhost.erb'))).to eq(source_contents('environment/virtualbox/Vagrantfile.dockerhost.erb'))
         end
       end
 
@@ -53,15 +53,15 @@ describe CopyConfiguration do
         let(:docker) { false }
 
         it 'copies Vagrantfile.erb from vagrant source' do
-          expect(IO.read(File.join(@dir, 'environment/Vagrantfile.erb'))).to eq(source_contents('environment/Vagrantfile.single.erb'))
+          expect(IO.read(File.join(@dir, 'environment/virtualbox/Vagrantfile.erb'))).to eq(source_contents('environment/virtualbox/Vagrantfile.single.erb'))
         end
 
         it 'does not copies Vagrantfile.docker.erb' do
-          expect(File).not_to exist(File.join(@dir, 'environment/Vagrantfile.docker.erb'))
+          expect(File).not_to exist(File.join(@dir, 'environment/virtualbox/Vagrantfile.docker.erb'))
         end
 
         it 'does not copies Vagrantfile.dockerhost.erb' do
-          expect(File).not_to exist(File.join(@dir, 'environment/Vagrantfile.dockerhost.erb'))
+          expect(File).not_to exist(File.join(@dir, 'environment/virtualbox/Vagrantfile.dockerhost.erb'))
         end
       end
     end

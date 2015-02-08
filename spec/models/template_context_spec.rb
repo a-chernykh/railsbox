@@ -1,6 +1,9 @@
 describe TemplateContext do
   let(:server_type) { 'nginx_unicorn' }
-  let(:context) { described_class.new({databases: %w(postgresql), background_jobs: %w(sidekiq), server_type: server_type}) }
+  let(:context) do
+    described_class.new(Rails.root.join('templates/environment/virtualbox/Vagrantfile.single.erb'),
+                        {databases: %w(postgresql), background_jobs: %w(sidekiq), server_type: server_type})
+  end
 
   describe '#roles' do
     subject { context.roles }
@@ -27,7 +30,7 @@ describe TemplateContext do
   end
 
   describe '#render' do
-    subject(:rendered) { context.render 'environment/vagrant_plugins' }
+    subject(:rendered) { context.render 'vagrant_plugins' }
 
     it 'renders given partial' do
       expect(rendered).to include 'require_plugins'
