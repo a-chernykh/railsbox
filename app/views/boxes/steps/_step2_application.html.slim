@@ -1,19 +1,25 @@
 a.anchor#app-settings
 .row.step.step2
   .col-lg-1.step-number.visible-lg-block
-    h1 3
+    h1 2
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading
         h2.panel-title Application
       .panel-body
         .row
-          .col-lg-7
+          .col-lg-3
             .form-group
               label for='vm_name'= t('boxes.form.name')
               p
                 small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores are allowed.
               input.form-control required=true id='vm_name' name='box[vm_name]' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
+          .col-lg-4
+            .form-group
+              label for='git_url'= t('boxes.form.git_url')
+              p
+                small If you would like to add staging or production environments, railsbox needs to know where your application is hosted. Make sure you specify SSH URL here so that it's possible to use SSH agent forwarding.
+              input.form-control id='git_url' name='box[git_url]' type='text' ng-model='configuration.git_url' placeholder='git@github.com:andreychernih/railsbox.git'
           .col-lg-5
             .form-group
               label for='environment_file' Environment variables

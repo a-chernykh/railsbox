@@ -1,7 +1,7 @@
 a.anchor#environments
-.row.step.step2 ng-controller='EnvironmentsController'
+.row.step.step3 ng-controller='EnvironmentsController'
   .col-lg-1.step-number.visible-lg-block
-    h1 2
+    h1 3
   .col-lg-11.step-conf
     .panel.panel-default
       .panel-heading
@@ -46,31 +46,31 @@ a.anchor#environments
                   .row ng-hide='configuration[environment].autoconf'
                     .col-lg-4
                       .form-group
-                        label for='vm_memory'= t('boxes.form.memory')
-                        input.form-control required=true id='vm_memory' name='box[{{ environment }}][vm_memory]' type='text' ng-model='configuration[environment].vm_memory' ng-pattern="/^[0-9]+$/"
+                        label for='{{ environment }}_vm_memory'= t('boxes.form.memory')
+                        input.form-control required=true id='{{ environment }}_vm_memory' name='box[{{ environment }}][vm_memory]' type='text' ng-model='configuration[environment].vm_memory' ng-pattern="/^[0-9]+$/"
                     .col-lg-4
                       .form-group
-                        label for='vm_swap' Swap, Mb
-                        input.form-control required=true id='vm_swap' name='box[{{ environment }}][vm_swap]' type='text' ng-model='configuration[environment].vm_swap' ng-pattern="/^[0-9]+$/"
+                        label for='{{ environment }}_vm_swap' Swap, Mb
+                        input.form-control required=true id='{{ environment }}_vm_swap' name='box[{{ environment }}][vm_swap]' type='text' ng-model='configuration[environment].vm_swap' ng-pattern="/^[0-9]+$/"
                     .col-lg-4
                       .form-group
-                        label for='vm_cores' CPU cores
-                        select.form-control required=true id='vm_cores' name='box[{{ environment }}][vm_cores]' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration[environment].vm_cores'
+                        label for='{{ environment }}_vm_cores' CPU cores
+                        select.form-control required=true id='{{ environment }}_vm_cores' name='box[{{ environment }}][vm_cores]' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration[environment].vm_cores'
                   .row
                     .col-lg-4
                       .form-group
-                        label for='vm_shared_directory' Shared directory
-                        input.form-control required=true type='text' id='vm_shared_directory' name='box[{{ environment }}][vm_shared_directory]' ng-model='configuration[environment].vm_shared_directory'
+                        label for='{{ environment }}_vm_shared_directory' Shared directory
+                        input.form-control required=true type='text' id='{{ environment }}_vm_shared_directory' name='box[{{ environment }}][vm_shared_directory]' ng-model='configuration[environment].vm_shared_directory'
                     .col-lg-4
                       .form-group
-                        label for='vm_share_type'= t('boxes.form.share_type')
-                        select.form-control required=true id='vm_share_type' name='box[{{ environment }}][vm_share_type]' ng-model='configuration[environment].vm_share_type' ng-options='t.label for t in shareTypes track by t.id'
+                        label for='{{ environment }}_vm_share_type'= t('boxes.form.share_type')
+                        select.form-control required=true id='{{ environment }}_vm_share_type' name='box[{{ environment }}][vm_share_type]' ng-model='configuration[environment].vm_share_type' ng-options='t.label for t in shareTypes track by t.id'
                     .col-lg-4
                       .form-group
-                        label for='vm_ip' IP address
-                        input.form-control required=true type='text' id='vm_ip' name='box[{{ environment }}][vm_ip]' ng-model='configuration[environment].vm_ip'
+                        label for='{{ environment }}_vm_ip' IP address
+                        input.form-control required=true type='text' id='{{ environment }}_vm_ip' name='box[{{ environment }}][vm_ip]' ng-model='configuration[environment].vm_ip'
                 .col-lg-4 ng-controller='VirtualMachineController'
-                  label for='new_guest_port' Port forwarding
+                  label for='{{ environment }}_new_guest_port' Port forwarding
                   table.table.table-bordered
                     thead
                       tr
@@ -87,10 +87,17 @@ a.anchor#environments
                           button.btn.btn-danger type='button' ng-click='deletePort($index)' Delete
                       tr
                         td
-                          input.form-control id='new_guest_port' type='number' placeholder='guest port' ng-model='newGuestPort'
+                          input.form-control id='{{ environment }}_new_guest_port' type='number' placeholder='guest port' ng-model='newGuestPort'
                         td
                           input.form-control type='number' placeholder='host port' ng-model='newHostPort'
                         td
                           button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
+
+            / div ng-show="configuration[environment].target == 'ec2'"
+            /   .row
+            /     .col-lg-12
+            /       .form-group
+            /         label for='ec2_access_key'= t('boxes.form.memory')
+            /         input.form-control required=true id='vm_memory' name='box[{{ environment }}][vm_memory]' type='text' ng-model='configuration[environment].vm_memory' ng-pattern="/^[0-9]+$/"
 
             button.btn.btn-danger.pull-right type='button' ng-show='activeObjects.length > 1' ng-click="delete(environment)" Delete

@@ -59,6 +59,7 @@ en:
       mongodb: MongoDB
       redis: Redis
       database_name: Database name
+      git_url: 'git repository URL'
     show:
       download: 'Download'
       edit: 'Edit'
