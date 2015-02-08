@@ -1,11 +1,7 @@
 describe EnvironmentsConfiguration do
   describe '#save' do
     let(:params) do
-      params_fixture.merge({
-        staging: {
-          target: 'ec2'
-        }
-      })
+      params_fixture.merge(environments: %w(development staging))
     end
     subject { described_class.new(params) }
 
@@ -19,6 +15,10 @@ describe EnvironmentsConfiguration do
 
     it 'creates staging directory' do
       expect(Dir).to exist(File.join(@dir, 'staging'))
+    end
+
+    it 'does not creates production directory' do
+      expect(Dir).not_to exist(File.join(@dir, 'production'))
     end
 
     describe 'development - VirtualBox' do

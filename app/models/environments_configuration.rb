@@ -33,6 +33,6 @@ class EnvironmentsConfiguration < BaseConfiguration
   end
 
   def environments
-    %w(development staging production) & @params.keys.map(&:to_s)
+    %w(development staging production) & @params[:environments]
   end
 end

@@ -20,6 +20,12 @@ class DefaultConfiguration
           '1' => { guest: 443, host: 8081 }
         },
       },
+      staging: {
+        target: 'server'
+      },
+      production: {
+        target: 'server'
+      },
       package_bundles: [ 'graphics', 'qt', 'curl' ],
       packages: [],
       manual_ruby_version: nil,
