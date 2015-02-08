@@ -1,6 +1,4 @@
 ---
-rails_env: development
-
 <% params.each do |k, v| -%>
   <% unless v.respond_to?(:each) -%>
 <%= k %>: <%= v %>

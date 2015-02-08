@@ -23,9 +23,18 @@ describe EnvironmentsConfiguration do
 
     describe 'development - VirtualBox' do
       let(:vagrantfile_path) { File.join(@dir, 'development', 'Vagrantfile') }
+      let(:config_path) { File.join(@dir, 'ansible/group_vars/development/config.yml') }
 
       it 'copies Vagrantfile' do
         expect(File).to exist(vagrantfile_path)
+      end
+
+      context 'ansible/group_vars/development/config.yml' do
+        let(:output) { IO.read(config_path) }
+
+        it 'sets vm_shared_directory' do
+          expect(output).to include %Q(vm_shared_directory: /vagrant)
+        end
       end
 
       context 'Vagrantfile' do

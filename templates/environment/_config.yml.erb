@@ -1,0 +1,12 @@
+---
+<% params[:env].each do |k, v| -%>
+  <% unless v.respond_to?(:each) -%>
+<%= k %>: <%= v %>
+  <% end %>
+  <% if v.is_a?(Array) -%>
+<%= k %>:
+<% params[:env][k].each do |v| -%>
+  - <%= v %>
+<% end %>
+  <% end %>
+<% end %>

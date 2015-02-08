@@ -16,23 +16,23 @@
     vb.cpus = <%= params[:vm_cores] %>
     <% end %>
 
-    override.vm.box = '<%= params[:vm_os] %>'
-
-    override.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
-    override.vm.synced_folder '../', '<%= params[:vm_shared_directory] %>'<%= vm_share_type_param %>
-    override.vm.synced_folder 'ansible', '/ansible'<%= vm_share_type_param %>
-    <% if params[:vm_share_type] == 'nfs' -%>
-    override.bindfs.bind_folder '/vagrant', '/vagrant'
-    override.bindfs.bind_folder '/ansible', '/ansible'
-    <% end %>
-
-    override.vm.define '<%= params[:vm_name] %>' do |machine|
-      machine.vm.hostname = '<%= params[:server_name] %>'
-      <% params[:vm_ports].each_value do |port| -%>
-      machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
-      <% end %>
-    end
-
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
+
+  config.vm.define '<%= params[:vm_name] %>' do |machine|
+    machine.vm.hostname = '<%= params[:server_name] %>'
+    <% params[:vm_ports].each_value do |port| -%>
+    machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
+    <% end %>
+
+    machine.vm.box = '<%= params[:vm_os] %>'
+
+    machine.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
+    machine.vm.synced_folder '../../', '<%= params[:vm_shared_directory] %>'<%= vm_share_type_param %>
+    machine.vm.synced_folder '../ansible', '/ansible'<%= vm_share_type_param %>
+    <% if params[:vm_share_type] == 'nfs' -%>
+    machine.bindfs.bind_folder '/vagrant', '/vagrant'
+    machine.bindfs.bind_folder '/ansible', '/ansible'
+    <% end %>
   end
