@@ -21,10 +21,12 @@ class DefaultConfiguration
         },
       },
       staging: {
-        target: 'server'
+        target: 'server',
+        port: '22',
       },
       production: {
-        target: 'server'
+        target: 'server',
+        port: '22',
       },
       package_bundles: [ 'graphics', 'qt', 'curl' ],
       packages: [],

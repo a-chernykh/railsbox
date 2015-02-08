@@ -102,6 +102,6 @@ a.anchor#environments
                 .col-lg-2
                   .form-group
                     label for='{{ environment }}_port'= t('boxes.form.server_port')
-                    input.form-control id='{{ environment }}_port' name='box[{{ environment }}][port]' type='text' ng-model='configuration[environment].port' placeholder='22'
+                    input.form-control id='{{ environment }}_port' name='box[{{ environment }}][port]' type='text' ng-model='configuration[environment].port'
 
             button.btn.btn-danger.pull-right type='button' ng-show='activeObjects.length > 1' ng-click="delete(environment)" Delete
