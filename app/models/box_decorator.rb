@@ -14,13 +14,17 @@ class BoxDecorator < SimpleDelegator
   end
 
   def vm_shared_directory
-    development['vm_shared_directory']
+    default_environment['vm_shared_directory']
   end
 
   private
 
+  def default_environment
+    %w(development production staging).map { |e| send(e) }.compact.first
+  end
+
   def vm_ports
-    development['vm_ports']
+    default_environment['vm_ports']
   end
 
   def find_by_guest_port(port_number)

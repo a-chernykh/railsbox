@@ -11,7 +11,13 @@
         ' 
         a.btn.btn-default.btn-lg role='button' href=edit_box_url(@box) = t('.edit')
 
-      p Your site will be available as <a href="#{@box.http_url}">#{@box.http_url}</a> (http) and <a href="#{@box.https_url}">#{@box.https_url}</a> (https).
+      dl.dl-horizontal
+        - if @box.http_url
+          dt HTTP URL
+          dd <a href="#{@box.http_url}">#{@box.http_url}</a>
+        - if @box.https_url
+          dt HTTPS URL
+          dd <a href="#{@box.https_url}">#{@box.https_url}</a> (https)
 
       h2 Control
       h3 VM

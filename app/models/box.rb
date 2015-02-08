@@ -1,5 +1,5 @@
 class Box < ActiveRecord::Base
-  store_accessor :params, :vm_name, :server_type, :development
+  store_accessor :params, :vm_name, :server_type, :development, :production, :staging
 
   validates :params, presence: true
   validates :secure_id, presence: true, uniqueness: true
