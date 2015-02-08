@@ -60,6 +60,9 @@ en:
       redis: Redis
       database_name: Database name
       git_url: 'git repository URL'
+      git_branch: 'git branch'
+      server_host: 'Server host'
+      server_port: 'Server port'
     show:
       download: 'Download'
       edit: 'Edit'

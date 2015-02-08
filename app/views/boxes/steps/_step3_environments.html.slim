@@ -26,11 +26,10 @@ a.anchor#environments
                 input name='box[{{ environment }}][target]' type='radio' value='virtualbox' ng-model='configuration[environment].target'
                 ' VirtualBox
               label.radio-inline
-                input name='box[{{ environment }}][target]' type='radio' value='ec2' ng-model='configuration[environment].target'
-                ' Amazon EC2
-              label.radio-inline
-                input name='box[{{ environment }}][target]' type='radio' value='digitalocean' ng-model='configuration[environment].target'
-                ' DigitalOcean
+                input name='box[{{ environment }}][target]' type='radio' value='server' ng-model='configuration[environment].target'
+                ' Remote server
+
+            br
 
             div ng-show="configuration[environment].target == 'virtualbox'"
               .row
@@ -93,11 +92,16 @@ a.anchor#environments
                         td
                           button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
 
-            / div ng-show="configuration[environment].target == 'ec2'"
-            /   .row
-            /     .col-lg-12
-            /       .form-group
-            /         label for='ec2_access_key'= t('boxes.form.memory')
-            /         input.form-control required=true id='vm_memory' name='box[{{ environment }}][vm_memory]' type='text' ng-model='configuration[environment].vm_memory' ng-pattern="/^[0-9]+$/"
+            div ng-show="configuration[environment].target == 'server'"
+              p.small SSH connection will be used to provision and deploy.
+              .row
+                .col-lg-6
+                  .form-group
+                    label for='{{ environment }}_host'= t('boxes.form.server_host')
+                    input.form-control id='{{ environment }}_host' name='box[{{ environment }}][host]' type='text' ng-model='configuration[environment].host'
+                .col-lg-2
+                  .form-group
+                    label for='{{ environment }}_port'= t('boxes.form.server_port')
+                    input.form-control id='{{ environment }}_port' name='box[{{ environment }}][port]' type='text' ng-model='configuration[environment].port' placeholder='22'
 
             button.btn.btn-danger.pull-right type='button' ng-show='activeObjects.length > 1' ng-click="delete(environment)" Delete

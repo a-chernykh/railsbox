@@ -3,6 +3,7 @@ class DefaultConfiguration
     app_name = 'myapp'
     user_name = 'vagrant'
     { vm_name: app_name,
+      git_branch: 'master',
       vm_os: 'ubuntu/trusty64',
       environments: ['development'],
       development: {
