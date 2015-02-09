@@ -13,10 +13,6 @@ class BoxDecorator < SimpleDelegator
     "https://localhost:#{port['host']}" if port
   end
 
-  def vm_shared_directory
-    default_environment['vm_shared_directory']
-  end
-
   private
 
   def default_environment

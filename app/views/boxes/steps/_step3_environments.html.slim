@@ -56,15 +56,11 @@ a.anchor#environments
                         label for='{{ environment }}_vm_cores' CPU cores
                         select.form-control required=true id='{{ environment }}_vm_cores' name='box[{{ environment }}][vm_cores]' ng-options='coreNum for coreNum in coresList track by coreNum' ng-model='configuration[environment].vm_cores'
                   .row
-                    .col-lg-4
-                      .form-group
-                        label for='{{ environment }}_vm_shared_directory' Shared directory
-                        input.form-control required=true type='text' id='{{ environment }}_vm_shared_directory' name='box[{{ environment }}][vm_shared_directory]' ng-model='configuration[environment].vm_shared_directory'
-                    .col-lg-4
+                    .col-lg-6
                       .form-group
                         label for='{{ environment }}_vm_share_type'= t('boxes.form.share_type')
                         select.form-control required=true id='{{ environment }}_vm_share_type' name='box[{{ environment }}][vm_share_type]' ng-model='configuration[environment].vm_share_type' ng-options='t.label for t in shareTypes track by t.id'
-                    .col-lg-4
+                    .col-lg-6
                       .form-group
                         label for='{{ environment }}_vm_ip' IP address
                         input.form-control required=true type='text' id='{{ environment }}_vm_ip' name='box[{{ environment }}][vm_ip]' ng-model='configuration[environment].vm_ip'

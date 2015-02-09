@@ -7,13 +7,13 @@ namespace :integration do
       background_jobs: %w(sidekiq),
       docker: false,
       vm_name: 'testapp1',
+      path: '/testapp1',
       vm_os: 'ubuntu/trusty64',
       environments: ['development', 'staging'],
       development: {
         target: 'virtualbox',
         autoconf: true,
         vm_ip: '192.168.59.104',
-        vm_shared_directory: '/vagrant',
         vm_share_type: 'nfs',
         vm_memory: 1500,
         vm_swap: 1024,
@@ -42,7 +42,7 @@ namespace :integration do
       sidekiq_app_name: 'testapp1-sidekiq',
       sidekiq_command: 'sidekiq',
       packages: %w(),
-      environment_file: '/vagrant/.envrc'
+      environment_file: '/testapp1/.envrc'
     }
 
     test_app_path = Rails.root.join('spec/fixtures/testapp1')

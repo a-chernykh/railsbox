@@ -8,13 +8,19 @@ a.anchor#app-settings
         h2.panel-title Application
       .panel-body
         .row
-          .col-lg-7
+          .col-lg-4
             .form-group
               label for='vm_name'= t('boxes.form.name')
               p
-                small It will be the name of your box and Linux service. Only alphanumeric characters, dashes and underscores are allowed.
+                small Only alphanumeric characters, dashes and underscores are allowed.
               input.form-control required=true id='vm_name' name='box[vm_name]' type='text' ng-model='configuration.vm_name' ng-pattern="/^[0-9a-zA-Z_-]+$/"
-          .col-lg-5
+          .col-lg-4
+            .form-group
+              label for='path' Path
+              p
+                small Where application source code will be stored.
+              input.form-control type='text' id='path' name='box[path]' ng-model='configuration.path'
+          .col-lg-4
             .form-group
               label for='environment_file' Environment variables
               p

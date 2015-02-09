@@ -20,7 +20,7 @@ user_home_path: '/home/{{ user_name }}'
 ssl_certificate_path: /etc/nginx/ssl/{{ server_name }}.crt
 ssl_certificate_key_path: /etc/nginx/ssl/{{ server_name }}.key
 
-app_path: '{{ vm_shared_directory }}'
+app_path: '{{ path }}'
 app_public_path: "{{ app_path }}/public"
 app_config_path: "{{ app_path }}/config"
 app_temp_path: "{{ app_path }}/tmp"

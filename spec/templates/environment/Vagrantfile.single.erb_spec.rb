@@ -11,7 +11,7 @@ describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
       let(:params) { base_params.merge(:vm_share_type => nil) }
 
       it 'does not sets synced folder type' do
-        expect(subject).to include %Q(.vm.synced_folder '../../', '/vagrant'\n)
+        expect(subject).to include %Q(.vm.synced_folder '../../', '/myapp'\n)
       end
     end
 
@@ -19,7 +19,7 @@ describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
       let(:params) { base_params.merge(:vm_share_type => 'nfs') }
 
       it 'sets nfs synced folder type' do
-        expect(subject).to include %Q(.vm.synced_folder '../../', '/vagrant', :type => 'nfs')
+        expect(subject).to include %Q(.vm.synced_folder '../../', '/myapp', :type => 'nfs')
       end
     end
 
@@ -27,7 +27,7 @@ describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
       let(:params) { base_params.merge(:vm_share_type => 'smb') }
 
       it 'sets smb synced folder type' do
-        expect(subject).to include %Q(.vm.synced_folder '../../', '/vagrant', :type => 'smb')
+        expect(subject).to include %Q(.vm.synced_folder '../../', '/myapp', :type => 'smb')
       end
     end
   end

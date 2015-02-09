@@ -3,6 +3,7 @@ class DefaultConfiguration
     app_name = 'myapp'
     user_name = 'vagrant'
     { vm_name: app_name,
+      path: "/#{app_name}",
       git_branch: 'master',
       vm_os: 'ubuntu/trusty64',
       environments: ['development'],
@@ -12,7 +13,6 @@ class DefaultConfiguration
         vm_memory: '1024',
         vm_swap: '1024',
         vm_cores: '2',
-        vm_shared_directory: '/vagrant',
         vm_share_type: platform == :windows ? 'smb' : 'nfs',
         vm_ip: '192.168.20.50',
         vm_ports: {
@@ -35,7 +35,7 @@ class DefaultConfiguration
       rails_version: '4',
       ruby_install: 'rvm',
       ruby_version: '2.2.0',
-      environment_file: '/vagrant/.envrc',
+      environment_file: "/#{app_name}/.envrc",
       databases: ['postgresql'],
       background_jobs: [],
       postgresql_orm: 'none',

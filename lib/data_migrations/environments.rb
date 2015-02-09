@@ -14,9 +14,10 @@ module DataMigrations
           params['environments'] = %w(development)
           params['development'] = { target: 'virtualbox' }
           %w(autoconf vm_memory vm_swap vm_cores 
-             vm_shared_directory vm_share_type vm_ip vm_ports).each do |attr|
+             vm_share_type vm_ip vm_ports).each do |attr|
             params['development'][attr] = params[attr]
           end
+          params['path'] = params.delete('vm_shared_directory')
 
           box.update_columns params: params
         end

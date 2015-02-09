@@ -38,7 +38,7 @@
               sudo restart #{@box.vm_name}
       - elsif @box.server_type == 'nginx_passenger'
         h3 Passenger
-        p You can restart your Rails application by running <kbd>touch tmp/restart.txt</kbd> in <kbd>#{@box.vm_shared_directory}</kbd> dir.
+        p You can restart your Rails application by running <kbd>touch tmp/restart.txt</kbd> in <kbd>#{@box.path}</kbd> dir.
 
       h2 Customization
       p Feel free to customize ansible playbooks as you need. But keep in mind that your changes may be lost if you decide to re-generate configuration using Edit button. Probably it will be best if you keep your customizations in a separate roles which names do not overlap with the playbooks provided by railsbox.
@@ -81,4 +81,4 @@
           | cd /path/to/rails/project/railsbox/development
             vagrant up
       p Note that vagrant may ask for a sudo password. That's required when you're using NFS for folder synchronization.
-      p Once it's done, you'll be able to login into it using <kbd>vagrant ssh</kbd> command. Your application is stored in <kbd>#{@box.vm_shared_directory}</kbd> directory.
+      p Once it's done, you'll be able to login into it using <kbd>vagrant ssh</kbd> command. Your application is stored in <kbd>#{@box.path}</kbd> directory.

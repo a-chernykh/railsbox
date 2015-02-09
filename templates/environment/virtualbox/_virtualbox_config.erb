@@ -29,10 +29,10 @@
     machine.vm.box = '<%= params[:vm_os] %>'
 
     machine.vm.network 'private_network', ip: '<%= params[:vm_ip] %>'
-    machine.vm.synced_folder '../../', '<%= params[:vm_shared_directory] %>'<%= vm_share_type_param %>
+    machine.vm.synced_folder '../../', '<%= params[:path] %>'<%= vm_share_type_param %>
     machine.vm.synced_folder '../ansible', '/ansible'<%= vm_share_type_param %>
     <% if params[:vm_share_type] == 'nfs' -%>
-    machine.bindfs.bind_folder '/vagrant', '/vagrant'
+    machine.bindfs.bind_folder '/<%= params[:path] %>', '/<%= params[:path] %>'
     machine.bindfs.bind_folder '/ansible', '/ansible'
     <% end %>
   end

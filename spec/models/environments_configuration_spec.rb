@@ -47,8 +47,8 @@ describe EnvironmentsConfiguration do
       context 'ansible/group_vars/development/config.yml' do
         let(:output) { IO.read(config_path) }
 
-        it 'sets vm_shared_directory' do
-          expect(output).to include %Q(vm_shared_directory: /vagrant)
+        it 'sets rails_env' do
+          expect(output).to include %Q(rails_env: development)
         end
       end
 

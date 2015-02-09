@@ -6,7 +6,7 @@ start on [2]
 stop on runlevel [016]
 
 env PATH=$PATH:/usr/local/bin:/usr/bin:/bin
-env HOME=/home/vagrant
+env HOME={{ user_home_path }}
 
 respawn
 

@@ -37,6 +37,10 @@ describe DataMigrations::Environments do
           'vm_memory' => '1024',
         )
       end
+
+      it 'renames vm_shared_directory to path' do
+        expect(old_box.params['path']).to eq '/vagrant'
+      end
     end
 
     context 'new boxes' do

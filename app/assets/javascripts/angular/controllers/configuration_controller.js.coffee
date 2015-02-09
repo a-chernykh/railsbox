@@ -78,7 +78,8 @@ angular.module('app.railsbox').classy.controller
         packages: [ 'curl', 'libcurl3', 'libcurl3-gnutls', 'libcurl4-openssl-dev' ]
 
   watch:
-    'configuration.vm_name': '_onVmNameChanged'
+    'configuration.vm_name':      '_onVmNameChanged'
+    'configuration.path':         '_onPathChanged'
     'configuration.ruby_install': '_onRubyInstallChange'
 
   downloadConfiguration: (url) ->
@@ -107,6 +108,9 @@ angular.module('app.railsbox').classy.controller
 
   _onVmNameChanged: (newValue, oldValue) ->
     if @$.configuration
+      if @$.configuration.path == "/#{oldValue}"
+        @$.configuration.path = "/#{newValue}"
+
       for dependant in ['delayed_job', 'sidekiq', 'resque']
         if @$.configuration["#{dependant}_app_name"] is undefined || @$.configuration["#{dependant}_app_name"] == "#{oldValue}-#{dependant}"
           @$.configuration["#{dependant}_app_name"] = "#{newValue}-#{dependant}"
@@ -115,5 +119,8 @@ angular.module('app.railsbox').classy.controller
         if @$.configuration["#{db}_db_name"] is undefined || @$.configuration["#{db}_db_name"] == oldValue
           @$.configuration["#{db}_db_name"] = newValue
 
+  _onPathChanged: (newValue, oldValue) ->
+    if @$.configuration?.environment_file == "#{oldValue}/.envrc"
+      @$.configuration['environment_file'] = "#{newValue}/.envrc"
 
   _t: (key) -> I18n.t("boxes.form.#{key}")
