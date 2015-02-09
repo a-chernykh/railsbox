@@ -1,0 +1,12 @@
+---
+- name: Create directories
+  file: path={{ item }} state=directory owner={{ user_name }} group={{ group_name }}
+  with_items:
+    - '{{ path }}'
+    - '{{ releases_path }}'
+    - '{{ shared_path }}'
+    - '{{ shared_path }}/tmp'
+    - '{{ shared_path }}/log'
+    - '{{ shared_path }}/config'
+    - '{{ shared_path }}/vendor'
+    - '{{ shared_path }}/vendor/bundle'

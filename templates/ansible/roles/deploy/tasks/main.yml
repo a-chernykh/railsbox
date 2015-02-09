@@ -1,0 +1,52 @@
+---
+- set_fact: this_release_path={{ releases_path }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
+
+- debug: msg='New release path {{ this_release_path }}'
+
+- name: Create new release dir
+  file: path={{ this_release_path }} state=directory
+
+- name: Update code
+  git: repo={{ git_url }} dest={{ this_release_path }} version={{ git_branch }} accept_hostkey=yes
+  register: git
+
+- debug: msg='Updated repo from {{ git.before }} to {{ git.after }}'
+
+- name: Delete log directory
+  file: path={{ this_release_path }}/log state=absent
+
+- name: Symlink shared files
+  file: src={{ shared_path }}/{{ item }} dest={{ this_release_path }}/{{ item }} state=link force=yes
+  with_items:
+    - config/database.yml
+    - config/secrets.yml
+    - config/unicorn.rb
+    - log
+    - tmp
+    - vendor/bundle
+
+- name: Install bundle
+  command: 'bundle install --deployment --without="development test"'
+  args:
+    chdir: '{{ this_release_path }}'
+
+- name: Precompile assets
+  command: rake assets:precompile chdir={{ this_release_path }}
+  environment:
+    RAILS_ENV: '{{ rails_env }}'
+
+- name: Migrate database
+  command: rake db:migrate chdir={{ this_release_path }}
+  environment:
+    RAILS_ENV: '{{ rails_env }}'
+
+- name: Symlink new release
+  file: src={{ this_release_path }} dest={{ current_release_path }} state=link force=yes
+
+- name: Restart unicorn
+  command: sudo restart {{ app_name }}
+
+- name: Cleanup
+  shell: "ls -1t {{ releases_path }}|tail -n +{{ keep_releases + 1 }}|xargs rm -rf"
+  args:
+    chdir: '{{ releases_path }}'

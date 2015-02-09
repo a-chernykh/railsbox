@@ -12,19 +12,23 @@
 <% end %>
 
 app_name: '{{ vm_name }}'
-user_name: vagrant
-group_name: vagrant
+user_name: '{{ "vagrant" if target == "virtualbox" else app_name }}'
+group_name: '{{ user_name }}'
 
 user_home_path: '/home/{{ user_name }}'
 
 ssl_certificate_path: /etc/nginx/ssl/{{ server_name }}.crt
 ssl_certificate_key_path: /etc/nginx/ssl/{{ server_name }}.key
 
-app_path: '{{ path }}'
+app_path: '{{ path }}/current'
 app_public_path: "{{ app_path }}/public"
 app_config_path: "{{ app_path }}/config"
 app_temp_path: "{{ app_path }}/tmp"
 app_logs_path: "{{ app_path }}/log"
+
+releases_path: '{{ path }}/releases'
+current_release_path: '{{ path }}/current'
+shared_path: '{{ path }}/shared'
 
 unicorn_sock_path: "/tmp/unicorn.{{ rails_env }}.sock"
 unicorn_config_path: "{{ app_config_path }}/unicorn.{{ rails_env }}.rb"
