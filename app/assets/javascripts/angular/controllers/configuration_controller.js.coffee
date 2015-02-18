@@ -32,7 +32,7 @@ angular.module('app.rubyops').classy.controller
       { box: 'ubuntu/precise64', name: 'Ubuntu Precise Pangolin 12.04 LTS 64' },
       { box: 'ubuntu/trusty32', name: 'Ubuntu Trusty 14.04 LTS 32' },
       { box: 'ubuntu/trusty64', name: 'Ubuntu Trusty 14.04 LTS 64' }
-      ##{ box: 'mokote/debian-7', name: 'Debian Wheezy 7.8.0 64' }
+      # { box: 'mokote/debian-7', name: 'Debian Wheezy 7.8.0 64' }
     ]
     @$.coresList = [ '1', '2', '3', '4', '5', '6', '7', '8' ]
     
