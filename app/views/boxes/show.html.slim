@@ -31,7 +31,7 @@
               sudo stop #{@box.vm_name}
               sudo restart #{@box.vm_name}
       - elsif @box.server_type == 'nginx_puma'
-        h3 unicorn
+        h3 puma
         p You can start and stop puma by running standard upstart commands:
         p
           pre
