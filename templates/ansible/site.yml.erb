@@ -9,6 +9,7 @@
     - { role: apt_proxy, when: use_apt_proxy }
   tasks:
     - apt: update_cache=yes
+    - apt: upgrade=yes
 
 <% params[:databases].each do |db| -%>
 - hosts: <%= db %>
@@ -26,6 +27,7 @@
     - ruby
     - vim
     - webserver
+    - nodejs
 
 <% params[:background_jobs].each do |bg| -%>
 - hosts: <%= bg %>

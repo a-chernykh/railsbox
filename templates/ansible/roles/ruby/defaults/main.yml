@@ -6,7 +6,7 @@ rvm1_user: '{{ user_name }}'
 rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
 rvm1_rvm_version: 'stable'
 rvm1_rvm_check_for_updates: no
-rvm1_gpg_keys: 'D39DC0E3'
+rvm1_gpg_keys: '409B6B1796C275462A1703113804BB82D39DC0E3'
 rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 rvm1_temp_download_path: '/tmp'
 rvm1_default_ruby_version: '{{ manual_ruby_version or ruby_version }}'

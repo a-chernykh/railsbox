@@ -1,0 +1,39 @@
+---
+- name: Install packages
+  apt: name={{ item }}
+  with_items:
+    - python
+    - g++
+    - make
+    - checkinstall
+
+- name: Detect nodejs
+  stat: path='/usr/local/bin/node'
+  register: nodejs_installed
+
+- name: Detect nodejs install file
+  stat: path='{{ nodejs_temp_download_path }}/node-latest.tar.gz'
+  register: nodejs_installer
+  when: not nodejs_installed.stat.exists
+
+- name: Download latest NodeJs
+  get_url:
+    url: 'http://nodejs.org/dist/node-latest.tar.gz'
+    dest: '{{ nodejs_temp_download_path }}/node-latest.tar.gz'
+  when: nodejs_installer is defined and not nodejs_installer.stat.exists and not nodejs_installed.stat.exists
+
+- name: Uncompress nodejs configure and install
+  shell: >
+    tar -xzvf {{ nodejs_temp_download_path }}/node-latest.tar.gz &&
+    cd node-v* &&
+    ./configure &&
+    fakeroot checkinstall -y --install=no --pkgversion $(echo $(pwd) | sed -n -re's/.+node-v(.+)$/\1/p') make -j$(($(nproc)+1)) install &&
+    sudo dpkg -i node_*
+  register: nodejs_finished
+  when: not nodejs_installed.stat.exists
+
+- name: Clean up files
+  shell: >
+    rm {{ nodejs_temp_download_path }}/node-latest.tar.gz &&
+    rm -Rf {{ nodejs_temp_download_path }}/node-v*
+  when: nodejs_finished is defined

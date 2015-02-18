@@ -1,0 +1,11 @@
+---
+:verbose: true
+:concurrency: 5
+:pidfile: {{ sidekiq_pid_path }}
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 20
+:queues:
+  - default
+  - [myqueue, 2]

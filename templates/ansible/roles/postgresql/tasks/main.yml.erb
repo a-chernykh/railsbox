@@ -1,28 +1,37 @@
 ---
+- name: 'Set postgresql key'
+  apt_key: id=ACCC4CF8 url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+
+- name: Set repo for Debian Wheezy
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main' update_cache=yes state=present
+  when: os_name == 'mokote/debian-7'
+  
+- name: Set repo for Ubuntu Trusty
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' update_cache=yes state=present
+  when: os_name == 'ubuntu/trusty32' or os_name == 'ubuntu/trusty64'
+
+- name: Set repo for Ubuntu Precise
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' update_cache=yes state=present
+  when: os_name == 'ubuntu/precise64' or os_name == 'ubuntu/precise64'
+
+- name: Install the version 9.x of postgresql 
+  apt: name=postgresql-{{ postgresql_version }} state=present
+  apt: name=postgresql-{{ postgresql_version }} state=present
+
 - name: Install packages
   apt: name={{ item }}
   with_items:
     - libpq-dev
-    - postgresql
-    - postgresql-contrib
     - python-pip
     - python-dev
 
 - name: Configure PostgreSQL - postgresql.conf
-  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
   notify: restart postgresql
 
 - name: Configure PostgreSQL - pg_hba.conf
-  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf
   notify: restart postgresql
-
-<% if params[:docker] -%>
-- name: Create /etc/my_init.d/postgresql.sh
-  template: src=my_init.sh.j2 dest=/etc/my_init.d/postgresql.sh mode=0755
-
-- name: Start postgresql
-  command: /etc/my_init.d/postgresql.sh
-<% end %>
 
 - name: Install required Python modules
   pip: name=psycopg2
