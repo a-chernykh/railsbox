@@ -10,6 +10,9 @@ angular.module('app.railsbox').classy.controller
     ]
     @$.activeObjects = []
 
+    @$.isVirtualBox = -> @configuration[@environment].target == 'virtualbox'
+    @$.isServer = -> @configuration[@environment].target == 'server'
+
   watch:
     'configuration.environments': '_onEnvironmentsChange'
 

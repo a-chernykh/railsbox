@@ -2,6 +2,12 @@ class DefaultConfiguration
   def self.get(platform = :mac)
     app_name = 'myapp'
     user_name = 'vagrant'
+    server_configuration = {
+      target: 'server',
+      port: '22',
+      username: 'ubuntu',
+    }.freeze
+
     { vm_name: app_name,
       path: "/#{app_name}",
       git_branch: 'master',
@@ -20,14 +26,8 @@ class DefaultConfiguration
           '1' => { guest: 443, host: 8081 }
         },
       },
-      staging: {
-        target: 'server',
-        port: '22',
-      },
-      production: {
-        target: 'server',
-        port: '22',
-      },
+      staging: server_configuration,
+      production: server_configuration,
       package_bundles: [ 'graphics', 'qt', 'curl' ],
       packages: [],
       manual_ruby_version: nil,
@@ -53,7 +53,7 @@ class DefaultConfiguration
       delayed_job_command: 'script/delayed_job run',
       sidekiq_command: 'sidekiq',
       resque_command: 'rake resque:work',
-      server_type: 'nginx_unicorn' }
+      server_type: 'nginx_unicorn' }.freeze
   end
 
   # Returns default configuration minimally required to compile
@@ -64,19 +64,22 @@ class DefaultConfiguration
   end
 
   def self.cleanup(hash)
+    bare = {}
+
     hash.each do |k, v|
-      if [true, false].include?(v)
-        hash.delete(k)
-      elsif v.is_a?(Array)
-        hash[k] = []
+      if v.is_a?(Array)
+        bare[k] = []
       elsif v.is_a?(Hash)
-        if %i(development staging production).include?(k)
-          cleanup(hash[k])
-        else
-          hash[k] = {}
-        end
+        bare[k] = if %i(development staging production).include?(k)
+                    cleanup(hash[k])
+                  else
+                    {}
+                  end
+      elsif ![true, false].include?(v)
+        bare[k] = v
       end
     end
-    hash
+
+    bare
   end
 end

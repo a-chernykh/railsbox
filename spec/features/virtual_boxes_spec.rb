@@ -1,5 +1,5 @@
 feature 'Virtual boxes', js: true do
-  scenario 'Create new box' do
+  scenario 'Create new box redirects to download page' do
     visit '/'
     fill_in 'Name', with: 'myapp'
     click_on I18n.t('boxes.form.create')

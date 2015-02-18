@@ -63,7 +63,7 @@ en:
       git_branch: 'git branch'
       server_host: 'SSH host'
       server_port: 'SSH port'
-      server_username: 'SSH username'
+      server_username: 'SSH username (with sudo access)'
     show:
       download: 'Download'
       edit: 'Edit'
