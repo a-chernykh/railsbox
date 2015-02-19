@@ -19,4 +19,10 @@ feature 'Provision boxes', js: true, vagrant: true do
              components: ['system_package', 'passenger', 'mysql'],
              ansible: false)
   end
+
+  scenario '(remote server) system_package, passenger, MySQL' do
+    test_box(app: 'testapp2', 
+             components: ['system_package', 'passenger', 'mysql'],
+             target: 'server')
+  end
 end

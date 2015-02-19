@@ -27,7 +27,7 @@ a.anchor#environments
                 ' VirtualBox
               label.radio-inline
                 input name='box[{{ environment }}][target]' type='radio' value='server' ng-model='configuration[environment].target'
-                ' Remote server
+                = t('boxes.form.remote_server')
 
             br
 

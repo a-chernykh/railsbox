@@ -61,6 +61,7 @@ en:
       database_name: Database name
       git_url: 'git repository URL'
       git_branch: 'git branch'
+      remote_server: 'Remote server'
       server_host: 'SSH host'
       server_port: 'SSH port'
       server_username: 'SSH username (with sudo access)'
