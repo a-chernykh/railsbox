@@ -1,4 +1,3 @@
 --color
---require spec_helper
 --require rails_helper
 --tag ~vagrant

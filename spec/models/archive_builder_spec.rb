@@ -1,10 +1,7 @@
 describe ArchiveBuilder do
   describe '#build' do
-    include FakeFS::SpecHelpers
-
     def stub_temp_dir(dir)
       allow(Dir).to receive(:mktmpdir) do
-        Dir.mkdir dir
         dir
       end
     end
@@ -17,7 +14,9 @@ describe ArchiveBuilder do
     let(:archiver) { double('Archiver').as_null_object }
     subject { described_class.new(configurator) }
 
-    before { stub_temp_dir('/tmp') }
+    let(:temp_dir) { Dir.mktmpdir }
+
+    before { stub_temp_dir(temp_dir) }
     before { stub_archiver }
 
     it 'creates temp directory' do
@@ -28,22 +27,22 @@ describe ArchiveBuilder do
     it 'creates railsbox directory in temp directory' do
       expect(FileUtils).to receive(:remove_entry_secure)
       subject.build
-      expect(File).to be_directory('/tmp/railsbox')
+      expect(File).to be_directory(File.join(temp_dir, 'railsbox'))
     end
 
     it 'saves configuration' do
-      expect(configurator).to receive(:save).with('/tmp/railsbox')
+      expect(configurator).to receive(:save).with(File.join(temp_dir, 'railsbox'))
       subject.build
     end
 
     it 'archives directory' do
-      allow(Archiver).to receive(:new).with('/tmp') { archiver }
+      allow(Archiver).to receive(:new).with(temp_dir) { archiver }
       expect(archiver).to receive(:archive)
       subject.build
     end
 
     it 'removes temp directory' do
-      expect(FileUtils).to receive(:remove_entry_secure).with('/tmp')
+      expect(FileUtils).to receive(:remove_entry_secure).with(temp_dir)
       subject.build
     end
   end

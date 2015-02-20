@@ -10,10 +10,8 @@ module TestHelpers
         @destroyed = false
       end
 
-      def up(provision: false)
-        args = %w(up)
-        args << '--no-provision' unless provision
-        run 'up', args
+      def up
+        run 'up'
       end
 
       def destroy
@@ -27,7 +25,7 @@ module TestHelpers
 
       private
 
-      def run(command, args)
+      def run(command, args=[])
         Dir.chdir(@dir) do
           system "vagrant #{command} #{args.join(' ')}"
         end

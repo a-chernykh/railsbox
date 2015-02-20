@@ -15,8 +15,16 @@ module TestHelpers
         begin
           FileUtils.cp_r File.join(Rails.root.join('spec/fixtures', @app), '.'), @dir
 
+          copy_dummy_vagrantfile if remote_server?
+
           is_provisioned = vagrant.up
           return false unless is_provisioned
+
+          if remote_server?
+            Dir.chdir(@dir) do
+              system './provision.sh'
+            end
+          end
 
           # give unicorn / worker some time to start
           sleep(10)
@@ -31,6 +39,14 @@ module TestHelpers
       end
 
       private
+
+      def remote_server?
+        @target == 'server'
+      end
+
+      def copy_dummy_vagrantfile
+        FileUtils.cp Rails.root.join('spec/fixtures/Vagrantfile'), @dir
+      end
 
       def vagrant_dir
         "#{@dir}/railsbox/development"

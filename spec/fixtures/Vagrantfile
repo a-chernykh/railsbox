@@ -1,0 +1,19 @@
+Vagrant.configure('2') do |config|
+  config.vm.provider :virtualbox do |vb, override|
+    vb.memory = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 3
+    vb.cpus = `sysctl -n hw.ncpu`.to_i
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
+
+  config.vm.define 'ubuntu' do |machine|
+    machine.vm.hostname = 'localhost'
+    machine.vm.network 'forwarded_port', :guest => 22, :host => 2299
+    machine.vm.network 'forwarded_port', :guest => 80, :host => 8080
+    machine.vm.network 'forwarded_port', :guest => 443, :host => 8081
+
+    machine.vm.box = 'ubuntu/trusty64'
+
+    machine.vm.network 'private_network', ip: '192.168.20.50'
+  end
+end
