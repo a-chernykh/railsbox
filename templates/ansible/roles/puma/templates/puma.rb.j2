@@ -1,0 +1,34 @@
+# {{ ansible_managed }}
+
+working_directory '{{ app_path }}'
+
+pid '{{ puma_pid_path }}'
+
+stderr_path '{{ puma_stderr_path }}'
+stdout_path '{{ puma_stdout_path }}'
+
+listen '{{ puma_sock_path }}'
+
+workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+threads_count = Integer(ENV['MAX_THREADS'] || 5)
+threads threads_count, threads_count
+
+preload_app!
+
+timeout 30
+
+rackup      DefaultRackup
+port        ENV['PORT']     || 3000
+environment ENV['RACK_ENV'] || 'development'
+
+on_worker_boot do
+  {% if postgresql_orm == 'activerecord' %}
+  # Connect to ActiveRecord
+  ActiveRecord::Base.establish_connection
+  {% endif %}
+  
+  {% if redis_orm == 'redis-rb' %}
+  # Connect to Redis
+  $redis.client.reconnect
+  {% endif %}
+end

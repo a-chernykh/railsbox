@@ -18,6 +18,12 @@ describe TemplateContext do
 
       it { should eq 'unicorn' }
     end
+    
+    context 'server_type == nginx_puma' do
+      let(:server_type) { 'nginx_puma' }
+
+      it { should eq 'puma' }
+    end
 
     context 'server_type == nginx_passenger' do
       let(:server_type) { 'nginx_passenger' }

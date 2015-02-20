@@ -30,6 +30,7 @@ module TestHelpers
           mongodb_db_name: 'testapp',
           mongodb_orm: 'mongoid',
           redis_orm: 'redis-rb',
+          sidekiq_orm: 'sidekiq-rb',
           delayed_job_app_name: 'testapp-delayed_job',
           delayed_job_command: 'bin/delayed_job run',
           sidekiq_app_name: 'testapp-sidekiq',

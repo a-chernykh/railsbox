@@ -1,0 +1,11 @@
+---
+- name: Configure puma
+  template: src=puma.rb.j2 dest={{ puma_config_path }}
+
+- name: Install puma
+  command: /bin/bash -l -c 'gem install puma --no-ri --no-rdoc' chdir={{ app_path }}
+  sudo: no
+
+- name: Create upstart config
+  template: src=upstart.conf.j2 dest=/etc/init/{{ puma_app_name }}.conf
+  notify: restart application

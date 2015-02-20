@@ -48,6 +48,7 @@ en:
       system_package: System package
       ruby_version: Ruby version
       nginx_unicorn: nginx + unicorn
+      nginx_puma: nginx + puma
       nginx_passenger: nginx + passenger
       mysql: MySQL
       postgresql: PostgreSQL

@@ -7,4 +7,20 @@
     .form-group
       label for='sidekiq_command' Command to start sidekiq
       input.form-control id='sidekiq_command' name='box[sidekiq_command]' type='text' ng-model='configuration.sidekiq_command' ng-disabled='!isActive("sidekiq")'
+
+.row
+  .col-lg-2
+    .form-group
+      .radio
+        label
+          input name='box[sidekiq_orm]' type='radio' value='none' ng-model='configuration.sidekiq_orm' ng-disabled='!isActive("sidekiq")'
+          ' Do not configure
+      .radio
+        label
+          input name='box[sidekiq_orm]' type='radio' value='sidekiq-rb' ng-model='configuration.sidekiq_orm' ng-disabled='!isActive("sidekiq")'
+          ' sidekiq-rb
+
+p ng-show='configuration.sidekiq_orm != "none"' <kbd>config/initializers/sidekiq.rb</kbd> will be automatically created. Your old configuration (if any) will be backed up.
+p ng-hide='configuration.sidekiq_orm != "none"' No configuration files will be created.
+
 p System service <kbd>{{ configuration.sidekiq_app_name }}</kbd> will be created. You can control it by running the following commands: <kbd>sudo stop {{ configuration.sidekiq_app_name }}</kbd>, <kbd>sudo start {{ configuration.sidekiq_app_name }}</kbd>, <kbd>sudo restart {{ configuration.sidekiq_app_name }}</kbd>.

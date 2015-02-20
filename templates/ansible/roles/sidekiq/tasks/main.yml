@@ -2,3 +2,7 @@
 - name: Create upstart config
   template: src=upstart.conf.j2 dest=/etc/init/{{ sidekiq_app_name }}.conf
   notify: restart sidekiq
+  
+- name: Configure sidekiq-rb
+  template: src=sidekiq.rb.j2 dest={{ app_config_path }}/initializers/sidekiq.rb owner={{ user_name }} backup=yes
+  when: sidekiq_orm is defined and sidekiq_orm == 'sidekiq-rb'

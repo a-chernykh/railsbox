@@ -7,6 +7,9 @@ angular.module('app.rubyops').classy.controller
       label: @_t('nginx_unicorn')
       id: 'nginx_unicorn'
      ,
+      label: @_t('nginx_puma')
+      id: 'nginx_puma'
+     ,
       label: @_t('nginx_passenger')
       id: 'nginx_passenger'
     ]
@@ -29,6 +32,7 @@ angular.module('app.rubyops').classy.controller
       { box: 'ubuntu/precise64', name: 'Ubuntu Precise Pangolin 12.04 LTS 64' },
       { box: 'ubuntu/trusty32', name: 'Ubuntu Trusty 14.04 LTS 32' },
       { box: 'ubuntu/trusty64', name: 'Ubuntu Trusty 14.04 LTS 64' }
+      # { box: 'mokote/debian-7', name: 'Debian Wheezy 7.8.0 64' }
     ]
     @$.coresList = [ '1', '2', '3', '4', '5', '6', '7', '8' ]
     
@@ -58,8 +62,8 @@ angular.module('app.rubyops').classy.controller
         # https://www.brightbox.com/docs/ruby/ubuntu/
         rubies: [ { version: 'ruby1.8',   label: '1.8' },
                   { version: 'ruby1.9.1', label: '1.9.1' },
-                  { version: 'ruby2.1',   label: '2.1', default: true },
-                  { version: 'ruby2.2',   label: '2.2 (beta)' } ]
+                  { version: 'ruby2.1',   label: '2.1' },
+                  { version: 'ruby2.2',   label: '2.2', default: true } ]
     @$.railsVersions = [
       { version: '2',   label: 'rails 2.0+' },
       { version: '3',   label: 'rails 3.0+' },
@@ -72,7 +76,7 @@ angular.module('app.rubyops').classy.controller
     @$.packages =
       graphics:
         label: @_t('graphics_kit')
-        packages: [ 'imagemagick' ]
+        packages: [ 'imagemagick', 'libmagick++-dev' ]
       qt:
         label: @_t('qt_kit')
         packages: [ 'qt5-default', 'libqt5webkit5-dev' ]

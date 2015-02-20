@@ -29,6 +29,7 @@ class DefaultConfiguration
       mysql_orm: 'none',
       mongodb_orm: 'none',
       redis_orm: 'none',
+      sidekiq_orm: 'none',
       mongodb_db_name: app_name,
       mysql_db_name: app_name,
       mysql_db_user: user_name,

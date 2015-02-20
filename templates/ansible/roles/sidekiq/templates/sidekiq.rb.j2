@@ -1,0 +1,25 @@
+require 'sidekiq'
+
+# Set the Proper Redis Url
+redis_server_url = ENV["REDIS_URL"]  || 'redis://localhost:6379'
+
+# Client Config
+Sidekiq.configure_client do |config|
+  config.redis = { url: redis_server_url, namespace: 'sidekiq', size: 1 }
+end
+
+# Server Config
+Sidekiq.configure_server do |config|
+  # Redis
+  config.redis = { url: redis_server_url, namespace: 'sidekiq', size: 2 }
+
+{% if postgresql_orm == 'activerecord' %}
+  # Database
+  database_url = ENV['DATABASE_URL'] || 'localhost'
+  database_pool = ENV['DATABASE_POOL'] || '25'
+  if database_url
+    ENV['DATABASE_URL'] = "#{database_url}?pool=#{database_pool}"
+    ActiveRecord::Base.establish_connection
+  end
+{% endif %}
+end

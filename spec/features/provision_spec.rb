@@ -8,6 +8,11 @@ feature 'Provision boxes', js: true, vagrant: true do
     test_box(app: 'testapp1', 
              components: ['rvm', 'unicorn', 'postgresql', 'redis', 'sidekiq'])
   end
+  
+  scenario 'rvm, puma, PostgreSQL, redis, sidekiq' do
+    test_box(app: 'testapp1', 
+             components: ['rvm', 'puma', 'postgresql', 'redis', 'sidekiq'])
+  end
 
   scenario 'system_package, passenger, MySQL, delayed_job' do
     test_box(app: 'testapp2', 
