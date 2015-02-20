@@ -14,14 +14,12 @@
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' update_cache=yes state=present
   when: os_name == 'ubuntu/precise64' or os_name == 'ubuntu/precise64'
 
-- name: Install the version 9.x of postgresql 
-  apt: name=postgresql-{{ postgresql_version }} state=present
-  apt: name=postgresql-{{ postgresql_version }} state=present
-
-- name: Install packages
-  apt: name={{ item }}
+- name: Install the version 9.x of postgresql and packages
+  apt: name={{ item }} state=present
   with_items:
     - libpq-dev
+    - 'postgresql-{{ postgresql_version }}'
+    - 'postgresql-contrib-{{ postgresql_version }}'
     - python-pip
     - python-dev
 

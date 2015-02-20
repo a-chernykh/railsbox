@@ -3,37 +3,46 @@
   apt: name={{ item }}
   with_items:
     - python
+    - gcc
     - g++
     - make
     - checkinstall
+    - fakeroot
+    
+- name: 'Install node via apt (ubuntu)'
+  apt: name=nodejs
+  register: nodejs_ubuntu
+  when: os_name != 'mokote/debian-7'
 
-- name: Detect nodejs
+- name: Detect nodejs (debian)
   stat: path='/usr/local/bin/node'
   register: nodejs_installed
+  when: nodejs_ubuntu is not defined
 
-- name: Detect nodejs install file
+- name: Detect nodejs install file (debian)
   stat: path='{{ nodejs_temp_download_path }}/node-latest.tar.gz'
   register: nodejs_installer
-  when: not nodejs_installed.stat.exists
+  when: nodejs_installer is defined and not nodejs_installed.stat.exists and nodejs_ubuntu is not defined
 
-- name: Download latest NodeJs
+- name: Download latest NodeJs (debian)
   get_url:
     url: 'http://nodejs.org/dist/node-latest.tar.gz'
     dest: '{{ nodejs_temp_download_path }}/node-latest.tar.gz'
   when: nodejs_installer is defined and not nodejs_installer.stat.exists and not nodejs_installed.stat.exists
 
-- name: Uncompress nodejs configure and install
+- name: Uncompress nodejs configure and install (debian)
   shell: >
-    tar -xzvf {{ nodejs_temp_download_path }}/node-latest.tar.gz &&
+    cd {{ nodejs_temp_download_path }} &&
+    tar -xzvf node-latest.tar.gz &&
     cd node-v* &&
     ./configure &&
-    fakeroot checkinstall -y --install=no --pkgversion $(echo $(pwd) | sed -n -re's/.+node-v(.+)$/\1/p') make -j$(($(nproc)+1)) install &&
+    sudo fakeroot checkinstall -y --install=no --pkgversion $(echo $(pwd) | sed -n -re's/.+node-v(.+)$/\1/p') make -j$(($({{vm_cores}})+1)) install &&
     sudo dpkg -i node_*
   register: nodejs_finished
-  when: not nodejs_installed.stat.exists
+  when: nodejs_installer is defined and not nodejs_installed.stat.exists
 
-- name: Clean up files
+- name: Clean up files (debian)
   shell: >
     rm {{ nodejs_temp_download_path }}/node-latest.tar.gz &&
     rm -Rf {{ nodejs_temp_download_path }}/node-v*
-  when: nodejs_finished is defined
+  when: nodejs_installer is defined and not nodejs_installer.stat.exists and nodejs_finished is defined
