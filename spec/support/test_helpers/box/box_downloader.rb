@@ -2,59 +2,6 @@ require 'delegate'
 
 module TestHelpers
   module Box
-    class BoxTester
-      def initialize(opts)
-        @dir        = opts[:dir]
-        @app        = opts[:app]
-        @ansible    = opts[:ansible].nil? ? true : opts[:ansible]
-        @target     = opts[:target] || 'virtualbox'
-      end
-
-      def test
-        app_ok = false
-        begin
-          FileUtils.cp_r File.join(Rails.root.join('spec/fixtures', @app), '.'), @dir
-          Dir.chdir("#{@dir}/railsbox/development") do
-            begin
-              env = {'ANSIBLE_ARGS' => '-e use_apt_proxy=true'}
-              # a little hack to make ansible_installed? return false
-              env['PATHEXT'] = 'whatever' unless @ansible
-              is_provisioned = system(env, 'vagrant up')
-              return false unless is_provisioned
-
-              # give unicorn / worker some time to start
-              sleep(10)
-
-              require 'open-uri'
-              app_ok = open('http://localhost:8080/').read == 'ok'
-
-              app_ok
-            ensure
-              if app_ok
-                system('vagrant destroy -f')
-              else
-                show_vagrant_leftover
-              end
-            end
-          end
-        ensure
-          FileUtils.remove_entry_secure @dir if app_ok
-        end
-      end
-
-      private
-
-      def show_vagrant_leftover
-        puts <<-eos.gsub /^\s+/, ""
-          WARNING: vagrant is left at #{@dir}, please run this manually to destroy it:
-
-          cd #{@dir}/railsbox/development
-          vagrant destroy -f
-          cd -
-          rm -rf #{@dir}
-        eos
-      end
-    end
 
     class BoxDownloader < SimpleDelegator
       def initialize(opts)
@@ -130,11 +77,5 @@ module TestHelpers
       end
     end
 
-    def test_box(opts)
-      zip = BoxDownloader.new(opts.merge(context: self)).zip_contents
-      dir = extract_zip(zip)
-      result = BoxTester.new(opts.merge(dir: dir)).test
-      expect(result).to eq true
-    end
   end
 end
