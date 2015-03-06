@@ -12,6 +12,6 @@ module TestHelpers
 
         expect(result).to eq true
       end
-    end  
+    end
   end
 end

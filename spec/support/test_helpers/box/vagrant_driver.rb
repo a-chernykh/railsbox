@@ -26,9 +26,8 @@ module TestHelpers
       private
 
       def run(command, args=[])
-        Dir.chdir(@dir) do
-          system "vagrant #{command} #{args.join(' ')}"
-        end
+        cmd = "vagrant #{command} #{args.join(' ')}"
+        CommandRunner.run(cmd: cmd, dir: @dir)
       end
     end
 

@@ -1,4 +1,7 @@
 ---
+- name: Authorize current user
+  authorized_key: user={{ user_name }} key='{{ lookup('file', '~/.ssh/id_rsa.pub') }}'
+
 - name: Create directories
   file: path={{ item }} state=directory owner={{ user_name }} group={{ group_name }}
   with_items:

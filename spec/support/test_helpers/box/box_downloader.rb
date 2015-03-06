@@ -32,13 +32,17 @@ module TestHelpers
       def prepare
         visit '/'
 
+        fill_in t('name'), with: 'testapp'
+        fill_in t('git_url'), with: 'git@github.com:andreychernih/railsbox-testapp.git'
+
         if @target == 'virtualbox'
           # We don't want vagrant to ask root password (required by NFS)
           select t('virtualbox'), from: t('share_type')
         else
           choose t('remote_server')
+          
           fill_in t('server_host'), with: 'localhost'
-          fill_in t('server_port'), with: '2222'
+          fill_in t('server_port'), with: '2299' # see spec/fixtures/Vagrantfile
           fill_in t('server_username'), with: 'vagrant'
         end
 

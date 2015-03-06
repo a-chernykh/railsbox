@@ -1,0 +1,4 @@
+---
+- hosts: application
+  roles:
+    - deploy

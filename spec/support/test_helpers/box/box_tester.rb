@@ -21,12 +21,16 @@ module TestHelpers
           return false unless is_provisioned
 
           if remote_server?
-            Dir.chdir(@dir) do
-              system './provision.sh'
-            end
+            env = { 'ANSIBLE_HOST_KEY_CHECKING' => 'false' }
+            CommandRunner.run(cmd: './provision.sh --private-key .vagrant/machines/ubuntu/virtualbox/private_key', 
+              env: env,
+              dir: vagrant_dir)
+            CommandRunner.run(cmd: './deploy.sh --private-key .vagrant/machines/ubuntu/virtualbox/private_key',
+              env: env, 
+              dir: vagrant_dir)
           end
 
-          # give unicorn / worker some time to start
+          # give server / worker some time to start
           sleep(10)
 
           success = smoke_passed?
@@ -45,7 +49,7 @@ module TestHelpers
       end
 
       def copy_dummy_vagrantfile
-        FileUtils.cp Rails.root.join('spec/fixtures/Vagrantfile'), @dir
+        FileUtils.cp Rails.root.join('spec/fixtures/Vagrantfile'), vagrant_dir
       end
 
       def vagrant_dir
