@@ -29,7 +29,7 @@ gem 'rubyzip', require: 'zip'
 gem 'browser'
 
 gem 'unicorn'
-gem 'rollbar', '~> 1.3.1'
+gem 'rollbar', '~> 1.4.4'
 
 group :development do
   gem 'spring'
