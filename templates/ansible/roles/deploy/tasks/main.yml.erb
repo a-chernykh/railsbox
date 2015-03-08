@@ -1,4 +1,10 @@
 ---
+<% if params[:server_type] == 'nginx_passenger' -%>
+- include_vars: ../../passenger/defaults/main.yml
+<% else %>
+- include_vars: ../../unicorn/defaults/main.yml
+<% end %>
+
 - set_fact: this_release_path={{ releases_path }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
 
 - debug: msg='New release path {{ this_release_path }}'
@@ -44,7 +50,7 @@
   file: src={{ this_release_path }} dest={{ current_release_path }} state=link force=yes
 
 - name: Restart unicorn
-  command: sudo restart {{ app_name }}
+  command: sudo {{ server_restart_command }}
 
 - name: Cleanup
   shell: "ls -1t {{ releases_path }}|tail -n +{{ keep_releases + 1 }}|xargs rm -rf"

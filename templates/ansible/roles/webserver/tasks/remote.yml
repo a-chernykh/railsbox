@@ -2,6 +2,9 @@
 - name: Authorize current user
   authorized_key: user={{ user_name }} key='{{ lookup('file', '~/.ssh/id_rsa.pub') }}'
 
+- name: Allow to start / stop app with sudo
+  template: src=sudoers.d.conf.j2 dest=/etc/sudoers.d/{{ app_name }} validate='visudo -cf %s'
+
 - name: Create directories
   file: path={{ item }} state=directory owner={{ user_name }} group={{ group_name }}
   with_items:
@@ -13,3 +16,19 @@
     - '{{ shared_path }}/config'
     - '{{ shared_path }}/vendor'
     - '{{ shared_path }}/vendor/bundle'
+
+- name: Check if config/database.yml exists
+  stat:
+    path: ../../config/database.yml
+  connection: local
+  sudo: no
+  register: database
+
+- name: Copy config/database.yml to {{ shared_path }}/config
+  copy: 
+    src: ../../../../../config/database.yml
+    dest: '{{ shared_path }}/config/database.yml'
+    owner: '{{ user_name }}'
+    group: '{{ group_name }}'
+    mode: 0600
+  when: database.stat.exists
