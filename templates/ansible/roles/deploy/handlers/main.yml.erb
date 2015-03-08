@@ -1,0 +1,4 @@
+---
+<% params[:background_jobs].each do |bg| -%>
+- include: ../../<%= bg %>/handlers/main.yml
+<% end %>
