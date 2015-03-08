@@ -17,18 +17,22 @@
     - '{{ shared_path }}/vendor'
     - '{{ shared_path }}/vendor/bundle'
 
-- name: Check if config/database.yml exists
+- name: Check if config/{{ item }}.yml exists
   stat:
-    path: ../../config/database.yml
+    path: ../../config/{{ item }}.yml
   connection: local
   sudo: no
-  register: database
+  register: configs
+  with_items:
+    - database
+    - secrets
 
-- name: Copy config/database.yml to {{ shared_path }}/config
+- name: Copy config/{{ item.item }}.yml to {{ shared_path }}/config
   copy: 
-    src: ../../../../../config/database.yml
-    dest: '{{ shared_path }}/config/database.yml'
+    src: ../../../../../config/{{ item.item }}.yml
+    dest: '{{ shared_path }}/config/{{ item.item }}.yml'
     owner: '{{ user_name }}'
     group: '{{ group_name }}'
     mode: 0600
-  when: database.stat.exists
+  with_items: configs.results
+  when: item.stat.exists

@@ -22,7 +22,7 @@ feature 'Provision boxes', js: true, vagrant: true do
 
   scenario '(remote server) system_package, passenger, MySQL' do
     test_box(app: 'testapp2', 
-             components: ['system_package', 'passenger', 'mysql'],
+             components: ['system_package', 'passenger', 'mysql', 'delayed_job'],
              target: 'server')
   end
 end

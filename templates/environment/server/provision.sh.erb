@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ansible-playbook $@ -s -u <%= params[:username] %> -i inventory ../ansible/site.yml

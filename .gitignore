@@ -16,3 +16,5 @@
 /tmp
 
 devops/group_vars/production/secret.yml
+
+cleanup.sh

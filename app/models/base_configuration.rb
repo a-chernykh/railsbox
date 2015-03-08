@@ -18,9 +18,11 @@ class BaseConfiguration
 
   def render(template_path, output_path, additional_params={})
     template = Tilt.new template_path
+    mode = File.stat(template_path).mode
     params = @params.merge(additional_params)
     File.open(output_path, 'w') do |f|
       f.write template.render(TemplateContext.new(template_path, params), params: params)
+      f.chmod mode
     end
   end
 end

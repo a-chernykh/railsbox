@@ -90,6 +90,10 @@ describe EnvironmentsConfiguration do
       it 'creates staging/provision.sh' do
         expect(File).to exist(staging_provision_path)
       end
+
+      it 'keeps executable flag on staging/provision.sh' do
+        expect(File).to be_executable(staging_provision_path)
+      end
     end
 
     after { FileUtils.remove_entry_secure @dir }

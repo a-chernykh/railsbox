@@ -76,14 +76,21 @@ module TestHelpers
       end
 
       def show_vagrant_leftover
-        puts <<-eos.gsub /^\s+/, ""
-          WARNING: vagrant is left at #{@dir}, please run this manually to destroy it:
-
-          cd #{@dir}/railsbox/development
-          vagrant destroy -f
-          cd -
-          rm -rf #{@dir}
+        command = <<-eos
+cd #{@dir}/railsbox/development
+vagrant destroy -f
+cd -
+rm -rf #{@dir}
         eos
+
+        File.open('cleanup.sh', 'w') do |f|
+          f.write "#/bin/bash\n"
+          f.write "set -e\n"
+          f.write command
+          f.chmod 0777
+        end
+
+        puts "WARNING: vagrant is left at #{@dir}, please run ./cleanup.sh to destroy it"
       end
     end
 

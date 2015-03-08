@@ -15,6 +15,12 @@
 - name: Update code
   git: repo={{ git_url }} dest={{ this_release_path }} version={{ git_branch }} accept_hostkey=yes
   register: git
+  <% if params[:background_jobs].any? -%>
+  notify:
+    <% params[:background_jobs].each do |bg| -%>
+    - restart <%= bg %>
+    <% end %>
+  <% end -%>
 
 - debug: msg='Updated repo from {{ git.before }} to {{ git.after }}'
 
