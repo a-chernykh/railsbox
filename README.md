@@ -1,4 +1,4 @@
-[railsbox][] is Ruby on Rails virtual machine configurator. You can quickly create virtual machine for development using this tool. Mac OS X, Linux and Windows host machines are supported.
+[railsbox][] is Ruby on Rails virtual machine configurator. You can quickly create virtual machine for development and production environments using this tool. Mac OS X, Linux and Windows host machines are supported.
 
 # Requirements
 
@@ -8,7 +8,10 @@ You will need [VirtualBox][], [vagrant][] and [ansible][] to bootstrap new machi
 
 ## Operating systems
 
-You can choose between Ubuntu 12.04 LTS and Ubuntu 14.04 LTS. Base boxes provided by [vagrantcloud][].
+You can choose between Ubuntu 12.04 LTS and Ubuntu 14.04 LTS. Base boxes provided by [vagrantcloud][]. You can also deploy to your remote server using SSH connection. [railsbox][] will create 2 scripts:
+
+* `provision.sh` - which will install and configure all required software
+* `deploy.sh` - which will deploy latest code from the GIT repo
 
 ## Ruby versions
 
@@ -44,7 +47,6 @@ It's possible to install the following databases:
 
 [railsbox][] is constantly improving. The following is in our TODO list for future releases:
 
-* Multi-environment support (ability to apply the same playbooks for production / staging)
 * Add ability to deploy to various platforms supported by vagrant - Parallels, VMWare, EC2
 * Add additional server options (Passenger, puma, thin)
 * Add memcached
