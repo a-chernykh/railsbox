@@ -1,2 +1,3 @@
 ---
 rails_env: production
+backups_path: /backup

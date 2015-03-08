@@ -53,3 +53,7 @@
 
 - name: Allow to start / stop app with sudo
   template: src=sudoers.d.conf.j2 dest=/etc/sudoers.d/{{ app_name }} validate='visudo -cf %s'
+
+- name: Create backups path
+  file: path={{ backups_path }} state=directory owner={{ user_name }} group={{ group_name }} mode=0700
+  tags: backup

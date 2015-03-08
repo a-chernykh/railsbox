@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook -u railsbox -i production deploy.yml
+ansible-playbook $@ -u railsbox -i production deploy.yml

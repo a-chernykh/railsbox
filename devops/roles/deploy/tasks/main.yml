@@ -1,5 +1,8 @@
 ---
-- set_fact: this_release_path={{ releases_path }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
+- set_fact: this_release_ts={{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
+  tags: always
+
+- set_fact: this_release_path={{ releases_path }}/{{ this_release_ts }}
 
 - debug: msg='New release path {{ this_release_path }}'
 
@@ -34,6 +37,17 @@
   command: rake assets:precompile chdir={{ this_release_path }}
   environment:
     RAILS_ENV: '{{ rails_env }}'
+
+- set_fact: backup_file_path={{ backups_path }}/{{ this_release_ts }}.sql
+  tags: backup
+
+- name: Backup database
+  shell: umask 077 && pg_dump -O -x railsbox_{{ rails_env }} > {{ backup_file_path }}
+  tags: backup
+
+- name: Archive backup
+  shell: gzip {{ backup_file_path }}
+  tags: backup
 
 - name: Migrate database
   command: rake db:migrate chdir={{ this_release_path }}
