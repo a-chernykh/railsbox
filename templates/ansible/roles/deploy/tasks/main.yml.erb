@@ -56,7 +56,7 @@
     RAILS_ENV: '{{ rails_env }}'
 
 - name: Symlink new release
-  file: src={{ this_release_path }} dest={{ current_release_path }} state=link force=yes
+  file: src={{ this_release_path }} dest={{ app_path }} state=link force=yes
 
 - name: Restart unicorn
   command: sudo {{ server_restart_command }}

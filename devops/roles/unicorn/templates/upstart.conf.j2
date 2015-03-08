@@ -12,7 +12,7 @@ respawn
 setuid {{ user_name }}
 setgid {{ group_name }}
 
-chdir {{ current_release_path }}
+chdir {{ app_path }}
 
 script
   /bin/bash -l -c 'bundle exec unicorn -E {{ rails_env }} -c {{ unicorn_config_path }}'
