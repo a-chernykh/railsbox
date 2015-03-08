@@ -1,9 +1,11 @@
 ---
 - hosts: vm
+  remote_user: <%= params[:username] %>
   roles:
     - swap
 
 - hosts: all
+  remote_user: <%= params[:username] %>
   gather_facts: no
   roles:
     - { role: apt_proxy, when: use_apt_proxy }
@@ -12,12 +14,14 @@
 
 <% params[:databases].each do |db| -%>
 - hosts: <%= db %>
+  remote_user: <%= params[:username] %>
   roles:
     - <%= db %>
 
 <% end %>
 
 - hosts: application
+  remote_user: <%= params[:username] %>
   handlers:
     <% params[:background_jobs].each do |bg| -%>
     - include: roles/<%= bg %>/handlers/main.yml
@@ -30,6 +34,7 @@
 
 <% params[:background_jobs].each do |bg| -%>
 - hosts: <%= bg %>
+  remote_user: <%= params[:username] %>
   handlers:
     - include: roles/<%= server_role %>/handlers/main.yml
   roles:

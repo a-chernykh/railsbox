@@ -22,12 +22,16 @@ module TestHelpers
 
           if remote_server?
             env = { 'ANSIBLE_HOST_KEY_CHECKING' => 'false' }
-            CommandRunner.run(cmd: './provision.sh --private-key .vagrant/machines/ubuntu/virtualbox/private_key', 
+            CommandRunner.run(
+              cmd: './provision.sh --private-key .vagrant/machines/ubuntu/virtualbox/private_key', 
               env: env,
-              dir: vagrant_dir)
-            CommandRunner.run(cmd: './deploy.sh --private-key .vagrant/machines/ubuntu/virtualbox/private_key',
+              dir: vagrant_dir
+            )
+            CommandRunner.run(
+              cmd: './deploy.sh --private-key .vagrant/machines/ubuntu/virtualbox/private_key',
               env: env, 
-              dir: vagrant_dir)
+              dir: vagrant_dir
+            )
           end
 
           # give server / worker some time to start
