@@ -4,6 +4,9 @@
 <% else %>
 - include_vars: ../../unicorn/defaults/main.yml
 <% end %>
+<% params[:background_jobs].each do |bg| -%>
+- include_vars: ../../<%= bg %>/defaults/main.yml
+<% end %>
 
 - set_fact: this_release_path={{ releases_path }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}
 
