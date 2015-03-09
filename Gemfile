@@ -18,7 +18,6 @@ gem "i18n-js", ">= 3.0.0.rc8"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
-  gem 'rails-assets-angular-classy'
 end
 
 gem 'sdoc', '~> 0.4.0', group: :doc

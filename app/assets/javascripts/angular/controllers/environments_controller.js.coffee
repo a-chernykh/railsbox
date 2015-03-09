@@ -1,21 +1,15 @@
-angular.module('app.railsbox').classy.controller
-  name: 'EnvironmentsController'
-  inject: ['$scope']
+angular.module('app.railsbox').controller 'EnvironmentsController', [ '$scope', ($scope) ->
+  $scope.allObjects = [
+    { id: 'development' },
+    { id: 'staging' },
+    { id: 'production' },
+  ]
+  $scope.activeObjects = []
 
-  init: ->
-    @$.allObjects = [
-      { id: 'development' },
-      { id: 'staging' },
-      { id: 'production' },
-    ]
-    @$.activeObjects = []
+  $scope.isVirtualBox = -> @configuration[@environment].target == 'virtualbox'
+  $scope.isServer = -> @configuration[@environment].target == 'server'
 
-    @$.isVirtualBox = -> @configuration[@environment].target == 'virtualbox'
-    @$.isServer = -> @configuration[@environment].target == 'server'
-
-  watch:
-    'configuration.environments': '_onEnvironmentsChange'
-
-  _onEnvironmentsChange: (newValue) ->
-    if @$.configuration and @$.configuration.environments
-      @$.activeObjects = @$.configuration.environments
+  $scope.$watch 'configuration.environments', (newValue) ->
+    if $scope.configuration and $scope.configuration.environments
+      $scope.activeObjects = $scope.configuration.environments
+]

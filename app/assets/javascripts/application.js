@@ -20,7 +20,6 @@
 //= require bootstrap/tooltip
 
 //= require angular
-//= require angular-classy
 
 //= require init
 

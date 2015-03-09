@@ -1,20 +1,17 @@
-angular.module('app.railsbox').classy.controller
-  name: 'MultiChoiceController'
-  inject: ['$scope']
+angular.module('app.railsbox').controller 'MultiChoiceController', [ '$scope', ($scope) ->
+  $scope.allObjects = []
+  $scope.activeObjects = []
 
-  init: ->
-    @$.allObjects = []
-    @$.activeObjects = []
+  $scope.isActive = (obj) ->
+    obj in @activeObjects
 
-    @$.isActive = (obj) ->
-      obj in @activeObjects
+  $scope.allActive = ->
+    @activeObjects.length == @allObjects.length
 
-    @$.allActive = ->
-      @activeObjects.length == @allObjects.length
+  $scope.add = (obj) ->
+    @activeObjects.push obj
 
-    @$.add = (obj) ->
-      @activeObjects.push obj
-
-    @$.delete = (obj) ->
-      index = @activeObjects.indexOf(obj)
-      @activeObjects.splice(index, 1) unless index == -1
+  $scope.delete = (obj) ->
+    index = @activeObjects.indexOf(obj)
+    @activeObjects.splice(index, 1) unless index == -1
+]

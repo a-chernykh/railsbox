@@ -151,8 +151,6 @@ GEM
       railties (= 4.2.0)
       sprockets-rails
     rails-assets-angular (1.3.14)
-    rails-assets-angular-classy (1.1.1)
-      rails-assets-angular (~> 1.2)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.5)
@@ -271,7 +269,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.2)
   rails-assets-angular!
-  rails-assets-angular-classy!
   rollbar (~> 1.4.4)
   rspec-activemodel-mocks
   rspec-its

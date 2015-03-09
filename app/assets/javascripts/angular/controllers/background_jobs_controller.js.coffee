@@ -1,25 +1,18 @@
-angular.module('app.railsbox').classy.controller
-  name: 'BackgroundJobsController'
-  inject: ['$scope']
+angular.module('app.railsbox').controller 'BackgroundJobsController', ['$scope', ($scope) ->
+  $scope.allObjects = [
+    { id: 'delayed_job', name: 'delayed_job' },
+    { id: 'sidekiq',     name: 'sidekiq' },
+    { id: 'resque',      name: 'resque' },
+  ]
+  $scope.activeObjects = []
 
-  init: ->
-    @$.allObjects = [
-      { id: 'delayed_job', name: 'delayed_job' },
-      { id: 'sidekiq',     name: 'sidekiq' },
-      { id: 'resque',      name: 'resque' },
-    ]
-    @$.activeObjects = []
-
-  watch:
-    'configuration.rails_version': '_onRailsVersionChange'
-    'configuration.background_jobs': '_onBackgroundJobsChange'
-
-  _onRailsVersionChange: (newValue) ->
+  $scope.$watch 'configuration.rails_version', (newValue) ->
     if newValue
-      @$.configuration.delayed_job_command = switch newValue.version
+      $scope.configuration.delayed_job_command = switch newValue.version
         when '4' then 'bin/delayed_job run'
         else 'script/delayed_job run'
 
-  _onBackgroundJobsChange: (newValue) ->
-    if @$.configuration and @$.configuration.background_jobs
-      @$.activeObjects = @$.configuration.background_jobs
+  $scope.$watch 'configuration.background_jobs', (newValue) ->
+    if $scope.configuration and $scope.configuration.background_jobs
+      $scope.activeObjects = $scope.configuration.background_jobs
+]

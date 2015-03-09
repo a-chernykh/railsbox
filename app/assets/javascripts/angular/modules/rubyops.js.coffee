@@ -1,1 +1,1 @@
-angular.module 'app.railsbox', ['classy']
+angular.module 'app.railsbox', []
