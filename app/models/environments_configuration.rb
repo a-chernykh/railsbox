@@ -6,7 +6,6 @@ class EnvironmentsConfiguration < BaseConfiguration
   def save(output_dir)
     environments.each do |env|
       env_params = { rails_env: env }.merge(@params[env.to_sym])
-
       env_path = File.join(output_dir, env)
       FileUtils.mkdir_p env_path
 
