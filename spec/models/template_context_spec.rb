@@ -16,13 +16,13 @@ RSpec.describe TemplateContext do
   describe '#server_role' do
     subject { context.server_role }
 
-    context 'server_type == nginx_unicorn' do
+    context 'when server_type == nginx_unicorn' do
       let(:server_type) { 'nginx_unicorn' }
 
       it { is_expected.to eq 'unicorn' }
     end
 
-    context 'server_type == nginx_passenger' do
+    context 'when server_type == nginx_passenger' do
       let(:server_type) { 'nginx_passenger' }
 
       it { is_expected.to eq 'passenger' }

@@ -34,8 +34,11 @@ RSpec.describe TemplateConfiguration do
         expect(File).not_to exist(File.join(dir, 'Vagrantfile.erb'))
       end
 
-      it 'does not copies partials' do
+      it 'does not copies _vagrant_plugins partial' do
         expect(File).not_to exist(File.join(dir, '_vagrant_plugins'))
+      end
+
+      it 'does not copies _vagrant_plugins.erb partial' do
         expect(File).not_to exist(File.join(dir, '_vagrant_plugins.erb'))
       end
 

@@ -5,7 +5,9 @@ RSpec.describe SecureIdGenerator do
       id2 = described_class.generate
       id3 = described_class.generate
 
-      expect([id1, id2, id3].uniq.length).to eq 3
+      ids = [id1, id2, id3]
+
+      expect(ids.uniq.length).to eq(3), "expected #{ids} to be unique"
     end
 
     it 'returns fixed length string' do
