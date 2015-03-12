@@ -1,8 +1,8 @@
 RSpec.describe Box do
-  it { should validate_presence_of(:params) }
-  it { should_not allow_value('<test').for(:vm_name) }
-  it { should allow_value('my_app').for(:vm_name) }
-  it { should allow_value('my-app').for(:vm_name) }
+  it { is_expected.to     validate_presence_of(:params) }
+  it { is_expected.not_to allow_value('<test').for(:vm_name) }
+  it { is_expected.to     allow_value('my_app').for(:vm_name) }
+  it { is_expected.to     allow_value('my-app').for(:vm_name) }
 
   describe 'secure_id' do
     let(:params) { { params: {databases: []} } }
@@ -37,6 +37,6 @@ RSpec.describe Box do
   describe '.background_jobs' do
     subject { described_class.background_jobs.map(&:id) }
 
-    it { should include 'sidekiq' }
+    it { is_expected.to include 'sidekiq' }
   end
 end

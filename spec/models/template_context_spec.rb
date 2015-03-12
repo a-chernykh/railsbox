@@ -8,9 +8,9 @@ RSpec.describe TemplateContext do
   describe '#roles' do
     subject { context.roles }
 
-    it { should     include 'postgresql' }
-    it { should     include 'sidekiq' }
-    it { should_not include 'mysql' }
+    it { is_expected.to     include 'postgresql' }
+    it { is_expected.to     include 'sidekiq' }
+    it { is_expected.not_to include 'mysql' }
   end
 
   describe '#server_role' do
@@ -19,13 +19,13 @@ RSpec.describe TemplateContext do
     context 'server_type == nginx_unicorn' do
       let(:server_type) { 'nginx_unicorn' }
 
-      it { should eq 'unicorn' }
+      it { is_expected.to eq 'unicorn' }
     end
 
     context 'server_type == nginx_passenger' do
       let(:server_type) { 'nginx_passenger' }
 
-      it { should eq 'passenger' }
+      it { is_expected.to eq 'passenger' }
     end
   end
 
