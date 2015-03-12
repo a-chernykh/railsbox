@@ -59,6 +59,10 @@ It's possible to install the following databases:
 
 All kind of contributions are always welcomed.
 
+# License
+
+[railsbox][] is licensed under the [MIT license].
+
 [railsbox]: http://railsbox.io/
 [vagrant]: https://www.vagrantup.com/
 [VirtualBox]: https://www.virtualbox.org/
@@ -74,8 +78,4 @@ All kind of contributions are always welcomed.
 [rbenv]: https://github.com/sstephenson/rbenv
 [vim-sensible]: https://github.com/tpope/vim-sensible
 [vim-rails]: https://github.com/tpope/vim-rails
-[MIT license]: http://opensource.org/licenses/MIT
-
-# License
-
-[railsbox][] is licensed under the [MIT license].
+[MIT license]: LICENSE
