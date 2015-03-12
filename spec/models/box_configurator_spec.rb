@@ -7,11 +7,13 @@ RSpec.describe BoxConfigurator do
     before { configurator.save(dir) }
 
     it 'copies files without erb extensions' do
-      expect(File).to exist(File.join(dir, '.gitignore'))
+      path = File.join(dir, '.gitignore')
+      expect(File).to exist(path), "expected #{path} to exist"
     end
 
     it 'creates Vagrantfile' do
-      expect(File.join(dir, 'development/Vagrantfile')).to file_exists
+      path = File.join(dir, 'development/Vagrantfile')
+      expect(File).to exist(path), "expected #{path} to exist"
     end
 
     after { FileUtils.remove_entry_secure dir }

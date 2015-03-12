@@ -6,7 +6,7 @@ RSpec.describe Archiver do
 
     it 'creates zip archive' do
       described_class.new(Rails.root.join('templates')).archive(zip)
-      expect(File).to exist(zip)
+      expect(File).to exist(zip), "expected #{zip} to exists"
     end
   end
 end

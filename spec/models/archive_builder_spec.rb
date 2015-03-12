@@ -25,7 +25,7 @@ RSpec.describe ArchiveBuilder do
     end
 
     it 'creates railsbox directory in temp directory' do
-      expect(FileUtils).to receive(:remove_entry_secure)
+      allow(FileUtils).to receive(:remove_entry_secure)
       subject.build
       expect(File).to be_directory(File.join(temp_dir, 'railsbox'))
     end
