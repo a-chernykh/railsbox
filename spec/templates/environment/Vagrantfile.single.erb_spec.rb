@@ -1,4 +1,4 @@
-describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
+RSpec.describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
   let(:base_params)  { params_fixture.merge(target: 'virtualbox').merge(params_fixture[:development]) }
   let(:params)       { base_params }
   let(:context)      { TemplateContext.new(Rails.root.join('templates/environment/virtualbox/Vagrantfile.single.erb'), params) }

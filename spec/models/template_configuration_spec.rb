@@ -1,4 +1,4 @@
-describe TemplateConfiguration do
+RSpec.describe TemplateConfiguration do
   describe '#save' do
     let(:dir)    { Dir.mktmpdir }
     let(:params) { params_fixture }
@@ -26,7 +26,7 @@ describe TemplateConfiguration do
         end
 
         it 'includes sidekiq role' do
-          expect(output).to include %Q(- sidekiq)
+          expect(output).to include %Q(role: sidekiq)
         end
       end
 

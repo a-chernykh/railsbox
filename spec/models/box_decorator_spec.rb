@@ -1,4 +1,4 @@
-describe BoxDecorator do
+RSpec.describe BoxDecorator do
   let(:params) { params_fixture }
   let(:box) { stub_model(Box, secure_id: 'whatever', params: params) }
 

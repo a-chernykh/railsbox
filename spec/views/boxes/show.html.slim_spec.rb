@@ -1,4 +1,4 @@
-describe 'boxes/show.html.slim' do
+RSpec.describe 'boxes/show.html.slim' do
   let(:box) { stub_model(Box, secure_id: 'whatever', params: params_fixture) }
   let(:os)  { :mac }
 

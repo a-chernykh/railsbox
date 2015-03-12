@@ -1,4 +1,4 @@
-describe Archiver do
+RSpec.describe Archiver do
   describe '#archive' do
     let(:zip) { Rails.root.join('tmp/test.zip') }
 

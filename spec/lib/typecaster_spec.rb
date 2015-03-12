@@ -1,4 +1,4 @@
-describe Typecaster do
+RSpec.describe Typecaster do
   describe '#typecasted' do
     it 'converts strings to boolean' do
       typecasted = described_class.new({'true' => 'true',

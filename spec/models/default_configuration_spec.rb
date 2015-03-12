@@ -1,4 +1,4 @@
-describe DefaultConfiguration do
+RSpec.describe DefaultConfiguration do
   describe '.get' do
     subject { described_class.get }
 

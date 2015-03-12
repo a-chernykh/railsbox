@@ -1,4 +1,4 @@
-feature 'Provision boxes', js: true, vagrant: true do
+RSpec.feature 'Provision boxes', js: true, vagrant: true do
   scenario 'rbenv, unicorn, PostgreSQL, redis, sidekiq' do
     test_box(app: 'testapp1', 
              components: ['rbenv', 'unicorn', 'postgresql', 'redis', 'sidekiq'])

@@ -46,6 +46,7 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-its'
   gem 'rspec-activemodel-mocks'
+  gem 'fuubar'
 end
 
 group :development, :test do

@@ -1,4 +1,4 @@
-describe CopyConfiguration do
+RSpec.describe CopyConfiguration do
   describe '#save' do
     subject { described_class.new(params_fixture) }
 

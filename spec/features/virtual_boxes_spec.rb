@@ -1,4 +1,4 @@
-feature 'Virtual boxes', js: true do
+RSpec.feature 'Virtual boxes', js: true do
   scenario 'Create new box redirects to download page' do
     visit '/'
     fill_in 'Name', with: 'myapp'

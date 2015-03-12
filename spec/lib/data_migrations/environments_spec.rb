@@ -1,4 +1,4 @@
-describe DataMigrations::Environments do
+RSpec.describe DataMigrations::Environments do
   subject { described_class.new(Rails.logger) }
 
   describe '#run' do

@@ -1,4 +1,4 @@
-describe BoxesController do
+RSpec.describe BoxesController do
   describe 'POST create' do
     before do
       allow(SecureIdGenerator).to receive(:generate) { 'abc123' }

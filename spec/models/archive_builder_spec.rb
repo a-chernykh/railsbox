@@ -1,4 +1,4 @@
-describe ArchiveBuilder do
+RSpec.describe ArchiveBuilder do
   describe '#build' do
     def stub_temp_dir(dir)
       allow(Dir).to receive(:mktmpdir) do

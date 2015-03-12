@@ -1,4 +1,4 @@
-describe EnvironmentsConfiguration do
+RSpec.describe EnvironmentsConfiguration do
   describe '#save' do
     let(:params) do
       params_fixture.merge(environments: %w(development staging), staging: {

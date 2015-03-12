@@ -1,4 +1,4 @@
-describe SecureIdGenerator do
+RSpec.describe SecureIdGenerator do
   describe '.generate' do
     it 'returns unique strings' do
       id1 = described_class.generate

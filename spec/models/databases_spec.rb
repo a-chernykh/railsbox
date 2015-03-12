@@ -1,4 +1,4 @@
-describe Databases do
+RSpec.describe Databases do
   describe '.list' do
     subject { described_class.list.map(&:id) }
 
