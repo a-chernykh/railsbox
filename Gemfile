@@ -47,6 +47,7 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-activemodel-mocks'
   gem 'fuubar'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do

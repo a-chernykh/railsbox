@@ -66,5 +66,6 @@ en:
       server_port: 'SSH port'
       server_username: 'SSH username (with sudo access)'
     show:
+      title: 'Your virtual box:'
       download: 'Download'
       edit: 'Edit'
