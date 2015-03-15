@@ -1,10 +1,12 @@
+require 'tmpdir'
+
 class ArchiveBuilder
   def initialize(configurator)
     @configurator = configurator
   end
 
   def build
-    zip_path = Rails.root.join('tmp', File.basename(temp_dir) + '.zip')
+    zip_path = File.join(Dir.tmpdir, File.basename(temp_dir) + '.zip')
 
     begin
       railsbox_dir = File.join(temp_dir, 'railsbox')
