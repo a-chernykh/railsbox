@@ -1,0 +1,2 @@
+before_script:
+  - psql -c 'create database railsbox_test;' -U postgres
