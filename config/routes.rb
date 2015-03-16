@@ -3,5 +3,8 @@ Rails.application.routes.draw do
     get :download, on: :member
     get :default, on: :collection
   end
+
+  post 'configurations/for_gemfile'
+
   root to: 'dashboard#show'
 end

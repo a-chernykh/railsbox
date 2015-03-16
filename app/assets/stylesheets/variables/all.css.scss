@@ -3,3 +3,11 @@ $custom-step-color: darken($background-color, 5%);
 
 $logo-light-color-1: #fff;
 $logo-light-color-2: darken($logo-light-color-1, 20%);
+
+$secondary-color: #9D9C9C;
+$secondary-text-color: #3E3B3B;
+
+$zindex-fork-me: $zindex-navbar-fixed + 10;
+$zindex-notifier: $zindex-fork-me + 10;
+
+$border-radius: 10px;

@@ -1,21 +1,6 @@
 angular.module('app.railsbox').controller 'ConfigurationController', ['$scope', '$http', ($scope, $http) ->
   _findOptionById = (options, id, label) -> (options.filter (opt) -> opt[label] == id)[0]
 
-  _loadConfiguration = (configuration) ->
-    $scope.configuration = configuration
-
-    $scope.configuration.vm_os = _findOptionById($scope.osList, configuration.vm_os, 'box')
-
-    for environment in ['development', 'staging', 'production']
-      if $scope.configuration[environment]
-        $scope.configuration[environment].vm_ports = (val for key, val of configuration[environment].vm_ports)
-        $scope.configuration[environment].vm_share_type = _findOptionById($scope.shareTypes, configuration[environment].vm_share_type, 'id')
-
-    p.selected = (id in configuration.package_bundles) for id, p of $scope.packages
-    $scope.configuration.rails_version = _findOptionById($scope.railsVersions, configuration.rails_version, 'version')
-    $scope.configuration.ruby_version = ($scope.rubyInstalls[$scope.configuration.ruby_install].rubies.filter (v) -> v.version == configuration.ruby_version)[0]
-    ext.selected = (ext.name in configuration.postgresql_extensions) for ext in $scope.postgresqlExtensions
-
   _t = (key) -> I18n.t("boxes.form.#{key}")
 
   $scope.serverTypes = [
@@ -58,7 +43,8 @@ angular.module('app.railsbox').controller 'ConfigurationController', ['$scope', 
              { version: '2.1.3',    label: '2.1.3' },
              { version: '2.1.4',    label: '2.1.4' },
              { version: '2.1.5',    label: '2.1.5' },
-             { version: '2.2.0',    label: '2.2.0', default: true },
+             { version: '2.2.0',    label: '2.2.0' },
+             { version: '2.2.1',    label: '2.2.1', default: true },
              { version: '2.2-head', label: '2.2-head' }, ]
 
   $scope.rubyInstalls =
@@ -92,10 +78,7 @@ angular.module('app.railsbox').controller 'ConfigurationController', ['$scope', 
       label: _t('curl')
       packages: [ 'curl', 'libcurl3', 'libcurl3-gnutls', 'libcurl4-openssl-dev' ]
 
-  $scope.downloadConfiguration = (url) ->
-    $http.get(url).success (data) => _loadConfiguration(data)
-
-  $scope.$watch 'configuration.vm_name', (newValue, oldValue) =>
+  _updateVmName = (newValue, oldValue) ->
     if $scope.configuration
       if $scope.configuration.path == "/#{oldValue}"
         $scope.configuration.path = "/#{newValue}"
@@ -108,11 +91,36 @@ angular.module('app.railsbox').controller 'ConfigurationController', ['$scope', 
         if $scope.configuration["#{db}_db_name"] is undefined || $scope.configuration["#{db}_db_name"] == oldValue
           $scope.configuration["#{db}_db_name"] = newValue
 
-  $scope.$watch 'configuration.path', (newValue, oldValue) ->
+  _updatePath = (newValue, oldValue) ->
     if $scope.configuration?.environment_file == "#{oldValue}/.envrc"
       $scope.configuration['environment_file'] = "#{newValue}/.envrc"
 
-  $scope.$watch 'configuration.ruby_install', (newValue, oldValue) ->
+  _updateRubyInstall = (newValue, oldValue) ->
     if oldValue and newValue
       $scope.configuration.ruby_version = ($scope.rubyInstalls[newValue].rubies.filter (v) -> v.default)[0]
+
+  $scope.loadConfiguration = (configuration) ->
+    $scope.configuration = configuration
+    _updateVmName configuration.vm_name, undefined
+    _updatePath configuration.path, undefined
+    _updateRubyInstall configuration.ruby_install, undefined
+
+    $scope.configuration.vm_os = _findOptionById($scope.osList, configuration.vm_os, 'box')
+
+    for environment in ['development', 'staging', 'production']
+      if $scope.configuration[environment]
+        $scope.configuration[environment].vm_ports = (val for key, val of configuration[environment].vm_ports)
+        $scope.configuration[environment].vm_share_type = _findOptionById($scope.shareTypes, configuration[environment].vm_share_type, 'id')
+
+    p.selected = (id in configuration.package_bundles) for id, p of $scope.packages
+    $scope.configuration.rails_version = _findOptionById($scope.railsVersions, configuration.rails_version, 'version')
+    $scope.configuration.ruby_version = ($scope.rubyInstalls[$scope.configuration.ruby_install].rubies.filter (v) -> v.version == configuration.ruby_version)[0]
+    ext.selected = (ext.name in configuration.postgresql_extensions) for ext in $scope.postgresqlExtensions
+
+  $scope.downloadConfiguration = (url) ->
+    $http.get(url).success (data) => $scope.loadConfiguration(data)
+
+  $scope.$watch 'configuration.vm_name', _updateVmName
+  $scope.$watch 'configuration.path', _updatePath
+  $scope.$watch 'configuration.ruby_install', _updateRubyInstall
 ]

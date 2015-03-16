@@ -32,7 +32,7 @@
 }
 
 .step-number {
-  @include border-right-radius(10px);
+  @include border-right-radius($border-radius);
   h1 {
     text-align: center;
     font-size: 4em;
@@ -66,6 +66,35 @@ input.ng-invalid[type=text] {
     top: 0; 
     right: 0; 
     border: 0;
-    z-index: $zindex-navbar-fixed + 10;
+    z-index: $zindex-fork-me;
   }
+}
+
+.droparea {
+  margin-top: 2em;
+  border-radius: $border-radius;
+  padding: 1px;
+  background-color: $secondary-color;
+  color: $secondary-text-color;
+
+  &.dragover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  p {
+    border: 1px dashed black;
+    border-radius: $border-radius;
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    font-weight: 400;
+    strong {
+      font-weight: 600;
+    }
+  }
+}
+
+.notification {
+  margin-bottom: 0px;
 }

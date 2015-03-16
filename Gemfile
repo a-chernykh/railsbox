@@ -15,12 +15,13 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem "i18n-js", ">= 3.0.0.rc8"
+gem 'angular-rails-templates'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-angular'
+  gem 'rails-assets-angular', '~> 1.3.15'
+  gem 'rails-assets-ng-file-upload', '~> 3.2.4'
+  gem 'rails-assets-ng-file-upload-shim', '~> 3.2.4'
 end
-
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'tilt'
 gem 'rubyzip', require: 'zip'
@@ -30,12 +31,17 @@ gem 'browser'
 gem 'unicorn'
 gem 'rollbar', '~> 1.4.4'
 
+gem 'parser'
+
 group :development do
+  gem 'thin'
+
   gem 'spring'
   gem 'quiet_assets'
+
   gem 'guard-rspec', require: false
-  gem 'guard-shell'
-  gem 'terminal-notifier-guard'
+  gem 'guard-shell', require: false
+  gem 'terminal-notifier-guard', require: false
 end
 
 group :test do

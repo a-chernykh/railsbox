@@ -20,9 +20,14 @@
 //= require bootstrap/tooltip
 
 //= require angular
+//= require angular-rails-templates
+//= require_tree ../templates
+//= require ng-file-upload-shim
+//= require ng-file-upload
 
 //= require init
 
 //= require ./angular/app
-//= require_tree ./angular/modules
+//= require_tree ./angular/services
+//= require_tree ./angular/directives
 //= require_tree ./angular/controllers

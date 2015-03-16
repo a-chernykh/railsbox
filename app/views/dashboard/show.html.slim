@@ -2,7 +2,7 @@ a.fork-me.visible-md-block.visible-lg-block href='https://github.com/andreychern
   img src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
 
 a.anchor#home
-.jumbotron
+.jumbotron ng-controller='GemfileAnalyzerController'
   .container-fluid
     .row
       .col-lg-10.col-lg-offset-1
@@ -12,10 +12,10 @@ a.anchor#home
           ' <strong>railsbox</strong> helps you to start applying best <strong>DevOps</strong> practices in your project by generating
           a href='http://www.ansible.com/' <strong>ansible</strong>
           '  playbooks for configuring and deploying Ruby on Rails applications. You no longer need to edit a single configuration file on your server and use tools like capistrano for code deployments - all this comes out of the box.
-        p.button
-          a.btn.btn-default.btn-lg href='#vm-settings' Get started
+        .droparea ng-file-drop='' ng-model='gemfile' drag-over-class='dragover' allow-dir='false'
+          p Drag and Drop your <strong>Gemfile</strong> here or fill the form below manually
 
-.container-fluid ng-controller='ConfigurationController' ng-init="downloadConfiguration('#{default_boxes_url(format: 'json')}')"
+.container-fluid ng-init="downloadConfiguration('#{default_boxes_url(format: 'json')}')"
   form name='newBox' role='form' method='post' action=boxes_path novalidate=true
     = token_tag nil
     = render layout: 'boxes/form' do
