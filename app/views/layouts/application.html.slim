@@ -42,4 +42,6 @@ html lang="en"
           li
             a href='https://github.com/andreychernih/railsbox/issues' Issues
           - if VersionManager.current_version
-            li Version: #{VersionManager.current_version}
+            li 
+              ' Version:
+              a href='https://github.com/andreychernih/railsbox/releases' = VersionManager.current_version
