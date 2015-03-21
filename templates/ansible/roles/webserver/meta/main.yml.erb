@@ -3,6 +3,9 @@ dependencies:
 <% if params[:server_type] == 'nginx_passenger' -%>
   - passenger
   - nginx
+<% elsif params[:server_type] == 'nginx_puma' -%>
+  - nginx
+  - puma
 <% else %>
   - nginx
   - unicorn

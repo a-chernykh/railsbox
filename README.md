@@ -25,6 +25,7 @@ It's possible to install Ruby either with [rvm][], [rbenv][] or using [brightbox
 Supported servers are:
 
 * [nginx][] and [unicorn][]
+* [nginx][] and [puma][]
 * [nginx][] and [passenger][]
 
 ## Databases
@@ -51,7 +52,7 @@ It's possible to install the following databases:
 [railsbox][] is constantly improving. The following is in our TODO list for future releases:
 
 * Add ability to deploy to various platforms supported by vagrant - Parallels, VMWare, EC2
-* Add additional server options (Passenger, puma, thin)
+* Add additional server options (Passenger, thin)
 * Add memcached
 * Add elasticsearch
 * Add MariaDB
@@ -73,6 +74,7 @@ All kind of contributions are always welcomed.
 [rvm]: https://rvm.io/
 [brightbox apt repository]: https://www.brightbox.com/docs/ruby/ubuntu/
 [nginx]: http://nginx.org/
+[puma]: http://puma.io/
 [unicorn]: http://unicorn.bogomips.org/
 [passenger]: https://www.phusionpassenger.com/
 [homebrew]: http://brew.sh/

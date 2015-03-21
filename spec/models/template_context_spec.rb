@@ -21,6 +21,12 @@ RSpec.describe TemplateContext do
 
       it { is_expected.to eq 'unicorn' }
     end
+    
+    context 'when server_type == nginx_puma' do
+      let(:server_type) { 'nginx_puma' }
+
+      it { is_expected.to eq 'puma' }
+    end
 
     context 'when server_type == nginx_passenger' do
       let(:server_type) { 'nginx_passenger' }

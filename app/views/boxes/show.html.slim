@@ -39,6 +39,14 @@
             | sudo start #{@box.vm_name}
               sudo stop #{@box.vm_name}
               sudo restart #{@box.vm_name}
+      - elsif @box.server_type == 'nginx_puma'
+        h3 puma
+        p You can start and stop puma by running standard upstart commands:
+        p
+          pre
+            | sudo start #{@box.vm_name}
+              sudo stop #{@box.vm_name}
+              sudo restart #{@box.vm_name}
       - elsif @box.server_type == 'nginx_passenger'
         h3 Passenger
         p You can restart your Rails application by running <kbd>touch tmp/restart.txt</kbd> in <kbd>#{@box.path}</kbd> dir.

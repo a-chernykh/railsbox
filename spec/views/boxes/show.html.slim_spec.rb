@@ -23,6 +23,15 @@ RSpec.describe 'boxes/show.html.slim' do
         expect(rendered).to include 'sudo start testapp'
       end
     end
+    
+    context 'nginx and puma' do
+      let(:server_type) { 'nginx_puma' }
+
+      it 'includes puma control commands' do
+        render
+        expect(rendered).to include 'sudo start testapp'
+      end
+    end
 
     context 'nginx and passenger' do
       let(:server_type) { 'nginx_passenger' }

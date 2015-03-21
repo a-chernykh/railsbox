@@ -7,6 +7,9 @@ angular.module('app.railsbox').controller 'ConfigurationController', ['$scope', 
     label: _t('nginx_unicorn')
     id: 'nginx_unicorn'
    ,
+    label: _t('nginx_puma')
+    id: 'nginx_puma'
+   ,
     label: _t('nginx_passenger')
     id: 'nginx_passenger'
   ]
