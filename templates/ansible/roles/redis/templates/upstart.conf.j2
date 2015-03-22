@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+description "Redis Server"
+
+env USER=redis
+
+start on startup
+stop on shutdown
+
+respawn
+
+exec start-stop-daemon --start --make-pidfile --pidfile {{ app_temp_path }}/pids/redis.pid --chuid $USER --exec /usr/local/bin/redis-server /etc/redis/redis.conf >> {{ app_logs_path }}/redis.log 2>&1

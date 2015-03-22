@@ -1,6 +1,8 @@
 ---
 <% if params[:server_type] == 'nginx_passenger' -%>
 - include_vars: ../../passenger/defaults/main.yml
+<% elsif params[:server_type] == 'nginx_puma' -%>
+- include_vars: ../../puma/defaults/main.yml
 <% else %>
 - include_vars: ../../unicorn/defaults/main.yml
 <% end %>
@@ -35,7 +37,7 @@
   with_items:
     - config/database.yml
     - config/secrets.yml
-    - config/unicorn.rb
+    - <%= "config/#{params[:server_type].split('_')[1]}.rb" %>
     - log
     - tmp
     - vendor/bundle
