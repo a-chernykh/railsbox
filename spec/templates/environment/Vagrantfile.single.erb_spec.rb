@@ -8,7 +8,7 @@ RSpec.describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
 
   context 'vm_share_type' do
     context 'default' do
-      let(:params) { base_params.merge(:vm_share_type => nil) }
+      let(:params) { base_params.merge(:vm_share_type => 'virtualbox') }
 
       it 'does not sets synced folder type' do
         expect(subject).to include %Q(.vm.synced_folder '../../', '/myapp'\n)

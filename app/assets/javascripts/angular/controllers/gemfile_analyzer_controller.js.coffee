@@ -1,6 +1,6 @@
 angular
   .module('app.railsbox')
-  .controller 'GemfileAnalyzerController', [ '$rootScope', '$scope', '$upload', 'notifier', ($rootScope, $scope, $upload, notifier) ->
+  .controller 'GemfileAnalyzerController', ($rootScope, $scope, $upload, notifier) ->
 
     upload = (gemfile) ->
       if gemfile
@@ -16,4 +16,3 @@ angular
         )
 
     $scope.$watch 'gemfile', -> upload($scope.gemfile)
-]

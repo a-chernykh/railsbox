@@ -28,6 +28,7 @@
 //= require init
 
 //= require ./angular/app
+//= require_tree ./angular/constants
 //= require_tree ./angular/services
 //= require_tree ./angular/directives
 //= require_tree ./angular/controllers

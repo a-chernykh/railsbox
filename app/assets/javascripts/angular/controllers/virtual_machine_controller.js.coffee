@@ -1,4 +1,4 @@
-angular.module('app.railsbox').controller 'VirtualMachineController', [ '$scope', ($scope) ->
+angular.module('app.railsbox').controller 'VirtualMachineController', ($scope) ->
   $scope.addPort = ->
     $scope.configuration[$scope.environment].vm_ports.push { guest: $scope.newGuestPort, host: $scope.newHostPort }
     $scope.newGuestPort = null
@@ -6,4 +6,3 @@ angular.module('app.railsbox').controller 'VirtualMachineController', [ '$scope'
 
   $scope.deletePort = (index) ->
     $scope.configuration[$scope.environment].vm_ports.splice index, 1
-]

@@ -135,6 +135,9 @@ GEM
     minitest (5.5.0)
     multi_json (1.11.0)
     nenv (0.1.1)
+    ngannotate-rails (0.15.4)
+      execjs
+      rails (>= 3.1)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     parser (2.2.0.3)
@@ -286,6 +289,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  ngannotate-rails
   parser
   pg
   pry-byebug

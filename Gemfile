@@ -16,6 +16,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem "i18n-js", ">= 3.0.0.rc8"
 gem 'angular-rails-templates'
+gem 'ngannotate-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular', '~> 1.3.15'
