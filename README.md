@@ -25,7 +25,7 @@ It's possible to install Ruby either with [rvm][], [rbenv][] or using [brightbox
 Supported servers are:
 
 * [nginx][] and [unicorn][]
-* [nginx][] and [puma][]
+* [nginx][] and [puma][] (added by @RDrop)
 * [nginx][] and [passenger][]
 
 ## Databases
