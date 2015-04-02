@@ -86,7 +86,7 @@ a.anchor#environments
                         td
                           input.form-control type='number' placeholder='host port' ng-model='newHostPort'
                         td
-                          button.btn.btn-default ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
+                          button.btn.btn-default type='button' ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
 
             div ng-show="configuration[environment].target == 'server'"
               p.small SSH connection will be used to provision and deploy. Your default private key will be used to authenticate.
