@@ -1,8 +1,8 @@
-RSpec.describe BoxDecorator do
+RSpec.describe Decorators::BoxDecorator do
   let(:params) { params_fixture }
   let(:box) { stub_model(Box, secure_id: 'whatever', params: params) }
 
-  subject(:decorated) { BoxDecorator.decorate(box) }
+  subject(:decorated) { described_class.decorate(box) }
 
   describe '#vm_name' do
     it 'passes through' do

@@ -1,4 +1,4 @@
-RSpec.describe TemplateContext do
+RSpec.describe Templates::Context do
   let(:server_type) { 'nginx_unicorn' }
   let(:context) do
     described_class.new(Rails.root.join('templates/environment/virtualbox/Vagrantfile.single.erb'),

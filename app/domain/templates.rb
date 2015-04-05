@@ -1,8 +1,10 @@
-class Templates
+module Templates
   ROOT_PATH = 'templates'
   EXT = '.erb'
 
-  def self.path(template)
+  module_function
+
+  def path(template)
     File.join(ROOT_PATH, template)
   end
 end

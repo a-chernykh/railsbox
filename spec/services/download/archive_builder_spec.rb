@@ -1,4 +1,4 @@
-RSpec.describe ArchiveBuilder do
+RSpec.describe Services::Download::ArchiveBuilder do
   describe '#build' do
     def stub_temp_dir(dir)
       allow(Dir).to receive(:mktmpdir) do
@@ -7,7 +7,7 @@ RSpec.describe ArchiveBuilder do
     end
 
     def stub_archiver
-      allow(Archiver).to receive(:new) { archiver }
+      allow(Services::Download::Archiver).to receive(:new) { archiver }
     end
 
     let(:configurator) { double('BoxConfigurator').as_null_object }
@@ -36,7 +36,7 @@ RSpec.describe ArchiveBuilder do
     end
 
     it 'archives directory' do
-      allow(Archiver).to receive(:new).with(temp_dir) { archiver }
+      allow(Services::Download::Archiver).to receive(:new).with(temp_dir) { archiver }
       expect(archiver).to receive(:archive)
       subject.build
     end

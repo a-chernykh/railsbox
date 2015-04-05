@@ -1,4 +1,4 @@
-RSpec.describe EnvironmentsConfiguration do
+RSpec.describe Compilers::Environments do
   describe '#save' do
     let(:params) do
       params_fixture.merge(environments: %w(development staging), staging: {
@@ -13,7 +13,7 @@ RSpec.describe EnvironmentsConfiguration do
     subject { described_class.new(params) }
 
     before { @dir = Dir.mktmpdir }
-    before { CopyConfiguration.new(params).save(@dir) }
+    before { Compilers::Copy.new(params).save(@dir) }
     before { subject.save(@dir) }
 
     it 'creates development directory' do

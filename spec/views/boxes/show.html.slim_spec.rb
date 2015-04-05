@@ -3,7 +3,7 @@ RSpec.describe 'boxes/show.html.slim' do
   let(:os)  { :mac }
 
   before do
-    assign :box, BoxDecorator.decorate(box)
+    assign :box, Decorators::BoxDecorator.decorate(box)
     allow(view).to receive(:browser) { double(platform: os) }
   end
 

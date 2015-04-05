@@ -1,9 +1,9 @@
-RSpec.describe TemplateConfiguration do
+RSpec.describe Compilers::Template do
   describe '#save' do
     let(:dir)    { Dir.mktmpdir }
     let(:params) { params_fixture }
 
-    before { CopyConfiguration.new(params).save(dir) }
+    before { Compilers::Copy.new(params).save(dir) }
 
     describe 'files' do
       subject(:output) { IO.read(File.join(dir, file)) }

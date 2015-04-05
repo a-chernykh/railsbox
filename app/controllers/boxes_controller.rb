@@ -12,7 +12,7 @@ class BoxesController < ApplicationController
   end
 
   def show
-    @box = BoxDecorator.decorate @box
+    @box = Decorators::BoxDecorator.decorate @box
     respond_to do |format|
       format.html
       format.json { render json: @box }
@@ -28,10 +28,9 @@ class BoxesController < ApplicationController
   end
 
   def download
-    configurator = BoxConfigurator.from_params(@box.params)
-    builder = ArchiveBuilder.new(configurator)
-    zip_path = builder.build
-    send_file zip_path, filename: configurator.file_name
+    download = Services::Download.new(@box)
+    result = download.call
+    send_file result.path, filename: result.file_name
   end
 
   private

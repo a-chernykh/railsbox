@@ -1,4 +1,4 @@
-RSpec.describe BoxConfigurator do
+RSpec.describe Compilers::BoxConfigurator do
   subject(:configurator) { described_class.from_params(params_fixture) }
 
   describe '#save' do
