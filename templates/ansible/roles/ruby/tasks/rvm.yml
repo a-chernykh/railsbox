@@ -71,7 +71,7 @@
   when: install_rubies.results[0].rc != 0 and item.rc != 0
   with_items: detect_rubies.results
   sudo_user: '{{ rvm1_user }}'
-.
+
 - name: Detect default ruby version
   command: '{{ rvm1_rvm }} alias list default'
   changed_when: False
