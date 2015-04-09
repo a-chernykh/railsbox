@@ -2,7 +2,7 @@
 
 description "{{ app_name }} resque"
 
-start on [2]
+start on runlevel [2]
 stop on runlevel [016]
 
 env PATH=$PATH:/usr/local/bin:/usr/bin:/bin
