@@ -71,6 +71,7 @@ input.ng-invalid[type=text] {
 }
 
 .droparea {
+  cursor: pointer;
   margin-top: 2em;
   border-radius: $border-radius;
   padding: 1px;

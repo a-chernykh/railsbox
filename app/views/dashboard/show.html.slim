@@ -12,7 +12,7 @@ a.anchor#home
           ' <strong>railsbox</strong> helps you to start applying best <strong>DevOps</strong> practices in your project by generating
           a href='http://www.ansible.com/' <strong>ansible</strong>
           '  playbooks for configuring and deploying Ruby on Rails applications. You no longer need to edit a single configuration file on your server and use tools like capistrano for code deployments - all this comes out of the box.
-        .droparea ng-file-drop='' ng-model='gemfile' drag-over-class='dragover' allow-dir='false'
+        .droparea ng-file-drop='' ng-file-select='' ng-model='gemfile' drag-over-class='dragover' allow-dir='false'
           p Drag and Drop your <strong>Gemfile</strong> here or fill the form below manually
 
 .container-fluid ng-init="downloadConfiguration('#{default_boxes_url(format: 'json')}')"
