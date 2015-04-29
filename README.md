@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/andreychernih/railsbox.svg?branch=master)](https://travis-ci.org/andreychernih/railsbox)
 [![Code Climate](https://codeclimate.com/github/andreychernih/railsbox/badges/gpa.svg)](https://codeclimate.com/github/andreychernih/railsbox)
+[![Test Coverage](https://codeclimate.com/github/andreychernih/railsbox/badges/coverage.svg)](https://codeclimate.com/github/andreychernih/railsbox)
 
 [railsbox][] is Ruby on Rails virtual machine configurator. You can quickly create virtual machine for development and production environments using this tool. Mac OS X, Linux and Windows host machines are supported.
 
