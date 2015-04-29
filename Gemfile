@@ -54,7 +54,8 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-activemodel-mocks'
   gem 'fuubar'
-  gem 'simplecov', require: false
+
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development, :test do

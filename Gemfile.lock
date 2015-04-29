@@ -65,6 +65,8 @@ GEM
       json
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -280,6 +282,7 @@ DEPENDENCIES
   browser
   capybara
   capybara-webkit
+  codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   database_cleaner
   fuubar
@@ -305,7 +308,6 @@ DEPENDENCIES
   rubyzip
   sass-rails (~> 4.0.3)
   shoulda-matchers
-  simplecov
   slim-rails
   spring
   terminal-notifier-guard
