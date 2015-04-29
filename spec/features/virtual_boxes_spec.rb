@@ -1,6 +1,9 @@
 RSpec.feature 'Virtual boxes', js: true do
   def wait_for_download
-    expect(page).not_to have_content 'Download'
+    # workaround for https://github.com/thoughtbot/capybara-webkit/issues/319
+    page.document.synchronize(2) do
+      raise Capybara::ElementNotFound unless page.response_headers['Content-Type'] =~ /zip/
+    end
   end
 
   scenario 'Create new box redirects to download page' do
