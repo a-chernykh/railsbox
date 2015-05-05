@@ -4,4 +4,3 @@ class DeleteDownloadsJob < ActiveJob::Base
     FileUtils.rm files
   end
 end
-

@@ -8,4 +8,3 @@ RSpec.describe DeleteDownloadsJob do
     end
   end
 end
-
