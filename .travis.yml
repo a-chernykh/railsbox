@@ -6,6 +6,7 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 before_script:
   - psql -c 'create database railsbox_test;' -U postgres
+  - mkdir tmp
   - bundle exec rake db:test:prepare
 script: bundle exec rspec -b
 addons:
