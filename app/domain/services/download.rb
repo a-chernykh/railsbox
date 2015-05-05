@@ -31,12 +31,16 @@ module Services
     end
 
     class ArchiveBuilder
+      TEMP_DIR = Rails.root.join('tmp')
+
       def initialize(configurator)
         @configurator = configurator
       end
 
       def build
-        zip_path = File.join(Dir.tmpdir, File.basename(temp_dir) + '.zip')
+        DeleteDownloadsJob.perform_now(File.join(TEMP_DIR, '*.zip'))
+
+        zip_path = File.join(TEMP_DIR, File.basename(temp_dir) + '.zip')
 
         begin
           railsbox_dir = File.join(temp_dir, 'railsbox')

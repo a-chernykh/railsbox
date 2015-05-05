@@ -57,8 +57,9 @@ RSpec.describe BoxesController do
   end
 
   describe 'GET download' do
+    let(:box) { Box.create! params: params_fixture }
+
     it 'responds with file download' do
-      box = Box.create! params: params_fixture
       get :download, id: box.secure_id
       expect(response.headers['Content-Disposition']).to include 'attachment'
     end
