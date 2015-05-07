@@ -54,4 +54,14 @@ RSpec.feature 'Virtual boxes', js: true do
 
     expect(page).to have_content(I18n.t('boxes.show.title') + ' anotherapp')
   end
+
+  scenario 'Delete box' do
+    visit '/'
+
+    click_on I18n.t('boxes.form.create')
+    click_on I18n.t('boxes.show.delete')
+
+    expect(page).to have_content(I18n.t('deleted'))
+    expect(Box.count).to eq 0
+  end
 end

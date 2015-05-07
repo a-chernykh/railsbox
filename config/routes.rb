@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :boxes, only: %i(create show edit update) do
+  resources :boxes, only: %i(create show edit update destroy) do
     get :download, on: :member
     get :default, on: :collection
   end

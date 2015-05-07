@@ -21,6 +21,7 @@
 
 en:
   updated: Box has been updated
+  deleted: Box has been deleted
   activerecord:
     attributes:
       box:
@@ -70,3 +71,4 @@ en:
       title: 'Your virtual box:'
       download: 'Download'
       edit: 'Edit'
+      delete: 'Delete'

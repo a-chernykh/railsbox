@@ -13,6 +13,8 @@
         a.btn.btn-primary.btn-lg role='button' href=download_box_url(@box) = t('.download')
         ' 
         a.btn.btn-default.btn-lg role='button' href=edit_box_url(@box) = t('.edit')
+        '
+        a.btn.btn-danger.btn-lg role='button' href=box_url(@box) data-confirm='Are you sure?' data-method='delete' = t('.delete')
 
       dl.dl-horizontal
         - if @box.http_url

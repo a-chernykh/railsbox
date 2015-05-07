@@ -1,6 +1,6 @@
 class BoxesController < ApplicationController
   layout 'box', except: %w(edit)
-  before_filter :find_box, only: %w(show edit download update)
+  before_filter :find_box, except: %w(create default)
 
   def create
     box = Box.create! params: typecasted_box_params
@@ -31,6 +31,11 @@ class BoxesController < ApplicationController
     download = Services::Download.new(@box)
     result = download.call
     send_file result.path, filename: result.file_name
+  end
+
+  def destroy
+    @box.destroy
+    redirect_to root_url, notice: t('deleted')
   end
 
   private

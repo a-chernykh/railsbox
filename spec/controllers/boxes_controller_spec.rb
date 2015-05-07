@@ -64,4 +64,11 @@ RSpec.describe BoxesController do
       expect(response.headers['Content-Disposition']).to include 'attachment'
     end
   end
+
+  describe 'DELETE destroy' do
+    it 'deletes box' do
+      box = Box.create! params: params_fixture
+      expect { delete :destroy, id: box.secure_id }.to change{ Box.count }.by(-1)
+    end
+  end
 end
