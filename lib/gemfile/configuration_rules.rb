@@ -66,6 +66,8 @@ module Gemfile
         'delayed_job_active_record' => add_background_job('delayed_job'),
         'delayed_job_mongoid' => add_background_job('delayed_job'),
         'delayed_job' => add_background_job('delayed_job'),
+        'ffi' => add_packages('libffi-dev'),
+        'sqlite3' => add_packages('sqlite3', 'libsqlite3-dev'),
       }
       rules.default = -> (c) { }
       rules.freeze
