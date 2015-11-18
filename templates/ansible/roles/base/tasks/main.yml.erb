@@ -42,6 +42,10 @@
     - restart <%= job %>
 <% end %>
 
+- name: Create temp directory
+  file: path={{ app_temp_path }} state=directory
+  sudo: no
+
 - name: Create profile.d directory
   file: path={{ profile_d_path }} state=directory owner={{ user_name }} group={{ group_name }}
 

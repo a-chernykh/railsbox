@@ -23,7 +23,7 @@ ssl_certificate_key_path: /etc/nginx/ssl/{{ server_name }}.key
 app_path: '{{ path if target == "virtualbox" else "{{ path }}/current" }}'
 app_public_path: "{{ app_path }}/public"
 app_config_path: "{{ app_path }}/config"
-app_temp_path: "{{ app_path }}/tmp"
+app_temp_path: "/tmp{{ app_path }}"
 app_logs_path: "{{ app_path }}/log"
 
 releases_path: '{{ path }}/releases'
