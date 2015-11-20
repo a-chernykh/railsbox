@@ -35,6 +35,9 @@
   postgresql_db: name={{ postgresql_db_name }} owner={{ postgresql_db_user }}
   sudo_user: postgres
 
+- name: Assure that config dir exists
+  file: path={{ app_config_path }} state=directory
+
 - name: Create config/database.yml
   template: src=database.yml.j2 dest={{ app_config_path }}/database.yml owner={{ user_name }} mode=0600 backup=yes
   when: postgresql_orm in ['activerecord', 'sequel', 'datamapper']
