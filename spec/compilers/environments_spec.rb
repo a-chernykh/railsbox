@@ -2,10 +2,10 @@ RSpec.describe Compilers::Environments do
   describe '#save' do
     let(:params) do
       params_fixture.merge(environments: %w(development staging), staging: {
-        'target': 'server',
-        'host': 'myapp.com',
-        'port': '22',
-        'username': 'ubuntu',
+        target:   'server',
+        host:     'myapp.com',
+        port:     '22',
+        username: 'ubuntu',
       })
     end
     let(:staging_inventory_path) { File.join(@dir, 'staging', 'inventory') }
@@ -93,6 +93,14 @@ RSpec.describe Compilers::Environments do
 
       it 'keeps executable flag on staging/provision.sh' do
         expect(File).to be_executable(staging_provision_path)
+      end
+
+      context 'inventory' do
+        let(:output) { IO.read(staging_inventory_path) }
+
+        it 'sets correct environment' do
+          expect(output).to include %Q([staging])
+        end
       end
     end
 
