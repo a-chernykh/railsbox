@@ -9,11 +9,11 @@
     - python-dev
 
 - name: Configure PostgreSQL - postgresql.conf
-  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
   notify: restart postgresql
 
 - name: Configure PostgreSQL - pg_hba.conf
-  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf
   notify: restart postgresql
 
 <% if params[:docker] -%>
@@ -34,6 +34,9 @@
 - name: Create postgresql database
   postgresql_db: name={{ postgresql_db_name }} owner={{ postgresql_db_user }}
   sudo_user: postgres
+
+- name: Assure that config dir exists
+  file: path={{ app_config_path }} state=directory
 
 - name: Create config/database.yml
   template: src=database.yml.j2 dest={{ app_config_path }}/database.yml owner={{ user_name }} mode=0600 backup=yes

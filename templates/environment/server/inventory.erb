@@ -9,7 +9,7 @@
 [vm]
 <%= params[:host] %>
 
-[development]
+[<%= params[:rails_env] %>]
 <%= params[:host] %>
 
 <% roles.each do |role| -%>
