@@ -68,7 +68,7 @@
 # https://github.com/andreychernih/railsbox/issues/13
 - name: Install rubies (non-binary)
   command: '{{ rvm1_rvm }} install {{ item.item }}'
-  when: install_rubies.results[0].rc != 0 and item.rc != 0
+  when: item.rc != 0 && install_rubies.results[0].rc != 0
   with_items: detect_rubies.results
   sudo_user: '{{ rvm1_user }}'
 
