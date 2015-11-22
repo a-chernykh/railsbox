@@ -60,7 +60,7 @@
 - name: Symlink new release
   file: src={{ this_release_path }} dest={{ app_path }} state=link force=yes
 
-- name: Restart unicorn
+- name: Restart webserver
   command: sudo {{ server_restart_command }}
 
 - name: Cleanup
