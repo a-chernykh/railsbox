@@ -37,7 +37,7 @@
   with_items:
     - config/database.yml
     - config/secrets.yml
-    - <%= "config/#{params[:server_type].split('_')[1]}.rb" %>
+    - config/<%= params[:server_type].split('_')[1] %>.{{ rails_env }}.rb
     - log
     - tmp
     - vendor/bundle
