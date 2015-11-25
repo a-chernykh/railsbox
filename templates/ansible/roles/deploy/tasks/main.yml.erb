@@ -48,7 +48,7 @@
     chdir: '{{ this_release_path }}'
 
 - name: Precompile assets
-  command: /bin/bach -lc 'rake assets:precompile'
+  command: /bin/bash -lc 'rake assets:precompile'
   environment:
     RAILS_ENV: '{{ rails_env }}'
   args:
