@@ -8,7 +8,10 @@
   roles:
     - { role: apt_proxy, when: use_apt_proxy }
   tasks:
-    - apt: update_cache=yes
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
 
 <% params[:databases].each do |db| -%>
 - hosts: <%= db %>

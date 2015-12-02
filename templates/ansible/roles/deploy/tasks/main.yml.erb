@@ -37,30 +37,34 @@
   with_items:
     - config/database.yml
     - config/secrets.yml
-    - <%= "config/#{params[:server_type].split('_')[1]}.rb" %>
+    - config/<%= params[:server_type].split('_')[1] %>.{{ rails_env }}.rb
     - log
     - tmp
     - vendor/bundle
 
-- name: Install bundle
-  command: 'bundle install --deployment --without="development test"'
+- name: Install gems
+  command: /bin/bash -lc 'bundle install --deployment --without="development test"'
   args:
     chdir: '{{ this_release_path }}'
 
 - name: Precompile assets
-  command: bundle exec rake assets:precompile chdir={{ this_release_path }}
+  command: /bin/bash -lc 'bundle exec rake assets:precompile'
   environment:
     RAILS_ENV: '{{ rails_env }}'
+  args:
+    chdir: '{{ this_release_path }}'
 
 - name: Migrate database
-  command: bundle exec rake db:migrate chdir={{ this_release_path }}
+  command: /bin/bash -lc 'bundle exec rake db:migrate'
   environment:
     RAILS_ENV: '{{ rails_env }}'
+  args:
+    chdir: '{{ this_release_path }}'
 
 - name: Symlink new release
   file: src={{ this_release_path }} dest={{ app_path }} state=link force=yes
 
-- name: Restart unicorn
+- name: Restart webserver
   command: sudo {{ server_restart_command }}
 
 - name: Cleanup
