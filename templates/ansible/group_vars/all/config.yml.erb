@@ -20,7 +20,7 @@ user_home_path: '/home/{{ user_name }}'
 ssl_certificate_path: /etc/nginx/ssl/{{ server_name }}.crt
 ssl_certificate_key_path: /etc/nginx/ssl/{{ server_name }}.key
 
-app_path: '{{ path }}{{ "/current" if target != "virtualbox" }}'
+app_path: '{{ path }}{{ "/current" if target != "virtualbox" else "" }}'
 app_public_path: "{{ app_path }}/public"
 app_config_path: '{{ app_path if target == "virtualbox" else shared_path }}/config'
 app_temp_path: "/tmp{{ app_path }}"
