@@ -3,7 +3,7 @@
   template: src=unicorn.rb.j2 dest={{ shared_path }}/config/unicorn.rb owner={{ user_name }} group={{ group_name }}
 
 - name: Install unicorn
-  command: /bin/bash -l -c 'gem install unicorn --no-ri --no-rdoc' chdir={{ app_path }}
+  command: /bin/bash -l -c 'gem install unicorn --no-ri --no-rdoc' chdir={{ current_release_path }}
   sudo: no
 
 - name: Create upstart config
