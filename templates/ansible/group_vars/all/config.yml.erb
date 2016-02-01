@@ -20,14 +20,15 @@ user_home_path: '/home/{{ user_name }}'
 ssl_certificate_path: /etc/nginx/ssl/{{ server_name }}.crt
 ssl_certificate_key_path: /etc/nginx/ssl/{{ server_name }}.key
 
-app_path: '{{ path }}{{ "/current" if target != "virtualbox" else "" }}'
-app_public_path: "{{ app_path }}/public"
-app_config_path: '{{ app_path if target == "virtualbox" else shared_path }}/config'
-app_temp_path: "/tmp{{ app_path }}"
-app_logs_path: "{{ app_path }}/log"
-
 releases_path: '{{ path }}/releases'
 shared_path: '{{ path }}/shared'
+
+app_path: '{{ path }}{{ "/current" if target != "virtualbox" else "" }}'
+app_public_path: "{{ app_path }}/public"
+app_config_path: '{{ app_path }}/config'
+shared_config_path: '{{ app_path if target == "virtualbox" else shared_path }}/config'
+app_temp_path: "/tmp{{ app_path }}"
+app_logs_path: "{{ app_path }}/log"
 
 unicorn_sock_path: "/tmp/unicorn.{{ rails_env }}.sock"
 unicorn_config_path: "{{ app_config_path }}/unicorn.{{ rails_env }}.rb"

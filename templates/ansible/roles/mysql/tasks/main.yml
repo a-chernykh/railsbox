@@ -20,5 +20,5 @@
   mysql_db: name={{ mysql_db_name }}
 
 - name: Create config/database.yml
-  template: src=database.yml.j2 dest={{ app_config_path }}/database.yml owner={{ user_name }} mode=0600 backup=yes
+  template: src=database.yml.j2 dest={{ shared_config_path }}/database.yml owner={{ user_name }} mode=0600 backup=yes
   when: mysql_orm in ['activerecord', 'sequel', 'datamapper']
