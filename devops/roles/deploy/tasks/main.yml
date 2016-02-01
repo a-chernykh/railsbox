@@ -34,7 +34,7 @@
     chdir: '{{ this_release_path }}'
 
 - name: Precompile assets
-  command: rake assets:precompile chdir={{ this_release_path }}
+  command: bundle exec rake assets:precompile chdir={{ this_release_path }}
   environment:
     RAILS_ENV: '{{ rails_env }}'
 
@@ -50,7 +50,7 @@
   tags: backup
 
 - name: Migrate database
-  command: rake db:migrate chdir={{ this_release_path }}
+  command: bundle exec rake db:migrate chdir={{ this_release_path }}
   environment:
     RAILS_ENV: '{{ rails_env }}'
 
