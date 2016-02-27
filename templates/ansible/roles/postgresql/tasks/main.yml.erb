@@ -35,6 +35,10 @@
   postgresql_db: name={{ postgresql_db_name }} owner={{ postgresql_db_user }}
   sudo_user: postgres
 
+- name: Create postgresql test database
+  postgresql_db: name={{ postgresql_db_name }}_test owner={{ postgresql_db_user }}
+  sudo_user: postgres
+
 - name: Assure that config dir exists
   file: path={{ shared_config_path }} state=directory
 
