@@ -22,3 +22,7 @@ coverage
 
 spec/fixtures/testapp1/railsbox
 
+#ignore ansible retries
+*.retry
+#ignore gedit backup files
+*.*~
