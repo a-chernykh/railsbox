@@ -13,6 +13,6 @@
   sudo_user: '{{ ruby_user_name }}'
 
 - name: bundle install
-  command: /bin/bash -l -c 'bundle install' chdir={{ app_path }}
+  command: /bin/bash -l -c 'bundle install --path vendor/bundle' chdir={{ app_path }}
   sudo_user: '{{ ruby_user_name }}'
   when: target == 'virtualbox'
