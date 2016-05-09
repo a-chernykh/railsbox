@@ -30,7 +30,7 @@ gem 'rubyzip', require: 'zip'
 gem 'browser'
 
 gem 'unicorn'
-gem 'rollbar', '~> 1.4.4'
+gem 'rollbar', '~> 2.11'
 
 gem 'parser'
 
