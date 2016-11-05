@@ -5,13 +5,21 @@ module Decorators
     end
 
     def http_url
-      port = find_by_guest_port(80)
-      "http://localhost:#{port['host']}" if port
+      if params["development"]["use_hostname"]
+        "http://#{vm_name}.dev"
+      else
+        port = find_by_guest_port(80)
+        "http://localhost:#{port['host']}" if port
+      end
     end
 
     def https_url
-      port = find_by_guest_port(443)
-      "https://localhost:#{port['host']}" if port
+      if params["development"]["use_hostname"]
+        "https://#{vm_name}.dev"
+      else
+        port = find_by_guest_port(443)
+        "https://localhost:#{port['host']}" if port
+      end
     end
 
     private

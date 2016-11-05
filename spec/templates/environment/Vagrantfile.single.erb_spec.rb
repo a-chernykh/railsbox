@@ -31,4 +31,11 @@ RSpec.describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
       end
     end
   end
+
+  context 'hostmanager' do
+    it 'should set the host aliases' do
+      expect(subject).to include %Q(.hostmanager.aliases = %w(localhost.dev www.localhost.dev *.localhost.dev))
+    end
+  end
+
 end

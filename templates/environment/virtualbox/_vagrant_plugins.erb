@@ -17,6 +17,11 @@ end
 require_plugins \
   'vagrant-bindfs' => '0.3.2'
 
+<% if params[:use_hostname] %>
+require_plugins \
+  'vagrant-hostmanager' => '1.8.0'
+<% end  %>
+
 def ansible_installed?
   exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
   ENV['PATH'].split(File::PATH_SEPARATOR).any? do |p|
