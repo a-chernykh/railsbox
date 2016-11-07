@@ -33,8 +33,11 @@ RSpec.describe 'templates/environment/virtualbox/Vagrantfile.single.erb' do
   end
 
   context 'hostmanager' do
+    let(:params)       { base_params.merge(:use_hostname => true) }
+
     it 'should set the host aliases' do
-      expect(subject).to include %Q(.hostmanager.aliases = %w(www.localhost.dev *.localhost.dev))
+      expect(subject).to include %Q(.hostmanager.aliases = %w(www.testapp.dev *.testapp.dev))
+      expect(subject).to include %Q(.vm.hostname = 'testapp.dev')
     end
   end
 
