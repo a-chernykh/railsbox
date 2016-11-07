@@ -40,8 +40,8 @@ RSpec.describe Compilers::Environments do
         expect(File).not_to exist(File.join(@dir, 'development', 'inventory'))
       end
 
-      it 'does not creates development/provision.sh' do
-        expect(File).not_to exist(File.join(@dir, 'development', 'provision.sh'))
+      it 'does create development/provision.sh' do
+        expect(File).to exist(File.join(@dir, 'development', 'provision.sh'))
       end
 
       context 'ansible/group_vars/development/config.yml' do
