@@ -57,5 +57,5 @@
 - name: Create extensions
   sudo_user: '{{ postgresql_admin_user }}'
   shell: "psql {{ postgresql_db_name }} -c 'CREATE EXTENSION IF NOT EXISTS {{ item }};'"
-  with_items: postgresql_extensions
+  with_items: '{{ postgresql_extensions }}'
   when: postgresql_extensions

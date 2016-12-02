@@ -34,5 +34,5 @@
     owner: '{{ user_name }}'
     group: '{{ group_name }}'
     mode: 0600
-  with_items: configs.results
+  with_items: '{{ configs.results }}'
   when: item.stat.exists

@@ -18,4 +18,4 @@
 - name: Install plugins
   git: repo={{ item.git }} dest={{ vim_bundle_path }}/{{ item.name }} version=master accept_hostkey=yes
   sudo_user: '{{ user_name }}'
-  with_items: vim_plugins
+  with_items: '{{ vim_plugins }}'
