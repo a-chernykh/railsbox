@@ -42,7 +42,7 @@
     name: Renew SSL
     minute: "0"
     hour: "6,12"
-    job: "/usr/local/bin/certbot-auto renew --quiet --no-self-upgrade"
+    job: "/usr/local/bin/certbot-auto renew --quiet --no-self-upgrade --renew-hook=\"service nginx restart\""
   tags:
     - nginx
     - ssl
