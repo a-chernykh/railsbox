@@ -28,16 +28,21 @@
   notify: restart nginx
   tags: nginx
 
-- name: Create certificates directory
-  file: path={{ ssl_certificate_path|dirname }} recurse=yes state=directory
-  tags: nginx
+- name: Install certbot
+  get_url:
+    url: https://dl.eff.org/certbot-auto
+    dest: /usr/local/bin/certbot-auto
+    mode: 0755
+  tags:
+    - nginx
+    - ssl
 
-- name: Copy certificate
-  copy: content="{{ ssl_cert }}" dest={{ ssl_certificate_path }} mode=0600
-  notify: restart nginx
-  tags: nginx
-
-- name: Copy private key
-  copy: content="{{ ssl_key }}" dest={{ ssl_certificate_key_path }} mode=0600
-  notify: restart nginx
-  tags: nginx
+- name: Setup automatic SSL renewals
+  cron:
+    name: Renew SSL
+    minute: "0"
+    hour: "6,12"
+    job: "/usr/local/bin/certbot-auto renew --quiet --no-self-upgrade"
+  tags:
+    - nginx
+    - ssl

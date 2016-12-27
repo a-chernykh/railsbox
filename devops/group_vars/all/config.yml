@@ -22,10 +22,10 @@ ruby_version: ruby2.2
 
 postgresql_db_name: railsbox_production
 postgresql_db_user: railsbox
-postgresql_db_password: 
+postgresql_db_password:
 
-ssl_certificate_path: /etc/nginx/ssl/railsbox.crt
-ssl_certificate_key_path: /etc/nginx/ssl/railsbox.key
+ssl_certificate_path: /etc/letsencrypt/live/railsbox.io/fullchain.pem
+ssl_certificate_key_path: /etc/letsencrypt/live/railsbox.io/privkey.pem
 
 user_home_path: '/{{ app_name }}'
 app_path: '{{ user_home_path }}/app'
