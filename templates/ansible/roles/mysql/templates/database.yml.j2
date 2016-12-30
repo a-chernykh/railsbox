@@ -10,7 +10,7 @@ development:
   database: {{ mysql_db_name }}
 
   username: {{ mysql_db_user }}
-  password: {{ mysql_db_password }}
+  password: {{ mysql_db_password|default('', true) }}
 
 test:
   <<: *default
