@@ -11,10 +11,13 @@
 - name: Enable and start redis-server
   service: name=redis-server enabled=yes state=started
 
+- name: Assure initializers dir exists
+  file: path={{app_config_path}}/initializers state=directory
+
 - name: Configure redis-rb
   template: src=redis.rb.j2 dest={{ app_config_path }}/initializers/redis.rb owner={{ user_name }} backup=yes
   when: redis_orm is defined and redis_orm == 'redis-rb'
- 
+
 - name: Create upstart config
   template: src=upstart.conf.j2 dest=/etc/init/redis.conf
   notify: restart redis
