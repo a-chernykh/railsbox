@@ -21,7 +21,7 @@
 
 - name: Install additional packages
   apt: name={{ item }}
-  with_items: packages
+  with_items: '{{ packages }}'
 
 - name: Install required Python modules
   pip: name=httplib2
