@@ -65,28 +65,35 @@ a.anchor#environments
                         label for='{{ environment }}_vm_ip' IP address
                         input.form-control ng-required='isVirtualBox()' type='text' id='{{ environment }}_vm_ip' name='box[{{ environment }}][vm_ip]' ng-model='configuration[environment].vm_ip'
                 .col-lg-4 ng-controller='VirtualMachineController'
-                  label for='{{ environment }}_new_guest_port' Port forwarding
-                  table.table.table-bordered
-                    thead
-                      tr
-                        th Guest port
-                        th Host port
-                        th
-                    tbody
-                      tr ng-repeat='port in configuration[environment].vm_ports'
-                        input type='hidden' name='box[{{ environment }}][vm_ports[{{ $index }}][guest]]' value='{{ port.guest }}'
-                        input type='hidden' name='box[{{ environment }}][vm_ports[{{ $index }}][host]]' value='{{ port.host }}'
-                        td {{ port.guest }}
-                        td {{ port.host }}
-                        td
-                          button.btn.btn-danger type='button' ng-click='deletePort($index)' Delete
-                      tr
-                        td
-                          input.form-control id='{{ environment }}_new_guest_port' type='number' placeholder='guest port' ng-model='newGuestPort'
-                        td
-                          input.form-control type='number' placeholder='host port' ng-model='newHostPort'
-                        td
-                          button.btn.btn-default type='button' ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
+                  label for='{{ environment }}_hostname' Host Name
+                  .form-group
+                    label.checkbox-inline
+                      input id='{{ environment }}_use_hostname' name='box[{{ environment }}][use_hostname]' type="checkbox" value='true' ng-model='configuration[environment].use_hostname'
+                        | Use local host name ( http://{{ configuration.vm_name }}.dev ) ?
+
+                  .ports ng-if='!configuration[environment].use_hostname'
+                    label for='{{ environment }}_new_guest_port' Port forwarding
+                    table.table.table-bordered
+                      thead
+                        tr
+                          th Guest port
+                          th Host port
+                          th
+                      tbody
+                        tr ng-repeat='port in configuration[environment].vm_ports'
+                          input type='hidden' name='box[{{ environment }}][vm_ports[{{ $index }}][guest]]' value='{{ port.guest }}'
+                          input type='hidden' name='box[{{ environment }}][vm_ports[{{ $index }}][host]]' value='{{ port.host }}'
+                          td {{ port.guest }}
+                          td {{ port.host }}
+                          td
+                            button.btn.btn-danger type='button' ng-click='deletePort($index)' Delete
+                        tr
+                          td
+                            input.form-control id='{{ environment }}_new_guest_port' type='number' placeholder='guest port' ng-model='newGuestPort'
+                          td
+                            input.form-control type='number' placeholder='host port' ng-model='newHostPort'
+                          td
+                            button.btn.btn-default type='button' ng-disabled='!newGuestPort || !newHostPort' ng-click='addPort()' Add
 
             div ng-show="configuration[environment].target == 'server'"
               p.small SSH connection will be used to provision and deploy. Your default private key will be used to authenticate.

@@ -21,9 +21,15 @@
   end
 
   config.vm.define '<%= params[:vm_name] %>' do |machine|
+    <% if params[:use_hostname] %>
+    machine.vm.hostname = '<%= params[:vm_name] %>.dev'
+    <% else %>
     machine.vm.hostname = '<%= params[:server_name] %>'
+    <% end %>
+    <% if params[:vm_ports].present? %>
     <% params[:vm_ports].each_value do |port| -%>
     machine.vm.network 'forwarded_port', :guest => <%= port[:guest] %>, :host => <%= port[:host] %>, :auto_correct => true
+    <% end %>
     <% end %>
 
     machine.vm.box = '<%= params[:vm_os] %>'
@@ -36,3 +42,10 @@
     machine.bindfs.bind_folder '/ansible', '/ansible'
     <% end %>
   end
+
+  <% if params[:use_hostname] %>
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.manage_guest = true
+  config.hostmanager.aliases = %w(www.<%= params[:vm_name] %>.dev *.<%= params[:vm_name] %>.dev)
+  <% end %>
