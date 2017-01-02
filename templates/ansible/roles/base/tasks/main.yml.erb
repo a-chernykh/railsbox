@@ -37,6 +37,10 @@
 - name: Create application user
   user: name={{ user_name }} group={{ group_name }} shell=/bin/bash home={{ user_home_path }}
 
+- name: Add ansible user '{{ ansible_user }}' to group '{{ group_name }}'
+  user: name={{ ansible_user }} groups={{ group_name }} append=yes
+
+
 - name: Setup script to read application environment
   template: src=read_environment.sh.j2 dest=/etc/profile.d/read_environment.sh
   notify:

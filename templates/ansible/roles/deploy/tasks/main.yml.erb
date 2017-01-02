@@ -43,23 +43,32 @@
     - vendor/bundle
 
 - name: Install gems
-  command: /bin/bash -lc 'bundle install --deployment --without="development test"'
+  # "/bin/basg -lc" didn't start a login shell, so RVM not properly loaded and "bundle not installed" error appear.
+  # however shell with " -i" become_user did the thing
+  shell: bundle install --deployment --without="development test"
   args:
     chdir: '{{ this_release_path }}'
+  become: yes
+  become_user: "'{{ ruby_user_name }}' -i"
+
 
 - name: Precompile assets
-  command: /bin/bash -lc 'bundle exec rake assets:precompile'
+  shell: bundle exec rake assets:precompile
   environment:
     RAILS_ENV: '{{ rails_env }}'
   args:
     chdir: '{{ this_release_path }}'
+  become: yes
+  become_user: "'{{ ruby_user_name }}' -i"
 
 - name: Migrate database
-  command: /bin/bash -lc 'bundle exec rake db:migrate'
+  shell: bundle exec rake db:migrate
   environment:
     RAILS_ENV: '{{ rails_env }}'
   args:
     chdir: '{{ this_release_path }}'
+  become: yes
+  become_user: "'{{ ruby_user_name }}' -i"
 
 - name: Symlink new release
   file: src={{ this_release_path }} dest={{ app_path }} state=link force=yes
